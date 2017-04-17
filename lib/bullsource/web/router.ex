@@ -13,14 +13,10 @@ defmodule Bullsource.Web.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Bullsource.Web do
-    pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
-  end
-
   # Other scopes may use custom stacks.
-  # scope "/api", Bullsource.Web do
-  #   pipe_through :api
-  # end
+   scope "/api", Bullsource.Web do
+     pipe_through :api
+
+     resources "/users", UserController
+   end
 end
