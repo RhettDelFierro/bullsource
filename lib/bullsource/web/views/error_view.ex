@@ -15,7 +15,8 @@ defmodule Bullsource.Web.ErrorView do
     }
   end
 
-  def changeset_errors(errors) do
+  #creates a map of the errors with each field generated from the changeset errors.
+  defp changeset_errors(errors) do
     errors
     |> Enum.map(fn {field, {reason,_}} -> {field, reason} end)
     |> Map.new
