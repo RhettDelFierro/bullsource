@@ -10,5 +10,8 @@ defmodule Bullsource.Repo.Migrations.CreateBullsource.User do
       timestamps()
     end
 
+    create unique_index(:users, [:username])
+    create unique_index(:users, [:email])
+
   end
 end
