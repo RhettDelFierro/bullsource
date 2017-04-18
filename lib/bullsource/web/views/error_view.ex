@@ -15,6 +15,12 @@ defmodule Bullsource.Web.ErrorView do
     }
   end
 
+  def render("error.json", %{message: message}) do
+      %{
+        errors: message
+      }
+    end
+
   #creates a map of the errors with each field generated from the changeset errors.
   defp changeset_errors(errors) do
     errors
