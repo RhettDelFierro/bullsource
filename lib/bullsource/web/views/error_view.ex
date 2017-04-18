@@ -9,17 +9,19 @@ defmodule Bullsource.Web.ErrorView do
     "Internal server error"
   end
 
+  #usually when we have multiple different errors
   def render("error.json", %{changeset_error: changeset}) do
     %{
       errors: changeset_errors(changeset.errors)
     }
   end
 
+  #when we know exactly the one thing that went wrong
   def render("error.json", %{message: message}) do
-      %{
-        errors: message
-      }
-    end
+    %{
+      errors: message
+    }
+  end
 
   #creates a map of the errors with each field generated from the changeset errors.
   defp changeset_errors(errors) do

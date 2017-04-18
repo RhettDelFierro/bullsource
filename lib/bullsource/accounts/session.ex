@@ -3,6 +3,7 @@ defmodule Bullsource.Accounts.Session do
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
 
+  #for authentication/login
   def authenticate(%{"username" => username, "password" => given_password}) do
   	user = Repo.get_by(User, username: username)
 
