@@ -1,5 +1,5 @@
 defmodule Bullsource.Accounts.Session do
-
+# do I want to handle registration > login into here also?
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
 
