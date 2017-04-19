@@ -4,6 +4,6 @@ defmodule Bullsource.Web.AuthController do
 
   #for use with Guardian dependency.
   def unauthenticated(conn, _params) do
-    render ErrorView, "error.json", message: "You must be logged in to perform this action."
+    render conn, ErrorView, "error.json", message: "You must be logged in to perform this action."
   end
 end
