@@ -10,7 +10,6 @@ defmodule Bullsource.Repo.Migrations.CreateBullsource.Discussion.Topic do
     end
 
    create unique_index(:topics, [:name])
-   create unique_index(:topics, [:email])
 
   end
 end
