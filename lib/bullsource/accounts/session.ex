@@ -20,4 +20,5 @@ defmodule Bullsource.Accounts.Session do
       _    -> {:error, "Incorrect password"}
     end
   end
+
 end
