@@ -1,11 +1,18 @@
 defmodule Bullsource.Web.TopicController do
   use Bullsource.Web, :controller
 
+  alias Bullsource.Discussion
+
   def index(conn, _params) do
-    conn |> text "yo!"
+    topics = Discussion.list_topics()
+    render conn, "index.json", topics: topics
   end
 
-  def create(conn, params) do
-    conn |> text "yessir"
+  def create(conn, %{"name" => name, "description" => description}) do
+    topic = %{name: name, description: description}
+
+    with {:ok, topic} <- Discussion.create_topic(topic) do
+      render conn, "show.json", topic: topic
+    end
   end
 end
