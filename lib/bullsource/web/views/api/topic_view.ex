@@ -3,11 +3,13 @@ defmodule Bullsource.Web.TopicView do
   use Bullsource.Web, :view
 
   def render("index.json", %{topics: topics}) do
-    %{topics: topics}
+    %{
+      topics: Enum.map(topics, &topic_json(&1))
+    }
   end
 
   def render("show.json", %{topic: topic}) do
-    %{topic: topic_json(topic)}
+    %{ topic: topic_json(topic) }
   end
 
   defp topic_json(topic) do
