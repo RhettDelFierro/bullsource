@@ -26,15 +26,19 @@ defmodule Bullsource.Web.Router do
      #delete "/sessions", SessionController, :delete
 
      resources "/topics", TopicController, only: [:index]
+     resources "/threads", ThreadController, only: [:index]
 
      resources "/users", UserController #for registering and soon to be updating.
 
      #another scope for the protected routes?
    end
 
+   #mainly for routes that do everything except only read it.
    scope "/api", Bullsource.Web do
-      pipe_through [:api, :require_login]
+     pipe_through [:api, :require_login]
 
-      resources "/topics", TopicController, except: [:index]
-    end
+     resources "/topics", TopicController, except: [:index]
+     resources "/threads", ThreadController, except: [:index]
+   end
+
 end

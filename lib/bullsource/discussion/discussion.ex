@@ -16,11 +16,30 @@ defmodule Bullsource.Discussion do
     %Topic{}
     |> cast(params, [:name, :description])
     |> validate_required([:name, :description])
-    |> unique_constraint(:name)
     |> validate_format(:name, ~r/^[a-zA-Z0-9_]*$/)
     |> validate_length(:name, max: 32)
     |> validate_length(:name, min: 1)
     |> validate_length(:description, max: 140)
     |> validate_length(:description, min: 1)
+    |> unique_constraint(:name)
   end
+
+  def list_threads_in_topic(topic_id) do
+    Repo.get(Topic,topic_id) |> preload(:threads) |> preload(:users)
+  end
+
+  def create_thread(params) do
+    thread_changeset(params) |> Repo.insert
+  end
+
+  def thread_changeset(params \\ %{}) do
+    %Thread{}
+    |> cast(params, [:title, :user_id, :topic_id])
+    |> validate_required([:title, :user_id, :topic_id])
+    |> validate_length(:title, max: 300)
+    |> validate_length(:title, min: 3)
+    |> unique_constraint([:name, :user_id, :topic_id])
+    |> assoc_constraint(:topic)
+  end
+
 end

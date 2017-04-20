@@ -31,4 +31,8 @@ config :guardian, Guardian,
   ttl: { 30, :days },
   allowed_drift: 2000,
   secret_key: "PC6mpgXyERaK50xytZM48i0TpjD2zHOQTjqrJtmkEBGmO9LbWoIkyse/gmGwzrQu",
-  serializer: Bullsource.Accounts.GuardianSerializer
+  serializer: Bullsource.Accounts.GuardianSerializer,
+  permissions: %{
+      default: [ :read, :write],
+      admin: [:dashboard, :make_payments]
+    }
