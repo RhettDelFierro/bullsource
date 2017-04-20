@@ -5,7 +5,7 @@ defmodule Bullsource.Discussion do
   alias Bullsource.Repo
 
   def list_topics do
-    Repo.all(Topic)
+    Repo.all(Topic) |> Repo.preload(:threads)
   end
 
   def create_topic(params) do
@@ -25,7 +25,14 @@ defmodule Bullsource.Discussion do
   end
 
   def list_threads_in_topic(topic_id) do
-    Repo.get(Topic,topic_id) |> preload(:threads) |> preload(:users)
+#    Repo.get(Topic,topic_id) |> Repo.preload(:threads) |> Repo.preload(:users)
+    Repo.get(Topic,topic_id) |> Repo.preload(:threads)
+#    query =
+#      from(t in Topics, where t.id == ^topic_id)
+#      |> Repo.all
+#      |> preload: [threads: :users]
+#     Repo.get(query)
+
   end
 
   def create_thread(params) do
@@ -38,8 +45,8 @@ defmodule Bullsource.Discussion do
     |> validate_required([:title, :user_id, :topic_id])
     |> validate_length(:title, max: 300)
     |> validate_length(:title, min: 3)
-    |> unique_constraint([:name, :user_id, :topic_id])
     |> assoc_constraint(:topic)
+    |> assoc_constraint(:user)
   end
 
 end
