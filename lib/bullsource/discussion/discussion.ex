@@ -26,7 +26,7 @@ defmodule Bullsource.Discussion do
 
   def list_threads_in_topic(topic_id) do
 #    Repo.get(Topic,topic_id) |> Repo.preload(:threads) |> Repo.preload(:users)
-    Repo.get(Topic,topic_id) |> Repo.preload(:threads)
+    Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
 #    query =
 #      from(t in Topics, where t.id == ^topic_id)
 #      |> Repo.all
