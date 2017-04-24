@@ -3,20 +3,30 @@ defmodule Bullsource.Web.ThreadController do
   use Bullsource.Web, :controller
 
   alias Bullsource.Discussion
+  alias Bullsource.Web.ErrorView
 
-  def index(conn, %{"topic_ic" => topic_id}) do
+
+  def index(conn, %{"topic_id" => topic_id}) do
     #how to get the current topic?
     threads = Discussion.list_threads_in_topic(topic_id)
     render conn, "index.json", threads: threads
   end
 
-  def create(conn,params) do
+  def create(conn,%{"thread" => thread} = params) do
     user = Guardian.Plug.current_resource(conn)
-    IO.puts "++++++++++++ Thread :create"
-    IO.inspect user
+    %{"title" => title, "topic_id" => topic_id } = thread
+    thread = %{user_id: user.id,
+               topic_id: topic_id,
+               title: title
+             }
 
-#    with {:ok, topic} <- Discussion.create_topic(topic) do
-#      render conn, "show.json", topic: topic
-#    end
+    with {:ok, thread} <- Discussion.create_thread(thread) do
+      render conn, "show.json", thread: thread
+    else
+      {:error, error_changeset} ->
+        render conn, ErrorView, "error.json", changeset_errors: error_changeset
+    end
+
   end
+
 end
