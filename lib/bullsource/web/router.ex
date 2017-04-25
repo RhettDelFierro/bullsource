@@ -27,6 +27,7 @@ defmodule Bullsource.Web.Router do
 
      resources "/topics", TopicController, only: [:index]
      resources "/threads", ThreadController, only: [:index]
+     resources "/posts", PostController, only: [:index]
 
      resources "/users", UserController #for registering and soon to be updating.
 
@@ -39,6 +40,7 @@ defmodule Bullsource.Web.Router do
 
      resources "/topics", TopicController, except: [:index]
      resources "/threads", ThreadController, except: [:index]
+     resources "/posts", PostController, except: [:index]
    end
 
 end
