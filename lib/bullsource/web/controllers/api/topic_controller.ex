@@ -11,6 +11,7 @@ defmodule Bullsource.Web.TopicController do
   def create(conn, %{"name" => name, "description" => description}) do
     topic = %{name: name, description: description}
 
+    #you have not yet handled the case where create_topic fails.
     with {:ok, topic} <- Discussion.create_topic(topic) do
       render conn, "show.json", topic: topic
     end

@@ -14,10 +14,13 @@ defmodule Bullsource.Web.ThreadController do
 
   def create(conn,%{"thread" => thread} = params) do
     user = Guardian.Plug.current_resource(conn)
-    %{"title" => title, "topic_id" => topic_id } = thread
-    thread = %{user_id: user.id,
-               topic_id: topic_id,
-               title: title
+    %{"title" => title, "topic_id" => topic_id, "post" => post} = thread
+    thread = %{ thread:
+               %{ user_id: user.id,
+                  topic_id: topic_id,
+                  title: title
+               },
+                post: post
              }
 
     with {:ok, thread} <- Discussion.create_thread(thread) do

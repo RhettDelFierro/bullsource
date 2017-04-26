@@ -9,11 +9,69 @@ defmodule Bullsource.Discussion do
     Repo.all(Topic) |> Repo.preload(:threads)
   end
 
-
   def create_topic(params) do
     topic_changeset(params) |> Repo.insert
   end
 
+# will list nested threads in topics with the users who created it. I wonder if [threads: :user] works.
+  def list_threads_in_topic(topic_id) do
+    Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
+  end
+
+  def create_thread(%{thread_param: thread_param, post_param: post_param} = params) do
+
+    case insert_thread(thread_param) do
+
+      {:ok, thread} ->
+
+        new_post_params = Map.put_new(post_param,:thread_id, thread.id)
+
+        case create_post(new_post_params) do
+          {:ok, post} -> {:ok, post}
+          {:error, error_changeset} -> {:error, error_changeset}
+        end
+
+      {:error, error_changeset} ->
+        {:error, error_changeset}
+
+    end
+
+  end
+
+
+   #maybe split it here: the post stuff is handled seaparately from the proof stuff. Use a with macro in the controller? because you need the post id. But what if the proof is invalid - you don't want to store the post in the database. Maybe use a transaction?
+  def create_post(%{thread_id: thread_id, user_id: user_id, intro: intro, proofs: proofs} = params) do
+    post_info = %{thread_id: thread_id, user_id: user_id, intro: intro}
+    case insert_post(post_info) do
+      {:ok, post} ->
+        proofs_with_id = Enum.map proofs, fn -> Map.put_new(proof, :post_id, post.id) end
+        case insert_proofs(proofs_with_id) do
+
+        end
+
+      {:error, error_changeset} ->
+        {:error, error_changeset}
+    end
+
+  end
+
+  defp insert_thread(params) do
+    thread_changeset(params) |> Repo.insert
+  end
+
+  defp insert_post(params) do
+    post_changeset(params) |> Repo.insert
+  end
+
+  defp insert_proof(proofs) do
+    Enum.map(proofs, &insert_proof(&1))
+  end
+
+  defp insert_proof(%{post_id: post_id, article: article, comment: comment, reference: reference}) do
+
+  end
+
+##### Changesets #####
 
   def topic_changeset(params \\ %{}) do
     %Topic{}
@@ -27,17 +85,6 @@ defmodule Bullsource.Discussion do
     |> unique_constraint(:name)
   end
 
-# will list nested threads in topics with the users who created it. I wonder if [threads: :user] works.
-  def list_threads_in_topic(topic_id) do
-    Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
-  end
-
-
-  def create_thread(params) do
-    thread_changeset(params) |> Repo.insert
-  end
-
-
   def thread_changeset(params \\ %{}) do
     %Thread{}
     |> cast(params, [:title, :user_id, :topic_id])
@@ -47,23 +94,7 @@ defmodule Bullsource.Discussion do
     |> assoc_constraint(:topic)
     |> assoc_constraint(:user)
   end
-   #maybe split it here: the post stuff is handled seaparately from the proof stuff. Use a with macro in the controller? because you need the post id. But what if the proof is invalid - you don't want to store the post in the database. Maybe use a transaction?
-  def create_post(params) do
-    with {:ok, post}       <- post_changeset(params) |> Repo.insert
-            proof_params = %{post_id: post.id}
-         {:ok, proof_info} <- proof_changeset(proof_params) |> Repo.insert do
-            proof_id = proof_info.id
-            #now you have both post and proof ids for associations to articles, comments and references.
-         {:ok, }
 
-    else {:error, error_changeset} ->
-           {:error, error_changeset}
-    end
-
-  end
-
-
-  #should I check to see if it's a new thread starter? If it's a thread starting post, it'll be a little different. I guess that'll be decided in Thread's logic. -
   def post_changeset(params \\%{}) do
     %Post{}
     |> cast(params, [:intro, :user_id, :thread_id])
@@ -79,10 +110,6 @@ defmodule Bullsource.Discussion do
     |> cast(params, [:post_id])
     |> validate_required([:post_id])
     |> assoc_constraint(:post)
-  end
-
-  def store_proofs(proofs) do
-    Enum.map()
   end
 
   #the article is a section of the reference that they're quoting.
