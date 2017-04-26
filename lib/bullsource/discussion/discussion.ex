@@ -19,13 +19,9 @@ defmodule Bullsource.Discussion do
   end
 
   def create_thread(%{thread_param: thread_param, post_param: post_param} = params) do
-
     case insert_thread(thread_param) do
-
       {:ok, thread} ->
-
         new_post_params = Map.put_new(post_param,:thread_id, thread.id)
-
         case create_post(new_post_params) do
           {:ok, post} -> {:ok, post}
           {:error, error_changeset} -> {:error, error_changeset}
@@ -33,9 +29,7 @@ defmodule Bullsource.Discussion do
 
       {:error, error_changeset} ->
         {:error, error_changeset}
-
     end
-
   end
 
 
@@ -48,11 +42,9 @@ defmodule Bullsource.Discussion do
         case insert_proofs(proofs_with_id) do
 
         end
-
       {:error, error_changeset} ->
         {:error, error_changeset}
     end
-
   end
 
   defp insert_thread(params) do
@@ -63,12 +55,20 @@ defmodule Bullsource.Discussion do
     post_changeset(params) |> Repo.insert
   end
 
-  defp insert_proof(proofs) do
-    Enum.map(proofs, &insert_proof(&1))
+  defp insert_proofs([first_proof | rest_proof]) do
+    case insert_proof(first_proof) do
+      {:ok, proof} ->
+
+      {:error, error_changeset} ->
+    end
+  end
+
+  defp insert_proofs([]) do
+
   end
 
   defp insert_proof(%{post_id: post_id, article: article, comment: comment, reference: reference}) do
-
+    proof_changeset(%{post_id: post_id}) |> Repo.insert
   end
 
 ##### Changesets #####
