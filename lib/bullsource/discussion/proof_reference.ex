@@ -10,4 +10,5 @@ defmodule Bullsource.Discussion.ProofReference do
 
     timestamps()
   end
+
 end
