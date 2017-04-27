@@ -11,7 +11,7 @@ defmodule Bullsource.Discussion.Proof do
 
     has_many :articles, Article
     has_many :comments, Comment
-    has_many :references, Reference
+    many_to_many :references, Reference, join_through: "proof_references"
   end
 
 end
