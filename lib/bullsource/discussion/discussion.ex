@@ -32,15 +32,16 @@ defmodule Bullsource.Discussion do
     end
   end
 
-
    #maybe split it here: the post stuff is handled seaparately from the proof stuff. Use a with macro in the controller? because you need the post id. But what if the proof is invalid - you don't want to store the post in the database. Maybe use a transaction?
   def create_post(%{thread_id: thread_id, user_id: user_id, intro: intro, proofs: proofs} = params) do
     post_info = %{thread_id: thread_id, user_id: user_id, intro: intro}
     case insert_post(post_info) do
       {:ok, post} ->
-        proofs_with_id = Enum.map proofs, fn -> Map.put_new(proof, :post_id, post.id) end
-        case insert_proofs(proofs_with_id) do
-
+        proofs_with_post_id = Enum.map proofs, &Map.put_new(&1, :post_id, post.id)
+        #fix this
+        case insert_proofs(proofs_with_post_id) do
+        {:ok, blah} -> IO.puts "blah"
+        _ -> IO.puts "haha"
         end
       {:error, error_changeset} ->
         {:error, error_changeset}
@@ -58,8 +59,17 @@ defmodule Bullsource.Discussion do
   defp insert_proofs([first_proof | rest_proof]) do
     case insert_proof(first_proof) do
       {:ok, proof} ->
+        article = %{text: first_proof.article.text, proof_id: proof.id} #maybe have a reference id?
+        comment = %{text: first_proof.comment.text, proof_id: proof.id}
+        reference = %{link: first_proof.reference.link, title: first_proof.reference.title, proof_id: proof.id}
 
+        # can add article, comment and reference with the proof_id:
+        #use Repo.transaction with the proof_id.
+
+        #recursion:
+        insert_proofs(rest_proof)
       {:error, error_changeset} ->
+        {:error, error_changeset}
     end
   end
 
@@ -69,6 +79,10 @@ defmodule Bullsource.Discussion do
 
   defp insert_proof(%{post_id: post_id, article: article, comment: comment, reference: reference}) do
     proof_changeset(%{post_id: post_id}) |> Repo.insert
+  end
+
+  defp insert_article(params) do
+    article_changeset(params) |> Repo.insert
   end
 
 ##### Changesets #####

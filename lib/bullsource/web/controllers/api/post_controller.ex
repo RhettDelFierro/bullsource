@@ -24,7 +24,7 @@ defmodule Bullsource.Web.PostController do
              proofs: proofs
            }
 
-    with {:ok, thread} <- Discussion.create_thread(thread) do
+    with {:ok, thread} <- Discussion.create_thread(post) do
       render conn, "show.json", thread: thread
     else
       {:error, error_changeset} ->
