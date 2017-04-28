@@ -21,8 +21,7 @@ defmodule Bullsource.Discussion do
   def create_thread(%{thread_param: thread_param, post_param: post_param} = params) do
     case insert_thread(thread_param) do
       {:ok, thread} ->
-        new_post_params = Map.put_new(post_param,:thread_id, thread.id)
-        case create_post(new_post_params) do
+        case create_post(%{post_param | thread_id: thread.id}) do
           {:ok, post} -> {:ok, post}
           {:error, error_changeset} -> {:error, error_changeset}
         end
@@ -37,9 +36,9 @@ defmodule Bullsource.Discussion do
     post_info = %{thread_id: thread_id, user_id: user_id, intro: intro}
     case insert_post(post_info) do
       {:ok, post} ->
-        proofs_with_post_id = Enum.map proofs, &Map.put_new(&1, :post_id, post.id)
+#        proofs_with_post_id = Enum.map proofs, &Map.put_new(&1, :post_id, post.id)
         #fix this
-        case insert_proofs(proofs_with_post_id) do
+        case insert_proofs(post, proofs_with_post_id) do
         {:ok, blah} -> IO.puts "blah"
         _ -> IO.puts "haha"
         end
@@ -56,15 +55,20 @@ defmodule Bullsource.Discussion do
     post_changeset(params) |> Repo.insert
   end
 
-  defp insert_proofs([first_proof | rest_proof]) do
-    case insert_proof(first_proof) do
+  defp insert_proofs(post, [first_proof | rest_proof]) do
+    case insert_proof(%{first_proof | post_id: post.id}) do
       {:ok, proof} ->
-        article = %{text: first_proof.article.text, proof_id: proof.id} #maybe have a reference id?
-        comment = %{text: first_proof.comment.text, proof_id: proof.id}
-        reference = %{link: first_proof.reference.link, title: first_proof.reference.title, proof_id: proof.id}
+        article   = article_changeset(%{text: first_proof.article.text, proof_id: proof.id}) #maybe have a reference id?
+        comment   = comment_changeset(%{text: first_proof.comment.text, proof_id: proof.id})
+        reference = reference_changeset(%{link: first_proof.reference.link, title: first_proof.reference.title})
+        Repo.transaction
 
-        # can add article, comment and reference with the proof_id:
+#        handle this when you get back the reference id.
+        proof_reference = %{}
+        # can add article, comment and referencewith the proof_id:
         #use Repo.transaction with the proof_id.
+
+
 
         #recursion:
         insert_proofs(rest_proof)
@@ -109,7 +113,7 @@ defmodule Bullsource.Discussion do
     |> assoc_constraint(:user)
   end
 
-  def post_changeset(params \\%{}) do
+  def post_changeset(params \\ %{}) do
     %Post{}
     |> cast(params, [:intro, :user_id, :thread_id])
     |> validate_required([:user_id, :thread_id])
@@ -119,7 +123,7 @@ defmodule Bullsource.Discussion do
     |> assoc_constraint(:user)
   end
 
-  def proof_changeset(params \\%{}) do
+  def proof_changeset(params \\ %{}) do
     %Proof{}
     |> cast(params, [:post_id])
     |> validate_required([:post_id])
@@ -127,14 +131,14 @@ defmodule Bullsource.Discussion do
   end
 
   #the article is a section of the reference that they're quoting.
-  def article_changeset(params \\%{}) do
+  def article_changeset(params \\ %{}) do
     %Article{}
     |> cast(params, [:text, :proof_id])
     |> validate_required([:text, :proof_id])
     |> assoc_constraint(:proof_id)
   end
 
-  def comment_changeset(params \\%{}) do
+  def comment_changeset(params \\ %{}) do
     %Comment{}
     |> cast(params, [:text, :proof_id])
     |> validate_required([:proof_id])
@@ -142,12 +146,19 @@ defmodule Bullsource.Discussion do
     |> assoc_constraint(:proof_id)
   end
 
-  def reference_changeset(params \\%{}) do
+  def reference_changeset(params \\ %{}) do
     %Reference{}
     |> cast(params, [:title, :link, :proof_id])
     |> validate_required([:link, :proof_id])
     |> validate_length(:title, max: 300)
-    |> assoc_constraint(:proof_id)
+  end
+
+  def proof_reference_changeset(params \\ %{}) do
+    %ProofReference{}
+    |> cast(params, [:proof_id, :reference_id])
+    |> validate_required([:proof_id, :reference_id])
+    |> assoc_constraint(:proof)
+    |> assoc_constraint(:reference)
   end
 
 end

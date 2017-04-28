@@ -9,8 +9,8 @@ defmodule Bullsource.Discussion.Proof do
   schema "proofs" do
     belongs_to :post, Post
 
-    has_many :articles, Article
-    has_many :comments, Comment
+    has_one :article, Article
+    has_one :comment, Comment
     many_to_many :references, Reference, join_through: "proof_references"
   end
 
