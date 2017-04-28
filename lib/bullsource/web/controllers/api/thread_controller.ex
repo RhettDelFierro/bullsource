@@ -15,18 +15,13 @@ defmodule Bullsource.Web.ThreadController do
   def create(conn,%{"thread" => thread} = params) do
     user = Guardian.Plug.current_resource(conn)
     %{"title" => title, "topic_id" => topic_id, "post" => post} = thread
-    thread = %{ thread:
-               %{ user_id: user.id,
-                  topic_id: topic_id,
-                  title: title
-               },
-                post: post
-             }
+    thread_params = %{ topic_id: topic_id, title: title}
+    post_params = %{intro: post.intro, proofs: post.proofs}
 
-    with {:ok, thread} <- Discussion.create_thread(thread) do
+    with {:ok, thread} <- Discussion.create_thread(thread_params, post_params, user) do
       render conn, "show.json", thread: thread
     else
-      {:error, error_changeset} ->
+      {:error, reason} ->
         render conn, ErrorView, "error.json", changeset_errors: error_changeset
     end
 

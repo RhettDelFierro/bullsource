@@ -3,6 +3,7 @@ defmodule Bullsource.Discussion do
   alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic}
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
+  alias Ecto.Multi
 
 
   def list_topics do
@@ -18,62 +19,67 @@ defmodule Bullsource.Discussion do
     Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
   end
 
-  def create_thread(%{thread_param: thread_param, post_param: post_param} = params) do
-    case insert_thread(thread_param) do
-      {:ok, thread} ->
-        case create_post(%{post_param | thread_id: thread.id}) do
-          {:ok, post} -> {:ok, post}
-          {:error, error_changeset} -> {:error, error_changeset}
-        end
-
-      {:error, error_changeset} ->
-        {:error, error_changeset}
+  def create_thread(thread, post, user) do
+    case thread_transaction(thread, post, user) |> Repo.transaction do
+        {:ok, thread} -> {:ok, thread}
+        {:error, _, reason, _} -> {:error, reason}
     end
   end
 
-   #maybe split it here: the post stuff is handled seaparately from the proof stuff. Use a with macro in the controller? because you need the post id. But what if the proof is invalid - you don't want to store the post in the database. Maybe use a transaction?
-  def create_post(%{thread_id: thread_id, user_id: user_id, intro: intro, proofs: proofs} = params) do
-    post_info = %{thread_id: thread_id, user_id: user_id, intro: intro}
-    case insert_post(post_info) do
-      {:ok, post} ->
-#        proofs_with_post_id = Enum.map proofs, &Map.put_new(&1, :post_id, post.id)
-        #fix this
-        case insert_proofs(post, proofs_with_post_id) do
-        {:ok, blah} -> IO.puts "blah"
-        _ -> IO.puts "haha"
-        end
-      {:error, error_changeset} ->
-        {:error, error_changeset}
+  def thread_transaction(thread, post, user) do
+    Multi.new
+    |> Multi.run(:thread, insert_thread(thread, user))
+    |> Multi.run(:post,   &insert_post(&1.thread, post, user))
+    |> Multi.run(:proofs, &create_proofs(&1.post, post.proofs))
+  end
+
+  defp proofs_transaction(post, proofs) do
+      Multi.new
+      |> Multi.run(:post_proof, insert_post_proof(post))
+      |> Multi.run(:proof, &insert_proofs(&1.post_proof, proofs))
+    end
+
+  defp insert_thread(thread, user) do
+    thread_changeset(%{user_id: user.id, topic_id: thread.topic_id, title: thread.title})
+    |> Repo.insert
+  end
+
+  defp insert_post(thread, post, user) do
+    post_changeset(%{intro: post.intro, user_id: user.id, thread_id: thread.id})
+    |> Repo.insert
+  end
+
+  defp create_proofs(post, proofs) do
+   case proofs_transaction(post, proofs) |> Repo.transaction do
+     {:ok, post} -> {:ok, post}
+     {:error, _, reason, _} -> {:error, reason}
+   end
+  end
+
+  defp insert_post_proof(post) do
+    proof_changeset(%{post_id: post.id})
+    |> Repo.insert
+  end
+
+  defp insert_proofs(post_proof, [first_proof | rest_proofs]) do
+    case Repo.get_by(Reference, link: first_proof.link) do
+      nil ->
+      case create_proof_details(post_proof, first_proof) do
+        insert_proofs(post_proof, rest_proofs) #recursion.
+      end
+
+      reference -> reference
     end
   end
 
-  defp insert_thread(params) do
-    thread_changeset(params) |> Repo.insert
+  defp insert_proofs(post, []) do
+    {:ok, post |> Repo.preload(:proofs)}
   end
 
-  defp insert_post(params) do
-    post_changeset(params) |> Repo.insert
-  end
-
-  defp insert_proofs(post, [first_proof | rest_proof]) do
-    case insert_proof(%{first_proof | post_id: post.id}) do
-      {:ok, proof} ->
-        article   = article_changeset(%{text: first_proof.article.text, proof_id: proof.id}) #maybe have a reference id?
-        comment   = comment_changeset(%{text: first_proof.comment.text, proof_id: proof.id})
-        reference = reference_changeset(%{link: first_proof.reference.link, title: first_proof.reference.title})
-        Repo.transaction
-
-#        handle this when you get back the reference id.
-        proof_reference = %{}
-        # can add article, comment and referencewith the proof_id:
-        #use Repo.transaction with the proof_id.
-
-
-
-        #recursion:
-        insert_proofs(rest_proof)
-      {:error, error_changeset} ->
-        {:error, error_changeset}
+  defp create_proof_details(post_proof,proof) do
+    case details_transaction(post_proof, proof) |> Repo.insert do
+      {:ok, proof} -> proof
+      {:error, _, reason, _} -> {:error, reason}
     end
   end
 
@@ -81,12 +87,22 @@ defmodule Bullsource.Discussion do
 
   end
 
-  defp insert_proof(%{post_id: post_id, article: article, comment: comment, reference: reference}) do
-    proof_changeset(%{post_id: post_id}) |> Repo.insert
+  defp insert_article(post_proof, article) do
+    article_changeset(%{proof_id: post_proof.id, text: article.text}) |> Repo.insert
   end
 
-  defp insert_article(params) do
-    article_changeset(params) |> Repo.insert
+  defp insert_comment(post_proof, comment) do
+    article_changeset(%{proof_id: post_proof.id, text: comment.text}) |> Repo.insert
+  end
+
+# remember that you want to check if it exists first before you run this function.
+  defp insert_reference(reference) do
+    article_changeset(%{link: reference.link, title: reference.title}) |> Repo.insert
+  end
+
+  defp insert_proof_reference(post_proof, reference) do
+    proof_reference_changeset(%{proof_id: post_proof.id, reference_id: reference.id})
+    |> Repo.insert
   end
 
 ##### Changesets #####
