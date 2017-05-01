@@ -19,12 +19,30 @@ defmodule Bullsource.Discussion do
     Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
   end
 
+  ####creating interface functions for controllers
+
   def create_thread(thread, post, user) do
     case thread_transaction(thread, post, user) |> Repo.transaction do
         {:ok, thread} -> {:ok, thread}
         {:error, _, reason, _} -> {:error, reason}
     end
   end
+
+  defp create_proofs(post, proofs) do
+   case proofs_transaction(post, proofs) |> Repo.transaction do
+     {:ok, post} -> {:ok, post}
+     {:error, _, reason, _} -> {:error, reason}
+   end
+  end
+
+  defp create_proof_details(post_proof, proof) do
+    case proof_details_transaction(post_proof, proof) |> Repo.transaction do
+      {:ok, proof_details} -> {:ok, proof_details}
+      {:error, _, reason, _} -> {:error, reason}
+    end
+  end
+
+  ####Ecto.Multi functions
 
   def thread_transaction(thread, post, user) do
     Multi.new
@@ -34,10 +52,17 @@ defmodule Bullsource.Discussion do
   end
 
   defp proofs_transaction(post, proofs) do
-      Multi.new
-      |> Multi.run(:post_proof, insert_post_proof(post))
-      |> Multi.run(:proof, &insert_proofs(&1.post_proof, proofs))
-    end
+    Multi.new
+    |> Multi.run(:post_proof, insert_post_proof(post))
+    |> Multi.run(:proof, &insert_proofs(&1.post_proof, proofs))
+  end
+
+  defp proof_details_transaction(post_proof, proof) do
+    Multi.new
+    |> Multi.run(:article, insert_article(post_proof,proof.article))
+    |> Multi.run(:comment, insert_comment(post_proof,proof.comment))
+    |> Multi.run(:reference, insert_reference(proof.reference))
+  end
 
   defp insert_thread(thread, user) do
     thread_changeset(%{user_id: user.id, topic_id: thread.topic_id, title: thread.title})
@@ -49,42 +74,30 @@ defmodule Bullsource.Discussion do
     |> Repo.insert
   end
 
-  defp create_proofs(post, proofs) do
-   case proofs_transaction(post, proofs) |> Repo.transaction do
-     {:ok, post} -> {:ok, post}
-     {:error, _, reason, _} -> {:error, reason}
-   end
-  end
-
   defp insert_post_proof(post) do
     proof_changeset(%{post_id: post.id})
     |> Repo.insert
   end
 
-  defp insert_proofs(post_proof, [first_proof | rest_proofs]) do
+#so far, post_proof will have the id of the post. We will see if there's already a link available for the reference.
+  defp insert_proofs(post_proof, [first_proof | rest_proofs], proof_details \\ []) do
     case Repo.get_by(Reference, link: first_proof.link) do
       nil ->
-      case create_proof_details(post_proof, first_proof) do
-        insert_proofs(post_proof, rest_proofs) #recursion.
-      end
+        case create_proof_details(post_proof, first_proof) do
+          {:ok, proof_detail} ->
+            #add the previous proof details that have finished:
+            proof_details = proo_details ++ proof_detail
+            insert_proofs(post_proof, rest_proofs, proof_details) #recursion.
+          {:error, reason} -> {:error, reason} #these tuples are very much DRY right now, will need refactor
+        end
 
       reference -> reference
     end
   end
 
-  defp insert_proofs(post, []) do
-    {:ok, post |> Repo.preload(:proofs)}
-  end
-
-  defp create_proof_details(post_proof,proof) do
-    case details_transaction(post_proof, proof) |> Repo.insert do
-      {:ok, proof} -> proof
-      {:error, _, reason, _} -> {:error, reason}
-    end
-  end
-
-  defp insert_proofs([]) do
-
+  defp insert_proofs(post_proof, [], proof_details \\ []) do
+  #should be a query that will return a preloaded tuple.
+    {:ok, post_proof |> Repo.preload(:proofs)}
   end
 
   defp insert_article(post_proof, article) do
@@ -164,8 +177,8 @@ defmodule Bullsource.Discussion do
 
   def reference_changeset(params \\ %{}) do
     %Reference{}
-    |> cast(params, [:title, :link, :proof_id])
-    |> validate_required([:link, :proof_id])
+    |> cast(params, [:title, :link])
+    |> validate_required([:link])
     |> validate_length(:title, max: 300)
   end
 
