@@ -22,7 +22,7 @@ defmodule Bullsource.Web.ThreadController do
       render conn, "show.json", thread: thread
     else
       {:error, reason} ->
-        render conn, ErrorView, "error.json", changeset_errors: error_changeset
+        render conn, ErrorView, "error.json", changeset_errors: reason
     end
 
   end

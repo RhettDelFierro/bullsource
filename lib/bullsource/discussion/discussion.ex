@@ -1,6 +1,6 @@
 defmodule Bullsource.Discussion do
   import Ecto.{Changeset, Query}
-  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic}
+  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic, ProofReference}
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
   alias Ecto.Multi
@@ -19,25 +19,32 @@ defmodule Bullsource.Discussion do
     Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
   end
 
-  ####creating interface functions for controllers
+  ####creating interface functions for controllers.
+  #is it possible to chain transactions at a higher order?
+  #the reason for all the multis is for the rollback functionality in case anything in the chain is invalid.
 
   def create_thread(thread, post, user) do
     case thread_transaction(thread, post, user) |> Repo.transaction do
-        {:ok, thread} -> {:ok, thread}
+        {:ok, %{thread: finished_thread} = new_thread} ->
+          IO.puts "+++++++++++++++++++++create_thread"
+          IO.inspect new_thread
+          {:ok, finished_thread |> Repo.preload(:post)}
         {:error, _, reason, _} -> {:error, reason}
     end
   end
 
+  #create_post?
+
   defp create_proofs(post, proofs) do
    case proofs_transaction(post, proofs) |> Repo.transaction do
-     {:ok, post} -> {:ok, post}
+     {:ok, proofs} -> {:ok, proofs}
      {:error, _, reason, _} -> {:error, reason}
    end
   end
 
   defp create_proof_details(post_proof, proof) do
     case proof_details_transaction(post_proof, proof) |> Repo.transaction do
-      {:ok, proof_details} -> {:ok, proof_details}
+      {:ok, post_with_proofs} -> {:ok, post_with_proofs}
       {:error, _, reason, _} -> {:error, reason}
     end
   end
@@ -49,6 +56,7 @@ defmodule Bullsource.Discussion do
     |> Multi.run(:thread, insert_thread(thread, user))
     |> Multi.run(:post,   &insert_post(&1.thread, post, user))
     |> Multi.run(:proofs, &create_proofs(&1.post, post.proofs))
+    #maybe just keep pipelining the multis, and using enum.map for the proofs? I think there may be a complication because it's another Multi.new in create_proofs.
   end
 
   defp proofs_transaction(post, proofs) do
@@ -80,22 +88,34 @@ defmodule Bullsource.Discussion do
   end
 
 #so far, post_proof will have the id of the post. We will see if there's already a link available for the reference.
-  defp insert_proofs(post_proof, [first_proof | rest_proofs], proof_details \\ []) do
+  defp insert_proofs(post_proof, [first_proof | rest_proofs]) do
     case Repo.get_by(Reference, link: first_proof.link) do
       nil ->
         case create_proof_details(post_proof, first_proof) do
           {:ok, proof_detail} ->
             #add the previous proof details that have finished:
-            proof_details = proo_details ++ proof_detail
-            insert_proofs(post_proof, rest_proofs, proof_details) #recursion.
-          {:error, reason} -> {:error, reason} #these tuples are very much DRY right now, will need refactor
+            #proof_details = proof_details ++ proof_detail
+            insert_proofs(post_proof, rest_proofs) #recursion.
+
+          {:error, reason} ->
+            {:error, reason} #these tuples are very much DRY right now, will need refactor
         end
 
-      reference -> reference
+      reference ->
+        case create_proof_details(reference, first_proof) do
+          {:ok, proof_detail} ->
+            #add the previous proof details that have finished:
+            #proof_details = proof_details ++ proof_detail
+            insert_proofs(post_proof, rest_proofs) #recursion.
+
+          {:error, reason} ->
+            {:error, reason} #these tuples are very much DRY right now, will need refactor
+        end
     end
   end
 
-  defp insert_proofs(post_proof, [], proof_details \\ []) do
+# recursion end here
+  defp insert_proofs(post_proof, []) do
   #should be a query that will return a preloaded tuple.
     {:ok, post_proof |> Repo.preload(:proofs)}
   end
