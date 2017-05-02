@@ -31,7 +31,7 @@ defmodule Bullsource.Web.ThreadController do
 
     with {:ok, new_thread} <- Discussion.create_thread(thread_params, post_params, user) do
       IO.puts "back in controller, here is thread:++++++"
-      IO.inspect thread_final
+      IO.inspect new_thread
       render conn, "show.json", new_thread: new_thread
     else
       {:error, reason} ->

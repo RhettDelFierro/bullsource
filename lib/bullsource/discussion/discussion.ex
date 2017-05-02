@@ -20,7 +20,7 @@ defmodule Bullsource.Discussion do
   end
 
   def list_posts_in_thread(thread_id) do
-    Repo.get(Thread,thread_id) |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
+    Repo.get(Thread,thread_id) |> Repo.preload(:user) |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
   end
 
   ####creating interface functions for controllers.
@@ -40,6 +40,7 @@ defmodule Bullsource.Discussion do
           IO.inspect new_thread
           {:ok,
                finished_thread
+               |> Repo.preload(:user)
                |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
           }
         {:error, _, reason, _} ->
