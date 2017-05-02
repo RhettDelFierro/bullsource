@@ -24,18 +24,31 @@ defmodule Bullsource.Discussion do
   #the reason for all the multis is for the rollback functionality in case anything in the chain is invalid.
 
   def create_thread(thread, post, user) do
+    IO.puts "+++++thread:"
+    IO.inspect thread
+    IO.puts "+++++post:"
+    IO.inspect post
+    IO.puts "+++++user:"
+    IO.inspect user
     case thread_transaction(thread, post, user) |> Repo.transaction do
         {:ok, %{thread: finished_thread} = new_thread} ->
           IO.puts "+++++++++++++++++++++create_thread"
           IO.inspect new_thread
           {:ok, finished_thread |> Repo.preload(:post)}
-        {:error, _, reason, _} -> {:error, reason}
+        {:error, _, reason, _} ->
+          IO.puts "++++thread_transaction error:+++++"
+          IO.inspect reason
+          {:error, reason}
     end
   end
 
   #create_post?
 
   defp create_proofs(post, proofs) do
+  IO.puts "create_proofs: ++++++++ post"
+  IO.inspect post
+  IO.puts "create_proofs: ++++++++ proofs"
+  IO.inspect proofs
    case proofs_transaction(post, proofs) |> Repo.transaction do
      {:ok, proofs} -> {:ok, proofs}
      {:error, _, reason, _} -> {:error, reason}
@@ -78,6 +91,11 @@ defmodule Bullsource.Discussion do
   end
 
   defp insert_post(thread, post, user) do
+    IO.puts "in insert_post, thread++++++:"
+    IO.inspect thread
+    IO.puts "in insert_post, post++++++:"
+    IO.inspect post
+
     post_changeset(%{intro: post.intro, user_id: user.id, thread_id: thread.id})
     |> Repo.insert
   end

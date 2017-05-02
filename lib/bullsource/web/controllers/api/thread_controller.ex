@@ -12,13 +12,25 @@ defmodule Bullsource.Web.ThreadController do
     render conn, "index.json", threads: threads
   end
 
-  def create(conn,%{"thread" => thread} = params) do
+  def create(conn,%{"thread" => thread}) do
     user = Guardian.Plug.current_resource(conn)
+
     %{"title" => title, "topic_id" => topic_id, "post" => post} = thread
+    %{"intro" => intro, "proofs" => proofs} = post
     thread_params = %{ topic_id: topic_id, title: title}
-    post_params = %{intro: post.intro, proofs: post.proofs}
+    proofs = Enum.map proofs, fn proof ->
+      %{"article" => article, "comment" => comment, "reference" => reference} = proof
+      %{"link" => link, "title" => reference_title} = reference
+      %{
+        article: article,
+        comment: comment,
+        reference: %{link: link, title: reference_title}
+      }
+      end
+    post_params = %{intro: intro, proofs: proofs}
 
     with {:ok, thread} <- Discussion.create_thread(thread_params, post_params, user) do
+      IO.puts "back in controller, here is thread: #{thread}"
       render conn, "show.json", thread: thread
     else
       {:error, reason} ->
