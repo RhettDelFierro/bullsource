@@ -34,7 +34,7 @@ defmodule Bullsource.Discussion do
         {:ok, %{thread: finished_thread} = new_thread} ->
           IO.puts "+++++++++++++++++++++create_thread"
           IO.inspect new_thread
-          {:ok, finished_thread |> Repo.preload(:post)}
+          {:ok, finished_thread |> Repo.preload([{:posts, :proofs}])}
         {:error, _, reason, _} ->
           IO.puts "++++thread_transaction error:+++++"
           IO.inspect reason
@@ -55,9 +55,13 @@ defmodule Bullsource.Discussion do
    end
   end
 
-  defp create_proof_details(post_proof, proof) do
-    case proof_details_transaction(post_proof, proof) |> Repo.transaction do
-      {:ok, post_with_proofs} -> {:ok, post_with_proofs}
+  defp create_proof_details(proof, proof_content) do
+    case proof_details_transaction(proof, proof_content) |> Repo.transaction do
+      {:ok, post_with_proofs} ->
+        IO.puts "post_with proofs: ++++++"
+        IO.inspect post_with_proofs
+        {:ok, post_with_proofs}
+
       {:error, _, reason, _} -> {:error, reason}
     end
   end
@@ -66,7 +70,7 @@ defmodule Bullsource.Discussion do
 
   def thread_transaction(thread, post, user) do
     Multi.new
-    |> Multi.run(:thread, insert_thread(thread, user))
+    |> Multi.insert(:thread, thread_changeset(%{topic_id: thread.topic_id, user_id: user.id, title: thread.title}))
     |> Multi.run(:post,   &insert_post(&1.thread, post, user))
     |> Multi.run(:proofs, &create_proofs(&1.post, post.proofs))
     #maybe just keep pipelining the multis, and using enum.map for the proofs? I think there may be a complication because it's another Multi.new in create_proofs.
@@ -74,15 +78,17 @@ defmodule Bullsource.Discussion do
 
   defp proofs_transaction(post, proofs) do
     Multi.new
-    |> Multi.run(:post_proof, insert_post_proof(post))
-    |> Multi.run(:proof, &insert_proofs(&1.post_proof, proofs))
+    |> Multi.insert(:proof, proof_changeset(%{post_id: post.id}))
+    |> Multi.run(:proof_chain, &insert_proofs(&1.proof, proofs))
   end
 
-  defp proof_details_transaction(post_proof, proof) do
+  defp proof_details_transaction(proof, proof_content) do
     Multi.new
-    |> Multi.run(:article, insert_article(post_proof,proof.article))
-    |> Multi.run(:comment, insert_comment(post_proof,proof.comment))
-    |> Multi.run(:reference, insert_reference(proof.reference))
+    |> Multi.insert(:article, article_changeset(%{proof_id: proof.id, text: proof_content.article}))
+    |> Multi.insert(:comment, comment_changeset(%{proof_id: proof.id, text: proof_content.comment}))
+    |> Multi.insert(:reference,
+      reference_changeset(%{link: proof_content.reference.link,title: proof_content.reference.title}))
+    |> Multi.run(:proof_reference, &insert_proof_reference(proof, &1.reference))
   end
 
   defp insert_thread(thread, user) do
@@ -106,25 +112,30 @@ defmodule Bullsource.Discussion do
   end
 
 #so far, post_proof will have the id of the post. We will see if there's already a link available for the reference.
-  defp insert_proofs(post_proof, [first_proof | rest_proofs]) do
-    case Repo.get_by(Reference, link: first_proof.link) do
+  defp insert_proofs(proof, [first_proof_content | rest_proofs_content]) do
+
+    reference = Repo.get_by(Reference, link: first_proof_content.reference.link)
+    case reference do
       nil ->
-        case create_proof_details(post_proof, first_proof) do
+      IO.puts "nil'd ++++++++++++"
+        case create_proof_details(proof, first_proof_content) do
           {:ok, proof_detail} ->
             #add the previous proof details that have finished:
             #proof_details = proof_details ++ proof_detail
-            insert_proofs(post_proof, rest_proofs) #recursion.
+            insert_proofs(proof, rest_proofs_content) #recursion.
 
           {:error, reason} ->
             {:error, reason} #these tuples are very much DRY right now, will need refactor
         end
 
       reference ->
-        case create_proof_details(reference, first_proof) do
+      IO.puts "reference'd+++++++++++++ #{reference}'"
+#      may have to query to get the proof_id/similar to post_proof
+        case create_proof_details(reference, first_proof_content) do
           {:ok, proof_detail} ->
             #add the previous proof details that have finished:
             #proof_details = proof_details ++ proof_detail
-            insert_proofs(post_proof, rest_proofs) #recursion.
+            insert_proofs(proof, rest_proofs_content) #recursion.
 
           {:error, reason} ->
             {:error, reason} #these tuples are very much DRY right now, will need refactor
@@ -133,16 +144,16 @@ defmodule Bullsource.Discussion do
   end
 
 # recursion end here
-  defp insert_proofs(post_proof, []) do
+  defp insert_proofs(proof, []) do
   #should be a query that will return a preloaded tuple.
-    {:ok, post_proof |> Repo.preload(:proofs)}
+    {:ok, proof}
   end
 
-  defp insert_article(post_proof, article) do
+  defp insert_article(proof, article) do
     article_changeset(%{proof_id: post_proof.id, text: article.text}) |> Repo.insert
   end
 
-  defp insert_comment(post_proof, comment) do
+  defp insert_comment(proof, comment) do
     article_changeset(%{proof_id: post_proof.id, text: comment.text}) |> Repo.insert
   end
 
@@ -202,7 +213,7 @@ defmodule Bullsource.Discussion do
     %Article{}
     |> cast(params, [:text, :proof_id])
     |> validate_required([:text, :proof_id])
-    |> assoc_constraint(:proof_id)
+    |> assoc_constraint(:proof)
   end
 
   def comment_changeset(params \\ %{}) do
@@ -210,7 +221,7 @@ defmodule Bullsource.Discussion do
     |> cast(params, [:text, :proof_id])
     |> validate_required([:proof_id])
     |> validate_length(:text, max: 500)
-    |> assoc_constraint(:proof_id)
+    |> assoc_constraint(:proof)
   end
 
   def reference_changeset(params \\ %{}) do

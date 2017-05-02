@@ -7,7 +7,8 @@ defmodule Bullsource.Discussion.Reference do
     field :link, :string
     field :title, :string
 
-    belongs_to :proof, Proof
+    #has_many :proof, ProofReference
+    many_to_many :references, Proof, join_through: "proof_references"
 
   end
 end

@@ -29,9 +29,10 @@ defmodule Bullsource.Web.ThreadController do
       end
     post_params = %{intro: intro, proofs: proofs}
 
-    with {:ok, thread} <- Discussion.create_thread(thread_params, post_params, user) do
-      IO.puts "back in controller, here is thread: #{thread}"
-      render conn, "show.json", thread: thread
+    with {:ok, thread_final} <- Discussion.create_thread(thread_params, post_params, user) do
+      IO.puts "back in controller, here is thread:++++++"
+      IO.inspect thread_final
+      render conn, "show.json", thread: thread_final
     else
       {:error, reason} ->
         render conn, ErrorView, "error.json", changeset_errors: reason
