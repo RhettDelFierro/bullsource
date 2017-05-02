@@ -8,7 +8,7 @@ defmodule Bullsource.Web.ThreadView do
     }
   end
 
-  def render("show.json", %{thread: thread}) do
+  def render("show.json", %{new_thread: thread}) do
     %{ thread: thread_json(thread) }
   end
 

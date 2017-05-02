@@ -19,6 +19,10 @@ defmodule Bullsource.Discussion do
     Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
   end
 
+  def list_posts_in_thread(thread_id) do
+    Repo.get(Thread,thread_id) |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
+  end
+
   ####creating interface functions for controllers.
   #is it possible to chain transactions at a higher order?
   #the reason for all the multis is for the rollback functionality in case anything in the chain is invalid.
@@ -34,7 +38,10 @@ defmodule Bullsource.Discussion do
         {:ok, %{thread: finished_thread} = new_thread} ->
           IO.puts "+++++++++++++++++++++create_thread"
           IO.inspect new_thread
-          {:ok, finished_thread |> Repo.preload([{:posts, :proofs}])}
+          {:ok,
+               finished_thread
+               |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
+          }
         {:error, _, reason, _} ->
           IO.puts "++++thread_transaction error:+++++"
           IO.inspect reason
