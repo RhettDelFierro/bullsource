@@ -20,7 +20,29 @@ defmodule Bullsource.Discussion do
   end
 
   def list_posts_in_thread(thread_id) do
-    Repo.get(Thread,thread_id) |> Repo.preload(:user) |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
+    Repo.get(Thread,thread_id)
+    |> Repo.preload(:user)
+    |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: [references: :references]])
+
+#    proofs = Repo.all(from(pr in ProofReference, where: pr.proof_id == ^proof_id, preload: :blah))
+#     thread = Thread
+#     |> where([thread], thread.id == ^thread_id)
+#     |> join(:left, [thread], posts in assoc(thread, :posts))
+#     |> join(:left, [thread, posts], proofs in assoc(posts, :proofs))
+#     |> join(:left, [thread, posts, proofs], article in assoc(proofs, :article))
+#     |> join(:left, [thread, posts, proofs], comment in assoc(proofs, :comment))
+#     |> join(:left, [thread, posts, proofs], references in assoc(proofs, :references))
+#     |> join(:left, [thread, posts, proofs], pr in assoc(proofs, :proof_references))
+#     |> preload(:user)
+#     |> preload([thread, posts, proofs, article, comment, references, pr],
+#          [posts: {posts, proofs:
+#                    {proofs, article: article, comment: comment, pr: pr}
+#                  }
+#          ])
+#     |> Repo.one
+
+#    the query below works to get a nested :proof in :article
+#    Repo.get(Thread,thread_id) |> Repo.preload(:user) |> Repo.preload(posts: [proofs: [article: :proof], proofs: :comment, proofs: :references])
   end
 
   ####creating interface functions for controllers.
@@ -38,11 +60,23 @@ defmodule Bullsource.Discussion do
         {:ok, %{thread: finished_thread} = new_thread} ->
           IO.puts "+++++++++++++++++++++create_thread"
           IO.inspect new_thread
-          {:ok,
-               finished_thread
-               |> Repo.preload(:user)
-               |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
-          }
+
+          {:ok, list_posts_in_thread(finished_thread.id)}
+#               finished_thread
+#               |> Repo.preload(:user)
+#               |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
+#              }
+#        {:ok, %{thread: finished_thread} = new_thread} ->
+#          IO.puts "+++++++++++++++++++++create_thread"
+#          IO.inspect new_thread
+#
+#          query = from pr in ProofReference,
+#                    where: pr.proof_id == ^new_thread.post.id and ru.user_id == ^user.id
+#          {:ok,
+#               finished_thread
+#               |> Repo.preload(:user)
+#               |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
+#          }
         {:error, _, reason, _} ->
           IO.puts "++++thread_transaction error:+++++"
           IO.inspect reason
@@ -247,4 +281,55 @@ defmodule Bullsource.Discussion do
     |> assoc_constraint(:reference)
   end
 
+  def blah() do
+    %Bullsource.Discussion.Thread{__meta__: #Ecto.Schema.Metadata<:loaded, "threads">,
+     id: 46, inserted_at: ~N[2017-05-03 19:44:35.033274],
+     posts: [%Bullsource.Discussion.Post{__meta__: #Ecto.Schema.Metadata<:loaded, "posts">,
+       id: 27, inserted_at: ~N[2017-05-03 19:44:35.041735],
+       intro: "first thread title intro.",
+       proofs: [%Bullsource.Discussion.Proof{__meta__: #Ecto.Schema.Metadata<:loaded, "proofs">,
+         article: %Bullsource.Discussion.Article{__meta__: #Ecto.Schema.Metadata<:loaded, "articles">,
+          id: 14,
+          proof: #Ecto.Association.NotLoaded<association :proof is not loaded>,
+          proof_id: 24, text: "some blah quote from reference."},
+         comment: %Bullsource.Discussion.Comment{__meta__: #Ecto.Schema.Metadata<:loaded, "comments">,
+          id: 14, inserted_at: ~N[2017-05-03 19:44:35.045931],
+          proof: #Ecto.Association.NotLoaded<association :proof is not loaded>,
+          proof_id: 24, text: "come blah comment about article",
+          updated_at: ~N[2017-05-03 19:44:35.045936]}, id: 24,
+         post: #Ecto.Association.NotLoaded<association :post is not loaded>,
+         post_id: 27,
+         references: [%Bullsource.Discussion.Reference{__meta__: #Ecto.Schema.Metadata<:loaded, "references">,
+           id: 14, link: "http://someblah.com",
+           references: [%Bullsource.Discussion.Proof{__meta__: #Ecto.Schema.Metadata<:loaded, "proofs">,
+             article: #Ecto.Association.NotLoaded<association :article is not loaded>,
+             comment: #Ecto.Association.NotLoaded<association :comment is not loaded>,
+             id: 24,
+             post: #Ecto.Association.NotLoaded<association :post is not loaded>,
+             post_id: 27,
+             references: #Ecto.Association.NotLoaded<association :references is not loaded>}],
+           title: "some blah title for the link."},
+          %Bullsource.Discussion.Reference{__meta__: #Ecto.Schema.Metadata<:loaded, "references">,
+           id: 15, link: "http://someblah2.com",
+           references: [%Bullsource.Discussion.Proof{__meta__: #Ecto.Schema.Metadata<:loaded, "proofs">,
+             article: #Ecto.Association.NotLoaded<association :article is not loaded>,
+             comment: #Ecto.Association.NotLoaded<association :comment is not loaded>,
+             id: 24,
+             post: #Ecto.Association.NotLoaded<association :post is not loaded>,
+             post_id: 27,
+             references: #Ecto.Association.NotLoaded<association :references is not loaded>}],
+           title: "some blah title2 for the link."}]}],
+       thread: #Ecto.Association.NotLoaded<association :thread is not loaded>,
+       thread_id: 46, updated_at: ~N[2017-05-03 19:44:35.041740],
+       user: #Ecto.Association.NotLoaded<association :user is not loaded>,
+       user_id: 1}], title: "first title thread title.",
+     topic: #Ecto.Association.NotLoaded<association :topic is not loaded>,
+     topic_id: 1, updated_at: ~N[2017-05-03 19:44:35.037790],
+     user: %Bullsource.Accounts.User{__meta__: #Ecto.Schema.Metadata<:loaded, "users">,
+      email: "blah@blah.com",
+      encrypted_password: "$2b$12$RnF4AwxvGGs/SlNvMcaB.eS66hR/AWZ6WOyXiG88nWGRybaOft5M6",
+      id: 1, inserted_at: ~N[2017-04-17 23:21:33.090826], password: nil,
+      updated_at: ~N[2017-04-17 23:21:33.097732], username: "blah"}, user_id: 1}
+
+  end
 end
