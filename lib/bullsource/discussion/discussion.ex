@@ -101,17 +101,14 @@ defmodule Bullsource.Discussion do
       IO.puts "nil'd ++++++++++++"
         case create_proof_details(proof, proof_content) do
           {:ok, proof_detail} ->
-            #add the previous proof details that have finished:
-            #proof_details = proof_details ++ proof_detail
-#           refactoring because of the recursion on the proof is being addressed. insert_proofs(proof, rest_proofs_content) #recursion.
-           {:ok, proof_detail}
+            {:ok, proof_detail}
           {:error, reason} ->
             {:error, reason} #these tuples are very much DRY right now, will need refactor
         end
 
       reference ->
-      IO.puts "reference'd+++++++++++++ #{reference}'"
-#      may have to query to get the proof_id/similar to post_proof
+      IO.puts "reference'd+++++++++++++"
+      IO.inspect reference
         case create_proof_details(reference, proof_content) do
           {:ok, proof_detail} ->
             {:ok, proof_detail}
@@ -120,12 +117,6 @@ defmodule Bullsource.Discussion do
         end
     end
   end
-
-# recursion end here
-#  defp insert_proof(proof, []) do
-#  #should be a query that will return a preloaded tuple.
-#    {:ok, proof}
-#  end
 
   defp insert_article(proof, article) do
     article_changeset(%{proof_id: post_proof.id, text: article.text}) |> Repo.insert
