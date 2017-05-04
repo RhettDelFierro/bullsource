@@ -63,6 +63,13 @@ defmodule Bullsource.Discussion do
     end
   end
 
+  defp create_proof_details_existing(proof, proof_content, reference) do
+    case proof_details_transaction_existing(proof, proof_content, reference) |> Repo.transaction do
+      {:ok, post_with_proofs} -> {:ok, post_with_proofs}
+
+      {:error, _, reason, _} -> {:error, reason}
+    end
+  end
   ####Ecto.Multi functions
 
   def thread_transaction(thread, post, user) do
@@ -87,6 +94,13 @@ defmodule Bullsource.Discussion do
     |> Multi.run(:proof_reference, &insert_proof_reference(proof, &1.reference))
   end
 
+  defp proof_details_transaction_existing(proof, proof_content, reference) do
+    Multi.new
+    |> Multi.insert(:article, article_changeset(%{proof_id: proof.id, text: proof_content.article}))
+    |> Multi.insert(:comment, comment_changeset(%{proof_id: proof.id, text: proof_content.comment}))
+    |> Multi.insert(:proof_reference, proof_reference_changeset(%{proof_id: proof.id, reference_id: reference.id}))
+  end
+
   defp insert_post(thread, post, user) do
     post_changeset(%{intro: post.intro, user_id: user.id, thread_id: thread.id})
     |> Repo.insert
@@ -107,9 +121,13 @@ defmodule Bullsource.Discussion do
         end
 
       reference ->
-      IO.puts "reference'd+++++++++++++"
-      IO.inspect reference
-        case create_proof_details(reference, proof_content) do
+        # see about making this a join query statement:
+#        proof_id = Repo.one from pr in ProofReference,
+#                select: pr.proof_id,
+#                where: pr.reference_id == ^reference.id
+#        repo_proof = Repo.get(Proof, proof_id)
+
+        case create_proof_details_existing(proof, proof_content, reference) do
           {:ok, proof_detail} ->
             {:ok, proof_detail}
           {:error, reason} ->
@@ -197,6 +215,7 @@ defmodule Bullsource.Discussion do
     %Reference{}
     |> cast(params, [:title, :link])
     |> validate_required([:link])
+    |> unique_constraint(:link)
     |> validate_length(:title, max: 300)
   end
 

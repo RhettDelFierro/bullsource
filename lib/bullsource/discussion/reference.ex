@@ -4,7 +4,7 @@ defmodule Bullsource.Discussion.Reference do
   alias Bullsource.Discussion.Proof
 
   schema "references" do
-    field :link, :string
+    field :link, :string, unique: true
     field :title, :string
 
     #has_many :proof, ProofReference
