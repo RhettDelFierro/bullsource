@@ -22,7 +22,7 @@ defmodule Bullsource.Discussion do
   def list_posts_in_thread(thread_id) do
     thread = Repo.get(Thread,thread_id)
     |> Repo.preload(:user)
-    |> Repo.preload(posts: [proofs: :article, proofs: :comment])
+    |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
 
   end
 
@@ -47,10 +47,20 @@ defmodule Bullsource.Discussion do
   #create_post?
 
   defp create_proofs(post, [first_proof_content | rest_proofs_content]) do
-   case proofs_transaction(post, first_proof_content) |> Repo.transaction do
-     {:ok, proof} ->
-        create_proofs(post, rest_proofs_content)
-     {:error, _, reason, _} -> {:error, reason}
+   reference = Repo.get_by(Reference, link: first_proof_content.reference.link)
+   case reference do
+     nil ->
+      Multi.new
+      |> Multi.insert(:reference,
+           reference_changeset(%{title: first_proof_content.reference.title,
+             link: first_proof_content.reference.link}))
+      |> Multi.run(:proof, &insert_proof(post, first_proof_content, &1.reference))
+      |> Multi.run(:recursion, &create_proofs(post, rest_proofs_content))
+
+     reference ->
+       Multi.new
+       |>Multi.run(:proof, insert_proof(post, first_proof_content, reference))
+       |>Multi.run(:recursion, &create_proofs(post, rest_proofs_content))
    end
   end
 
@@ -86,26 +96,16 @@ defmodule Bullsource.Discussion do
     |> Multi.run(:proofs, &create_proofs(&1.post, post.proofs))
   end
 
-  defp proofs_transaction(post, proof_content) do
+  defp proofs_transaction(post, proof_content, reference) do
     Multi.new
-    |> Multi.insert(:proof, proof_changeset(%{post_id: post.id}))
-    |> Multi.run(:proof_chain, &insert_proof(&1.proof, proof_content))
+    |> Multi.insert(:proof, proof_changeset(%{post_id: post.id, reference_id: reference.id}))
+    |> Multi.run(:proof_chain, &proof_details_transaction(&1.proof, proof_content))
   end
 
-  defp proof_details_transaction(proof, proof_content) do
+  defp insert_proof_details(proof, proof_content) do
     Multi.new
     |> Multi.insert(:article, article_changeset(%{proof_id: proof.id, text: proof_content.article}))
     |> Multi.insert(:comment, comment_changeset(%{proof_id: proof.id, text: proof_content.comment}))
-    |> Multi.insert(:reference,
-      reference_changeset(%{link: proof_content.reference.link,title: proof_content.reference.title}))
-    |> Multi.run(:proof_reference, &insert_proof_reference(proof, &1.reference))
-  end
-
-  defp proof_details_transaction_existing(proof, proof_content, reference) do
-    Multi.new
-    |> Multi.insert(:article, article_changeset(%{proof_id: proof.id, text: proof_content.article}))
-    |> Multi.insert(:comment, comment_changeset(%{proof_id: proof.id, text: proof_content.comment}))
-    |> Multi.insert(:proof_reference, proof_reference_changeset(%{proof_id: proof.id, reference_id: reference.id}))
   end
 
   defp insert_post(thread, post, user) do
@@ -114,37 +114,10 @@ defmodule Bullsource.Discussion do
   end
   
 #so far, post_proof will have the id of the post. We will see if there's already a link available for the reference.
-  defp insert_proof(proof, proof_content) do
-
-    reference = Repo.get_by(Reference, link: proof_content.reference.link)
-    case reference do
-      nil ->
-      IO.puts "nil'd ++++++++++++"
-        case create_proof_details(proof, proof_content) do
-          {:ok, proof_detail} ->
-            IO.puts "inspect proof_detail"
-            IO.inspect proof_detail
-            {:ok, proof_detail}
-          {:error, reason} ->
-            {:error, reason} #these tuples are very much DRY right now, will need refactor
-        end
-
-      reference ->
-        # see about making this a join query statement:
-#        proof_id = Repo.one from pr in ProofReference,
-#                select: pr.proof_id,
-#                where: pr.reference_id == ^reference.id
-#        repo_proof = Repo.get(Proof, proof_id)
-
-        case create_proof_details_existing(proof, proof_content, reference) do
-          {:ok, proof_detail} ->
-            IO.puts "inspect proof_detail"
-            IO.inspect proof_detail
-            {:ok, proof_detail}
-          {:error, reason} ->
-            {:error, reason} #these tuples are very much DRY right now, will need refactor
-        end
-    end
+  defp insert_proof(proof, proof_content, reference) do
+   Multi.new
+   |> Multi.insert(:proof, proof_changeset(%{post_id: post.id, reference_id: reference.id}))
+   |> Multi.run(:proof_chain, &insert_proof_details(&1.proof, proof_content))
   end
 
   defp insert_article(proof, article) do
