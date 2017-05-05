@@ -1,6 +1,6 @@
 defmodule Bullsource.Discussion do
   import Ecto.{Changeset, Query}
-  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic, ProofReference}
+  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic}
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
   alias Ecto.Multi
@@ -23,10 +23,6 @@ defmodule Bullsource.Discussion do
     thread = Repo.get(Thread,thread_id)
     |> Repo.preload(:user)
     |> Repo.preload(posts: [proofs: :article, proofs: :comment])
-
-    query = from pr in ProofReference,
-            join: r in assoc(pr, :references),
-            where: pr.proof_id == ^thread.proof_id
 
   end
 
@@ -205,9 +201,10 @@ defmodule Bullsource.Discussion do
 
   def proof_changeset(params \\ %{}) do
     %Proof{}
-    |> cast(params, [:post_id])
-    |> validate_required([:post_id])
+    |> cast(params, [:post_id, :reference_id])
+    |> validate_required([:post_id, :reference_id])
     |> assoc_constraint(:post)
+    |> assoc_constraint(:reference)
   end
 
   #the article is a section of the reference that they're quoting.
@@ -235,7 +232,7 @@ defmodule Bullsource.Discussion do
   end
 
   def proof_reference_changeset(params \\ %{}) do
-    %ProofReference{}
+    %Proof{}
     |> cast(params, [:proof_id, :reference_id])
     |> validate_required([:proof_id, :reference_id])
     |> assoc_constraint(:proof)
