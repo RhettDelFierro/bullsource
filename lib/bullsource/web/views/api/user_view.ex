@@ -11,7 +11,7 @@ defmodule Bullsource.Web.UserView do
     }
   end
 
-  defp user_json(user) do
+  def user_json(user) do
     %{
       id: user.id,
       username: user.username,

@@ -2,6 +2,7 @@ defmodule Bullsource.Web.ThreadView do
 # for api/user_controller.ex
   use Bullsource.Web, :view
   import Bullsource.Web.PostView, only: [post_json: 1]
+  import Bullsource.Web.UserView, only: [user_json: 1]
 
   def render("index.json", %{threads: threads}) do
     %{
@@ -16,10 +17,10 @@ defmodule Bullsource.Web.ThreadView do
   defp thread_json(thread) do
     %{
       id: thread.id,
-      created_by: thread.user.username,
+      user: user_json(thread.user),
       created_at: thread.inserted_at,
       title: thread.title,
-      posts: Enum.map thread.posts &post_json(&1)
+      posts: Enum.map(thread.posts, &post_json(&1))
     }
   end
 

@@ -20,9 +20,14 @@ defmodule Bullsource.Discussion do
   end
 
   def list_posts_in_thread(thread_id) do
-    Repo.get(Thread,thread_id)
+    thread = Repo.get(Thread,thread_id)
     |> Repo.preload(:user)
-    |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: [references: :references]])
+    |> Repo.preload(posts: [proofs: :article, proofs: :comment])
+
+    query = from pr in ProofReference,
+            join: r in assoc(pr, :references),
+            where: pr.proof_id == ^thread.proof_id
+
   end
 
   ####creating interface functions for controllers.
@@ -32,6 +37,8 @@ defmodule Bullsource.Discussion do
   def create_thread(thread, post, user) do
     case thread_transaction(thread, post, user) |> Repo.transaction do
         {:ok, %{thread: finished_thread} = new_thread} ->
+          IO.puts "the end +++"
+          IO.inspect new_thread
           {:ok, list_posts_in_thread(finished_thread.id)}
 
         {:error, _, reason, _} ->
@@ -57,7 +64,10 @@ defmodule Bullsource.Discussion do
 
   defp create_proof_details(proof, proof_content) do
     case proof_details_transaction(proof, proof_content) |> Repo.transaction do
-      {:ok, post_with_proofs} -> {:ok, post_with_proofs}
+      {:ok, post_with_proofs} ->
+        IO.inspect "create_proof_details+++"
+        IO.inspect post_with_proofs
+        {:ok, post_with_proofs}
 
       {:error, _, reason, _} -> {:error, reason}
     end
@@ -65,7 +75,8 @@ defmodule Bullsource.Discussion do
 
   defp create_proof_details_existing(proof, proof_content, reference) do
     case proof_details_transaction_existing(proof, proof_content, reference) |> Repo.transaction do
-      {:ok, post_with_proofs} -> {:ok, post_with_proofs}
+      {:ok, post_with_proofs} ->
+        {:ok, post_with_proofs}
 
       {:error, _, reason, _} -> {:error, reason}
     end
@@ -115,6 +126,8 @@ defmodule Bullsource.Discussion do
       IO.puts "nil'd ++++++++++++"
         case create_proof_details(proof, proof_content) do
           {:ok, proof_detail} ->
+            IO.puts "inspect proof_detail"
+            IO.inspect proof_detail
             {:ok, proof_detail}
           {:error, reason} ->
             {:error, reason} #these tuples are very much DRY right now, will need refactor
@@ -129,6 +142,8 @@ defmodule Bullsource.Discussion do
 
         case create_proof_details_existing(proof, proof_content, reference) do
           {:ok, proof_detail} ->
+            IO.puts "inspect proof_detail"
+            IO.inspect proof_detail
             {:ok, proof_detail}
           {:error, reason} ->
             {:error, reason} #these tuples are very much DRY right now, will need refactor
@@ -137,11 +152,11 @@ defmodule Bullsource.Discussion do
   end
 
   defp insert_article(proof, article) do
-    article_changeset(%{proof_id: post_proof.id, text: article.text}) |> Repo.insert
+    article_changeset(%{proof_id: proof.id, text: article.text}) |> Repo.insert
   end
 
   defp insert_comment(proof, comment) do
-    article_changeset(%{proof_id: post_proof.id, text: comment.text}) |> Repo.insert
+    article_changeset(%{proof_id: proof.id, text: comment.text}) |> Repo.insert
   end
 
 # remember that you want to check if it exists first before you run this function.
