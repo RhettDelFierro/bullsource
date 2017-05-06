@@ -1,10 +1,12 @@
 defmodule Bullsource.Web.PostView do
 # for api/user_controller.ex
   use Bullsource.Web, :view
+  import Bullsource.Web.UserView, only: [user_json: 1]
 
   def post_json(post) do
     %{
       id: post.id,
+      user: user_json(post.user),
       inserted_at: post.inserted_at,
       intro: post.intro,
       proofs: Enum.map(post.proofs, &proofs_json(&1))
