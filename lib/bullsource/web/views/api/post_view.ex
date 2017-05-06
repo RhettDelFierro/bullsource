@@ -8,6 +8,7 @@ defmodule Bullsource.Web.PostView do
       id: post.id,
       user: user_json(post.user),
       inserted_at: post.inserted_at,
+      updated_at: post.updated_at,
       intro: post.intro,
       proofs: Enum.map(post.proofs, &proofs_json(&1))
     }

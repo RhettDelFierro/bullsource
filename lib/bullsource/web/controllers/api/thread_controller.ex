@@ -15,10 +15,37 @@ defmodule Bullsource.Web.ThreadController do
   def create(conn,%{"thread" => thread}) do
     user = Guardian.Plug.current_resource(conn)
 
+    {thread_params, post_params} = format_thread(thread)
+
+    with {:ok, new_thread} <- Discussion.create_thread(thread_params, post_params, user) do
+      IO.puts "back in thread controller create/2, here is new_thread:++++++"
+      IO.inspect new_thread
+      render conn, "show.json", new_thread: new_thread
+    else
+      {:error, reason} ->
+        IO.puts "thread controller create/2 error changeset+++++++++"
+        IO.inspect reason
+        render conn, ErrorView, "error.json", changeset_error: reason
+    end
+
+  end
+
+  defp format_thread(thread) do
     %{"title" => title, "topic_id" => topic_id, "post" => post} = thread
     %{"intro" => intro, "proofs" => proofs} = post
+
     thread_params = %{ topic_id: topic_id, title: title}
-    proofs = Enum.map proofs, fn proof ->
+
+    proofs = format_proofs(proofs)
+
+    post_params = %{intro: intro, proofs: proofs}
+
+    {thread_params, post_params}
+
+  end
+
+  defp format_proofs(proofs) do
+   Enum.map proofs, fn proof ->
       %{"article" => article, "comment" => comment, "reference" => reference} = proof
       %{"link" => link, "title" => reference_title} = reference
       %{
@@ -26,19 +53,7 @@ defmodule Bullsource.Web.ThreadController do
         comment: comment,
         reference: %{link: link, title: reference_title}
       }
-      end
-    post_params = %{intro: intro, proofs: proofs}
-
-    with {:ok, new_thread} <- Discussion.create_thread(thread_params, post_params, user) do
-      IO.puts "back in controller, here is thread:++++++"
-      IO.inspect new_thread
-      render conn, "show.json", new_thread: new_thread
-    else
-      {:error, reason} ->
-        IO.puts "controller error changeset+++++++++"
-        IO.inspect reason
-        render conn, ErrorView, "error.json", changeset_error: reason
-    end
+   end
 
   end
 

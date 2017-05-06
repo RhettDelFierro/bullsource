@@ -27,12 +27,10 @@ defmodule Bullsource.Web.ErrorView do
 
   #creates a map of the errors with each field generated from the changeset errors.
   defp changeset_errors(errors) do
-    IO.puts "changeset_errors/1 in views++++++"
-    IO.inspect errors
     errors
-    |> Enum.map(fn {field, {reason,detail} = v} ->
+    |> Enum.map(fn {field, {reason,detail}} ->
          str = Enum.reduce detail, reason, fn {k, v}, acc ->
-                 String.replace(acc, "%{#{k}}", to_string(v))
+                 String.replace(acc, "%{#{k}}", to_string(v)) #inject the value into error string
                end
          {field, str}
 #         {field, reason}
