@@ -31,59 +31,71 @@ defmodule Bullsource.Discussion do
   #the reason for all the multis is for the rollback functionality in case anything in the chain is invalid.
 
   def create_thread(thread, post, user) do
-    case thread_transaction(thread, post, user) |> Repo.transaction do
-        {:ok, new_thread} ->
-          IO.puts "the end +++"
-          IO.inspect new_thread
-#          {:ok, list_posts_in_thread(finished_thread.id)}
+    Repo.transaction(fn ->
+      with {:ok, post_insert} <- thread_transaction(thread, post, user),
+           {:ok, post_with_proofs} <- proofs_transaction(post_insert,post.proofs) do
+           IO.puts "post_with_proofs +++++++"
+           IO.inspect post_with_proofs
+           post_with_proofs
 
-        {:error, _, reason, _} ->
-          IO.puts "++++thread_transaction error:+++++"
-          IO.inspect reason
-          {:error, reason}
-    end
+      else
+        {:error, error_changeset} ->
+          IO.puts "error changeset++++++++"
+          IO.inspect error_changeset
+          Repo.rollback(error_changeset)
+      end
+    end)
   end
-
-  #create_post?
-
-  defp create_proofs(post, [first_proof_content | rest_proofs_content]) do
-    reference_check = Repo.get_by(Reference, link: first_proof_content.reference.link)
-    case reference_check do
-      nil ->
-        Multi.new
-        |> Multi.insert(:reference,
-             reference_changeset(%{title: first_proof_content.reference.title,
-               link: first_proof_content.reference.link}))
-        |> Multi.run(:proof, &insert_proof(post, first_proof_content, &1.reference))
-        |> Multi.run(:recursion, create_proofs(post, rest_proofs_content))
-
-     reference ->
-       Multi.new
-       |> Multi.run(:proof, insert_proof(post, first_proof_content, reference))
-       |> Multi.run(:recursion, create_proofs(post, rest_proofs_content))
-     end
-  end
-
-    defp create_proofs(post,[]) do
-      IO.inspect post
-      {:ok, post |> Repo.preload(:thread)}
-    end
-
-
-
-  ####Ecto.Multi functions
 
   def thread_transaction(thread, post, user) do
-    Multi.new
-    |> Multi.insert(:thread, thread_changeset(%{topic_id: thread.topic_id, user_id: user.id, title: thread.title}))
-    |> Multi.run(:post,   &insert_post(&1.thread, post, user))
-    |> Multi.run(:proofs, &create_proofs(&1.post, post.proofs))
+    Repo.transaction(fn ->
+      with {:ok, thread_insert} <- thread_changeset(%{topic_id: thread.topic_id, user_id: user.id, title: thread.title}) |> Repo.insert,
+           {:ok, post_insert} <- post_changeset(%{intro: post.intro, user_id: user.id, thread_id: thread_insert.id}) |> Repo.insert do
+           post_insert
+      else
+        {:error, error_changeset} ->
+          IO.puts "thread_transaction error ++++++++"
+          IO.inspect error_changeset
+          Repo.rollback(error_changeset)
+      end
+    end)
   end
 
-  defp proofs_transaction(post, proof_content, reference) do
-    Multi.new
-    |> Multi.insert(:proof, proof_changeset(%{post_id: post.id, reference_id: reference.id}))
-    |> Multi.run(:proof_chain, &proof_details_transaction(&1.proof, proof_content))
+  defp proofs_transaction(post, [first_proof| rest_proofs]) do
+    Repo.transaction(fn ->
+      with {:ok, reference} <- get_or_insert_reference(first_proof.reference),
+           {:ok, proof} <- proof_changeset(%{post_id: post.id, reference_id: reference.id}) |> Repo.insert,
+           {:ok, article} <- article_changeset(%{proof_id: proof.id, text: first_proof.article}) |> Repo.insert,
+           {:ok, comment} <- comment_changeset(%{proof_id: proof.id, text: first_proof.comment}) |> Repo.insert do
+           proofs_transaction(post, rest_proofs)
+      else
+        {:error, error_changeset} ->
+          IO.puts "proofs_transaction error ++++++++"
+          IO.inspect error_changeset
+          Repo.rollback(error_changeset)
+      end
+    end)
+  end
+
+  defp proofs_transaction(post, []) do
+    IO.puts "+++proofs_transaction wiht [] ++++++"
+    IO.inspect post
+    post |> Repo.preload(:proofs)
+  end
+
+
+  defp get_or_insert_reference(reference) do
+    reference_check = Repo.get_by(Reference, link: reference.link)
+    case reference_check do
+      nil ->
+        reference_changeset(%{title: reference.title,link: reference.link}) |> Repo.insert
+      reference ->
+        {:ok, reference}
+    end
+  end
+
+  defp insert_proofs() do
+
   end
 
   defp insert_proof_details(proof, proof_content) do
