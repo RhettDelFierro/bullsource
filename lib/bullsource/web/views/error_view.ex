@@ -30,7 +30,13 @@ defmodule Bullsource.Web.ErrorView do
     IO.puts "changeset_errors/1 in views++++++"
     IO.inspect errors
     errors
-    |> Enum.map(fn {field, {reason,_}} -> {field, reason} end)
+    |> Enum.map(fn {field, {reason,detail} = v} ->
+         str = Enum.reduce detail, reason, fn {k, v}, acc ->
+                 String.replace(acc, "%{#{k}}", to_string(v))
+               end
+         {field, str}
+#         {field, reason}
+      end)
     |> Map.new
 
   end

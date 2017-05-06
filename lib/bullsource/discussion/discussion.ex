@@ -10,24 +10,21 @@ defmodule Bullsource.Discussion do
     Repo.all(Topic) |> Repo.preload(:threads)
   end
 
-  def create_topic(params) do
-    topic_changeset(params) |> Repo.insert
-  end
-
-# will list nested threads in topics with the users who created it. I wonder if [threads: :user] works.
   def list_threads_in_topic(topic_id) do
     Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
   end
 
   def list_posts_in_thread(thread_id) do
-
     Repo.get(Thread,thread_id)
     |> Repo.preload(:user)
     |> Repo.preload(posts: [:user, :proofs, proofs: :reference, proofs: :article, proofs: :comment])
-
   end
 
   ####creating interface functions for controllers.
+
+  def create_topic(params) do
+    topic_changeset(params) |> Repo.insert
+  end
 
   def create_thread(thread_params, post_params, user) do
     Repo.transaction(fn ->
@@ -48,10 +45,11 @@ defmodule Bullsource.Discussion do
   defp proofs_transaction(post, [first_proof| rest_proofs] = proofs) do
     Repo.transaction(fn ->
       with {:ok, reference} <- get_or_insert_reference(first_proof.reference),
-           {:ok, proof} <- proof_changeset(%{post_id: post.id, reference_id: reference.id}) |> Repo.insert,
-           {:ok, article} <- article_changeset(%{proof_id: proof.id, text: first_proof.article}) |> Repo.insert,
-           {:ok, comment} <- comment_changeset(%{proof_id: proof.id, text: first_proof.comment}) |> Repo.insert do
-           proofs_transaction(post, rest_proofs)
+           {:ok, proof}     <- proof_changeset(%{post_id: post.id, reference_id: reference.id})    |> Repo.insert,
+           {:ok, article}   <- article_changeset(%{proof_id: proof.id, text: first_proof.article}) |> Repo.insert,
+           {:ok, comment}   <- comment_changeset(%{proof_id: proof.id, text: first_proof.comment}) |> Repo.insert do
+           proofs_transaction(post, rest_proofs) #recursion
+
       else
         {:error, error_changeset} ->
           IO.puts "proofs_transaction error ++++++++"
@@ -62,8 +60,6 @@ defmodule Bullsource.Discussion do
   end
 
   defp proofs_transaction(post, []) do
-    IO.puts "+++proofs_transaction with [] ++++++"
-    IO.inspect post
     post |> Repo.preload(:proofs)
   end
 
@@ -72,9 +68,10 @@ defmodule Bullsource.Discussion do
     reference_check = Repo.get_by(Reference, link: reference.link)
     case reference_check do
       nil ->
-        reference_changeset(%{title: reference.title,link: reference.link}) |> Repo.insert
-      reference ->
-        {:ok, reference}
+        reference_changeset(%{title: reference.title,link: reference.link})
+        |> Repo.insert
+
+      reference -> {:ok, reference}
     end
   end
 
