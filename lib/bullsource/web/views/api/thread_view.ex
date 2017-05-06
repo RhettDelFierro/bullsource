@@ -17,8 +17,10 @@ defmodule Bullsource.Web.ThreadView do
   defp thread_json(thread) do
     %{
       id: thread.id,
+      topic_id: thread.topic_id,
       user: user_json(thread.user),
       created_at: thread.inserted_at,
+      updated_at: thread.updated_at,
       title: thread.title,
       posts: Enum.map(thread.posts, &post_json(&1))
     }

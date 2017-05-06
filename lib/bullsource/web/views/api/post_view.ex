@@ -16,16 +16,12 @@ defmodule Bullsource.Web.PostView do
         id: proof.id,
         article: proof.article.text,
         comment: proof.comment.text,
-        reference: Enum.map(proof.references, &references_json(&1))
+        reference: reference_json(proof.reference)
       }
   end
 
-  defp references_json([]) do
-    []
-  end
-
-  defp references_json([r | rs]) do
-    [%{title: r.title, link: r.link}] ++ references_json(rs)
+  defp reference_json(reference) do
+    %{title: reference.title, link: reference.link}
   end
 
 end

@@ -20,23 +20,11 @@ defmodule Bullsource.Discussion do
   end
 
   def list_posts_in_thread(thread_id) do
-#    thread = Repo.get(Thread,thread_id)
-#    |> Repo.preload(:user)
-#    |> Repo.preload(posts: [proofs: :article, proofs: :comment])
-
 
     Repo.get(Thread,thread_id)
     |> Repo.preload(:user)
     |> Repo.preload(posts: [:proofs, proofs: :reference, proofs: :article, proofs: :comment])
 
-#    thread = Thread
-#    |> where([thread], thread.id == ^thread_id)
-#    |> join(:left, [thread], posts in assoc(thread, :posts))
-#    |> join(:left, [thread, posts], proofs in assoc(posts, :proofs))
-##    |> join(:left, [thread,posts,proofs], article in assoc(proofs, :article))
-##    |> join(:left, [thread,posts,proofs], comment in assoc(proofs, :article))
-#    |> Repo.preload([{:threads, :posts}])
-#    |> Repo.one
   end
 
   ####creating interface functions for controllers.
@@ -47,9 +35,7 @@ defmodule Bullsource.Discussion do
     Repo.transaction(fn ->
       with {:ok, post_insert} <- thread_transaction(thread, post, user),
            {:ok, post_with_proofs} <- proofs_transaction(post_insert,post.proofs) do
-           IO.puts "post_with_proofs +++++++"
-           IO.inspect post_with_proofs
-           post_with_proofs
+           list_posts_in_thread(post_insert.thread_id)
 
       else
         {:error, error_changeset} ->
@@ -105,28 +91,6 @@ defmodule Bullsource.Discussion do
       reference ->
         {:ok, reference}
     end
-  end
-
-  defp insert_proofs() do
-
-  end
-
-  defp insert_proof_details(proof, proof_content) do
-    Multi.new
-    |> Multi.insert(:article, article_changeset(%{proof_id: proof.id, text: proof_content.article}))
-    |> Multi.insert(:comment, comment_changeset(%{proof_id: proof.id, text: proof_content.comment}))
-  end
-
-  defp insert_post(thread, post, user) do
-    post_changeset(%{intro: post.intro, user_id: user.id, thread_id: thread.id})
-    |> Repo.insert
-  end
-  
-#so far, post_proof will have the id of the post. We will see if there's already a link available for the reference.
-  defp insert_proof(post, proof_content, reference) do
-   Multi.new
-   |> Multi.insert(:proof, proof_changeset(%{post_id: post.id, reference_id: reference.id}))
-   |> Multi.run(:proof_chain, &insert_proof_details(&1.proof, proof_content))
   end
 
 ##### Changesets #####
