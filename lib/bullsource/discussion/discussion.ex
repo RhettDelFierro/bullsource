@@ -32,10 +32,10 @@ defmodule Bullsource.Discussion do
 
   def create_thread(thread, post, user) do
     case thread_transaction(thread, post, user) |> Repo.transaction do
-        {:ok, %{thread: finished_thread} = new_thread} ->
+        {:ok, new_thread} ->
           IO.puts "the end +++"
           IO.inspect new_thread
-          {:ok, list_posts_in_thread(finished_thread.id)}
+#          {:ok, list_posts_in_thread(finished_thread.id)}
 
         {:error, _, reason, _} ->
           IO.puts "++++thread_transaction error:+++++"
@@ -47,46 +47,30 @@ defmodule Bullsource.Discussion do
   #create_post?
 
   defp create_proofs(post, [first_proof_content | rest_proofs_content]) do
-   reference = Repo.get_by(Reference, link: first_proof_content.reference.link)
-   case reference do
-     nil ->
-      Multi.new
-      |> Multi.insert(:reference,
-           reference_changeset(%{title: first_proof_content.reference.title,
-             link: first_proof_content.reference.link}))
-      |> Multi.run(:proof, &insert_proof(post, first_proof_content, &1.reference))
-      |> Multi.run(:recursion, &create_proofs(post, rest_proofs_content))
+    reference_check = Repo.get_by(Reference, link: first_proof_content.reference.link)
+    case reference_check do
+      nil ->
+        Multi.new
+        |> Multi.insert(:reference,
+             reference_changeset(%{title: first_proof_content.reference.title,
+               link: first_proof_content.reference.link}))
+        |> Multi.run(:proof, &insert_proof(post, first_proof_content, &1.reference))
+        |> Multi.run(:recursion, create_proofs(post, rest_proofs_content))
 
      reference ->
        Multi.new
-       |>Multi.run(:proof, insert_proof(post, first_proof_content, reference))
-       |>Multi.run(:recursion, &create_proofs(post, rest_proofs_content))
-   end
+       |> Multi.run(:proof, insert_proof(post, first_proof_content, reference))
+       |> Multi.run(:recursion, create_proofs(post, rest_proofs_content))
+     end
   end
 
-  defp create_proofs(post,[]) do
-    {:ok, post |> Repo.preload(:proofs)}
-  end
-
-  defp create_proof_details(proof, proof_content) do
-    case proof_details_transaction(proof, proof_content) |> Repo.transaction do
-      {:ok, post_with_proofs} ->
-        IO.inspect "create_proof_details+++"
-        IO.inspect post_with_proofs
-        {:ok, post_with_proofs}
-
-      {:error, _, reason, _} -> {:error, reason}
+    defp create_proofs(post,[]) do
+      IO.inspect post
+      {:ok, post |> Repo.preload(:thread)}
     end
-  end
 
-  defp create_proof_details_existing(proof, proof_content, reference) do
-    case proof_details_transaction_existing(proof, proof_content, reference) |> Repo.transaction do
-      {:ok, post_with_proofs} ->
-        {:ok, post_with_proofs}
 
-      {:error, _, reason, _} -> {:error, reason}
-    end
-  end
+
   ####Ecto.Multi functions
 
   def thread_transaction(thread, post, user) do
@@ -114,28 +98,10 @@ defmodule Bullsource.Discussion do
   end
   
 #so far, post_proof will have the id of the post. We will see if there's already a link available for the reference.
-  defp insert_proof(proof, proof_content, reference) do
+  defp insert_proof(post, proof_content, reference) do
    Multi.new
    |> Multi.insert(:proof, proof_changeset(%{post_id: post.id, reference_id: reference.id}))
    |> Multi.run(:proof_chain, &insert_proof_details(&1.proof, proof_content))
-  end
-
-  defp insert_article(proof, article) do
-    article_changeset(%{proof_id: proof.id, text: article.text}) |> Repo.insert
-  end
-
-  defp insert_comment(proof, comment) do
-    article_changeset(%{proof_id: proof.id, text: comment.text}) |> Repo.insert
-  end
-
-# remember that you want to check if it exists first before you run this function.
-  defp insert_reference(reference) do
-    article_changeset(%{link: reference.link, title: reference.title}) |> Repo.insert
-  end
-
-  defp insert_proof_reference(post_proof, reference) do
-    proof_reference_changeset(%{proof_id: post_proof.id, reference_id: reference.id})
-    |> Repo.insert
   end
 
 ##### Changesets #####
@@ -167,7 +133,6 @@ defmodule Bullsource.Discussion do
     |> cast(params, [:intro, :user_id, :thread_id])
     |> validate_required([:user_id, :thread_id])
     |> validate_length(:intro, min: 3)
-    |> validate_length(:intro, max: 500)
     |> assoc_constraint(:thread)
     |> assoc_constraint(:user)
   end
@@ -202,14 +167,6 @@ defmodule Bullsource.Discussion do
     |> validate_required([:link])
     |> unique_constraint(:link)
     |> validate_length(:title, max: 300)
-  end
-
-  def proof_reference_changeset(params \\ %{}) do
-    %Proof{}
-    |> cast(params, [:proof_id, :reference_id])
-    |> validate_required([:proof_id, :reference_id])
-    |> assoc_constraint(:proof)
-    |> assoc_constraint(:reference)
   end
 
 #  def blah() do
