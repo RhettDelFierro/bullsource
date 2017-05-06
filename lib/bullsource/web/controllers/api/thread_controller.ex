@@ -15,7 +15,9 @@ defmodule Bullsource.Web.ThreadController do
   def create(conn,%{"thread" => thread}) do
     user = Guardian.Plug.current_resource(conn)
 
-    {thread_params, post_params} = format_thread(thread)
+    thread_params = format_params(thread)
+    post_params = format_params(thread_params.post)
+
 
     with {:ok, new_thread} <- Discussion.create_thread(thread_params, post_params, user) do
       IO.puts "back in thread controller create/2, here is new_thread:++++++"
@@ -30,6 +32,23 @@ defmodule Bullsource.Web.ThreadController do
 
   end
 
+  defp format_params({key,val} = params) do
+    for {key, val} <- params, into: %{} do
+      cond do
+        is_atom(key) ->
+          new_val = format_params(val)
+          {key, new_val}
+        true ->
+          new_val = format_params(val)
+          {String.to_atom(key), new_val}
+      end
+    end
+  end
+
+  defp format_params(val) do
+    val
+  end
+
   defp format_thread(thread) do
     %{"title" => title, "topic_id" => topic_id, "post" => post} = thread
     %{"intro" => intro, "proofs" => proofs} = post
@@ -41,7 +60,6 @@ defmodule Bullsource.Web.ThreadController do
     post_params = %{intro: intro, proofs: proofs}
 
     {thread_params, post_params}
-
   end
 
   defp format_proofs(proofs) do
