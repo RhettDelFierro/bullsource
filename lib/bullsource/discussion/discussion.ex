@@ -20,10 +20,23 @@ defmodule Bullsource.Discussion do
   end
 
   def list_posts_in_thread(thread_id) do
-    thread = Repo.get(Thread,thread_id)
-    |> Repo.preload(:user)
-    |> Repo.preload(posts: [proofs: :article, proofs: :comment, proofs: :references])
+#    thread = Repo.get(Thread,thread_id)
+#    |> Repo.preload(:user)
+#    |> Repo.preload(posts: [proofs: :article, proofs: :comment])
 
+
+    Repo.get(Thread,thread_id)
+    |> Repo.preload(:user)
+    |> Repo.preload(posts: [:proofs, proofs: :reference, proofs: :article, proofs: :comment])
+
+#    thread = Thread
+#    |> where([thread], thread.id == ^thread_id)
+#    |> join(:left, [thread], posts in assoc(thread, :posts))
+#    |> join(:left, [thread, posts], proofs in assoc(posts, :proofs))
+##    |> join(:left, [thread,posts,proofs], article in assoc(proofs, :article))
+##    |> join(:left, [thread,posts,proofs], comment in assoc(proofs, :article))
+#    |> Repo.preload([{:threads, :posts}])
+#    |> Repo.one
   end
 
   ####creating interface functions for controllers.
