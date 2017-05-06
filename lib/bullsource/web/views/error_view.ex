@@ -11,6 +11,8 @@ defmodule Bullsource.Web.ErrorView do
 
   #usually when we have multiple different errors
   def render("error.json", %{changeset_error: changeset}) do
+    IO.puts "error changeset+++++++ in view"
+    IO.inspect changeset
     %{
       errors: changeset_errors(changeset.errors)
     }
@@ -25,6 +27,8 @@ defmodule Bullsource.Web.ErrorView do
 
   #creates a map of the errors with each field generated from the changeset errors.
   defp changeset_errors(errors) do
+    IO.puts "changeset_errors/1 in views++++++"
+    IO.inspect errors
     errors
     |> Enum.map(fn {field, {reason,_}} -> {field, reason} end)
     |> Map.new
