@@ -28,8 +28,8 @@ defmodule Bullsource.Web.PostController do
     post_params = Converters.str_to_atom_keys(post)
     post_params = %{post_params | proofs: Enum.map(post_params.proofs, &Converters.str_to_atom_keys(&1))}
 
-    with {:ok, thread} <- Discussion.create_post(post_params, user) do
-      render conn, "show.json", thread: thread
+    with {:ok, post} <- Discussion.create_post(post_params, user) do
+      render conn, "show.json", post: post
     else
       {:error, error_changeset} ->
         render conn, ErrorView, "error.json", changeset_errors: error_changeset

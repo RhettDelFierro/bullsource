@@ -3,6 +3,10 @@ defmodule Bullsource.Web.PostView do
   use Bullsource.Web, :view
   import Bullsource.Web.UserView, only: [user_json: 1]
 
+  def render("show.json", %{post: post}) do
+    %{ post: post_json(post) }
+  end
+
   def post_json(post) do
     %{
       id: post.id,

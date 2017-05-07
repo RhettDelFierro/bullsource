@@ -47,8 +47,10 @@ defmodule Bullsource.Discussion do
     Repo.transaction( fn ->
       #can I abstract this part because of it's similarity to create_thread?
       with {:ok, post}             <- insert_post(thread, post_params, user),
-           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs) do
+           {:ok, {:ok,post_with_proofs}} <- proofs_transaction(post, post_params.proofs) do
            post_with_proofs
+           |> Repo.preload(:user)
+           |> Repo.preload(proofs: [:reference, :article, :comment])
       else
         {:error, error_changeset} ->
            IO.puts "error changeset++++++++"
