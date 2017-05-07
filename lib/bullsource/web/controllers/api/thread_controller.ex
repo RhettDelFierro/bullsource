@@ -16,7 +16,9 @@ defmodule Bullsource.Web.ThreadController do
     user = Guardian.Plug.current_resource(conn)
 
     thread_params = format_params(thread)
-    post_params = format_params(thread_params.post)
+    IO.puts "thread_params ++++"
+    IO.inspect thread_params
+    post_params = Map.put(thread_params.post,:proofs,Enum.map(thread_params.post.proofs, &format_params(&1)))
 
 
     with {:ok, new_thread} <- Discussion.create_thread(thread_params, post_params, user) do
@@ -32,47 +34,26 @@ defmodule Bullsource.Web.ThreadController do
 
   end
 
-  defp format_params({key,val} = params) do
+  defp format_params(params) do
+
     for {key, val} <- params, into: %{} do
       cond do
-        is_atom(key) ->
-          new_val = format_params(val)
-          {key, new_val}
-        true ->
-          new_val = format_params(val)
-          {String.to_atom(key), new_val}
+        is_atom(key) -> #for keys that are already atoms
+
+          cond do
+            is_map(val) -> {key, format_params(val)}
+            true -> {key, val}
+          end
+
+        true -> #for keys that are not atoms
+
+          cond do
+            is_map(val) -> {String.to_atom(key), format_params(val)}
+            true -> {String.to_atom(key), val}
+          end
+
       end
     end
-  end
-
-  defp format_params(val) do
-    val
-  end
-
-  defp format_thread(thread) do
-    %{"title" => title, "topic_id" => topic_id, "post" => post} = thread
-    %{"intro" => intro, "proofs" => proofs} = post
-
-    thread_params = %{ topic_id: topic_id, title: title}
-
-    proofs = format_proofs(proofs)
-
-    post_params = %{intro: intro, proofs: proofs}
-
-    {thread_params, post_params}
-  end
-
-  defp format_proofs(proofs) do
-   Enum.map proofs, fn proof ->
-      %{"article" => article, "comment" => comment, "reference" => reference} = proof
-      %{"link" => link, "title" => reference_title} = reference
-      %{
-        article: article,
-        comment: comment,
-        reference: %{link: link, title: reference_title}
-      }
-   end
-
   end
 
 end
