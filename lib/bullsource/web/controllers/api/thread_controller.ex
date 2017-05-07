@@ -4,6 +4,7 @@ defmodule Bullsource.Web.ThreadController do
 
   alias Bullsource.Discussion
   alias Bullsource.Web.ErrorView
+  alias Bullsource.Helpers.Converters
 
 
   def index(conn, %{"topic_id" => topic_id}) do
@@ -15,10 +16,10 @@ defmodule Bullsource.Web.ThreadController do
   def create(conn,%{"thread" => thread}) do
     user = Guardian.Plug.current_resource(conn)
 
-    thread_params = format_params(thread)
-    IO.puts "thread_params ++++"
-    IO.inspect thread_params
-    post_params = Map.put(thread_params.post,:proofs,Enum.map(thread_params.post.proofs, &format_params(&1)))
+    thread_params = Converters.str_to_atom_keys(thread)
+    post_params = Map.put(thread_params.post, :proofs,
+                           Enum.map(thread_params.post.proofs, &Converters.str_to_atom_keys(&1))
+                         )
 
 
     with {:ok, new_thread} <- Discussion.create_thread(thread_params, post_params, user) do
@@ -32,28 +33,6 @@ defmodule Bullsource.Web.ThreadController do
         render conn, ErrorView, "error.json", changeset_error: reason
     end
 
-  end
-
-  defp format_params(params) do
-
-    for {key, val} <- params, into: %{} do
-      cond do
-        is_atom(key) -> #for keys that are already atoms
-
-          cond do
-            is_map(val) -> {key, format_params(val)}
-            true -> {key, val}
-          end
-
-        true -> #for keys that are not atoms
-
-          cond do
-            is_map(val) -> {String.to_atom(key), format_params(val)}
-            true -> {String.to_atom(key), val}
-          end
-
-      end
-    end
   end
 
 end
