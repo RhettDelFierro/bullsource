@@ -4,6 +4,7 @@ defmodule Bullsource.Web.PostController do
 
   alias Bullsource.Discussion
   alias Bullsource.Web.ErrorView
+  alias Bullsource.Helpers.Converters
 
 # when a user visits the thread, show all posts.
   def index(conn, %{"thread_id" => thread_id}) do
@@ -24,7 +25,10 @@ defmodule Bullsource.Web.PostController do
              proofs: proofs
            }
 
-    with {:ok, thread} <- Discussion.create_thread(post) do
+    post_params = Converters.str_to_atom_keys(post)
+    post_params = %{post_params | proofs: Enum.map(post_params.proofs, &Converters.str_to_atom_keys(&1))}
+
+    with {:ok, thread} <- Discussion.create_post(post_params, user) do
       render conn, "show.json", thread: thread
     else
       {:error, error_changeset} ->

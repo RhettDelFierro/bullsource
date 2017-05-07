@@ -42,7 +42,24 @@ defmodule Bullsource.Discussion do
     end)
   end
 
-  defp proofs_transaction(post, [first_proof| rest_proofs] = proofs) do
+  def create_post(post_params, user) do
+    thread = Repo.get(Thread,post_params.thread_id)
+    Repo.transaction( fn ->
+      #can I abstract this part because of it's similarity to create_thread?
+      with {:ok, post}             <- insert_post(thread, post_params, user),
+           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs) do
+           post_with_proofs
+      else
+        {:error, error_changeset} ->
+           IO.puts "error changeset++++++++"
+           IO.inspect error_changeset
+           Repo.rollback(error_changeset)
+      end
+
+    end)
+  end
+
+  defp proofs_transaction(post, [first_proof | rest_proofs] = proofs) do
     Repo.transaction(fn ->
       with {:ok, reference} <- get_or_insert_reference(first_proof.reference),
            {:ok, proof}     <- proof_changeset(%{post_id: post.id, reference_id: reference.id})    |> Repo.insert,
