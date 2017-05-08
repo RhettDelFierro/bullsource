@@ -23,13 +23,9 @@ defmodule Bullsource.Web.ThreadController do
 
 
     with {:ok, new_thread} <- Discussion.create_thread(thread_params, post_params, user) do
-      IO.puts "back in thread controller create/2, here is new_thread:++++++"
-      IO.inspect new_thread
       render conn, "show.json", new_thread: new_thread
     else
       {:error, reason} ->
-        IO.puts "thread controller create/2 error changeset+++++++++"
-        IO.inspect reason
         render conn, ErrorView, "error.json", changeset_error: reason
     end
 

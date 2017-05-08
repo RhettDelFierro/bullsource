@@ -20,6 +20,12 @@ defmodule Bullsource.Discussion do
     |> Repo.preload(posts: [:user, :proofs, proofs: :reference, proofs: :article, proofs: :comment])
   end
 
+  def get_post(post_id) do
+    Repo.get(Post, post_id)
+    |> Repo.preload(:user)
+    |> Repo.preload(proofs: [:reference, :article, :comment])
+  end
+
   ####creating interface functions for controllers.
 
   def create_topic(params) do
@@ -30,32 +36,25 @@ defmodule Bullsource.Discussion do
     Repo.transaction(fn ->
       with {:ok, thread}  <- insert_thread(thread_params, user),
            {:ok, post}    <- insert_post(thread, post_params, user),
-           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs) do
+           {:ok, {:ok,post_with_proofs}} <- proofs_transaction(post, post_params.proofs) do
            list_posts_in_thread(thread.id)
 
       else
-        {:error, error_changeset} ->
-          IO.puts "error changeset++++++++"
-          IO.inspect error_changeset
-          Repo.rollback(error_changeset)
+        {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
     end)
   end
 
   def create_post(post_params, user) do
-    thread = Repo.get(Thread,post_params.thread_id)
+    thread = Repo.get(Thread,post_params.thread_id) ######Right now I'm assuming it's a correct thread_id. May have to fix because exception will be raised.
     Repo.transaction( fn ->
       #can I abstract this part because of it's similarity to create_thread?
-      with {:ok, post}             <- insert_post(thread, post_params, user),
+      with {:ok, post} <- insert_post(thread, post_params, user),
            {:ok, {:ok,post_with_proofs}} <- proofs_transaction(post, post_params.proofs) do
-           post_with_proofs
-           |> Repo.preload(:user)
-           |> Repo.preload(proofs: [:reference, :article, :comment])
+           get_post(post_with_proofs.id)
+
       else
-        {:error, error_changeset} ->
-           IO.puts "error changeset++++++++"
-           IO.inspect error_changeset
-           Repo.rollback(error_changeset)
+        {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
 
     end)
@@ -63,6 +62,7 @@ defmodule Bullsource.Discussion do
 
   defp proofs_transaction(post, [first_proof | rest_proofs] = proofs) do
     Repo.transaction(fn ->
+#    possible to do this part with a Multi or concurrently when you get the reference?
       with {:ok, reference} <- get_or_insert_reference(first_proof.reference),
            {:ok, proof}     <- proof_changeset(%{post_id: post.id, reference_id: reference.id})    |> Repo.insert,
            {:ok, article}   <- article_changeset(%{proof_id: proof.id, text: first_proof.article}) |> Repo.insert,
@@ -70,10 +70,7 @@ defmodule Bullsource.Discussion do
            proofs_transaction(post, rest_proofs) #recursion
 
       else
-        {:error, error_changeset} ->
-          IO.puts "proofs_transaction error ++++++++"
-          IO.inspect error_changeset
-          Repo.rollback(error_changeset)
+        {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
     end)
   end
@@ -81,7 +78,6 @@ defmodule Bullsource.Discussion do
   defp proofs_transaction(post, []) do
     post |> Repo.preload(:proofs)
   end
-
 
   defp get_or_insert_reference(reference) do
     reference_check = Repo.get_by(Reference, link: reference.link)
