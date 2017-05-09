@@ -41,6 +41,7 @@ defmodule Bullsource.Web.Router do
      resources "/topics", TopicController, except: [:index]
      resources "/threads", ThreadController, except: [:index]
      resources "/posts", PostController, except: [:index]
+     resources "/votes", VoteController, only: [:create, :update, :delete]
    end
 
 end
