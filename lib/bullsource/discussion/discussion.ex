@@ -165,5 +165,4 @@ defmodule Bullsource.Discussion do
     |> validate_length(:title, max: 300)
   end
 
-
 end

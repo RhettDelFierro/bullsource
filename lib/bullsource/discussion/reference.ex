@@ -2,6 +2,7 @@ defmodule Bullsource.Discussion.Reference do
   use Ecto.Schema
 
   alias Bullsource.Discussion.Proof
+  alias Bullsource.Votes.{ReferenceVoteUp, ReferenceVoteDown}
 
   schema "references" do
     field :link, :string, unique: true
@@ -9,6 +10,8 @@ defmodule Bullsource.Discussion.Reference do
 
     #has_many :proof, ProofReference
     has_many :proofs, Proof
+    has_many :reference_votes_down, ReferenceVoteDown
+    has_many :reference_votes_up, ReferenceVoteUp
 
   end
 end

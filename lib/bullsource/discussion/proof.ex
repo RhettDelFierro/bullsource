@@ -5,6 +5,7 @@ defmodule Bullsource.Discussion.Proof do
   alias Bullsource.Discussion.Article
   alias Bullsource.Discussion.Comment
   alias Bullsource.Discussion.Reference
+  alias Bullsource.Votes.{ProofVoteUp, ProofVoteDown}
 
   schema "proofs" do
     belongs_to :post, Post
@@ -12,6 +13,8 @@ defmodule Bullsource.Discussion.Proof do
 
     has_one :article, Article
     has_one :comment, Comment
+    has_many :proof_votes_down, ProofVoteDown
+    has_many :proof_votes_up, ProofVoteUp
 
   end
 

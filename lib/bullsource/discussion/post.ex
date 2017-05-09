@@ -4,7 +4,7 @@ defmodule Bullsource.Discussion.Post do
   alias Bullsource.Accounts.User
   alias Bullsource.Discussion.Thread
   alias Bullsource.Discussion.Proof
-
+  alias Bullsource.Votes.{PostVoteUp, PostVoteDown}
 
   schema "posts" do
     field :intro, :string
@@ -13,6 +13,8 @@ defmodule Bullsource.Discussion.Post do
     belongs_to :user, User
 
     has_many :proofs, Proof
+    has_many :post_vote_down, PostVoteDown
+    has_many :post_vote_up, PostVoteUp
 
     timestamps()
   end
