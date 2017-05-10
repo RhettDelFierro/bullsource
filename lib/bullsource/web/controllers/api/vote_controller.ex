@@ -10,21 +10,21 @@ defmodule Bullsource.Web.VoteController do
   def create(conn,{"post_vote" = post_vote}) do
     user = Guardian.Plug.current_resource(conn)
     params = Converters.str_to_atom_keys(post_vote)
-
+    IO.inspect params
 
   end
 
   def create(conn,{"proof_vote" = proof_vote}) do
     user = Guardian.Plug.current_resource(conn)
     params = Converters.str_to_atom_keys(proof_vote)
-
+    IO.inspect params
 
   end
 
   def create(conn,{"reference_vote" = reference_vote}) do
     user = Guardian.Plug.current_resource(conn)
     params = Converters.str_to_atom_keys(reference_vote)
-
+    IO.inspect params
 
   end
 
