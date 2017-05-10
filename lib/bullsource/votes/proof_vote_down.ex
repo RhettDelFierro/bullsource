@@ -1,4 +1,6 @@
-defmodule BullSource.Votes.ProofVoteDown do
+defmodule Bullsource.Votes.ProofVoteDown do
+  use Ecto.Schema
+
   alias Bullsource.Discussion.Proof
   alias Bullsource.Accounts.User
 

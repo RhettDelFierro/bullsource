@@ -1,4 +1,6 @@
-defmodule BullSource.Votes.ReferenceVoteDown do
+defmodule Bullsource.Votes.ReferenceVoteDown do
+  use Ecto.Schema
+
   alias Bullsource.Discussion.Reference
   alias Bullsource.Accounts.User
 

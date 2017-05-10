@@ -1,4 +1,6 @@
-defmodule BullSource.Votes.PostVoteDown do
+defmodule Bullsource.Votes.PostVoteDown do
+  use Ecto.Schema
+
   alias Bullsource.Discussion.Post
   alias Bullsource.Accounts.User
 
@@ -9,4 +11,5 @@ defmodule BullSource.Votes.PostVoteDown do
     timestamps()
 
   end
+
 end

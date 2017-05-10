@@ -1,4 +1,6 @@
-defmodule BullSource.Votes.PostVoteUp do
+defmodule Bullsource.Votes.PostVoteUp do
+  use Ecto.Schema
+
   alias Bullsource.Discussion.Post
   alias Bullsource.Accounts.User
 
