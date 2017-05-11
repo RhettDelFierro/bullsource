@@ -48,7 +48,7 @@ defmodule Bullsource.Votes do
 
 
     ####Changesets
-    def down_vote_post_changeset(params \\%{}) do
+    defp down_vote_post_changeset(params \\%{}) do
       %PostVoteDown{}
       |> cast(params, [:post_id, :user_id])
       |> validate_required([:post_id, :user_id])
@@ -57,7 +57,7 @@ defmodule Bullsource.Votes do
       |> assoc_constraint(:post)
     end
 
-    def up_vote_post_changeset(params \\%{}) do
+    defp up_vote_post_changeset(params \\%{}) do
       %PostVoteUp{}
       |> cast(params, [:post_id, :user_id])
       |> validate_required([:post_id, :user_id])
@@ -66,7 +66,7 @@ defmodule Bullsource.Votes do
       |> assoc_constraint(:post)
     end
 
-    def down_vote_proof_changeset(params \\%{}) do
+    defp down_vote_proof_changeset(params \\%{}) do
       %ProofVoteDown{}
       |> cast(params, [:proof_id, :user_id])
       |> validate_required([:proof_id, :user_id])
@@ -75,7 +75,7 @@ defmodule Bullsource.Votes do
       |> assoc_constraint(:proof)
     end
 
-    def up_vote_proof_changeset(params \\%{}) do
+    defp up_vote_proof_changeset(params \\%{}) do
       %ProofVoteUp{}
       |> cast(params, [:proof_id, :user_id])
       |> validate_required([:proof_id, :user_id])
@@ -84,7 +84,7 @@ defmodule Bullsource.Votes do
       |> assoc_constraint(:proof)
     end
 
-    def down_vote_reference_changeset(params \\%{}) do
+    defp down_vote_reference_changeset(params \\%{}) do
       %ReferenceVoteDown{}
       |> cast(params, [:reference_id, :user_id])
       |> validate_required([:reference_id, :user_id])
@@ -93,7 +93,7 @@ defmodule Bullsource.Votes do
       |> assoc_constraint(:reference)
     end
 
-    def up_vote_reference_changeset(params \\%{}) do
+    defp up_vote_reference_changeset(params \\%{}) do
       %ReferenceVoteUp{}
       |> cast(params, [:reference_id, :user_id])
       |> validate_required([:reference_id, :user_id])
