@@ -3,26 +3,29 @@ defmodule Bullsource.Web.VoteController do
 
   import Bullsource.Votes
   alias Bullsource.Helpers.Converters
+  alias Bullsource.Web.ErrorView
+
 
 
   def create(conn,%{"post_vote" => post_vote}) do
     user = Guardian.Plug.current_resource(conn)
-    params = Converters.str_to_atom_keys(post_vote)
-
+    post_params = Converters.str_to_atom_keys(post_vote)
+    params = Map.put_new(post_params, :user_id, user.id)
     vote_handler conn, params, func_down: &down_vote_post/1, func_up: &up_vote_post/1
   end
 
   def create(conn,%{"proof_vote" => proof_vote}) do
     user = Guardian.Plug.current_resource(conn)
-    params = Converters.str_to_atom_keys(proof_vote)
-
+    proof_params = Converters.str_to_atom_keys(proof_vote)
+    params = Map.put_new(proof_params, :user_id, user.id)
+    IO.inspect params
     vote_handler conn, params, func_down: &down_vote_proof/1, func_up: &up_vote_proof/1
   end
 
   def create(conn,%{"reference_vote" => reference_vote}) do
     user = Guardian.Plug.current_resource(conn)
-    params = Converters.str_to_atom_keys(reference_vote)
-
+    reference_params = Converters.str_to_atom_keys(reference_vote)
+    params = Map.put_new(reference_params, :user_id, user.id)
     vote_handler conn, params, func_down: &down_vote_reference/1, func_up: &up_vote_reference/1
   end
 #  this one will get called if the user already voted. this is where we'll repo.get, delete it then create a new vote in the other table.
