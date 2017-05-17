@@ -11,6 +11,7 @@ defmodule Bullsource.Web.VoteController do
     user = Guardian.Plug.current_resource(conn)
     post_params = Converters.str_to_atom_keys(post_vote)
     params = Map.put_new(post_params, :user_id, user.id)
+
     vote_handler conn, params, func_down: &down_vote_post/1, func_up: &up_vote_post/1
   end
 
@@ -18,7 +19,7 @@ defmodule Bullsource.Web.VoteController do
     user = Guardian.Plug.current_resource(conn)
     proof_params = Converters.str_to_atom_keys(proof_vote)
     params = Map.put_new(proof_params, :user_id, user.id)
-    IO.inspect params
+
     vote_handler conn, params, func_down: &down_vote_proof/1, func_up: &up_vote_proof/1
   end
 
@@ -26,6 +27,7 @@ defmodule Bullsource.Web.VoteController do
     user = Guardian.Plug.current_resource(conn)
     reference_params = Converters.str_to_atom_keys(reference_vote)
     params = Map.put_new(reference_params, :user_id, user.id)
+
     vote_handler conn, params, func_down: &down_vote_reference/1, func_up: &up_vote_reference/1
   end
 #  this one will get called if the user already voted. this is where we'll repo.get, delete it then create a new vote in the other table.

@@ -8,9 +8,11 @@ defmodule Bullsource.Votes do
     alias Bullsource.Repo
     alias Ecto.Multi
 
-#    def list_user_votes(struct, user) do
-#
-#    end
+    #Interface functions.
+
+    def list_user_votes(struct, user) do
+
+    end
 
     def down_vote_post(%{post_id: post_id, user_id: user_id} = params) do
       down_vote_post_changeset(params)
