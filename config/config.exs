@@ -15,16 +15,7 @@ config :bullsource, Bullsource.Web.Endpoint,
   secret_key_base: "Nb/nF7q4idwZ2OTHYQq+48hOsq4Rz8QLrJHzlEq26583fZGa1ElC8eN/UWeoluJf",
   render_errors: [view: Bullsource.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Bullsource.PubSub,
-           adapter: Phoenix.PubSub.PG2],
-  watchers: [node: ["assets/node_modules/webpack/bin/webpack.js", "--watch", "--color"]]
-
-# Configure for vue_setup branch:
-#config :bullsource, Bullsource.Web.Endpoint,
-#  http: [port: 4000],
-#  debug_errors: true,
-#  code_reloader: true,
-#  check_origin: false,
-#  watchers: [node: ["node_modules/webpack/bin/webpack.js", "--watch", "--color"]]
+           adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
