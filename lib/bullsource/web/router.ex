@@ -44,4 +44,10 @@ defmodule Bullsource.Web.Router do
      resources "/votes", VoteController, only: [:create, :update, :delete]
    end
 
+   scope "/", Bullsource.Web do
+     pipe_through :browser
+
+     get "/*path", PageController, :index
+   end
+
 end
