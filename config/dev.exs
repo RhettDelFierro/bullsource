@@ -12,9 +12,7 @@ config :bullsource, Bullsource.Web.Endpoint,
   code_reloader: true,
   cache_static_lookup: false, ######<~~~~~~I added this. RD
   check_origin: false,
-  watchers: [
-    node: ["assets/node_modules/webpack/bin/webpack.js", "watch", "--color"]
-  ]
+  watchers: [npm: ["run", "dev", cd: Path.expand("../assets", __DIR__)]]
 
 # ## SSL Support
 #
