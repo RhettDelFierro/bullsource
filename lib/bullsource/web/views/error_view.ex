@@ -21,7 +21,7 @@ defmodule Bullsource.Web.ErrorView do
   #when we know exactly the one thing that went wrong
   def render("error.json", %{message: message}) do
     %{
-      errors: message
+      errors: %{message: message}
     }
   end
 
