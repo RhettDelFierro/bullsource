@@ -34,7 +34,6 @@ const actions = {
           reject();
         }
       })
-
     })
   },
   [types.LOGIN]: ({commit}, payload) => {
