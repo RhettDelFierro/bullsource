@@ -7,7 +7,7 @@ import Vuex from 'vuex'
 // import mutations from './mutations'
 
 import user from './modules/user'
-
+import errors from './modules/errors'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -17,6 +17,7 @@ export const store = new Vuex.Store({
   // mutations,
   // actions,
   modules: {
-    user
+    user,
+    errors
   }
 })

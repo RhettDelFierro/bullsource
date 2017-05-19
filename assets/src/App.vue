@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <router-view></router-view>
+    <transition name="slide">
+      <router-view></router-view>
+    </transition>
+
   </div>
 </template>
 
@@ -30,4 +33,18 @@
     list-style: none;
   }
 
+  .slide-enter-active {
+    animation: component-in 1s forwards;
+  }
+
+  @keyframes component-in {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 </style>
