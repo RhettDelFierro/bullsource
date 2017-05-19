@@ -1,5 +1,10 @@
 <template>
   <div>
+    <ul class="navbar">
+      <li>Home</li>
+      <li>Login</li>
+      <li>Register</li>
+    </ul>
     <button @click="register(userRegister)">Register</button>
   </div>
 </template>
@@ -29,6 +34,21 @@
     }
   }
 </script>
-<style>
+<style scoped>
+  .navbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
+  @media screen and (max-width: 740px) {
+    .navbar {
+      top: 90vh;
+      background-color: blue;
+      grid-template-columns: 50px 1fr 50px;
+    }
+
+    li {
+      background-color: green;
+    }
+  }
 </style>

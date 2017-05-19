@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <nav-bar></nav-bar>
     <router-view></router-view>
   </div>
@@ -26,4 +25,9 @@
     color: #2c3e50;
     margin-top: 60px;
   }
+
+  li {
+    list-style: none;
+  }
+
 </style>
