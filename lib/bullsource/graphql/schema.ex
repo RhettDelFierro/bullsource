@@ -6,28 +6,7 @@ defmodule Bullsource.GraphQL.Schema do
 #  alias Bullsource.Accounts.User
 #  alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ProofVoteUp,
 #                                ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
-  alias Bullsource.Repo
-  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic}
-  alias Bullsource.Accounts.User
-  alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ProofVoteUp,
-                                ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
-  @desc "Topics has many threads."
-  object :topic do
-    field :id, :integer
-    field :name, :string
-    field :description, :string
-
-    #because :topic has_many :threads, we're going to add a :threads field
-    field :threads, list_of(:thread) do
-     resolve &Bullsource.GraqphQL.ThreadResolver.assoc/2
-    end
-  end
-
-  @desc "Threads belong to topics and users. Has many posts."
-  object :thread do
-    field :id, :integer
-    field :title, :string
-  end
+  import_types Bullsource.GraphQL.Types
 
   query do
     @desc "Lists all the topics"

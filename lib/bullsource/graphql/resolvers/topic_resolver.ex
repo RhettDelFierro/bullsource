@@ -1,9 +1,5 @@
 defmodule Bullsource.GraphQL.TopicResolver do
-    alias Bullsource.Repo
-    alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic}
-    alias Bullsource.Accounts.User
-    alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ProofVoteUp,
-                                    ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
+    alias Bullsource.{Repo,Discussion.Topic}
 
     def list(_args, _context) do
       {:ok, Repo.all(Topic)}
