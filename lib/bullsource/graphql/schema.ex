@@ -34,10 +34,24 @@ defmodule Bullsource.GraphQL.Schema do
   end
 
   query do
+    @desc "Lists all the topics"
     field :topic, list_of(:topic) do
       resolve fn(_args, _context) ->
         {:ok, Repo.all(Topic)}
       end
+    end
+  end
+
+  mutation do
+    @desc "Create a topic"
+    field :create_topic, :topic do
+        arg :name, non_null(:string)
+        arg :description, :string
+        #the args above will be passed in to the resolve/2 function as a map.
+        resolve fn(%{name: name, description: description}, _context) ->
+            topic = Repo.insert! %Topic{name: name, description: description}
+            {:ok, topic}
+        end
     end
   end
 end
