@@ -19,26 +19,20 @@ defmodule Bullsource.GraphQL.Schema do
 
     #because :topic has_many :threads, we're going to add a :threads field
     field :threads, list_of(:thread) do
-      resolve(_args, %{source: topic}) -> #we can define how every field is resolved with the resolve/2 function.
-        topic = Repo.preload(topic, :threads)
-        {:ok, topic.threads}
+     resolve &Bullsource.GraqphQL.ThreadResolver.assoc/2
     end
   end
 
-  @desc "Threads belong to toics and users. Has many posts."
+  @desc "Threads belong to topics and users. Has many posts."
   object :thread do
     field :id, :integer
     field :title, :string
-
-    timestamps()
   end
 
   query do
     @desc "Lists all the topics"
     field :topic, list_of(:topic) do
-      resolve fn(_args, _context) ->
-        {:ok, Repo.all(Topic)}
-      end
+      resolve &Bullsource.GraphQL.TopicResolver.list/2
     end
   end
 
@@ -48,20 +42,14 @@ defmodule Bullsource.GraphQL.Schema do
         arg :name, non_null(:string)
         arg :description, :string
         #the args above will be passed in to the resolve/2 function as a map.
-        resolve fn(%{name: name, description: description}, _context) ->
-            topic = Repo.insert! %Topic{name: name, description: description}
-            {:ok, topic}
-        end
+        resolve &Bullsource.GraphQL.TopicResolver.create/2
     end
 
     @desc "Create a thread"
     field :create_thread, :thread do
       arg :title, non_null(:string)
       arg :topic_id, non_null(:integer)
-      resolve fn(%{title: title, topic_id: topic_id}, _context) ->
-        thread = Repo.insert! %Thread{title: title, topic_id: topic_id}
-        {:ok, thread}
-      end
+      resolve &Bullsource.GraqphQL.ThreadResolver.create/2
     end
   end
 end
