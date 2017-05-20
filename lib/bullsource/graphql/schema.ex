@@ -53,5 +53,15 @@ defmodule Bullsource.GraphQL.Schema do
             {:ok, topic}
         end
     end
+
+    @desc "Create a thread"
+    field :create_thread, :thread do
+      arg :title, non_null(:string)
+      arg :topic_id, non_null(:integer)
+      resolve fn(%{title: title, topic_id: topic_id}, _context) ->
+        thread = Repo.insert! %Thread{title: title, topic_id: topic_id}
+        {:ok, thread}
+      end
+    end
   end
 end
