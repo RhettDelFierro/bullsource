@@ -4,7 +4,7 @@ defmodule Bullsource.GraqphQL.ThreadResolver do
 
   alias Bullsource.{Repo, Discussion.Thread}
 
-  def assoc(_args, %{source: topic}) do
+  def assoc(_args, %{source: topic} = context) do
     #now we're only making one query for all the threads int he topic:
     batch {__MODULE__, :by_topic_id}, topic.id, fn results ->
         {:ok, Map.get(results, topic.id)}
