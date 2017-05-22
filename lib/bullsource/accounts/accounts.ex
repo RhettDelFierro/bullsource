@@ -4,6 +4,14 @@ defmodule Bullsource.Accounts do
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
 
+  def find(%{id: id}, _context)do
+    case Repo.get(User, id) do
+      nil -> {:error, "User id #{id} not found"}
+      user -> {:ok, user}
+    end
+  end
+
+
   def create_user(%{"password" => password} = params) do
 
     # Encrypt the password with Comeonin:

@@ -15,14 +15,19 @@ defmodule Bullsource.GraphQL.Schema do
     end
 
     # no matter what, check to see if user is resolved:
-    @desc "Fetch user :: nil || User"
+    @desc "Get the current user :: nil || User"
     field :user, :user do
-      resolve &Bullsource.GraphQL.SessionResolver.resolve_user/2
+      resolve &Bullsource.GraphQL.UserResolver.resolve_user/2
     end
 
   end
 
   mutation do
+    @desc "Register a user"
+    field :_register_user, :user do
+
+    end
+
     @desc "Create a topic"
     field :create_topic, :topic do
         arg :name, non_null(:string)
