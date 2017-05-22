@@ -4,6 +4,8 @@ defmodule Bullsource.Web.HandleError do
 # this will short circuit the query/mutation if no current_user is found.
   def call(resolution = %{errors: errors}, _config) do
     case errors do
+      [] -> resolution
+
       %{message: message} -> {:error, %{message: message}}
 
       [%Ecto.Changeset{}] ->

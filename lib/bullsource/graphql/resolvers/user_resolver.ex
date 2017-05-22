@@ -14,9 +14,9 @@ defmodule Bullsource.GraphQL.UserResolver do
 # a user wants to register - send back the token
   def register(args, _info) do
     with {:ok, user} <- Accounts.create_user(args),
-         {:ok, token, full_claims} <- create_token(user)
+         {:ok, token} <- create_token(user)
     do
-      {:ok, token.token}
+      {:ok, %{token: token}}
     else
       #error will be either registration changeset or token error
       {:error, %{token_error: error_message } = token_error} ->
@@ -32,7 +32,7 @@ defmodule Bullsource.GraphQL.UserResolver do
   defp create_token(user) do
     case Guardian.encode_and_sign(user, :token) do
       nil -> {:error, %{token_error: "An error occured creating the token"}}
-      {:ok, token, full_claims} -> {:ok, %{token: token}}
+      {:ok, token, full_claims} -> {:ok, token}
     end
   end
 
