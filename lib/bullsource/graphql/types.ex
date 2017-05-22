@@ -6,24 +6,16 @@ defmodule Bullsource.GraphQL.Types do
   object :user do
     field :username, :string
     field :email, :string
-    field :encrypted_password
+    field :password, :string
 
     field :threads, list_of(:thread) do
-     resolve &Bullsource.GraqphQL.ThreadResolver.assoc/2
+     resolve &Bullsource.GraphQL.ThreadResolver.assoc/2
     end
 
     field :posts, list_of(:post) do
-     resolve &Bullsource.GraqphQL.PostResolver.assoc/2
+     resolve &Bullsource.GraphQL.PostResolver.assoc/2
     end
 
-#    has_many :posts, Post
-#    has_many :threads, Thread
-#    has_many :post_votes_down, PostVoteDown
-#    has_many :post_votes_up, PostVoteUp
-#    has_many :proof_votes_down, ProofVoteDown
-#    has_many :proof_votes_up, ProofVoteUp
-#    has_many :reference_votes_down, ReferenceVoteDown
-#    has_many :reference_votes_up, ReferenceVoteUp
   end
 
   @desc "Topics has many threads."

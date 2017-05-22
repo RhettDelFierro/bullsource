@@ -23,4 +23,5 @@ defmodule Bullsource.Accounts.User do
 
     timestamps()
   end
+
 end

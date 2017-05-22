@@ -13,6 +13,13 @@ defmodule Bullsource.GraphQL.Schema do
     field :topic, list_of(:topic) do
       resolve &Bullsource.GraphQL.TopicResolver.list/2
     end
+
+    # no matter what, check to see if user is resolved:
+    @desc "Fetch user :: nil || User"
+    field :user, :user do
+      resolve &Bullsource.GraphQL.SessionResolver.resolve_user/2
+    end
+
   end
 
   mutation do
