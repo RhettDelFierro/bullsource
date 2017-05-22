@@ -13,8 +13,8 @@ defmodule Bullsource.GraqphQL.PostResolver do
 #    {:ok, topic.Posts}
   end
 
-  def create(%{title: title, topic_id: thread_id}, _context) do
-    Post = Repo.insert! %Post{title: title, thread_id: thread_id}
+  def create(%{intro: intro, topic_id: thread_id}, _context) do
+    Post = Repo.insert! %Post{intro: intro, thread_id: thread_id}
     {:ok, Post}
   end
 

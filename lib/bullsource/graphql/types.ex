@@ -4,17 +4,17 @@ defmodule Bullsource.GraphQL.Types do
 
   @desc "User - has many Posts, Threads and all Votes."
   object :user do
+    field :id, :integer
     field :username, :string
     field :email, :string
-    field :password, :string
 
-    field :threads, list_of(:thread) do
-     resolve &Bullsource.GraphQL.ThreadResolver.assoc/2
-    end
-
-    field :posts, list_of(:post) do
-     resolve &Bullsource.GraphQL.PostResolver.assoc/2
-    end
+#    field :threads, list_of(:thread) do
+#     resolve &Bullsource.GraphQL.ThreadResolver.assoc/2
+#    end
+#
+#    field :posts, list_of(:post) do
+#     resolve &Bullsource.GraphQL.PostResolver.assoc/2
+#    end
 
   end
 
@@ -35,4 +35,10 @@ defmodule Bullsource.GraphQL.Types do
     field :id, :integer
     field :title, :string
   end
+
+  @desc "A JWT Token"
+  object :token do
+    field :token, :string
+  end
+
 end

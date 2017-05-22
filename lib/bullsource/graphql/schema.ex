@@ -15,8 +15,9 @@ defmodule Bullsource.GraphQL.Schema do
     end
 
     # no matter what, check to see if user is resolved:
-    @desc "Get the current user :: nil || User"
+    @desc "Get a user by id :: nil || User"
     field :user, :user do
+      arg :id, non_null(:id)
       resolve &Bullsource.GraphQL.UserResolver.resolve_user/2
     end
 
@@ -24,8 +25,12 @@ defmodule Bullsource.GraphQL.Schema do
 
   mutation do
     @desc "Register a user"
-    field :_register_user, :user do
-
+    field :register_user, :token do
+      arg :username, non_null(:string)
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
+      resolve &Bullsource.GraphQL.UserResolver.register/2
+      middleware Bullsource.Web.HandleError
     end
 
     @desc "Create a topic"
@@ -41,6 +46,17 @@ defmodule Bullsource.GraphQL.Schema do
       arg :title, non_null(:string)
       arg :topic_id, non_null(:integer)
       resolve &Bullsource.GraqphQL.ThreadResolver.create/2
+    end
+  end
+
+  def handle_errors(fun) do
+    fn source, args, info ->
+      case Absinthe.Resolution.call(fun, source, args, info) do
+        {:error, %Ecto.Changeset{} = changeset} ->
+            Bullsource.Web.ErrorView.changeset_errors(changeset.errors)
+        {:error, %{message: message}} -> {:error, message}
+        val -> val
+      end
     end
   end
 end

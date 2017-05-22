@@ -37,14 +37,14 @@ defmodule Bullsource.Web.Context do
   defp build_context(conn) do
     with ["Bearer" <> token] <- get_req_header(conn, "Authorization"),
     {:ok, current_user} <- authorize(token) do
-      {ok, %{current_user: current_user}}
+      {:ok, %{current_user: current_user}}
     end
   end
 
   defp authorize(token) do
     case Guardian.decode_and_verify(token) do
       {:ok, claims}    -> return_user(claims)
-      {:error, reason} -> {error, reason}
+      {:error, reason} -> {:error, reason}
     end
   end
 

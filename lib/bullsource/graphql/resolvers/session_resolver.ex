@@ -2,7 +2,7 @@ defmodule Bullsource.GraphQL.SessionResolver do
   alias Bullsource.{Repo, Accounts.User}
 
 # authenticated. returns the User to the client if they're signed in to access public features.
-  def resolve_user(_args, %{context: %{current_user: curent_user}}) do
+  def resolve_user(_args, %{context: %{current_user: current_user}}) do
     {:ok, User.find(current_user.id)}
   end
 
@@ -31,7 +31,7 @@ defmodule Bullsource.GraphQL.SessionResolver do
   defp create_token(user) do
     case Guardian.encode_and_sign(user, :token) do
       nil -> {:error, "An error occured creating the token"}
-      {:ok, token, full_claims} -> {ok, %{token: token}}
+      {:ok, token, full_claims} -> {:ok, %{token: token}}
     end
   end
 

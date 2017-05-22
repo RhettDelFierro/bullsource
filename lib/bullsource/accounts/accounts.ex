@@ -12,7 +12,7 @@ defmodule Bullsource.Accounts do
   end
 
 
-  def create_user(%{"password" => password} = params) do
+  def create_user(%{password: password} = params) do
 
     # Encrypt the password with Comeonin:
     encrypted_password = Comeonin.Bcrypt.hashpwsalt(password)
