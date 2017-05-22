@@ -26,7 +26,6 @@ defmodule Bullsource.GraphQL.UserResolver do
     end
   end
 
-
 #######SESSIONS###########
 # passwords match, create a token:
   defp create_token(user) do

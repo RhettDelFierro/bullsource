@@ -49,14 +49,4 @@ defmodule Bullsource.GraphQL.Schema do
     end
   end
 
-  def handle_errors(fun) do
-    fn source, args, info ->
-      case Absinthe.Resolution.call(fun, source, args, info) do
-        {:error, %Ecto.Changeset{} = changeset} ->
-            Bullsource.Web.ErrorView.changeset_errors(changeset.errors)
-        {:error, %{message: message}} -> {:error, message}
-        val -> val
-      end
-    end
-  end
 end
