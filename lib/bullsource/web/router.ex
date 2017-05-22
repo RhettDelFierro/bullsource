@@ -9,5 +9,12 @@ defmodule Bullsource.Web.Router do
     plug Bullsource.Web.Context # this will be for auth.
   end
 
-  forward "/graphql", Absinthe.Plug.GraphiQL, schema: Bullsource.GraphQL.Schema
+  scope "/graphql" do
+    pipe_through :graphql
+    forward "/", Absinthe.Plug.GraphiQL, schema: Bullsource.GraphQL.Schema
+
+#    forward "/", Absinthe.Plug, schema: Bullsource.GraphQL.Schema WHEN LAUNCHING.
+
+  end
+
 end
