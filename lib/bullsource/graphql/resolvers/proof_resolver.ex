@@ -31,4 +31,5 @@ defmodule Bullsource.GraphQL.ProofResolver do
     |> Repo.all
     |> Enum.group_by(&(&1.post_id))
   end
+
 end

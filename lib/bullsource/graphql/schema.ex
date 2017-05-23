@@ -11,13 +11,6 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.TopicResolver.list/2
     end
 
-    # no matter what, check to see if user is resolved:
-    @desc "Get a user by id :: nil || User"
-    field :user, :user do
-      arg :id, non_null(:integer)
-      resolve &Bullsource.GraphQL.UserResolver.resolve_user/2
-    end
-
     @desc "Lists all threads in topic"
     field :thread, list_of(:thread) do
       resolve &Bullsource.GraphQL.ThreadResolver.list/2
@@ -33,6 +26,13 @@ defmodule Bullsource.GraphQL.Schema do
     field :proof, list_of(:proof) do
       resolve &Bullsource.GraphQL.ProofResolver.list/2
     end
+
+    # no matter what, check to see if user is resolved:
+    @desc "Get a user by id :: nil || User"
+    field :current_user, :user do
+      resolve &Bullsource.GraphQL.UserResolver.get_current_user/2
+    end
+
   end
 
   mutation do
@@ -50,7 +50,7 @@ defmodule Bullsource.GraphQL.Schema do
       arg :username, non_null(:string)
       arg :email, non_null(:string)
       arg :password, non_null(:string)
-      resolve &Bullsource.GraphQL.UserResolver.login/2
+      resolve &Bullsource.GraphQL.UserResolver.login_user/2
       middleware Bullsource.Web.HandleError
     end
 

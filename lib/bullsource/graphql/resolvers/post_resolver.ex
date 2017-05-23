@@ -2,7 +2,7 @@ defmodule Bullsource.GraphQL.PostResolver do
   import Absinthe.Resolution.Helpers #batch query so it won't make a query for each topic to get a Post.
   import Ecto.Query
 
-  alias Bullsource.{Repo, Discussion.Post}
+  alias Bullsource.{Repo, Discussion, Discussion.Post}
 
   def list(_args, _context) do
     {:ok, Repo.all(Post)}
@@ -17,9 +17,14 @@ defmodule Bullsource.GraphQL.PostResolver do
 #    {:ok, topic.Posts}
   end
 
-  def create(%{intro: intro, thread_id: thread_id}, %{current_user: current_user} = context) do
-    post = Repo.insert! %Post{intro: intro, thread_id: thread_id}
-    {:ok, post}
+  def create(params, %{context: %{current_user: current_user}}) do
+     post_params = Map.put_new(params.post, :thread_id, params.thread_id)
+     with {:ok, posts} <- Discussion.create_post(post_params, current_user)
+     do
+       {:ok, posts}
+     else
+       {:error, errors} -> {:error, errors}
+     end
   end
 
 # ids are thread_ids

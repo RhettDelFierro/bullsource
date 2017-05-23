@@ -7,14 +7,14 @@ defmodule Bullsource.GraphQL.UserResolver do
 
 #########SESSIONS############
 # authenticated. returns the User to the client if they're signed in to access public features.
-  def resolve_user(_args, %{context: %{current_user: current_user}}) do
+  def get_current__user(_args, %{context: %{current_user: current_user}}) do
     {:ok, Accounts.find(current_user.id)}
   end
 
 # unauthenticated. returns nil to the client for users who are not signed in, but want to access public features.
-  def resolve_user(_args, _context), do: {:ok, nil}
+  def get_current__user(_args, _context), do: {:ok, nil}
 
-  def login(args, _context) do
+  def login_user(args, _context) do
     with {:ok, user}  <- Accounts.authenticate(args),
          {:ok, token} <- create_token(user)
     do
