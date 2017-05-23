@@ -36,8 +36,12 @@ defmodule Bullsource.Web.Context do
 # building our GraphQL context.
   defp build_context(conn) do
     with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
-    {:ok, current_user} <- authorize(token) do
+          {:ok, current_user} <- authorize(token)
+    do
       {:ok, %{current_user: current_user}}
+    else
+ #     {:error, :invalid_token} -> {:error, %{token_error: "Invalid token"}}
+ #     {:error, error} -> {:error, error}
     end
 
   end
@@ -47,7 +51,6 @@ defmodule Bullsource.Web.Context do
     case Guardian.decode_and_verify(token) do
       {:ok, claims}    -> return_user(claims)
       {:error, reason} ->
-        IO.inspect reason
         {:error, reason}
     end
   end
