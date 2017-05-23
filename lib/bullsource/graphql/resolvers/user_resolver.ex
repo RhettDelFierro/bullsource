@@ -1,5 +1,5 @@
 defmodule Bullsource.GraphQL.UserResolver do
-  alias Bullsource.{Repo, Accounts.User, Accounts}
+  alias Bullsource.{Repo, Accounts, Session, Accounts.User, }
 
 #########SESSIONS############
 # authenticated. returns the User to the client if they're signed in to access public features.
@@ -10,6 +10,16 @@ defmodule Bullsource.GraphQL.UserResolver do
 # unauthenticated. returns nil to the client for users who are not signed in, but want to access public features.
   def resolve_user(_args, _context), do: {:ok, nil}
 
+  def login(args, _context) do
+    with {:ok, user}  <- Accounts.authenticate(args),
+         {:ok, token} <- create_token(user)
+    do
+      {:ok, %{token: token}}
+    else
+       #error will be either registration changeset or token error
+       {:error, error } -> {:error, error_handler(error)}
+    end
+  end
 
 # a user wants to register - send back the token
   def register(args, _info) do
@@ -19,10 +29,7 @@ defmodule Bullsource.GraphQL.UserResolver do
       {:ok, %{token: token}}
     else
       #error will be either registration changeset or token error
-      {:error, %{token_error: error_message } = token_error} ->
-        {:error, %{message: error_message}}
-      {:error, changeset_error} ->
-        {:error, changeset_error}
+      {:error, error } -> {:error, error_handler(error)}
     end
   end
 
@@ -34,5 +41,9 @@ defmodule Bullsource.GraphQL.UserResolver do
       {:ok, token, full_claims} -> {:ok, token}
     end
   end
+
+  defp error_handler(%{token_error: error_message} = token_error), do: %{message: error_message}
+  defp error_handler(%{message: error_message} = token_error),     do: %{message: error_message}
+  defp error_handler(changeset_error), do: changeset_error
 
 end

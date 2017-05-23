@@ -4,22 +4,19 @@ defmodule Bullsource.Web.HandleError do
 # this will short circuit the query/mutation if no current_user is found.
   def call(resolution = %{errors: errors}, _config) do
     case errors do
-      [] -> resolution
+      [] ->
+        resolution
 
-      %{message: message} -> {:error, %{message: message}}
+      [%{message: message}] ->
+        resolution
+        |>Absinthe.Resolution.put_result({:error, %{message: message}})
 
       [%Ecto.Changeset{}] ->
-       errors = Enum.map(resolution.errors, &changeset_errors(&1.errors))
-       resolution
-       |> Absinthe.Resolution.put_result({:error, %{message: "transaction declined", error_list: errors}})
+        errors = Enum.map(resolution.errors, &changeset_errors(&1.errors))
+        resolution
+        |> Absinthe.Resolution.put_result({:error, %{message: "transaction declined", error_list: errors}})
     end
   end
-
-#  def call(resolution, _config) do
-#    IO.puts "########inspecting resolution########"
-#    IO.inspect resolution
-#    resolution
-#  end
 
   defp changeset_errors(errors) do
     errors

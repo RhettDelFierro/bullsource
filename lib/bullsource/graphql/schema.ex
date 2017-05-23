@@ -33,6 +33,15 @@ defmodule Bullsource.GraphQL.Schema do
       middleware Bullsource.Web.HandleError
     end
 
+    @desc "Login a user"
+    field :login_user, :token do
+      arg :username, non_null(:string)
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
+      resolve &Bullsource.GraphQL.UserResolver.login/2
+      middleware Bullsource.Web.HandleError
+    end
+
     @desc "Create a topic"
     field :create_topic, :topic do
         arg :name, non_null(:string)

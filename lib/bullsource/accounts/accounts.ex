@@ -11,6 +11,25 @@ defmodule Bullsource.Accounts do
     end
   end
 
+  #for authentication/login
+  def authenticate(%{username: username,password: given_password}) do
+  	user = Repo.get_by(User, username: username)
+  	#should also check for email, either one will work?
+
+  	check_password(user, given_password)
+  end
+
+  defp check_password(nil, _given_password) do
+    {:error, %{message: "No user with this username was found!"}}
+  end
+
+  defp check_password(%{encrypted_password: encrypted_password} = user, given_password) do
+    case Comeonin.Bcrypt.checkpw(given_password, encrypted_password) do
+      true -> {:ok, user}
+      _    -> {:error, %{message: "Incorrect password"}}
+    end
+  end
+
 
   def create_user(%{password: password} = params) do
 
