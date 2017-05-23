@@ -73,10 +73,10 @@ defmodule Bullsource.GraphQL.Types do
   end
 
   @desc "References - has many proofs"
-  object :article do
+  object :reference do
     field :id, :integer
-    field :text, :string
-    field :proof_id, :integer
+    field :link, :string
+    field :title, :string
   end
 
 
@@ -94,8 +94,8 @@ defmodule Bullsource.GraphQL.Types do
 
   @desc "An input object for :proof"
   input_object :input_proof do
-    field :article, :input_article
-    field :comment, :input_comment
+    field :article, :string
+    field :comment, :string
     field :reference, non_null(:input_reference)
   end
 

@@ -36,7 +36,7 @@ defmodule Bullsource.Discussion do
     Repo.transaction(fn ->
       with {:ok, thread}  <- insert_thread(thread_params, user),
            {:ok, post}    <- insert_post(thread, post_params, user),
-           {:ok, {:ok,post_with_proofs}} <- proofs_transaction(post, post_params.proofs) do
+           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs) do
            list_posts_in_thread(thread.id)
 
       else
@@ -61,6 +61,7 @@ defmodule Bullsource.Discussion do
   end
 
   defp proofs_transaction(post, [first_proof | rest_proofs] = proofs) do
+    IO.inspect first_proof
     Repo.transaction(fn ->
 #    possible to do this part with a Multi or concurrently when you get the reference?
       with {:ok, reference} <- get_or_insert_reference(first_proof.reference),

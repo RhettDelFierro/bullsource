@@ -22,11 +22,11 @@ defmodule Bullsource.GraphQL.ThreadResolver do
 #    {:ok, thread}
 #  end
 
-   def create(%{title: title, topic_id: topic_id, post: post}, %{current_user: current_user} = context) do
-   IO.inspect current_user
-     new_thread_params = %{title: title, topic_id: topic_id}
-     new_post_params = %{intro: post.intro, proofs: post.proofs}
-     with {:ok, posts} <- Discussion.create_thread(new_thread_params, new_post_params, current_user)
+   def create(params, %{context: %{current_user: current_user}}) do
+     {post_params,thread_params} = Map.pop(params, :post)
+#     new_thread_params = %{title: title, topic_id: topic_id}
+#     new_post_params = %{intro: post.intro, proofs: post.proofs}
+     with {:ok, posts} <- Discussion.create_thread(thread_params, post_params, current_user)
      do
        {:ok, posts}
      else
