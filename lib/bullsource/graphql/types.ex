@@ -34,11 +34,63 @@ defmodule Bullsource.GraphQL.Types do
   object :thread do
     field :id, :integer
     field :title, :string
+    field :user, :user
+    field :posts, list_of(:post) do
+      resolve &Bullsource.GraphQL.PostResolver.assoc/2
+    end
+  end
+
+  @desc "Posts belong to Threads and Users. Has many Proofs and References"
+  object :post do
+    field :id, :integer
+    field :intro, :string
+    field :thread_id, :integer
+    field :user_id, :integer
+    field :proofs, list_of(:proof) do
+      resolve &Bullsource.GraphQL.ProofResolver.assoc/2
+    end
+  end
+
+  @desc "Proofs belong to Posts and References. has one Article and Comment."
+  object :proof do
+    field :id, :integer
+    field :reference_id, :integer
+    field :post_id, :integer
   end
 
   @desc "A JWT Token"
   object :token do
     field :token, :string
+  end
+
+######## input_objects
+  @desc "An input object for :post"
+  input_object :input_post do
+    field :intro, :string
+    field :proofs, :input_proof
+  end
+
+  @desc "An input object for :proof"
+  input_object :input_proof do
+    field :article, :input_article
+    field :comment, :input_comment
+    field :reference, :input_reference
+  end
+
+  @desc "An input object for :proof"
+  input_object :input_article do
+    field :text, :string
+  end
+
+  @desc "An input object for :comment"
+  input_object :input_comment do
+    field :text, :string
+  end
+
+  @desc "An input object for :reference"
+  input_object :input_reference do
+    field :link, :string
+    field :title, :string
   end
 
 end

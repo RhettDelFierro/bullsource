@@ -79,7 +79,7 @@ defmodule Bullsource.Discussion do
     post |> Repo.preload(:proofs)
   end
 
-  defp get_or_insert_reference(reference) do
+  def get_or_insert_reference(reference) do
     reference_check = Repo.get_by(Reference, link: reference.link)
     case reference_check do
       nil ->

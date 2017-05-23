@@ -40,14 +40,13 @@ defmodule Bullsource.Web.Context do
     do
       {:ok, %{current_user: current_user}}
     else
- #     {:error, :invalid_token} -> {:error, %{token_error: "Invalid token"}}
- #     {:error, error} -> {:error, error}
+#      {:error, :invalid_token} -> {:error, %{token_error: "Invalid token"}} #####will have to uncomment these two lines out.
+#      {:error, error} -> {:error, error} ####maybe string_to_atom method? ####it just looks like it sends back the error you're not authenticated when the token is wrong.'
     end
 
   end
 
   defp authorize(token) do
-    IO.inspect token
     case Guardian.decode_and_verify(token) do
       {:ok, claims}    -> return_user(claims)
       {:error, reason} ->

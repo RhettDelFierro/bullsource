@@ -1,8 +1,12 @@
-defmodule Bullsource.GraqphQL.ThreadResolver do
+defmodule Bullsource.GraphQL.ThreadResolver do
   import Absinthe.Resolution.Helpers #batch query so it won't make a query for each topic to get a thread.
   import Ecto.Query
 
-  alias Bullsource.{Repo, Discussion.Thread}
+  alias Bullsource.{Repo, Discussion, Discussion.Thread}
+
+  def list(_args, _context) do
+    {:ok, Repo.all(Thread)}
+  end
 
   def assoc(_args, %{source: topic} = context) do
     #now we're only making one query for all the threads int he topic:
@@ -13,10 +17,22 @@ defmodule Bullsource.GraqphQL.ThreadResolver do
 #    {:ok, topic.threads}
   end
 
-  def create(%{title: title, topic_id: topic_id}, _context) do
-    thread = Repo.insert! %Thread{title: title, topic_id: topic_id}
-    {:ok, thread}
-  end
+#  def create(%{title: title, topic_id: topic_id, post: post}, %{current_user: current_user} = context) do
+#    thread = Repo.insert! %Thread{title: title, topic_id: topic_id}
+#    {:ok, thread}
+#  end
+
+   def create(%{title: title, topic_id: topic_id, post: post}, %{current_user: current_user} = context) do
+   IO.inspect current_user
+     new_thread_params = %{title: title, topic_id: topic_id}
+     new_post_params = %{intro: post.intro, proofs: post.proofs}
+     with {:ok, posts} <- Discussion.create_thread(new_thread_params, new_post_params, current_user)
+     do
+       {:ok, posts}
+     else
+       {:error, errors} -> {:error, errors}
+     end
+   end
 
   def by_topic_id(_, ids) do
     Thread

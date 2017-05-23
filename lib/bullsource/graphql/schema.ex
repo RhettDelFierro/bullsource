@@ -2,10 +2,7 @@ defmodule Bullsource.GraphQL.Schema do
 #defines the shape of our api. We can practically do away with the router.
 #this schema is a plug
   use Absinthe.Schema
-#  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic}
-#  alias Bullsource.Accounts.User
-#  alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ProofVoteUp,
-#                                ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
+
   import_types Bullsource.GraphQL.Types
 
   query do
@@ -21,6 +18,15 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.UserResolver.resolve_user/2
     end
 
+    @desc "Lists all threads in topic"
+    field :thread, list_of(:thread) do
+      resolve &Bullsource.GraphQL.ThreadResolver.list/2
+    end
+
+    @desc "Lists all posts in thread"
+    field :post, list_of(:post) do
+      resolve &Bullsource.GraphQL.PostResolver.list/2
+    end
   end
 
   mutation do
@@ -54,8 +60,9 @@ defmodule Bullsource.GraphQL.Schema do
     field :create_thread, :thread do
       arg :title, non_null(:string)
       arg :topic_id, non_null(:integer)
+      arg :post, list_of(non_null(:input_post))
       middleware Bullsource.Web.Authentication
-      resolve &Bullsource.GraqphQL.ThreadResolver.create/2
+      resolve &Bullsource.GraphQL.ThreadResolver.create/2
       middleware Bullsource.Web.HandleError
     end
   end

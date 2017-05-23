@@ -1,6 +1,10 @@
 defmodule Bullsource.GraphQL.UserResolver do
   alias Bullsource.{Repo, Accounts, Session, Accounts.User, }
 
+  def list(_args,_context) do
+    {:ok, Repo.all(User)}
+  end
+
 #########SESSIONS############
 # authenticated. returns the User to the client if they're signed in to access public features.
   def resolve_user(_args, %{context: %{current_user: current_user}}) do
