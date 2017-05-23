@@ -14,7 +14,7 @@ defmodule Bullsource.GraphQL.Schema do
     # no matter what, check to see if user is resolved:
     @desc "Get a user by id :: nil || User"
     field :user, :user do
-      arg :id, non_null(:id)
+      arg :id, non_null(:integer)
       resolve &Bullsource.GraphQL.UserResolver.resolve_user/2
     end
 
@@ -25,6 +25,7 @@ defmodule Bullsource.GraphQL.Schema do
 
     @desc "Lists all posts in thread"
     field :post, list_of(:post) do
+      arg :id, non_null(:integer)
       resolve &Bullsource.GraphQL.PostResolver.list/2
     end
 

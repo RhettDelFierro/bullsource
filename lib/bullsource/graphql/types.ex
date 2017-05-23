@@ -56,6 +56,19 @@ defmodule Bullsource.GraphQL.Types do
     field :id, :integer
     field :reference_id, :integer
     field :post_id, :integer
+
+    field :article, :article do
+      resolve &Bullsource.GraphQL.ArticleResolver.assoc/2
+    end
+
+    field :comment, :comment do
+      resolve &Bullsource.GraphQL.CommentResolver.assoc/2
+    end
+
+#    field :reference, :reference do
+#      resolve &Bullsource.GraphQL.ReferenceResolver.assoc/2
+#    end
+
   end
 
   @desc "Articles - belong to proofs - quoted from Reference :link"
@@ -78,7 +91,6 @@ defmodule Bullsource.GraphQL.Types do
     field :link, :string
     field :title, :string
   end
-
 
   @desc "A JWT Token"
   object :token do

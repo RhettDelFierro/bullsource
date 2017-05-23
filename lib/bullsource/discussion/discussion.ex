@@ -61,7 +61,6 @@ defmodule Bullsource.Discussion do
   end
 
   defp proofs_transaction(post, [first_proof | rest_proofs] = proofs) do
-    IO.inspect first_proof
     Repo.transaction(fn ->
 #    possible to do this part with a Multi or concurrently when you get the reference?
       with {:ok, reference} <- get_or_insert_reference(first_proof.reference),
