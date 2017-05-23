@@ -11,7 +11,7 @@ defmodule Bullsource.Web.Authentication do
       _ ->
         resolution
         |> Absinthe.Resolution.put_result({:error, %{code: :not_authenticated,
-                                                     error: "Noth authenticated.",
+                                                     error: "Not authenticated.",
                                                      message: "Not authenticated"}})
     end
   end

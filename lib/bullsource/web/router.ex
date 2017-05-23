@@ -10,7 +10,7 @@ defmodule Bullsource.Web.Router do
   end
 
   scope "/graphql" do
-#    pipe_through :graphql
+    pipe_through :graphql
     forward "/", Absinthe.Plug.GraphiQL, schema: Bullsource.GraphQL.Schema
 
 #    forward "/", Absinthe.Plug, schema: Bullsource.GraphQL.Schema WHEN LAUNCHING.

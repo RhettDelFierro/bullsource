@@ -22,29 +22,33 @@ defmodule Bullsource.Web.Context do
                                                                  # }
       {:error, reason} ->
         conn
-        |> send_resp(403, reason)
-        |> halt()
+#        |> send_resp(403, reason)
+#        |> halt()
 
       _ ->
         conn
-        |> send_resp(400, "Bad Request")
-        |> halt()
+#        |> send_resp(400, "Bad Request")
+#        |> halt()
 
     end
   end
 
 # building our GraphQL context.
   defp build_context(conn) do
-    with ["Bearer" <> token] <- get_req_header(conn, "Authorization"),
+    with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
     {:ok, current_user} <- authorize(token) do
       {:ok, %{current_user: current_user}}
     end
+
   end
 
   defp authorize(token) do
+    IO.inspect token
     case Guardian.decode_and_verify(token) do
       {:ok, claims}    -> return_user(claims)
-      {:error, reason} -> {:error, reason}
+      {:error, reason} ->
+        IO.inspect reason
+        {:error, reason}
     end
   end
 

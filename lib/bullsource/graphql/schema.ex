@@ -54,6 +54,7 @@ defmodule Bullsource.GraphQL.Schema do
     field :create_thread, :thread do
       arg :title, non_null(:string)
       arg :topic_id, non_null(:integer)
+      middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraqphQL.ThreadResolver.create/2
     end
   end
