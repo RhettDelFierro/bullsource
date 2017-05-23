@@ -27,6 +27,11 @@ defmodule Bullsource.GraphQL.Schema do
     field :post, list_of(:post) do
       resolve &Bullsource.GraphQL.PostResolver.list/2
     end
+
+    @desc "Lists all the proofs"
+    field :proof, list_of(:proof) do
+      resolve &Bullsource.GraphQL.ProofResolver.list/2
+    end
   end
 
   mutation do
@@ -60,11 +65,24 @@ defmodule Bullsource.GraphQL.Schema do
     field :create_thread, :thread do
       arg :title, non_null(:string)
       arg :topic_id, non_null(:integer)
-      arg :post, list_of(non_null(:input_post))
+      arg :post, non_null(:input_post)
       middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.ThreadResolver.create/2
       middleware Bullsource.Web.HandleError
     end
+
+    @desc "Create a post - for threads already made."
+    field :create_post, :post do
+       arg :thread_id, non_null(:integer)
+       arg :post, non_null(:input_post)
+#      arg :intro, :string
+#      arg :thread_id, :integer
+#      args :proofs,list_of(non_null(:input_proofs))
+      middleware Bullsource.Web.Authentication
+      resolve &Bullsource.GraphQL.PostResolver.create/2
+      middleware Bullsource.Web.HandleError
+    end
+
   end
 
 end

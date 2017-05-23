@@ -9,11 +9,10 @@ defmodule Bullsource.GraphQL.ProofResolver do
   end
 
   def assoc(_args, %{source: post} = context) do
-    IO.puts "++++++++assoc++++++++++"
     #now we're only making one query for all the Proofs in the Post:
-    batch {__MODULE__, :by_post_id}, post.id, fn results ->
+    batch({__MODULE__, :by_post_id}, post.id, fn results ->
         {:ok, Map.get(results, post.id)}
-    end
+    end)
 #    topic = Repo.preload(topic, :Posts)
 #    {:ok, topic.Posts}
   end

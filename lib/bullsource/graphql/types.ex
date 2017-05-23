@@ -51,12 +51,34 @@ defmodule Bullsource.GraphQL.Types do
     end
   end
 
-  @desc "Proofs belong to Posts and References. has one Article and Comment."
+  @desc "Proofs - belong to Posts and References. has_one Article and Comment."
   object :proof do
     field :id, :integer
     field :reference_id, :integer
     field :post_id, :integer
   end
+
+  @desc "Articles - belong to proofs - quoted from Reference :link"
+  object :article do
+    field :id, :integer
+    field :text, :string
+    field :proof_id, :integer
+  end
+
+  @desc "Comments - belong to proofs - personal comments on article/reference"
+  object :comment do
+    field :id, :integer
+    field :text, :string
+    field :proof_id, :integer
+  end
+
+  @desc "References - has many proofs"
+  object :article do
+    field :id, :integer
+    field :text, :string
+    field :proof_id, :integer
+  end
+
 
   @desc "A JWT Token"
   object :token do
@@ -67,17 +89,17 @@ defmodule Bullsource.GraphQL.Types do
   @desc "An input object for :post"
   input_object :input_post do
     field :intro, :string
-    field :proofs, :input_proof
+    field :proofs, list_of(non_null(:input_proof))
   end
 
   @desc "An input object for :proof"
   input_object :input_proof do
     field :article, :input_article
     field :comment, :input_comment
-    field :reference, :input_reference
+    field :reference, non_null(:input_reference)
   end
 
-  @desc "An input object for :proof"
+  @desc "An input object for :article"
   input_object :input_article do
     field :text, :string
   end
@@ -89,7 +111,7 @@ defmodule Bullsource.GraphQL.Types do
 
   @desc "An input object for :reference"
   input_object :input_reference do
-    field :link, :string
+    field :link, non_null(:string)
     field :title, :string
   end
 
