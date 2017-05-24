@@ -14,6 +14,10 @@ defmodule Bullsource.Votes do
 
     end
 
+    def create_vote(func,params) do
+      #do one of the :functions |> Repo.insert
+    end
+
     def down_vote_post(%{post_id: post_id, user_id: user_id} = params) do
       down_vote_post_changeset(params)
       |> Repo.insert

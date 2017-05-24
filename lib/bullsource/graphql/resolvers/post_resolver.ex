@@ -17,8 +17,8 @@ defmodule Bullsource.GraphQL.PostResolver do
 #    {:ok, topic.Posts}
   end
 
-  def create(params, %{context: %{current_user: current_user}}) do
-     post_params = Map.put_new(params.post, :thread_id, params.thread_id)
+  def create(%{thread_id: thread_id, post: post} = params, %{context: %{current_user: current_user}}) do
+     post_params = Map.put_new(post, :thread_id, thread_id)
      with {:ok, posts} <- Discussion.create_post(post_params, current_user)
      do
        {:ok, posts}
