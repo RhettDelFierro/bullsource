@@ -24,9 +24,9 @@ defmodule Bullsource.GraphQL.ThreadResolver do
      {post_params,thread_params} = Map.pop(args, :post)
 #     new_thread_params = %{title: title, topic_id: topic_id}
 #     new_post_params = %{intro: post.intro, proofs: post.proofs}
-     with {:ok, posts} <- Discussion.create_thread(thread_params, post_params, current_user)
+     with {:ok, thread} <- Discussion.create_thread(thread_params, post_params, current_user)
      do
-       {:ok, posts}
+       {:ok, thread}
      else
        {:error, errors} -> {:error, errors}
      end

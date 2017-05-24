@@ -38,7 +38,9 @@ defmodule Bullsource.Discussion do
            {:ok, post}    <- insert_post(thread, post_params, user),
            {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs)
       do
-        list_posts_in_thread(thread.id)
+#        list_posts_in_thread(thread.id)
+         #for graphQL
+         {:ok, thread}
       else
         {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
@@ -76,7 +78,7 @@ defmodule Bullsource.Discussion do
   end
 
   defp proofs_transaction(post, []) do
-    post |> Repo.preload(:proofs)
+    {:ok, post}
   end
 
   def get_or_insert_reference(reference) do

@@ -15,11 +15,11 @@ defmodule Bullsource.GraphQL.ReferenceResolver do
 
 # redo this function:
 # do we need to look up for a reference first?
-  def create(%{reference: reference, post_id: post_id}, _context) do
-    {:ok, reference} = Discussion.get_or_insert_reference(reference)
-    proof = Repo.insert! %Proof{post_id: post_id, reference_id: reference.id}
-    {:ok, proof}
-  end
+#  def create(%{reference: reference, post_id: post_id}, _context) do
+#    {:ok, reference} = Discussion.get_or_insert_reference(reference)
+#    proof = Repo.insert! %Proof{post_id: post_id, reference_id: reference.id}
+#    {:ok, proof}
+#  end
 
 # don't think you need a by_parent_id/2 function this because reference isn't a child to anything.
 

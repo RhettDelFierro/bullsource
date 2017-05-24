@@ -1,4 +1,5 @@
 defmodule Bullsource.GraphQL.Types do
+  use Absinthe.Ecto, repo: Bullsource.Repo
   use Absinthe.Schema.Notation
 
 
@@ -25,19 +26,15 @@ defmodule Bullsource.GraphQL.Types do
     field :description, :string
 
     #because :topic has_many :threads, we're going to add a :threads field
-    field :threads, list_of(:thread) do
-     resolve &Bullsource.GraqphQL.ThreadResolver.assoc/2
-    end
+    field :threads, list_of(:thread), resolve: assoc(:threads)
   end
 
   @desc "Threads belong to topics and users. Has many posts."
   object :thread do
     field :id, :integer
     field :title, :string
-    field :user, :user
-    field :posts, list_of(:post) do
-      resolve &Bullsource.GraphQL.PostResolver.assoc/2
-    end
+    field :user, :user, resolve: assoc(:user)
+    field :posts, list_of(:post), resolve: assoc(:posts)
   end
 
   @desc "Posts belong to Threads and Users. Has many Proofs and References"
@@ -46,14 +43,12 @@ defmodule Bullsource.GraphQL.Types do
     field :intro, :string
     field :thread_id, :integer
     field :user_id, :integer
-    field :proofs, list_of(:proof) do
-      resolve &Bullsource.GraphQL.ProofResolver.assoc/2
-    end
+    field :proofs, list_of(:proof), resolve: assoc(:proofs)
 
-    field :votes, list_of(:vote) do
-    #wrapper functions for this so we could use one .assoc/2 function in VoteResolver?
-      resolve &Bullsource.GraphQL.VoteResolver.assoc/2
-    end
+#    field :votes, list_of(:vote) do
+#    #wrapper functions for this so we could use one .assoc/2 function in VoteResolver?
+#      resolve &Bullsource.GraphQL.VoteResolver.assoc/2
+#    end
   end
 
   @desc "Proofs - belong to Posts and References. has_one Article and Comment."
@@ -61,14 +56,8 @@ defmodule Bullsource.GraphQL.Types do
     field :id, :integer
     field :reference_id, :integer
     field :post_id, :integer
-
-    field :article, :article do
-      resolve &Bullsource.GraphQL.ArticleResolver.assoc/2
-    end
-
-    field :comment, :comment do
-      resolve &Bullsource.GraphQL.CommentResolver.assoc/2
-    end
+    field :article, :article, resolve: assoc(:article)
+    field :comment, :comment, resolve: assoc(:comment)
 
 #    field :reference, :reference do
 #      resolve &Bullsource.GraphQL.ReferenceResolver.assoc/2
@@ -95,6 +84,7 @@ defmodule Bullsource.GraphQL.Types do
     field :id, :integer
     field :link, :string
     field :title, :string
+    field :proofs, list_of(:proof), resolve: assoc(:proofs)
   end
 
   @desc "Vote - "
@@ -102,9 +92,9 @@ defmodule Bullsource.GraphQL.Types do
     field :id, :integer #the id of whatever the vote was in :vote_type table.
     field :vote_type_id, :integer #the foreign key id of the item voted on.
     field :vote_type, :vote_type
-    field :user, :user do
-      resolve &Bullsource.GraphQL.UserResolver.vote_assoc/2
-    end
+#    field :user, :user do
+#      resolve &Bullsource.GraphQL.UserResolver.vote_assoc/2
+#    end
   end
 
   @desc "Vote type"
