@@ -1,44 +1,28 @@
 defmodule Bullsource.GraphQL.UserResolver do
-  alias Bullsource.{Repo, Accounts, Session, Accounts.User, }
+  alias Bullsource.{Repo, Accounts, Session, Accounts.User}
+  import Bullsource.Accounts, only: [authenticate: 1, create_user: 1]
 
   def list(_args,_context) do
-    {:ok, Repo.all(User)}
+    {:ok, Repo.all(User)} #change this to the accounts interface rather than calling repo.
   end
 
-#########SESSIONS############
-# authenticated. returns the User to the client if they're signed in to access public features.
-  def get_current__user(_args, %{context: %{current_user: current_user}}) do
-    {:ok, Accounts.find(current_user.id)}
-  end
-
-# unauthenticated. returns nil to the client for users who are not signed in, but want to access public features.
+  def get_current__user(_args, %{context: %{current_user: current_user}}), do: {:ok, Accounts.find(current_user.id)}
   def get_current__user(_args, _context), do: {:ok, nil}
 
-  def login_user(args, _context) do
-    with {:ok, user}  <- Accounts.authenticate(args),
+  def login_user(args, _context), do: generate_session(&authenticate/1,args)
+  def register(args, _context),   do: generate_session(&create_user/1,args)
+
+  defp generate_session(func, args) do
+    with {:ok, user}  <- func.(args),
          {:ok, token} <- create_token(user)
     do
-      {:ok, %{token: token}}
+      {:ok, %{token: token,user: user}}
     else
        #error will be either registration changeset or token error
        {:error, error } -> {:error, error_handler(error)}
     end
   end
 
-# a user wants to register - send back the token
-  def register(args, _info) do
-    with {:ok, user} <- Accounts.create_user(args),
-         {:ok, token} <- create_token(user)
-    do
-      {:ok, %{token: token}}
-    else
-      #error will be either registration changeset or token error
-      {:error, error } -> {:error, error_handler(error)}
-    end
-  end
-
-#######SESSIONS###########
-# passwords match, create a token:
   defp create_token(user) do
     case Guardian.encode_and_sign(user, :token) do
       nil -> {:error, %{token_error: "An error occured creating the token"}}

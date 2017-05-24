@@ -14,4 +14,9 @@ defmodule Bullsource.GraphQL.Types.AccountTypes do
     field :token, :string
   end
 
+  @desc "User who has logged in/registered with a token"
+  object :signed_in_user do
+    field :user, :user, resolve: assoc(:user)
+    field :token, :string
+  end
 end

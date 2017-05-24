@@ -11,7 +11,6 @@ defmodule Bullsource.Accounts do
     end
   end
 
-  #for authentication/login
   def authenticate(%{username: username,password: given_password}) do
   	user = Repo.get_by(User, username: username)
   	#should also check for email, either one will work?

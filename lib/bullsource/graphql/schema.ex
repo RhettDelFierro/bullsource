@@ -39,7 +39,7 @@ defmodule Bullsource.GraphQL.Schema do
 
   mutation do
     @desc "Register a user"
-    field :register_user, :token do
+    field :register_user, :signed_in_user do
       arg :username, non_null(:string)
       arg :email, non_null(:string)
       arg :password, non_null(:string)
@@ -48,7 +48,7 @@ defmodule Bullsource.GraphQL.Schema do
     end
 
     @desc "Login a user"
-    field :login_user, :token do
+    field :login_user, :signed_in_user do
       arg :username, non_null(:string)
       arg :email, non_null(:string)
       arg :password, non_null(:string)
