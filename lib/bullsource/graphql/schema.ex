@@ -56,10 +56,10 @@ defmodule Bullsource.GraphQL.Schema do
 
     @desc "Create a topic"
     field :create_topic, :topic do
-        arg :name, non_null(:string)
-        arg :description, :string
-        #the args above will be passed in to the resolve/2 function as a map.
-        resolve &Bullsource.GraphQL.TopicResolver.create/2
+      arg :name, non_null(:string)
+      arg :description, :string
+      #the args above will be passed in to the resolve/2 function as a map.
+      resolve &Bullsource.GraphQL.TopicResolver.create/2
     end
 
     @desc "Create a thread"
@@ -74,13 +74,19 @@ defmodule Bullsource.GraphQL.Schema do
 
     @desc "Create a post - for threads already made."
     field :create_post, :post do
-       arg :thread_id, non_null(:integer)
-       arg :post, non_null(:input_post)
-#      arg :intro, :string
-#      arg :thread_id, :integer
-#      args :proofs,list_of(non_null(:input_proofs))
+      arg :thread_id, non_null(:integer)
+      arg :post, non_null(:input_post)
       middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.PostResolver.create/2
+      middleware Bullsource.Web.HandleError
+    end
+
+    @desc "Create a vote - posts, proofs and references"
+    field :create_vote, :vote do
+      arg :vote_type, non_null(:vote_type)
+      arg :vote_type_id, non_null(:integer)
+      middleware Bullsource.Web.Authentication
+      resolve &Bullsource.GraphQL.VoteResolver.create/2
       middleware Bullsource.Web.HandleError
     end
 

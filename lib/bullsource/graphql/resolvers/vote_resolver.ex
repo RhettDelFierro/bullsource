@@ -20,11 +20,11 @@ defmodule Bullsource.GraphQL.VoteResolver do
 
 # maybe: %{vote_object: vote_object} = params, %{context: %{current_user: current_user) - the client will decide the vote object.
 # maybe a wrapper function around the vote mutation that returns a resolve function?
-  def create(%{thread_id: thread_id, post: post} = params, %{context: %{current_user: current_user}}) do
-     post_params = Map.put_new(post, :thread_id, thread_id)
-     with {:ok, posts} <- Votes.create_vote(post_params, current_user)
+  def create(%{vote_type: vote_type, vote_type_id: vote_type_id} = params, %{context: %{current_user: current_user}}) do
+     vote_params = %{id: vote_type_id, user_id: current_user.id}
+     with {:ok, vote} <- Votes.create_vote(vote_type, vote_params)
      do
-       {:ok, posts}
+       {:ok, vote}
      else
        {:error, errors} -> {:error, errors}
      end

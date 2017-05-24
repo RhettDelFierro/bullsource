@@ -14,38 +14,32 @@ defmodule Bullsource.Votes do
 
     end
 
-    def create_vote(func,params) do
-      #do one of the :functions |> Repo.insert
+    def create_vote(func, params) do
+      apply(__MODULE__, func, [params]) |> Repo.insert
     end
 
-    def down_vote_post(%{post_id: post_id, user_id: user_id} = params) do
-      down_vote_post_changeset(params)
-      |> Repo.insert
+    def down_vote_post(params) do
+      %{post_id: params.id, user_id: params.user_id} |> down_vote_post_changeset
     end
 
-    def up_vote_post(%{post_id: post_id, user_id: user_id} = params) do
-      up_vote_post_changeset(params)
-      |> Repo.insert
+    def up_vote_post(params) do
+      %{post_id: params.id, user_id: params.user_id} |>  up_vote_post_changeset
     end
 
-    def down_vote_proof(%{proof_id: proof_id, user_id: user_id} = params) do
-      down_vote_proof_changeset(params)
-      |> Repo.insert
+    def down_vote_proof(params) do
+      %{proof_id: params.id, user_id: params.user_id} |> down_vote_proof_changeset
     end
 
-    def up_vote_proof(%{proof_id: proof_id, user_id: user_id} = params) do
-      up_vote_proof_changeset(params)
-      |> Repo.insert
+    def up_vote_proof(params) do
+      %{proof_id: params.id, user_id: params.user_id} |> up_vote_proof_changeset
     end
 
-    def down_vote_reference(%{reference_id: reference_id, user_id: user_id} = params) do
-      down_vote_reference_changeset(params)
-      |> Repo.insert
+    def down_vote_reference(params) do
+      %{reference_id: params.id, user_id: params.user_id} |> down_vote_reference_changeset
     end
 
-    def up_vote_reference(%{reference_id: reference_id, user_id: user_id} = params) do
-      up_vote_reference_changeset(params)
-      |> Repo.insert
+    def up_vote_reference(params) do
+      %{reference_id: params.id, user_id: params.user_id} |> up_vote_reference_changeset
     end
 
     def change_vote(struct, user) do

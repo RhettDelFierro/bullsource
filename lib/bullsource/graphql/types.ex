@@ -95,22 +95,20 @@ defmodule Bullsource.GraphQL.Types do
   @desc "Vote object"
   object :vote do
     field :id, :integer #the id of whatever the vote was in :vote_type table.
-    field :type, non_null(:vote_type)
     field :user, :user
+    field :vote_type, :vote_type
+    field :vote_type_id, :integer #will be reference_id, post_id, proof_id
     # to list the right association, read the :vote_type off the args in the assoc/2 function.
-    field :voted_on, :vote_type do
-      resolve &Bullsource.GraphQL.VoteResolver.assoc/2
-    end
   end
 
   @desc "Vote type"
   enum :vote_type do
-    value :post_vote_up
-    value :post_vote_down
-    value :proof_vote_up
-    value :proof_vote_down
-    value :reference_vote_up
-    value :reference_vote_down
+    value :up_vote_post
+    value :down_vote_post
+    value :up_vote_proof
+    value :down_vote_proof
+    value :up_vote_reference
+    value :down_vote_reference
   end
 
   @desc "A JWT Token"
