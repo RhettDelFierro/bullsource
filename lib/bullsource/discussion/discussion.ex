@@ -38,9 +38,8 @@ defmodule Bullsource.Discussion do
            {:ok, post}    <- insert_post(thread, post_params, user),
            {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs)
       do
-#        list_posts_in_thread(thread.id)
          #for graphQL
-         {:ok, thread}
+         thread
       else
         {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
@@ -49,14 +48,14 @@ defmodule Bullsource.Discussion do
 
   def create_post(post_params, user) do
     thread = Repo.get(Thread,post_params.thread_id) ######Right now I'm assuming it's a correct thread_id. May have to fix because exception will be raised.
-    Repo.transaction( fn ->
+    Repo.transaction( fn -> #Repo.transaction return {:ok, ....whatever....}, the ...whatever... here is determined by the do block in the with macro.
       #can I abstract this part because of it's similarity to create_thread?
       with {:ok, post} <- insert_post(thread, post_params, user),
            {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs)
       do
-        get_post(post_with_proofs.id)
+        post
       else
-        {:error, error_changeset} -> Repo.rollback(error_changeset)
+        {:error, error_changeset} -> Repo.rollback(error_changeset) #rollback in a Repo.transaction returns the argument in an {:error, argument} tuple. In this case {:error, error_changeset}
       end
 
     end)
@@ -77,9 +76,7 @@ defmodule Bullsource.Discussion do
     end)
   end
 
-  defp proofs_transaction(post, []) do
-    {:ok, post}
-  end
+  defp proofs_transaction(post, []), do: post
 
   def get_or_insert_reference(reference) do
     reference_check = Repo.get_by(Reference, link: reference.link)

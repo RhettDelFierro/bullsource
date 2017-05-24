@@ -1,12 +1,12 @@
 defmodule Bullsource.GraphQL.UserResolver do
   alias Bullsource.{Repo, Accounts, Session, Accounts.User}
-  import Bullsource.Accounts, only: [authenticate: 1, create_user: 1]
+  import Bullsource.Accounts, only: [authenticate: 1, create_user: 1, find: 1]
 
   def list(_args,_context) do
     {:ok, Repo.all(User)} #change this to the accounts interface rather than calling repo.
   end
 
-  def get_current__user(_args, %{context: %{current_user: current_user}}), do: {:ok, Accounts.find(current_user.id)}
+  def get_current__user(_args, %{context: %{current_user: current_user}}), do: {:ok, find(current_user.id)}
   def get_current__user(_args, _context), do: {:ok, nil}
 
   def login_user(args, _context), do: generate_session(&authenticate/1,args)

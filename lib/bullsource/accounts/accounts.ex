@@ -4,7 +4,7 @@ defmodule Bullsource.Accounts do
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
 
-  def find(%{id: id}, _context)do
+  def find(%{id: id})do
     case Repo.get(User, id) do
       nil -> {:error, "User id #{id} not found"}
       user -> {:ok, user}
