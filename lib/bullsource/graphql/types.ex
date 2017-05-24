@@ -9,14 +9,6 @@ defmodule Bullsource.GraphQL.Types do
     field :username, :string
     field :email, :string
 
-#    field :threads, list_of(:thread) do
-#     resolve &Bullsource.GraphQL.ThreadResolver.assoc/2
-#    end
-#
-#    field :posts, list_of(:post) do
-#     resolve &Bullsource.GraphQL.PostResolver.assoc/2
-#    end
-
   end
 
   @desc "Topics has many threads."
@@ -44,7 +36,8 @@ defmodule Bullsource.GraphQL.Types do
     field :thread_id, :integer
     field :user_id, :integer
     field :proofs, list_of(:proof), resolve: assoc(:proofs)
-
+    field :up_votes, list_of(:post_vote_up), resolve: assoc(:post_vote_up)
+    field :down_votes, list_of(:post_vote_down), resolve: assoc(:post_vote_down)
 #    field :votes, list_of(:vote) do
 #    #wrapper functions for this so we could use one .assoc/2 function in VoteResolver?
 #      resolve &Bullsource.GraphQL.VoteResolver.assoc/2
@@ -58,7 +51,6 @@ defmodule Bullsource.GraphQL.Types do
     field :post_id, :integer
     field :article, :article, resolve: assoc(:article)
     field :comment, :comment, resolve: assoc(:comment)
-
 #    field :reference, :reference do
 #      resolve &Bullsource.GraphQL.ReferenceResolver.assoc/2
 #    end
@@ -87,14 +79,46 @@ defmodule Bullsource.GraphQL.Types do
     field :proofs, list_of(:proof), resolve: assoc(:proofs)
   end
 
-  @desc "Vote - "
-  object :vote do
-    field :id, :integer #the id of whatever the vote was in :vote_type table.
-    field :vote_type_id, :integer #the foreign key id of the item voted on.
-    field :vote_type, :vote_type
-#    field :user, :user do
-#      resolve &Bullsource.GraphQL.UserResolver.vote_assoc/2
-#    end
+  @desc "PostVoteUp"
+  object :post_vote_up do
+    field :id, :integer
+    field :post, :post, resolve: assoc(:post)
+    field :user, :user, resolve: assoc(:user)
+  end
+
+  @desc "PostVoteDown"
+  object :post_vote_down do
+    field :id, :integer
+    field :post, :post, resolve: assoc(:post)
+    field :user, :user, resolve: assoc(:user)
+  end
+
+  @desc "ProofVoteUp"
+  object :proof_vote_up do
+    field :id, :integer
+    field :proof, :proof, resolve: assoc(:proof)
+    field :user, :user, resolve: assoc(:user)
+  end
+
+  @desc "ProofVoteDown"
+  object :proof_vote_down do
+    field :id, :integer
+    field :prook, :post, resolve: assoc(:proof)
+    field :user, :user, resolve: assoc(:user)
+  end
+
+  @desc "ReferenceVoteUp"
+  object :reference_vote_up do
+    field :id, :integer
+    field :reference, :reference, resolve: assoc(:reference)
+    field :user, :user, resolve: assoc(:user)
+  end
+
+  @desc "ReferenceVoteDown"
+  object :reference_vote_up do
+    field :id, :integer
+    field :reference, :reference, resolve: assoc(:reference)
+    field :user, :user, resolve: assoc(:user)
   end
 
   @desc "Vote type"
@@ -106,6 +130,16 @@ defmodule Bullsource.GraphQL.Types do
     value :up_vote_reference
     value :down_vote_reference
   end
+
+  @desc "Vote object"
+  object :vote do
+    field :id, :integer #the id of whatever the vote was in :vote_type table.
+    field :user, :user, resolve: assoc(:user)
+    field :vote_type, :vote_type
+    field :vote_type_id, :integer #will be reference_id, post_id, proof_id
+    # to list the right association, read the :vote_type off the args in the assoc/2 function.
+  end
+
 
   @desc "A JWT Token"
   object :token do
