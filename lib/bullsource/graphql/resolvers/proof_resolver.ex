@@ -13,8 +13,6 @@ defmodule Bullsource.GraphQL.ProofResolver do
     batch({__MODULE__, :by_post_id}, post.id, fn results ->
         {:ok, Map.get(results, post.id)}
     end)
-#    topic = Repo.preload(topic, :Posts)
-#    {:ok, topic.Posts}
   end
 
 # redo this function:

@@ -13,8 +13,6 @@ defmodule Bullsource.GraphQL.ThreadResolver do
     batch {__MODULE__, :by_topic_id}, topic.id, fn results ->
         {:ok, Map.get(results, topic.id)}
     end
-#    topic = Repo.preload(topic, :threads)
-#    {:ok, topic.threads}
   end
 
 #  def create(%{title: title, topic_id: topic_id, post: post}, %{current_user: current_user} = context) do
@@ -22,8 +20,8 @@ defmodule Bullsource.GraphQL.ThreadResolver do
 #    {:ok, thread}
 #  end
 
-   def create(params, %{context: %{current_user: current_user}}) do
-     {post_params,thread_params} = Map.pop(params, :post)
+   def create(args, %{context: %{current_user: current_user}}) do
+     {post_params,thread_params} = Map.pop(args, :post)
 #     new_thread_params = %{title: title, topic_id: topic_id}
 #     new_post_params = %{intro: post.intro, proofs: post.proofs}
      with {:ok, posts} <- Discussion.create_thread(thread_params, post_params, current_user)

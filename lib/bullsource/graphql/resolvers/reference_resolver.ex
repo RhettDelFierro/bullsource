@@ -1,20 +1,16 @@
-defmodule Bullsource.GraphQL.ProofResolver do
+defmodule Bullsource.GraphQL.ReferenceResolver do
   import Absinthe.Resolution.Helpers #batch query so it won't make a query for each topic to get a Post.
   import Ecto.Query
 
-  alias Bullsource.{Repo, Discussion, Discussion.Proof}
+  alias Bullsource.{Repo, Discussion, Discussion.Reference}
 
   def list(_args, _context) do
-    {:ok, Repo.all(Proof)}
+    {:ok, Repo.all(Reference)}
   end
 
-  def assoc(_args, %{source: post} = context) do
-    #now we're only making one query for all the Proofs in the Post:
-    batch({__MODULE__, :by_post_id}, post.id, fn results ->
-        {:ok, Map.get(results, post.id)}
-    end)
-#    topic = Repo.preload(topic, :Posts)
-#    {:ok, topic.Posts}
+  #if anything another funciton you need is:
+  def get_reference_by_id(args,context) do
+    {:ok, Repo.get_by(Reference,id: args.id)}
   end
 
 # redo this function:
@@ -25,10 +21,6 @@ defmodule Bullsource.GraphQL.ProofResolver do
     {:ok, proof}
   end
 
-  def by_post_id(_, ids) do
-    Proof
-    |> where([p], p.post_id in ^ids)
-    |> Repo.all
-    |> Enum.group_by(&(&1.post_id))
-  end
+# don't think you need a by_parent_id/2 function this because reference isn't a child to anything.
+
 end

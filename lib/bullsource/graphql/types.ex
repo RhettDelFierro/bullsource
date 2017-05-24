@@ -49,6 +49,11 @@ defmodule Bullsource.GraphQL.Types do
     field :proofs, list_of(:proof) do
       resolve &Bullsource.GraphQL.ProofResolver.assoc/2
     end
+
+    field :votes, list_of(:vote) do
+    #wrapper functions for this so we could use one .assoc/2 function in VoteResolver?
+      resolve &Bullsource.GraphQL.VoteResolver.assoc/2
+    end
   end
 
   @desc "Proofs - belong to Posts and References. has_one Article and Comment."
@@ -92,13 +97,14 @@ defmodule Bullsource.GraphQL.Types do
     field :title, :string
   end
 
-  @desc "Vote object"
+  @desc "Vote - "
   object :vote do
     field :id, :integer #the id of whatever the vote was in :vote_type table.
-    field :user, :user
+    field :vote_type_id, :integer #the foreign key id of the item voted on.
     field :vote_type, :vote_type
-    field :vote_type_id, :integer #will be reference_id, post_id, proof_id
-    # to list the right association, read the :vote_type off the args in the assoc/2 function.
+    field :user, :user do
+      resolve &Bullsource.GraphQL.UserResolver.vote_assoc/2
+    end
   end
 
   @desc "Vote type"

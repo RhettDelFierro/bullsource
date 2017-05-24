@@ -36,9 +36,9 @@ defmodule Bullsource.Discussion do
     Repo.transaction(fn ->
       with {:ok, thread}  <- insert_thread(thread_params, user),
            {:ok, post}    <- insert_post(thread, post_params, user),
-           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs) do
-           list_posts_in_thread(thread.id)
-
+           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs)
+      do
+        list_posts_in_thread(thread.id)
       else
         {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
@@ -50,9 +50,9 @@ defmodule Bullsource.Discussion do
     Repo.transaction( fn ->
       #can I abstract this part because of it's similarity to create_thread?
       with {:ok, post} <- insert_post(thread, post_params, user),
-           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs) do
-           get_post(post_with_proofs.id)
-
+           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs)
+      do
+        get_post(post_with_proofs.id)
       else
         {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
@@ -66,9 +66,9 @@ defmodule Bullsource.Discussion do
       with {:ok, reference} <- get_or_insert_reference(first_proof.reference),
            {:ok, proof}     <- proof_changeset(%{post_id: post.id, reference_id: reference.id})    |> Repo.insert,
            {:ok, article}   <- article_changeset(%{proof_id: proof.id, text: first_proof.article}) |> Repo.insert,
-           {:ok, comment}   <- comment_changeset(%{proof_id: proof.id, text: first_proof.comment}) |> Repo.insert do
-           proofs_transaction(post, rest_proofs) #recursion
-
+           {:ok, comment}   <- comment_changeset(%{proof_id: proof.id, text: first_proof.comment}) |> Repo.insert
+      do
+        proofs_transaction(post, rest_proofs) #recursion
       else
         {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
