@@ -21,6 +21,7 @@ defmodule Bullsource.GraphQL.VoteResolver do
      vote_params = %{id: vote_type_id, user_id: current_user.id}
      with {:ok, vote} <- Votes.create_vote(vote_type, vote_params)
      do
+     # how to return the vote of vote so GraphQL can understand which vote type it was?
        {:ok, vote}
      else
        {:error, errors} -> {:error, errors}

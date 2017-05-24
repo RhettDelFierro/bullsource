@@ -3,7 +3,9 @@ defmodule Bullsource.GraphQL.Schema do
 #this schema is a plug
   use Absinthe.Schema
 
-  import_types Bullsource.GraphQL.Types
+  import_types Bullsource.GraphQL.Types.DiscussionTypes
+  import_types Bullsource.GraphQL.Types.VoteTypes
+  import_types Bullsource.GraphQL.Types.AccountTypes
 
   query do
     @desc "Lists all the topics"
