@@ -8,14 +8,19 @@ defmodule Bullsource.Votes do
     alias Bullsource.Repo
     alias Ecto.Multi
 
-    #Interface functions.
-
-    def list_user_votes(struct, user) do
-
-    end
+  @vote_type_opposites [up_vote_post:        {PostVoteDown, Post, PostVoteUp},
+                        down_vote_post:      {PostVoteUp, Post, POstVoteDown},
+                        up_vote_proof:       {ProofVoteDown, Proof, ProofVoteUp},
+                        down_vote_proof:     {ProofVoteUp, Proof, ProofVoteDown},
+                        up_vote_reference:   {ReferenceVoteDown, Reference, ReferenceVoteUp},
+                        down_vote_reference: {ReferenceVoteUp, Reference, ReferenceVoteDown}]
 
     def create_vote(func, params) do
-      apply(__MODULE__, func, [params]) |> Repo.insert
+      {opposite_vote_type, base_type,vote_type} = @vote_type_opposites[func]
+      case delete_vote(opposite_vote_type,%{id: params.id, user_id: params.user_id}) do
+        {:ok, _} -> apply(__MODULE__, func, [params]) |> Repo.insert
+        {:error, error_changeset} -> {:error, error_changeset}
+      end
     end
 
     def down_vote_post(params) do
@@ -40,6 +45,62 @@ defmodule Bullsource.Votes do
 
     def up_vote_reference(params) do
       %{reference_id: params.id, user_id: params.user_id} |> up_vote_reference_changeset
+    end
+
+# would love to make an interface function instead.
+    def delete_vote(PostVoteUp,   %{id: id, user_id: user_id}) do
+      query = from p in PostVoteUp,
+              where: p.post_id == ^id and p.user_id == ^user_id
+      case Repo.one(query) do
+        nil -> {:ok, nil}
+        post -> Repo.delete(post)
+      end
+
+    end
+    def delete_vote(PostVoteDown, %{id: id, user_id: user_id}) do
+      query = from p in PostVoteDown,
+              where: p.post_id == ^id and p.user_id == ^user_id
+      case Repo.one(query) do
+        nil -> {:ok, nil}
+        post -> Repo.delete(post)
+      end
+    end
+
+    def delete_vote(ProofVoteUp,   %{id: id, user_id: user_id}) do
+       query = from p in ProofVoteUp,
+               where: p.proof_id == ^id and p.user_id == ^user_id
+       case Repo.one(query) do
+         nil -> {:ok, nil}
+         proof -> Repo.delete(proof)
+       end
+    end
+
+    def delete_vote(ProofVoteDown, %{id: id, user_id: user_id}) do
+       query = from p in ProofVoteDown,
+               where: p.proof_id == ^id and p.user_id == ^user_id
+       case Repo.one(query) do
+         nil -> {:ok, nil}
+         proof -> Repo.delete(proof)
+       end
+
+    end
+
+    def delete_vote(ReferenceVoteUp, %{id: id, user_id: user_id}) do
+      query = from r in ReferenceVoteUp,
+              where: r.reference_id == ^id and r.user_id == ^user_id
+      case Repo.one(query) do
+        nil -> {:ok, nil}
+        reference -> Repo.delete(reference)
+      end
+    end
+
+    def delete_vote(ReferenceVoteDown, %{id: id, user_id: user_id}) do
+      query = from r in ReferenceVoteDown,
+              where: r.reference_id == ^id and r.user_id == ^user_id
+      case Repo.one(query) do
+        nil -> {:ok, nil}
+        reference -> Repo.delete(reference)
+      end
     end
 
     def change_vote(struct, user) do

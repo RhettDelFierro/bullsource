@@ -87,6 +87,7 @@ defmodule Bullsource.GraphQL.Schema do
     field :create_vote, :vote do
       arg :vote_type, non_null(:vote_type)
       arg :vote_type_id, non_null(:integer)
+      arg :old_vote_type, :vote_type
       middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.VoteResolver.create/2
       middleware Bullsource.Web.HandleError
