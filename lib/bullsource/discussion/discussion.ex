@@ -5,7 +5,6 @@ defmodule Bullsource.Discussion do
   alias Bullsource.Repo
   alias Ecto.Multi
 
-
   def list_topics do
     Repo.all(Topic) |> Repo.preload(:threads)
   end
