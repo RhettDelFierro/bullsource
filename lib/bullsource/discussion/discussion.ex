@@ -28,7 +28,7 @@ defmodule Bullsource.Discussion do
   ####creating interface functions for controllers.
 
   def create_topic(params) do
-    topic_changeset(params) |> Repo.insert
+    topic_changeset(%Topic{},params) |> Repo.insert
   end
 
   def create_thread(thread_params, post_params, user) do
@@ -46,7 +46,7 @@ defmodule Bullsource.Discussion do
   end
 
   def create_post(post_params, user) do
-    thread = Repo.get(Thread,post_params.thread_id) ######Right now I'm assuming it's a correct thread_id. May have to fix because exception will be raised.
+    thread = Repo.get(Thread,post_params.thread_id)
     Repo.transaction( fn -> #Repo.transaction return {:ok, ....whatever....}, the ...whatever... here is determined by the do block in the with macro.
       #can I abstract this part because of it's similarity to create_thread?
       with {:ok, post} <- insert_post(thread, post_params, user),
@@ -60,13 +60,31 @@ defmodule Bullsource.Discussion do
     end)
   end
 
+  def edit_post(post_params, user) do
+    post = Repo.get(Post,post_params.id)
+    post_params = Map.put_new(post_params, :thread_id, post.thread_id)
+    with {:ok, post} <- post_changeset(post, post_params),
+         {:ok, post} <- Repo.update post
+    do
+      {:ok, post}
+    else
+      {:error, error_changeset} -> {:error, error_changeset}
+    end
+  end
+
+  def edit_proofs([first_proof | rest_proofs], user) do
+
+  end
+
+  def edit_proofs([], user), do: user
+
   defp proofs_transaction(post, [first_proof | rest_proofs] = proofs) do
     Repo.transaction(fn ->
 #    possible to do this part with a Multi or concurrently when you get the reference?
       with {:ok, reference} <- get_or_insert_reference(first_proof.reference),
-           {:ok, proof}     <- proof_changeset(%{post_id: post.id, reference_id: reference.id})    |> Repo.insert,
-           {:ok, article}   <- article_changeset(%{proof_id: proof.id, text: first_proof.article}) |> Repo.insert,
-           {:ok, comment}   <- comment_changeset(%{proof_id: proof.id, text: first_proof.comment}) |> Repo.insert
+           {:ok, proof}     <- proof_changeset(%Proof{},%{post_id: post.id, reference_id: reference.id})    |> Repo.insert,
+           {:ok, article}   <- article_changeset(%Article{},%{proof_id: proof.id, text: first_proof.article}) |> Repo.insert,
+           {:ok, comment}   <- comment_changeset(%Comment{},%{proof_id: proof.id, text: first_proof.comment}) |> Repo.insert
       do
         proofs_transaction(post, rest_proofs) #recursion
       else
@@ -81,7 +99,7 @@ defmodule Bullsource.Discussion do
     reference_check = Repo.get_by(Reference, link: reference.link)
     case reference_check do
       nil ->
-        reference_changeset(%{title: reference.title,link: reference.link})
+        reference_changeset(%Reference{},%{title: reference.title,link: reference.link})
         |> Repo.insert
 
       reference -> {:ok, reference}
@@ -89,19 +107,19 @@ defmodule Bullsource.Discussion do
   end
 
   defp insert_thread(thread, user) do
-    thread_changeset(%{topic_id: thread.topic_id, user_id: user.id, title: thread.title})
+    thread_changeset(%Thread{},%{topic_id: thread.topic_id, user_id: user.id, title: thread.title})
     |> Repo.insert
   end
 
   defp insert_post(thread, post,user) do
-    post_changeset(%{intro: post.intro, user_id: user.id, thread_id: thread.id})
+    post_changeset(%Post{},%{intro: post.intro, user_id: user.id, thread_id: thread.id})
     |> Repo.insert
   end
 
 ##### Changesets #####
 
-  def topic_changeset(params \\ %{}) do
-    %Topic{}
+  def topic_changeset(struct,params \\ %{}) do
+    struct
     |> cast(params, [:name, :description])
     |> validate_required([:name, :description])
     |> validate_format(:name, ~r/^[a-zA-Z0-9_]*$/)
@@ -112,8 +130,8 @@ defmodule Bullsource.Discussion do
     |> unique_constraint(:name)
   end
 
-  def thread_changeset(params \\ %{}) do
-    %Thread{}
+  def thread_changeset(struct,params \\ %{}) do
+    struct
     |> cast(params, [:title, :user_id, :topic_id])
     |> validate_required([:title, :user_id, :topic_id])
     |> validate_length(:title, max: 300)
@@ -122,8 +140,8 @@ defmodule Bullsource.Discussion do
     |> assoc_constraint(:user)
   end
 
-  def post_changeset(params \\ %{}) do
-    %Post{}
+  def post_changeset(struct,params \\ %{}) do
+    struct
     |> cast(params, [:intro, :user_id, :thread_id])
     |> validate_required([:user_id, :thread_id])
     |> validate_length(:intro, min: 3)
@@ -131,8 +149,8 @@ defmodule Bullsource.Discussion do
     |> assoc_constraint(:user)
   end
 
-  def proof_changeset(params \\ %{}) do
-    %Proof{}
+  def proof_changeset(struct,params \\ %{}) do
+    struct
     |> cast(params, [:post_id, :reference_id])
     |> validate_required([:post_id, :reference_id])
     |> assoc_constraint(:post)
@@ -140,23 +158,23 @@ defmodule Bullsource.Discussion do
   end
 
   #the article is a section of the reference that they're quoting.
-  def article_changeset(params \\ %{}) do
-    %Article{}
+  def article_changeset(struct,params \\ %{}) do
+    struct
     |> cast(params, [:text, :proof_id])
     |> validate_required([:text, :proof_id])
     |> assoc_constraint(:proof)
   end
 
-  def comment_changeset(params \\ %{}) do
-    %Comment{}
+  def comment_changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, [:text, :proof_id])
     |> validate_required([:proof_id])
     |> validate_length(:text, max: 500)
     |> assoc_constraint(:proof)
   end
 
-  def reference_changeset(params \\ %{}) do
-    %Reference{}
+  def reference_changeset(struct,params \\ %{}) do
+    struct
     |> cast(params, [:title, :link])
     |> validate_required([:link])
     |> unique_constraint(:link)
