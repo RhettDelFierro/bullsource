@@ -18,4 +18,8 @@ defmodule Bullsource.GraphQL.PostResolver do
      end
   end
 
+  def update(%{post_id: post_id},%{context: %{current_user: current_user}}) do
+
+  end
+
 end

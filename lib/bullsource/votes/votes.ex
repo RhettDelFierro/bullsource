@@ -12,7 +12,8 @@ defmodule Bullsource.Votes do
 
   def create_vote(func, params) do
     opposite_vote_type = @vote_type_opposites[func]
-    case delete_vote(opposite_vote_type,%{id: params.id, user_id: params.user_id}) do
+#    IO.inspect Bullsource.Votes.DeleteVote.delete_vote(%ReferenceVoteDown{id: 1,user_id: 58},%{id: 1, user_id: 58})
+    case DeleteVote.delete_vote(opposite_vote_type,%{id: params.id, user_id: params.user_id}) do
       {:ok, _ } ->
         apply(__MODULE__, func, [params]) |> Repo.insert
       {:error, error_changeset} ->
