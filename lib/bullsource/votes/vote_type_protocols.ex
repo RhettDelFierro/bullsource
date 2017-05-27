@@ -4,7 +4,7 @@ defprotocol DeleteVote do
 #  @doc "Add a type"
 #  def add(type,params)
   @fallback_to_any true
-  def delete_vote(vote_type,_params)
+  def delete_vote(vote_type,params)
 end
 
 defimpl DeleteVote, for: Bullsource.Votes.PostVoteUp do
@@ -37,7 +37,7 @@ defimpl DeleteVote, for: Bullsource.Votes.ProofVoteUp do
         query = from p in Bullsource.Votes.ProofVoteUp,
                 where: p.proof_id == ^params.id and p.user_id == ^params.user_id
         case Bullsource.Repo.one(query) do
-          nil -> {:ok, nil}
+          nil   -> {:ok, nil}
           proof -> Bullsource.Repo.delete(proof)
         end
   end
@@ -49,7 +49,7 @@ defimpl DeleteVote, for: Bullsource.Votes.ProofVoteDown do
         query = from p in Bullsource.Votes.ProofVoteDown,
                 where: p.proof_id == ^params.id and p.user_id == ^params.user_id
         case Bullsource.Repo.one(query) do
-          nil -> {:ok, nil}
+          nil   -> {:ok, nil}
           proof -> Bullsource.Repo.delete(proof)
         end
   end
@@ -58,6 +58,7 @@ end
 defimpl DeleteVote, for: Bullsource.Votes.ReferenceVoteUp do
   import Ecto.Query, only: [from: 2]
   def delete_vote(reference_vote_up,params) do
+
         query = from r in Bullsource.Votes.ReferenceVoteUp,
                 where: r.reference_id == ^params.id and r.user_id == ^params.user_id
         case Bullsource.Repo.one(query) do
@@ -82,6 +83,8 @@ end
 defimpl DeleteVote, for: Any do
   import Ecto.Query, only: [from: 2]
   def delete_vote(blah,params) do
+        IO.puts "ANY+++++++++"
+        IO.inspect blah
         {:ok, blah}
   end
 end

@@ -5,9 +5,9 @@ defmodule Bullsource.Votes do
                             ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
   alias Bullsource.Repo
 
-  @vote_type_opposites [up_vote_post: PostVoteDown,   down_vote_post: PostVoteUp,
-                        up_vote_proof: ProofVoteDown, down_vote_proof: ProofVoteUp,
-                        up_vote_reference:   ReferenceVoteDown, down_vote_reference: ReferenceVoteUp
+  @vote_type_opposites [up_vote_post: %PostVoteDown{},   down_vote_post: %PostVoteUp{},
+                        up_vote_proof: %ProofVoteDown{}, down_vote_proof: %ProofVoteUp{},
+                        up_vote_reference:   %ReferenceVoteDown{}, down_vote_reference: %ReferenceVoteUp{}
                        ]
 
   def create_vote(func, params) do
@@ -28,60 +28,6 @@ defmodule Bullsource.Votes do
   def down_vote_reference(params), do: %{reference_id: params.id, user_id: params.user_id} |> down_vote_reference_changeset
   def up_vote_reference(params), do: %{reference_id: params.id, user_id: params.user_id} |> up_vote_reference_changeset
 
-# would love to make behaviour/protocol instead.
-  def delete_vote(PostVoteUp,   %{id: id, user_id: user_id}) do
-    query = from p in PostVoteUp,
-            where: p.post_id == ^id and p.user_id == ^user_id
-    case Repo.one(query) do
-      nil -> {:ok, nil}
-      post -> Repo.delete(post)
-    end
-  end
-
-  def delete_vote(PostVoteDown, %{id: id, user_id: user_id}) do
-    query = from p in PostVoteDown,
-            where: p.post_id == ^id and p.user_id == ^user_id
-    case Repo.one(query) do
-      nil -> {:ok, nil}
-      post -> Repo.delete(post)
-    end
-  end
-
-  def delete_vote(ProofVoteUp,   %{id: id, user_id: user_id}) do
-    query = from p in ProofVoteUp,
-            where: p.proof_id == ^id and p.user_id == ^user_id
-    case Repo.one(query) do
-      nil -> {:ok, nil}
-      proof -> Repo.delete(proof)
-    end
-  end
-
-  def delete_vote(ProofVoteDown, %{id: id, user_id: user_id}) do
-    query = from p in ProofVoteDown,
-            where: p.proof_id == ^id and p.user_id == ^user_id
-    case Repo.one(query) do
-      nil -> {:ok, nil}
-      proof -> Repo.delete(proof)
-    end
-  end
-
-  def delete_vote(ReferenceVoteUp, %{id: id, user_id: user_id}) do
-    query = from r in ReferenceVoteUp,
-            where: r.reference_id == ^id and r.user_id == ^user_id
-    case Repo.one(query) do
-      nil -> {:ok, nil}
-      reference -> Repo.delete(reference)
-    end
-  end
-
-  def delete_vote(ReferenceVoteDown, %{id: id, user_id: user_id}) do
-    query = from r in ReferenceVoteDown,
-            where: r.reference_id == ^id and r.user_id == ^user_id
-    case Repo.one(query) do
-      nil -> {:ok, nil}
-      reference -> Repo.delete(reference)
-    end
-  end
 
 #### Changesets
   defp down_vote_post_changeset(params \\%{}) do
