@@ -2,7 +2,7 @@ defmodule Bullsource.GraphQL.PostResolver do
   import Ecto.Query
 
   alias Bullsource.{Repo, Discussion, Discussion.Post}
-  import Discussion, only: [create_post: 2, edit_post: 2]
+  import Discussion, only: [create_post: 2, edit_post: 1]
 
   def list(_args, _context) do
     {:ok, Repo.all(Post)}
@@ -18,15 +18,10 @@ defmodule Bullsource.GraphQL.PostResolver do
      end
   end
 
-  def edit(%{post_id: post_id, edited_post: edited_post},%{context: %{current_user: current_user}}) do
-    post_params = %{id: post_id}
-#    go through edited_post, if the the fields are not blank, add them to a map.
-#%{id: post_id, intro: intro, proofs: proofs} -----> was the first argument to edit_post
-    with {:ok, post} <- edit_post(post_params, current_user)
-    do
-      {:ok, post}
-    else
-      {:error, errors} -> {:error, errors}
+  def edit(%{post_id: post_id,intro: intro},%{context: %{current_user: current_user}}) do
+    case edit_post(%{id: post_id, intro: intro}) do
+      {:ok, post} -> {:ok, post}
+      {:error, error_changeset} -> {:error, error_changeset}
     end
   end
 

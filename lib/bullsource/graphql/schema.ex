@@ -93,15 +93,38 @@ defmodule Bullsource.GraphQL.Schema do
       middleware Bullsource.Web.HandleError
     end
 
-    @desc "Edit a post"
+    @desc "Edit a post - the intro/conclusion (implemented later)"
     field :edit_post, :post do
       arg :post_id, non_null(:integer)
-      arg :edited_post, :edited_post
+      arg :intro, :string
       middleware Bullsource.WebAuthentication
       resolve &Bullsource.GraphQL.PostResolver.edit/2
       middleware Bullsource.Web.ErrorHandler
     end
 
-  end
+    @desc "Edit an Article"
+    field :edit_article, :proof do
+      arg :article_id, non_null(:integer)
+      arg :text, :string
+      middleware Bullsource.WebAuthentication
+      resolve &Bullsource.GraphQL.ArticleResolver.edit/2
+      middleware Bullsource.Web.ErrorHandler
+    end
+    @desc "Edit a Comment"
+    field :edit_comment, :proof do
+      arg :comment_id, non_null(:integer)
+      arg :text, :string
+      middleware Bullsource.WebAuthentication
+      resolve &Bullsource.GraphQL.CommentResolver.edit/2
+      middleware Bullsource.Web.ErrorHandler
+    end
 
+    @desc "Edit a Reference"
+    field :edit_article, :proof do
+      arg :reference, non_null(:input_reference)
+      middleware Bullsource.WebAuthentication
+      resolve &Bullsource.GraphQL.ReferenceResolver.edit/2
+      middleware Bullsource.Web.ErrorHandler
+    end
+  end
 end

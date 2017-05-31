@@ -60,7 +60,7 @@ defmodule Bullsource.Discussion do
     end)
   end
 
-  def edit_post(%{id: post_id,intro: intro,thread_id: thread_id}) do
+  def edit_post(%{id: post_id,intro: intro}) do
     changeset = Repo.get(Post, post_id) |> post_changeset(%{intro: intro})
     case Repo.update(changeset) do
       {:ok, struct} -> {:ok, struct}
