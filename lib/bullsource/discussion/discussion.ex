@@ -60,24 +60,43 @@ defmodule Bullsource.Discussion do
     end)
   end
 
-  def edit_post(post_params, user) do
-    post = Repo.get(Post,post_params.id)
-    post = Map.put_new(post_params, :thread_id, post.thread_id)
-    with {:ok, post}   <- post_changeset(post, post_params),
-         {:ok, post}   <- Repo.update post
-         {:ok, post}   <- edit_proofs(params.proofs, user)
-    do
-      {:ok, post}
-    else
-      {:error, error_changeset} -> {:error, error_changeset}
+  def edit_post(%{id: post_id,intro: intro,thread_id: thread_id}) do
+    changeset = Repo.get(Post, post_id) |> post_changeset(%{intro: intro})
+    case Repo.update(changeset) do
+      {:ok, struct} -> {:ok, struct}
+      {:error, changeset} -> {:error, changeset}
     end
   end
 
-  def edit_proofs(post, [first_proof | rest_proofs], user) do
+  def edit_article(%{id: article_id,text: text}) do
+    changeset = Repo.get(Article,article_id) |> article_changeset(%{text: text})
+    case Repo.update(changeset) do
+      {:ok, struct} -> {:ok, struct}
+      {:error, changeset} -> {:error, changeset}
+    end
 
   end
 
-  def edit_proofs(post, [], user), do: post
+  def edit_comment(%{id: comment_id,text: text}) do
+    changeset = Repo.get(Comment,comment_id) |> comment_changeset(%{text: text})
+    case Repo.update(changeset) do
+      {:ok, struct} -> {:ok, struct}
+      {:error, changeset} -> {:error, changeset}
+    end
+
+  end
+
+# if they edit the reference I want to add a new one.
+  def edit_reference(%{reference: reference,user_id: user_id,proof_id: proof_id}) do
+    with {:ok, reference} <- get_or_insert_reference(reference),
+         changeset        =  Repo.get(Proof,proof_id) |> proof_changeset(%{reference_id: reference.id}),
+         {:ok, proof}     <- Repo.update(changeset)
+    do
+      {:ok, proof}
+    else
+      {:error, changeset} -> {:error, changeset}
+    end
+  end
 
   defp proofs_transaction(post, [first_proof | rest_proofs] = proofs) do
     Repo.transaction(fn ->
