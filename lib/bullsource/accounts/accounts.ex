@@ -31,19 +31,18 @@ defmodule Bullsource.Accounts do
 
 
   def create_user(%{password: password} = params) do
-
     # Encrypt the password with Comeonin:
     encrypted_password = Comeonin.Bcrypt.hashpwsalt(password)
 
-    register_changeset(params)
+    register_changeset(%User{},params)
     |> put_change(:encrypted_password, encrypted_password)
     |> Repo.insert
 
   end
 
   #checks for valid inputs to new user fields before it adds to db.
-  def register_changeset(params \\ %{}) do
-    %User{}
+  def register_changeset(struct,params \\ %{}) do
+    struct
     |> cast(params, [:username, :email, :password])
     |> validate_required([:username, :email, :password])
     |> unique_constraint(:email)

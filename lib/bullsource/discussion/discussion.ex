@@ -62,9 +62,10 @@ defmodule Bullsource.Discussion do
 
   def edit_post(post_params, user) do
     post = Repo.get(Post,post_params.id)
-    post_params = Map.put_new(post_params, :thread_id, post.thread_id)
-    with {:ok, post} <- post_changeset(post, post_params),
-         {:ok, post} <- Repo.update post
+    post = Map.put_new(post_params, :thread_id, post.thread_id)
+    with {:ok, post}   <- post_changeset(post, post_params),
+         {:ok, post}   <- Repo.update post
+         {:ok, post}   <- edit_proofs(params.proofs, user)
     do
       {:ok, post}
     else
@@ -72,11 +73,11 @@ defmodule Bullsource.Discussion do
     end
   end
 
-  def edit_proofs([first_proof | rest_proofs], user) do
+  def edit_proofs(post, [first_proof | rest_proofs], user) do
 
   end
 
-  def edit_proofs([], user), do: user
+  def edit_proofs(post, [], user), do: post
 
   defp proofs_transaction(post, [first_proof | rest_proofs] = proofs) do
     Repo.transaction(fn ->

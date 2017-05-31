@@ -21,17 +21,17 @@ defmodule Bullsource.Votes do
     end
   end
 
-  def down_vote_post(params),  do: %{post_id: params.id, user_id: params.user_id}  |> down_vote_post_changeset
-  def up_vote_post(params),    do: %{post_id: params.id, user_id: params.user_id}  |> up_vote_post_changeset
-  def down_vote_proof(params), do: %{proof_id: params.id, user_id: params.user_id} |> down_vote_proof_changeset
-  def up_vote_proof(params),   do: %{proof_id: params.id, user_id: params.user_id} |> up_vote_proof_changeset
-  def down_vote_reference(params), do: %{reference_id: params.id, user_id: params.user_id} |> down_vote_reference_changeset
-  def up_vote_reference(params), do: %{reference_id: params.id, user_id: params.user_id} |> up_vote_reference_changeset
+  def down_vote_post(params), do: down_vote_post_changeset(%PostVoteDown{},%{post_id: params.id, user_id: params.user_id})
+  def up_vote_post(params), do: up_vote_post_changeset(%PostVoteUp{},%{post_id: params.id, user_id: params.user_id})
+  def down_vote_proof(params), do: down_vote_proof_changeset(%ProofVoteDown{},%{proof_id: params.id, user_id: params.user_id})
+  def up_vote_proof(params), do: up_vote_proof_changeset(%ProofVoteUp{},%{proof_id: params.id, user_id: params.user_id})
+  def down_vote_reference(params), do: down_vote_reference_changeset(%ReferenceVoteDown{},%{reference_id: params.id, user_id: params.user_id})
+  def up_vote_reference(params), do: up_vote_reference_changeset(%ReferenceVoteUp{},%{reference_id: params.id, user_id: params.user_id})
 
 
 #### Changesets
-  defp down_vote_post_changeset(params \\%{}) do
-    %PostVoteDown{}
+  defp down_vote_post_changeset(struct,params \\%{}) do
+    struct
     |> cast(params, [:post_id, :user_id])
     |> validate_required([:post_id, :user_id])
     |> unique_constraint(:post_id, name: :post_votes_down_index)
@@ -39,8 +39,8 @@ defmodule Bullsource.Votes do
     |> assoc_constraint(:post)
   end
 
-  defp up_vote_post_changeset(params \\%{}) do
-    %PostVoteUp{}
+  defp up_vote_post_changeset(struct,params \\%{}) do
+    struct
     |> cast(params, [:post_id, :user_id])
     |> validate_required([:post_id, :user_id])
     |> unique_constraint(:post_id, name: :post_votes_up_index)
@@ -48,8 +48,8 @@ defmodule Bullsource.Votes do
     |> assoc_constraint(:post)
   end
 
-  defp down_vote_proof_changeset(params \\%{}) do
-    %ProofVoteDown{}
+  defp down_vote_proof_changeset(struct,params \\%{}) do
+    struct
     |> cast(params, [:proof_id, :user_id])
     |> validate_required([:proof_id, :user_id])
     |> unique_constraint(:proof_id, name: :proof_votes_down_index)
@@ -57,8 +57,8 @@ defmodule Bullsource.Votes do
     |> assoc_constraint(:proof)
   end
 
-  defp up_vote_proof_changeset(params \\%{}) do
-    %ProofVoteUp{}
+  defp up_vote_proof_changeset(struct,params \\%{}) do
+    struct
     |> cast(params, [:proof_id, :user_id])
     |> validate_required([:proof_id, :user_id])
     |> unique_constraint(:proof_id, name: :proof_votes_up_index)
@@ -66,8 +66,8 @@ defmodule Bullsource.Votes do
     |> assoc_constraint(:proof)
   end
 
-  defp down_vote_reference_changeset(params \\%{}) do
-    %ReferenceVoteDown{}
+  defp down_vote_reference_changeset(struct,params \\%{}) do
+    struct
     |> cast(params, [:reference_id, :user_id])
     |> validate_required([:reference_id, :user_id])
     |> unique_constraint(:reference_id, name: :reference_votes_down_index)
@@ -75,8 +75,8 @@ defmodule Bullsource.Votes do
     |> assoc_constraint(:reference)
   end
 
-  defp up_vote_reference_changeset(params \\%{}) do
-    %ReferenceVoteUp{}
+  defp up_vote_reference_changeset(struct,params \\%{}) do
+    struct
     |> cast(params, [:reference_id, :user_id])
     |> validate_required([:reference_id, :user_id])
     |> unique_constraint(:reference_id, name: :reference_votes_up_index)

@@ -97,7 +97,6 @@ defmodule Bullsource.GraphQL.Schema do
     field :edit_post, :post do
       arg :post_id
       arg :intro, :string
-      arg :proofs_ids_edited, list_of(:integer)
       arg :proofs, list_of(:input_proof)
       middleware Bullsource.WebAuthentication
       resolve &Bullsource.GraphQL.PostResolver.edit/2
