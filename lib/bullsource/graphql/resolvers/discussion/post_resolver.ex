@@ -18,8 +18,11 @@ defmodule Bullsource.GraphQL.PostResolver do
      end
   end
 
-  def edit(%{post_id: post_id, proofs: proofs, intro: intro, thread_id: thread_id},%{context: %{current_user: current_user}}) do
-    with {:ok, post} <- edit_post(%{id: post_id, intro: intro, proofs: proofs}, current_user)
+  def edit(%{post_id: post_id, edited_post: edited_post},%{context: %{current_user: current_user}}) do
+    post_params = %{id: post_id}
+#    go through edited_post, if the the fields are not blank, add them to a map.
+#%{id: post_id, intro: intro, proofs: proofs} -----> was the first argument to edit_post
+    with {:ok, post} <- edit_post(post_params, current_user)
     do
       {:ok, post}
     else

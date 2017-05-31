@@ -93,4 +93,10 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
     field :title, :string
   end
 
+  @desc "Post elements that have been edited"
+  input_object :edited_post do
+    field :intro, :string
+    field :proofs, list_of(:input_proof)
+  end
+
 end

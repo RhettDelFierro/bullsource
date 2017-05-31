@@ -95,9 +95,8 @@ defmodule Bullsource.GraphQL.Schema do
 
     @desc "Edit a post"
     field :edit_post, :post do
-      arg :post_id
-      arg :intro, :string
-      arg :proofs, list_of(:input_proof)
+      arg :post_id, non_null(:integer)
+      arg :edited_post, :edited_post
       middleware Bullsource.WebAuthentication
       resolve &Bullsource.GraphQL.PostResolver.edit/2
       middleware Bullsource.Web.ErrorHandler

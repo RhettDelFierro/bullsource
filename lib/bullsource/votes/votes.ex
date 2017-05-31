@@ -9,10 +9,9 @@ defmodule Bullsource.Votes do
                         up_vote_proof: %ProofVoteDown{}, down_vote_proof: %ProofVoteUp{},
                         up_vote_reference:   %ReferenceVoteDown{}, down_vote_reference: %ReferenceVoteUp{}
                        ]
-
+ # this also takes care of deleting votes from the opposite table
   def create_vote(func, params) do
     opposite_vote_type = @vote_type_opposites[func]
-#    IO.inspect Bullsource.Votes.DeleteVote.delete_vote(%ReferenceVoteDown{id: 1,user_id: 58},%{id: 1, user_id: 58})
     case DeleteVote.delete_vote(opposite_vote_type,%{id: params.id, user_id: params.user_id}) do
       {:ok, _ } ->
         apply(__MODULE__, func, [params]) |> Repo.insert
