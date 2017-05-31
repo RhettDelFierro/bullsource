@@ -87,12 +87,12 @@ defmodule Bullsource.Discussion do
   end
 
 # if they edit the reference I want to add a new one.
-  def edit_reference(%{reference: reference,user_id: user_id,proof_id: proof_id}) do
+  def edit_reference(%{reference: reference, proof_id: proof_id}) do
     with {:ok, reference} <- get_or_insert_reference(reference),
          changeset        =  Repo.get(Proof,proof_id) |> proof_changeset(%{reference_id: reference.id}),
          {:ok, proof}     <- Repo.update(changeset)
     do
-      {:ok, proof}
+      {:ok, reference}
     else
       {:error, changeset} -> {:error, changeset}
     end
