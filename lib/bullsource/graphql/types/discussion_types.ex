@@ -20,6 +20,8 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
     field :posts, list_of(:post), resolve: assoc(:posts)
   end
 
+
+
   @desc "Posts belong to Threads and Users. Has many Proofs and References"
   object :post do
     field :id, :integer
@@ -30,6 +32,9 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
     field :up_votes, list_of(:post_vote_up), resolve: assoc(:post_vote_up)
     field :down_votes, list_of(:post_vote_down), resolve: assoc(:post_vote_down)
   end
+
+
+
 
   @desc "Proofs - belong to Posts and References. has_one Article and Comment."
   object :proof do
@@ -62,6 +67,11 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
     field :proofs, list_of(:proof), resolve: assoc(:proofs)
   end
 
+
+
+
+
+
 #######INPUT OBJECTS########
 
   @desc "An input object for :post"
@@ -69,6 +79,8 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
     field :intro, :string
     field :proofs, list_of(non_null(:input_proof))
   end
+
+
 
   @desc "An input object for :proof"
   input_object :input_proof do

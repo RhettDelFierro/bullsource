@@ -5,6 +5,8 @@ defmodule Bullsource.Accounts.User do
                           ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
   alias Bullsource.Discussion.{Post, Thread}
 
+
+
   schema "users" do
 
     field :username, :string, unique: true

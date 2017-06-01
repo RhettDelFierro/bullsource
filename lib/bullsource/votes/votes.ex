@@ -5,10 +5,15 @@ defmodule Bullsource.Votes do
                             ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
   alias Bullsource.Repo
 
+
+
   @vote_type_opposites [up_vote_post: %PostVoteDown{},   down_vote_post: %PostVoteUp{},
                         up_vote_proof: %ProofVoteDown{}, down_vote_proof: %ProofVoteUp{},
                         up_vote_reference:   %ReferenceVoteDown{}, down_vote_reference: %ReferenceVoteUp{}
                        ]
+
+
+
  # this also takes care of deleting votes from the opposite table
   def create_vote(func, params) do
     opposite_vote_type = @vote_type_opposites[func]
@@ -20,12 +25,21 @@ defmodule Bullsource.Votes do
     end
   end
 
-  def down_vote_post(params), do: down_vote_post_changeset(%PostVoteDown{},%{post_id: params.id, user_id: params.user_id})
-  def up_vote_post(params), do: up_vote_post_changeset(%PostVoteUp{},%{post_id: params.id, user_id: params.user_id})
-  def down_vote_proof(params), do: down_vote_proof_changeset(%ProofVoteDown{},%{proof_id: params.id, user_id: params.user_id})
-  def up_vote_proof(params), do: up_vote_proof_changeset(%ProofVoteUp{},%{proof_id: params.id, user_id: params.user_id})
-  def down_vote_reference(params), do: down_vote_reference_changeset(%ReferenceVoteDown{},%{reference_id: params.id, user_id: params.user_id})
-  def up_vote_reference(params), do: up_vote_reference_changeset(%ReferenceVoteUp{},%{reference_id: params.id, user_id: params.user_id})
+
+  def down_vote_post(params),
+    do: down_vote_post_changeset(%PostVoteDown{},%{post_id: params.id, user_id: params.user_id})
+  def up_vote_post(params),
+    do: up_vote_post_changeset(%PostVoteUp{},%{post_id: params.id, user_id: params.user_id})
+  def down_vote_proof(params),
+    do: down_vote_proof_changeset(%ProofVoteDown{},%{proof_id: params.id, user_id: params.user_id})
+  def up_vote_proof(params),
+    do: up_vote_proof_changeset(%ProofVoteUp{},%{proof_id: params.id, user_id: params.user_id})
+  def down_vote_reference(params),
+    do: down_vote_reference_changeset(%ReferenceVoteDown{},%{reference_id: params.id, user_id: params.user_id})
+  def up_vote_reference(params),
+    do: up_vote_reference_changeset(%ReferenceVoteUp{},%{reference_id: params.id, user_id: params.user_id})
+
+
 
 
 #### Changesets

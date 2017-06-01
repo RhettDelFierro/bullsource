@@ -6,8 +6,11 @@ defmodule Bullsource.Web.Authentication do
 
     #check if there is a current_user in context:
     case resolution.context do
+
       %{current_user: _} ->
         resolution
+
+
       _ ->
         resolution
         |> Absinthe.Resolution.put_result({:error, %{code: :not_authenticated,

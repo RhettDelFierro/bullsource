@@ -6,7 +6,8 @@ defmodule Bullsource.GraphQL.UserResolver do
 
 
 
-  def get_current__user(_args, %{context: %{current_user: current_user}}), do: {:ok, find(current_user.id)}
+  def get_current__user(_args, %{context: %{current_user: current_user}}),
+    do: {:ok, find(current_user.id)}
   def get_current__user(_args, _context), do: {:ok, nil}
 
 

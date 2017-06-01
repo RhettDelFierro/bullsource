@@ -11,21 +11,15 @@ defmodule Bullsource.GraphQL.CommentResolver do
 
 
   def edit(args, %{context: %{current_user: current_user}}) do
+    %{comment_id: comment_id,text: text, post_id: post_id} = args
 
-        %{comment_id: comment_id,text: text, post_id: post_id} = args
+    comment_info =
+      %{id: comment_id, text: text, post_id: post_id, user_id: current_user.id}
 
-        comment_info =
-          %{id: comment_id, text: text, post_id: post_id, user_id: current_user.id}
-
-
-        case edit_comment(comment_info) do
-
-          {:ok, comment} -> {:ok, comment}
-
-          {:error, error} -> {:error, error}
-
-        end
-
+    case edit_comment(comment_info) do
+      {:ok, comment} -> {:ok, comment}
+      {:error, error} -> {:error, error}
+    end
   end
 
 end

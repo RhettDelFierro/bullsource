@@ -8,15 +8,20 @@ defmodule Bullsource.GraphQL.Schema do
   import_types Bullsource.GraphQL.Types.AccountTypes
 
   query do
+
+    # no matter what, check to see if user is resolved:
+    @desc "Get a user by id :: nil || User"
+    field :current_user, :user,
+      do: resolve &Bullsource.GraphQL.UserResolver.get_current_user/2
+
+
     @desc "Lists all the topics"
-    field :topic, list_of(:topic) do
-      resolve &Bullsource.GraphQL.TopicResolver.list/2
-    end
+    field :topic, list_of(:topic),
+      do: resolve &Bullsource.GraphQL.TopicResolver.list/2
 
     @desc "Lists all threads in topic"
-    field :thread, list_of(:thread) do
-      resolve &Bullsource.GraphQL.ThreadResolver.list/2
-    end
+    field :thread, list_of(:thread),
+      do: resolve &Bullsource.GraphQL.ThreadResolver.list/2
 
     @desc "Lists all posts in thread"
     field :post, list_of(:post) do
@@ -24,20 +29,15 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.PostResolver.list/2
     end
 
-    @desc "Lists all the proofs"
-    field :proof, list_of(:proof) do
-      resolve &Bullsource.GraphQL.ProofResolver.list/2
-    end
 
-    # no matter what, check to see if user is resolved:
-    @desc "Get a user by id :: nil || User"
-    field :current_user, :user do
-      resolve &Bullsource.GraphQL.UserResolver.get_current_user/2
-    end
+    @desc "Lists all the proofs"
+    field :proof, list_of(:proof),
+      do: resolve &Bullsource.GraphQL.ProofResolver.list/2
 
   end
 
   mutation do
+
     @desc "Register a user"
     field :register_user, :signed_in_user do
       arg :username, non_null(:string)
@@ -55,6 +55,8 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.UserResolver.login_user/2
       middleware Bullsource.Web.HandleError
     end
+
+
 
     @desc "Create a topic"
     field :create_topic, :topic do
@@ -83,6 +85,9 @@ defmodule Bullsource.GraphQL.Schema do
       middleware Bullsource.Web.HandleError
     end
 
+
+
+
     @desc "Create a vote - posts, proofs and references"
     field :create_vote, :vote do
       arg :vote_type, non_null(:vote_type)
@@ -92,6 +97,10 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.VoteResolver.create/2
       middleware Bullsource.Web.HandleError
     end
+
+
+
+
 
     @desc "Edit a post - the intro/conclusion (implemented later)"
     field :edit_post, :post do
@@ -129,5 +138,9 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.ReferenceResolver.edit/2
       middleware Bullsource.Web.HandleError
     end
+
+
   end
+
+
 end

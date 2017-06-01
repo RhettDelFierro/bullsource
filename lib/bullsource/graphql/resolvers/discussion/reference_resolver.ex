@@ -22,7 +22,6 @@ defmodule Bullsource.GraphQL.ReferenceResolver do
       {:ok, reference} -> {:ok, reference}
       {:error, error_changeset} -> {:error, error_changeset}
     end
-
   end
 
 

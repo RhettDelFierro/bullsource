@@ -34,23 +34,21 @@ defmodule Bullsource.Discussion do
 
   ####creating interface functions for controllers/graphql.
 
-  def create_topic(params), do: topic_changeset(%Topic{},params) |> Repo.insert
-
+  def create_topic(params),
+    do: topic_changeset(%Topic{},params) |> Repo.insert
 
   def create_thread(thread_params, post_params, user) do
 
     Repo.transaction(fn ->
-
       with {:ok, thread}  <- insert_thread(thread_params, user),
            {:ok, post}    <- insert_post(thread, post_params, user),
            {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs)
       do
-         #for graphQL
-         thread
+        thread
       else
-        {:error, error_changeset} -> Repo.rollback(error_changeset)
+        {:error, error_changeset} ->
+          Repo.rollback(error_changeset)
       end
-
     end)
 
   end
@@ -58,63 +56,140 @@ defmodule Bullsource.Discussion do
 
 
   def create_post(post_params, user) do
-
     thread = Repo.get(Thread,post_params.thread_id)
 
     Repo.transaction( fn -> #Repo.transaction return {:ok, ....whatever....}, the ...whatever... here is determined by the do block in the with macro.
-
       #can I abstract this part because of it's similarity to create_thread?
-      with {:ok, post} <- insert_post(thread, post_params, user),
-           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs)
+      with {:ok, post}             <- insert_post(thread, post_params, user),
+           {:ok, post_with_proofs} <- create_proof_components(post, post_params.proofs)
       do
         post
-
       else
         {:error, error_changeset} -> Repo.rollback(error_changeset) #rollback in a Repo.transaction returns the argument in an {:error, argument} tuple. In this case {:error, error_changeset}
       end
-
     end)
 
   end
 
 
 
+  defp create_proof_components(post, []), do: post
 
-  defp proofs_transaction(post, []), do: post
-
-  defp proofs_transaction(post, [first_proof | rest_proofs] = proofs) do
+  defp create_proof_components(post, [first_proof | rest_proofs] = proofs) do
 
     Repo.transaction(fn ->
-
       with {:ok, reference} <- get_or_insert_reference(first_proof.reference),
            {:ok, proof}     <- proof_changeset(%Proof{},%{post_id: post.id, reference_id: reference.id}) |> Repo.insert,
            {:ok, article}   <- article_changeset(%Article{},%{proof_id: proof.id, text: first_proof.article}) |> Repo.insert,
            {:ok, comment}   <- comment_changeset(%Comment{},%{proof_id: proof.id, text: first_proof.comment}) |> Repo.insert
-
       do
-        proofs_transaction(post, rest_proofs) #recursion
+        create_proof_components(post, rest_proofs) #recursion
       else
         {:error, error_changeset} -> Repo.rollback(error_changeset)
       end
-
     end)
 
   end
+
+
+
+
+  def edit_post(%{id: post_id,intro: intro, user_id: user_id}) do
+    post = Repo.get(Post,post_id)
+
+    if post.user_id == user_id do
+      changeset = post |> post_changeset(%{intro: intro})
+
+      case Repo.update(changeset) do
+        {:ok, post} -> {:ok, post}
+        {:error, error_changeset} -> {:error, error_changeset}
+      end
+
+    else
+        {:error, %{message: "this user doesn't own this post"}}
+    end
+  end
+
+
+
+  def edit_article(%{id: article_id,text: text, post_id: post_id, user_id: user_id}) do
+    post = Repo.get(Post, post_id)
+
+    if post.user_id == user_id do
+      changeset =
+        Repo.get(Article,article_id) |> article_changeset(%{text: text})
+
+      case Repo.update(changeset) do
+        {:ok, article} -> {:ok, article}
+        {:error, error_changeset} -> {:error, error_changeset}
+      end
+
+    else
+      {:error, %{message: "this user doesn't own this post"}}
+    end
+  end
+
+
+
+  def edit_comment(%{id: comment_id,text: text, post_id: post_id, user_id: user_id}) do
+    post = Repo.get(Post, post_id)
+
+    if post.user_id == user_id do
+      changeset =
+        Repo.get(Comment,comment_id) |> comment_changeset(%{text: text})
+
+      case Repo.update(changeset) do
+        {:ok, comment} -> {:ok, comment}
+        {:error, error_changeset} -> {:error, error_changeset}
+      end
+
+    else
+      {:error, %{message: "this user doesn't own this post"}}
+    end
+
+  end
+
+
+
+# if they edit the reference I want to add a new one.
+  def edit_reference(%{reference: reference, proof_id: proof_id, post_id: post_id, user_id: user_id}) do
+    post = Repo.get(Post, post_id)
+
+    if post.user_id == user_id do
+      with {:ok, reference} <- get_or_insert_reference(reference),
+           changeset        =  Repo.get(Proof,proof_id) |> proof_changeset(%{reference_id: reference.id}),
+           {:ok, proof}     <- Repo.update(changeset)
+      do
+        {:ok, reference}
+      else
+        {:error, error_changeset} -> {:error, error_changeset}
+      end
+
+    else
+      {:error, %{message: "this user doesn't own this post"}}
+    end
+
+  end
+
+
 
 
 
 
   def get_or_insert_reference(reference) do
-
     reference_check = Repo.get_by(Reference, link: reference.link)
 
     case reference_check do
+
       nil ->
         reference_changeset(%Reference{},%{title: reference.title,link: reference.link})
         |> Repo.insert
 
-      reference -> {:ok, reference}
+      reference ->
+        {:ok, reference}
+
     end
+
   end
 
   defp insert_thread(thread, user) do
@@ -126,113 +201,6 @@ defmodule Bullsource.Discussion do
     post_changeset(%Post{},%{intro: post.intro, user_id: user.id, thread_id: thread.id})
     |> Repo.insert
   end
-
-
-
-
-
-  def edit_post(%{id: post_id,intro: intro, user_id: user_id}) do
-
-    post = Repo.get(Post,post_id)
-
-    if post.user_id == user_id do
-      changeset = post |> post_changeset(%{intro: intro})
-
-      case Repo.update(changeset) do
-
-        {:ok, struct} ->
-          {:ok, struct}
-
-        {:error, changeset} ->
-          {:error, changeset}
-      end
-
-    else
-        {:error, %{message: "this user doesn't own this post"}}
-    end
-
-  end
-
-
-
-  def edit_article(%{id: article_id,text: text, post_id: post_id, user_id: user_id}) do
-
-    post = Repo.get(Post, post_id)
-
-    if post.user_id == user_id do
-
-      changeset = Repo.get(Article,article_id) |> article_changeset(%{text: text})
-
-      case Repo.update(changeset) do
-
-        {:ok, struct} ->
-          {:ok, struct}
-
-        {:error, changeset} ->
-          {:error, changeset}
-
-      end
-
-    else
-      {:error, %{message: "this user doesn't own this post"}}
-    end
-
-  end
-
-
-
-  def edit_comment(%{id: comment_id,text: text, post_id: post_id, user_id: user_id}) do
-
-    post = Repo.get(Post, post_id)
-
-    if post.user_id == user_id do
-
-      changeset = Repo.get(Comment,comment_id) |> comment_changeset(%{text: text})
-
-      case Repo.update(changeset) do
-
-        {:ok, struct} ->
-          {:ok, struct}
-
-        {:error, changeset} ->
-          {:error, changeset}
-
-      end
-
-    else
-      {:error, %{message: "this user doesn't own this post"}}
-    end
-
-  end
-
-
-
-
-
-# if they edit the reference I want to add a new one.
-  def edit_reference(%{reference: reference, proof_id: proof_id, post_id: post_id, user_id: user_id}) do
-
-    post = Repo.get(Post, post_id)
-
-    if post.user_id == user_id do
-
-      with {:ok, reference} <- get_or_insert_reference(reference),
-           changeset        =  Repo.get(Proof,proof_id) |> proof_changeset(%{reference_id: reference.id}),
-           {:ok, proof}     <- Repo.update(changeset)
-
-      do
-        {:ok, reference}
-      else
-        {:error, changeset} -> {:error, changeset}
-      end
-
-    else
-      {:error, %{message: "this user doesn't own this post"}}
-    end
-
-  end
-
-
 
 
 

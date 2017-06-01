@@ -8,6 +8,7 @@ defmodule Bullsource.Web.Context do
   def init(opts), do: opts
 
   def call(conn, _ ) do
+
     case build_context(conn) do
       {ok, context} ->
       #  we stuff the resulting context into our conn, as is expected by Absinthe (see http://absinthe-graphql.org/guides/context-and-authentication/#context-and-plugs)
@@ -22,16 +23,15 @@ defmodule Bullsource.Web.Context do
                                                                  # }
       {:error, reason} ->
         conn
-#        |> send_resp(403, reason)
-#        |> halt()
 
       _ ->
         conn
-#        |> send_resp(400, "Bad Request")
-#        |> halt()
 
     end
+
   end
+
+
 
 # building our GraphQL context.
   defp build_context(conn) do
@@ -43,14 +43,12 @@ defmodule Bullsource.Web.Context do
 #      {:error, :invalid_token} -> {:error, %{token_error: "Invalid token"}} #####will have to uncomment these two lines out.
 #      {:error, error} -> {:error, error} ####maybe string_to_atom method? ####it just looks like it sends back the error you're not authenticated when the token is wrong.'
     end
-
   end
 
   defp authorize(token) do
     case Guardian.decode_and_verify(token) do
       {:ok, claims}    -> return_user(claims)
-      {:error, reason} ->
-        {:error, reason}
+      {:error, reason} -> {:error, reason}
     end
   end
 
@@ -60,4 +58,6 @@ defmodule Bullsource.Web.Context do
       {:error, reason} -> {:error, reason}
     end
   end
+
+
 end

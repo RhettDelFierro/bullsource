@@ -4,12 +4,17 @@ defmodule Bullsource.Accounts do
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
 
+
+
   def find(%{id: id})do
     case Repo.get(User, id) do
       nil -> {:error, "User id #{id} not found"}
       user -> {:ok, user}
     end
   end
+
+
+
 
   def authenticate(%{username: username,password: given_password}) do
   	user = Repo.get_by(User, username: username)
@@ -18,16 +23,17 @@ defmodule Bullsource.Accounts do
   	check_password(user, given_password)
   end
 
-  defp check_password(nil, _given_password) do
-    {:error, %{message: "No user with this username was found!"}}
-  end
 
+  defp check_password(nil, _given_password),
+    do: {:error, %{message: "No user with this username was found!"}}
   defp check_password(%{encrypted_password: encrypted_password} = user, given_password) do
     case Comeonin.Bcrypt.checkpw(given_password, encrypted_password) do
       true -> {:ok, user}
       _    -> {:error, %{message: "Incorrect password"}}
     end
   end
+
+
 
 
   def create_user(%{password: password} = params) do
@@ -39,6 +45,9 @@ defmodule Bullsource.Accounts do
     |> Repo.insert
 
   end
+
+
+
 
   #checks for valid inputs to new user fields before it adds to db.
   def register_changeset(struct,params \\ %{}) do

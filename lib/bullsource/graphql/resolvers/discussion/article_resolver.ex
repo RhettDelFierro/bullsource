@@ -12,21 +12,15 @@ defmodule Bullsource.GraphQL.ArticleResolver do
 
 
   def edit(args, %{context: %{current_user: current_user}}) do
-
     %{article_id: article_id,text: text} = args
 
     article_info =
       %{id: article_id, text: text, user_id: current_user.id}
 
-
     case edit_article(article_info) do
-
       {:ok, article} -> {:ok, article}
-
       {:error, error_changeset} -> {:error, error_changeset}
-
     end
-
   end
 
 

@@ -23,7 +23,6 @@ defmodule Bullsource.GraphQL.PostResolver do
 
 
   def edit(args,%{context: %{current_user: current_user}}) do
-
     %{post_id: post_id,intro: intro} = args
     post_info = %{id: post_id, intro: intro, user_id: current_user.id}
 
