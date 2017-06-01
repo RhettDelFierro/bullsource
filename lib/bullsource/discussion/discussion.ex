@@ -61,6 +61,7 @@ defmodule Bullsource.Discussion do
 
   def edit_post(%{id: post_id,intro: intro, user_id: user_id}) do
     post = Repo.get(Post,post_id)
+    IO.puts "++++++++++++Post user id: #{post.user_id} vs user_id: #{user_id}"
     if post.user_id == user_id do
       changeset = post |> post_changeset(%{intro: intro})
       case Repo.update(changeset) do

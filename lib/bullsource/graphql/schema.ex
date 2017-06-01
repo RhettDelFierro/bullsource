@@ -97,9 +97,9 @@ defmodule Bullsource.GraphQL.Schema do
     field :edit_post, :post do
       arg :post_id, non_null(:integer)
       arg :intro, :string
-      middleware Bullsource.WebAuthentication
+      middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.PostResolver.edit/2
-      middleware Bullsource.Web.ErrorHandler
+      middleware Bullsource.Web.HandleError
     end
 
     @desc "Edit an Article"
@@ -107,27 +107,27 @@ defmodule Bullsource.GraphQL.Schema do
       arg :post_id, non_null(:integer)
       arg :article_id, non_null(:integer)
       arg :text, :string
-      middleware Bullsource.WebAuthentication
+      middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.ArticleResolver.edit/2
-      middleware Bullsource.Web.ErrorHandler
+      middleware Bullsource.Web.HandleError
     end
     @desc "Edit a Comment"
     field :edit_comment, :comment do
       arg :post_id, non_null(:integer)
       arg :comment_id, non_null(:integer)
       arg :text, :string
-      middleware Bullsource.WebAuthentication
+      middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.CommentResolver.edit/2
-      middleware Bullsource.Web.ErrorHandler
+      middleware Bullsource.Web.HandleError
     end
 
     @desc "Edit a Reference"
     field :edit_reference, :reference do
       arg :post_id, non_null(:integer)
       arg :reference, non_null(:input_reference)
-      middleware Bullsource.WebAuthentication
+      middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.ReferenceResolver.edit/2
-      middleware Bullsource.Web.ErrorHandler
+      middleware Bullsource.Web.HandleError
     end
   end
 end
