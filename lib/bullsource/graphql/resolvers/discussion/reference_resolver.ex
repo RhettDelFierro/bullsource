@@ -2,7 +2,7 @@ defmodule Bullsource.GraphQL.ReferenceResolver do
   import Ecto.Query
 
   import Bullsource.Discussion, only: [edit_reference: 1]
-  alias Bullsource.{Repo, Discussion, Discussion.Reference}
+  alias Bullsource.{Repo, Discussion.Reference}
 
   def list(_args, _context) do
     {:ok, Repo.all(Reference)}
@@ -14,11 +14,10 @@ defmodule Bullsource.GraphQL.ReferenceResolver do
   end
 
   def edit(%{reference: reference, proof_id: proof_id}, _context) do
-    case edit_comment(%{reference: reference, proof_id: proof_id}) do
+    case edit_reference(%{reference: reference, proof_id: proof_id}) do
       {:ok, reference} -> {:ok, reference}
       {:error, error_changeset} -> {:error, error_changeset}
     end
   end
-
 
 end

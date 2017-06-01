@@ -1,8 +1,9 @@
 defmodule Bullsource.GraphQL.PostResolver do
   import Ecto.Query
 
-  alias Bullsource.{Repo, Discussion, Discussion.Post}
-  import Discussion, only: [create_post: 2, edit_post: 1]
+  import Bullsource.Discussion, only: [create_post: 2, edit_post: 1]
+  alias Bullsource.{Repo, Discussion.Post}
+
 
   def list(_args, _context) do
     {:ok, Repo.all(Post)}
@@ -19,9 +20,9 @@ defmodule Bullsource.GraphQL.PostResolver do
   end
 
   def edit(%{post_id: post_id,intro: intro},%{context: %{current_user: current_user}}) do
-    case edit_post(%{id: post_id, intro: intro}) do
+    case edit_post(%{id: post_id, intro: intro, user_id: current_user.id}) do
       {:ok, post} -> {:ok, post}
-      {:error, error_changeset} -> {:error, error_changeset}
+      {:error, error} -> {:error, error}
     end
   end
 
