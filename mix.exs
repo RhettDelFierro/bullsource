@@ -42,7 +42,8 @@ defmodule Bullsource.Mixfile do
      {:cors_plug, "~> 1.2"},
      {:absinthe_plug, "~> 1.3.0"},
      {:absinthe_ecto, "~> 0.1.0"},
-     {:httpoison, "~> 0.11.1"}]
+     {:httpoison, "~> 0.11.1"},
+     {:poison, "~> 3.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
