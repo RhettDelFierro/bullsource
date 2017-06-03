@@ -13,7 +13,7 @@ defmodule Bullsource.Application do
       # Start the endpoint when the application starts
       supervisor(Bullsource.Web.Endpoint, []),
       # Start your own worker by calling: Bullsource.Worker.start_link(arg1, arg2, arg3)
-      # worker(Bullsource.Worker, [arg1, arg2, arg3]),
+      worker(Bullsource.ReferenceValidator.Supervisor, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

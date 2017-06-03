@@ -42,7 +42,7 @@ defmodule Bullsource.Discussion do
     Repo.transaction(fn ->
       with {:ok, thread}  <- insert_thread(thread_params, user),
            {:ok, post}    <- insert_post(thread, post_params, user),
-           {:ok, post_with_proofs} <- proofs_transaction(post, post_params.proofs)
+           {:ok, post_with_proofs} <- create_proof_components(post, post_params.proofs)
       do
         thread
       else
