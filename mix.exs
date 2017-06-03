@@ -17,7 +17,7 @@ defmodule Bullsource.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Bullsource.Application, []},
-     extra_applications: [:logger, :runtime_tools, :corsica, :cors_plug]]
+     extra_applications: [:logger, :runtime_tools, :corsica, :cors_plug, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,7 +41,8 @@ defmodule Bullsource.Mixfile do
      {:corsica, "~> 1.0"},
      {:cors_plug, "~> 1.2"},
      {:absinthe_plug, "~> 1.3.0"},
-     {:absinthe_ecto, "~> 0.1.0"}]
+     {:absinthe_ecto, "~> 0.1.0"},
+     {:httpoison, "~> 0.11.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
