@@ -1,4 +1,4 @@
-defmodule BullSource.News.GetNews do
+defmodule Bullsource.News.GetNews do
   use GenServer
 
   @default_news_url "https://newsapi.org/v1/articles?"
@@ -29,7 +29,7 @@ defmodule BullSource.News.GetNews do
     state = networks
       |> get_headlines(5)
       |> Enum.map(&parse_json(&1))
-      |> Enum.map(&Enum.take(&1,5))
+#      |> Enum.map(&Enum.take(&1,5))
     set_schedule()
     {:ok, state}
   end
@@ -64,11 +64,8 @@ defmodule BullSource.News.GetNews do
 # go through each source for their source (the id)
     sources
     |> Enum.map(&build_url(@default_news_url,&1)) #make the query strings
-    |> Enum.map(&Task.async(HTTPoison.get(&1))) # make the get requests
+    |> Enum.map(&Task.async(fn -> HTTPoison.get(&1) end)) # make the get requests
     |> Enum.map(&Task.await/1)
-
-#    |> Enum.map(&Task.async(HTTPoison.get(&1))) # make the get requests
-#    |> Enum.map(&Task.await/1)
   end
 
 #  defp filter_feed(articles,number_of_headlines) do
@@ -83,7 +80,7 @@ defmodule BullSource.News.GetNews do
 #  end
 
   defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    body |> Poison.decode!(keys: :atoms!)
+    body |> Poison.decode!(as: %{"articles" => [%News{}]})
   end
 
   defp parse_json(error) do
@@ -93,7 +90,8 @@ defmodule BullSource.News.GetNews do
 
 
   defp build_url(url, network) do
-    query = "#{url}&apiKey=#{api_key()}&source=#{network.id}&sortBy=top"
+#  not all sortBys's are available for each network.
+    query = "#{url}&apiKey=#{api_key()}&source=#{network.id}&sortBy=#{List.first(network.sortBysAvailable)}"
     query
   end
 

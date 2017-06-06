@@ -38,7 +38,7 @@ defmodule Bullsource.News.GetNetworks do
   ###
   def init(_state) do
     #get sources from the other GetNetworks
-    %{sources: state} = build_url(@default_networks_url)
+    %{"sources" => state} = build_url(@default_networks_url)
     |> HTTPoison.get([], [ ssl: [{:versions, [:'tlsv1.2']}] ])
     |> parse_json
 
@@ -91,7 +91,7 @@ defmodule Bullsource.News.GetNetworks do
   end
 
   defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    body |> Poison.decode!(keys: :atoms!)
+    body |> Poison.decode!(as: %{"sources" => [%Network{}]})
 #    body |> Poison.decode!(as: %{sources: [%Network{}]})
   end
 
