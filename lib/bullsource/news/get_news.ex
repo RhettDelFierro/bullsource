@@ -14,9 +14,9 @@ defmodule BullSource.News.GetNews do
   ###
 
   def init(_state) do
-    state = get_articles()
-    set_schedule()
-    {:ok, state}
+#    networks = get_articles()
+#    set_schedule()
+    {:ok, nil}
   end
 
   def handle_call(:get_news, _from, state) do

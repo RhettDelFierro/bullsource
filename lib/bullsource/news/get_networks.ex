@@ -17,7 +17,9 @@ defmodule Bullsource.News.GetNetworks do
               sortBysAvailable: []
   end
 
-  #
+  ###
+  # Public API
+  ###
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -34,9 +36,12 @@ defmodule Bullsource.News.GetNetworks do
   # GenServer API
   ###
 
+  @default_networks_url "https://newsapi.org/v1/sources?language=en"
   def init(_state) do
     #get sources from the other GetNetworks
-    state = get_networks()
+    state = build_url(@default_networks_url)
+    |> HTTPoison.get([], [ ssl: [{:versions, [:'tlsv1.2']}] ])
+    |> parse_json
     set_schedule()
     {:ok, state}
   end
@@ -46,9 +51,16 @@ defmodule Bullsource.News.GetNetworks do
   end
 
   def handle_info(:fetch, state) do
-    state = get_networks()
     set_schedule() # Reschedule once more
     {:noreply, state}
+  end
+
+  def handle_info(:error_parse_json, state) do
+    {:stop, :json_parse_error, :error, state}
+  end
+
+  def terminate(reason, state) do
+    {:stop, :error, state}
   end
 
 
@@ -79,30 +91,18 @@ defmodule Bullsource.News.GetNetworks do
     Default: empty (all sources returned)
   """
 
-  @default_networks_url "https://newsapi.org/v1/sources?language=en"
-
-  defp get_networks() do
-    case HTTPoison.get(@default_networks_url) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-         {:ok, body}
-      {:ok, %HTTPoison.Response{status_code: 404}} ->
-         IO.puts "+++++++++status code 404+++++++++++"
-         nil
-      {:error, %HTTPoison.Error{reason: reason}} ->
-        IO.puts "error #{inspect reason}"
-         nil
-      what_happend ->
-      #%HTTPoison.Response{body: "{\n \"error\": {\n  \"errors\": [\n   {\n
-        IO.puts "+++++++++++OFF++++++++++++ #{inspect what_happend}"
-        nil
-    end
+  defp build_url(url) do
+    url
   end
 
-  defp parse_response(response) do
-
+  defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
+#    body |> Poison.decode!(keys: :atoms!)
+    body |> Poison.decode!(as: %{sources: [%Network{}]})
   end
 
-  defp get_articles() do
-
+  defp parse_json(error) do
+    IO.puts "========ERROR: #{inspect error}"
+    Process.send(self(),:error_parse_json, [])
   end
+
 end
