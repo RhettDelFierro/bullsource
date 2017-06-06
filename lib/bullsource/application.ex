@@ -14,8 +14,7 @@ defmodule Bullsource.Application do
       supervisor(Bullsource.Web.Endpoint, []),
       # Start your own worker by calling: Bullsource.Worker.start_link(arg1, arg2, arg3)
       supervisor(Bullsource.ReferenceValidator.Supervisor, []),
-      worker(Bullsource.GetNews, [])
-
+      supervisor(Bullsource.News.Supervisor, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
