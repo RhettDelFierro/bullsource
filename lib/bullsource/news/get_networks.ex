@@ -1,6 +1,8 @@
 defmodule Bullsource.News.GetNetworks do
   use GenServer
 
+  @default_networks_url "https://newsapi.org/v1/sources?language=en"
+
   defmodule Network do
     defstruct id: nil,
               name: nil,
@@ -31,17 +33,15 @@ defmodule Bullsource.News.GetNetworks do
 
 
 
-
   ###
   # GenServer API
   ###
-
-  @default_networks_url "https://newsapi.org/v1/sources?language=en"
   def init(_state) do
     #get sources from the other GetNetworks
-    state = build_url(@default_networks_url)
+    %{sources: state} = build_url(@default_networks_url)
     |> HTTPoison.get([], [ ssl: [{:versions, [:'tlsv1.2']}] ])
     |> parse_json
+
     set_schedule()
     {:ok, state}
   end
@@ -62,11 +62,6 @@ defmodule Bullsource.News.GetNetworks do
   def terminate(reason, state) do
     {:stop, :error, state}
   end
-
-
-
-
-
 
 
 
@@ -96,12 +91,12 @@ defmodule Bullsource.News.GetNetworks do
   end
 
   defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-#    body |> Poison.decode!(keys: :atoms!)
-    body |> Poison.decode!(as: %{sources: [%Network{}]})
+    body |> Poison.decode!(keys: :atoms!)
+#    body |> Poison.decode!(as: %{sources: [%Network{}]})
   end
 
   defp parse_json(error) do
-    IO.puts "========ERROR: #{inspect error}"
+#    IO.puts "========ERROR: #{inspect error}"
     Process.send(self(),:error_parse_json, [])
   end
 

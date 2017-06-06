@@ -19,7 +19,7 @@ defmodule Bullsource.ReferenceValidator.GoogleCustomSearch do
     api_key = build_api_key()
     cx = Application.get_env(:bullsource, :google_custom_search)[:context]
     query = @google_url <> "key=#{api_key}" <> "&q=#{url}" <> "&cx=#{cx}"
-    IO.puts query
+#    IO.puts query
     query
   end
 
