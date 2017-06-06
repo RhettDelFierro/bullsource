@@ -1,4 +1,4 @@
-defmodule Bullsource.ReferenceValidator.GoogleCustomSearch do
+defmodule Bullsource.ReferenceValidator.NewsApi do
   @google_url "https://www.googleapis.com/customsearch/v1?"
 
   alias Bullsource.ReferenceValidator.Result

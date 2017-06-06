@@ -1,13 +1,15 @@
 defmodule Bullsource.ReferenceValidator do
-  @backends [Bullsource.ReferenceValidator.GoogleCustomSearch]
+  @backends [Bullsource.ReferenceValidator.GoogleCustomSearch, Bullsource.ReferenceValidator.NewsApi]
   
   defmodule Result do
     defstruct url: nil, title: nil, valid: false, result: nil
   end
 
   def verify_reference(url, opts \\ []) do
-    limit = opts[:limit] || 1 # this will be the number of references I want to choose from. Maybe have the user choose which one. With a pop up component.
-    # not going to have the function passed in here to determine which api to validate with. Just use @backends
+    limit = opts[:limit] || 1
+    news_api = opts[:news_api] || nil
+
+
     @backends
     |> Enum.map(&spawn_query(&1, url, limit))
     |> await_results(opts)
