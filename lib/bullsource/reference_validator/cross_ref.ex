@@ -1,30 +1,28 @@
-defmodule Bullsource.ReferenceValidator.NewsApi do
-  @google_url "https://www.googleapis.com/customsearch/v1?"
+defmodule Bullsource.ReferenceValidator.CrossRef do
+  @crossref_url "https://api.crossref.org/works?"
 
   alias Bullsource.ReferenceValidator.Result
 
-  def start_link(url, url_ref, owner, limit) do
-    Task.start_link(__MODULE__, :get_info, [url, url_ref, owner, limit])
+  def start_link(query, query_ref, owner, limit) do
+    Task.start_link(__MODULE__, :get_info, [query, query_ref, owner, limit])
   end
 
-  def get_info(url, url_ref, owner, limit) do
-    url
+  def get_info(query, query_ref, owner, limit) do
+    query
     |> build_query
     |> make_request
     |> parse_json
-    |> send_results(url_ref, owner)
+    |> send_results(query_ref, owner)
   end
 
-  defp build_query(url) do
-    api_key = build_api_key()
-    cx = Application.get_env(:bullsource, :google_custom_search)[:context]
-    query = @google_url <> "key=#{api_key}" <> "&q=#{url}" <> "&cx=#{cx}"
-    IO.puts query
-    query
+  defp build_query(query) do
+
+#    str = String.replace(match_text," ","+")
+    @crossref_url <> "query=#{URI.encode(query)}"
   end
 
-  defp build_api_key do
-    Application.get_env(:bullsource, :google_custom_search)[:app_id]
+  defp build_jwt_token do
+    Application.get_env(:bullsource, :jstor)[:jwt]
   end
 
   defp make_request(query) do

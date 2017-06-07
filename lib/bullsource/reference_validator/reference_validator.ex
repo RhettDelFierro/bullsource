@@ -1,5 +1,5 @@
 defmodule Bullsource.ReferenceValidator do
-  @backends [Bullsource.ReferenceValidator.GoogleCustomSearch, Bullsource.ReferenceValidator.NewsApi]
+  @backends [Bullsource.ReferenceValidator.CrossRef]
   
   defmodule Result do
     defstruct url: nil, title: nil, valid: false, result: nil
