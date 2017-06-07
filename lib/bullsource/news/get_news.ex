@@ -3,6 +3,17 @@ defmodule Bullsource.News.GetNews do
 
   @default_news_url "https://newsapi.org/v1/articles?"
 
+
+
+  defmodule News do
+    defstruct author: nil,
+              title: nil,
+              description: nil,
+              url: nil,
+              urlToImage: nil,
+              publishedAt: nil
+  end
+
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
@@ -18,7 +29,7 @@ defmodule Bullsource.News.GetNews do
   def init(_state) do
     state = update_news()
     set_schedule()
-    {:ok, state} # state :: [%articles: [%News{}],sortBy: string, source: string, status: ok}
+    {:ok, state} # state :: [%articles: [%News{}],sortBy: string, source: string, status: ok}]
   end
 
   def handle_call(:get_news, _from, state) do
@@ -47,10 +58,11 @@ defmodule Bullsource.News.GetNews do
   defp update_news do
     networks = Bullsource.News.GetNetworks.get_networks([])
     state = networks
-      |> get_headlines(5)
-      |> Enum.map(&parse_json(&1))
-      |> List.flatten
-      |> Enum.map(&Bullsource.Helpers.Converters.str_to_atom_keys(&1))
+      |> get_headlines([])
+      |> Enum.map(&format_list(&1))
+#      |> Enum.map(&parse_json(&1))
+#      |> List.flatten
+#      |> Enum.map(&Bullsource.Helpers.Converters.str_to_atom_keys(&1))
 #      |> Enum.map(&Enum.take(&1.articles,3))
   end
 
@@ -68,13 +80,36 @@ defmodule Bullsource.News.GetNews do
     query
   end
 
-  defp get_headlines(sources,number_of_headlines) do
-# go through each source for their source (the id)
-    sources
-    |> Enum.map(&build_url(@default_news_url,&1)) #make the query strings
-    |> Enum.map(&Task.async(fn -> HTTPoison.get(&1) end)) # make the get requests
-    |> Enum.map(&Task.await/1)
+  defp get_headlines([], acc) do
+    acc
   end
+
+  defp get_headlines([n | ns], acc) do
+    headline = build_url(@default_news_url,n)
+    task = Task.async(fn -> HTTPoison.get(headline) end)
+#    response = Task.await(task)
+
+    get_headlines(ns, [{n, task} | acc])
+  end
+
+  defp format_list({network,task}) do
+    %{"articles" => articles, "sortBy" => sortBy} = parse_json(Task.await(task))
+
+    %{
+      network: network,
+      news: articles,
+      sortBy: sortBy
+     }
+  end
+
+
+#  defp get_headlines(sources,number_of_headlines) do
+## go through each source for their source (the id)
+#    sources
+#    |> Enum.map(&build_url(@default_news_url,&1)) #make the query strings
+#    |> Enum.map(&Task.async(fn -> HTTPoison.get(&1) end)) # make the get requests
+#    |> Enum.map(&Task.await/1)
+#  end
 
   defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
     body |> Poison.decode!(as: %{"articles" => [%News{}]})
