@@ -29,9 +29,11 @@ defmodule Bullsource.News.GetNews do
     state = networks
       |> get_headlines(5)
       |> Enum.map(&parse_json(&1))
-#      |> Enum.map(&Enum.take(&1,5))
+      |> List.flatten
+      |> Enum.map(&Bullsource.Helpers.Converters.str_to_atom_keys(&1))
+#      |> Enum.map(&Enum.take(&1.articles,3))
     set_schedule()
-    {:ok, state}
+    {:ok, state} # state :: [%articles: [%News{}],sortBy: string, source: string, status: ok}
   end
 
   def handle_call(:get_news, _from, state) do
@@ -71,12 +73,6 @@ defmodule Bullsource.News.GetNews do
 #  defp filter_feed(articles,number_of_headlines) do
 #    articles
 #    |>
-#  end
-
-#  def parse_responses(responses)do
-#    responses
-#    |> Enum.map(&Poison.decode!(&1, as: %{articles: [%News{}]}))
-#
 #  end
 
   defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
