@@ -67,7 +67,7 @@ defmodule Bullsource.News.GetNews do
   end
 
   defp set_schedule() do
-     Process.send_after(self(), :fetch_headlines_hourly, 1 * 60 * 60 * 1000) #check every hour for news updates/top stories
+     Process.send_after(self(), :fetch_headlines_hourly, 1 * 60 * 60 1000 ) #check every hour for news updates/top stories
   end
 
   defp api_key do
