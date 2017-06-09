@@ -17,9 +17,9 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
               id_str: nil,
               text: nil,
               truncated: false,
-              entitities: %{},
-              extended_entitites: %{},
-              metadata: %{},
+              entitities: nil,
+              extended_entitites: [],
+              metadata: nil,
               source: nil,
               in_reply_to_status_id: nil,
               in_reply_to_status_id_str: nil,
@@ -62,11 +62,10 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   def init(_state) do
 # global woeid = 1
 # united states = 23424977
-
-    state = update_tweets(23424977
-)
+    token = encode_secret() |> get_bearer_token() |> parse_json_validate()
+    statuses = update_tweets(token,23424977)
     set_schedule()
-    {:ok, state}
+    {:ok, %{token: token, statuses: statuses}}
   end
 
   def handle_call(:get_tweets, _from, state) do
@@ -74,9 +73,9 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_info(:fetch, state) do
-    state = update_tweets(1)
+    statuses = update_tweets(state.token,23424977)
     set_schedule() # Reschedule once more
-    {:noreply, state}
+    {:noreply, %{token: state.token, statuses: statuses}}
   end
 
   def handle_info(:error_parse_json, state) do
@@ -106,8 +105,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   ###
 
 # keep in mind, when you have to update, you'll be querying for a new token, find some way to get the token from state?
-  defp update_tweets(woe_id) do
-    token = encode_secret() |> get_bearer_token() |> parse_json_validate()
+  defp update_tweets(token, woe_id) do
+#    token = encode_secret() |> get_bearer_token() |> parse_json_validate()
 #    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token)
     [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token) |> parse_json_trends()
 #    IO.inspect "=================#{inspect trends}"
@@ -121,7 +120,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
       |> List.flatten
       |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
 
-    IO.puts "=========#{inspect Enum.count(statuses)}"
     %{token: token, statuses: statuses}
   end
 
@@ -130,7 +128,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   defp build_search_filter_url(trend) do
-    @twitter_search_filter_url <> "#{trend.query}&filter:news"
+    @twitter_search_filter_url <> "#{trend.query}&filter:news&tweet_mode=extended"
   end
 
   defp search_twitter_trends(trend_url, token) do
