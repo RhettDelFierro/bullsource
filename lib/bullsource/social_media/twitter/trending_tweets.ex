@@ -2,7 +2,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   use GenServer
 
   @default_twitter_url "https://api.twitter.com"
-  @twitter_search_url "https://twitter.com/search?q="
   @twitter_search_filter_url "https://api.twitter.com/1.1/search/tweets.json?q="
   @twitter_trends_url "https://api.twitter.com/1.1/trends/place.json?id="
 
@@ -62,18 +61,40 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   ###
   def init(_state) do
     #get sources from the other GetNetworks
-    token = encode_secet() |> get_bearer_token
-    state = %{token: token}
+    token = encode_secet() |> get_bearer_token()
+    state = %{token: token, results: nil}
+    %{"trends" => trends} = build_trend_url(1) |> HTTPoison.get(%{},["Authorization": "Bearer #{token.access_token}"])
+    trends = parse_json_trends(trends)
 
-    |> HTTPoison.get([], [ ssl: [{:versions, [:'tlsv1.2']}] ])
-    |> parse_json
-
+    state = %{state| results: results}
     set_schedule()
     {:ok, state}
   end
 
-  defp query_twitter(token) do
-    search =
+# keep in mind, when you have to update, you'll be querying for a new token, find some way to get the token from state?
+  defp update_tweets(woe_id) do
+    token = encode_secet() |> get_bearer_token()
+
+    %{"trends" => trends} = build_trend_url(woe_id) |> search_twitter_trends(token)
+    results = Enum.map( trends, &parse_json_trends(&1))
+    |> Enum.map(&build_search_filter_url(&1))
+    |> Enum.map(&Task.async(fn -> HTTPoison.get(&1, %{}, ["Authorization": "Bearer #{token.access_token}"]) end))
+    |> Enum.map(&Task.await/1)
+    |> Enum.map(&parse_json_final/1)
+
+    %{token: token, results: results}
+  end
+
+  defp build_trend_url(woe_id) do
+    @twitter_trends_url <> "#{woe_id}"
+  end
+
+  defp build_search_filter_url(trend) do
+    @twitter_search_filter_url <> "#{trend.query}&filter:news"
+  end
+
+  defp search_twitter_trends(trend_url, token) do
+    HTTPoison.get(trend_url, %{},["Authorization": "Bearer #{token.access_token}"])
   end
 
   def handle_call(:get_tweets, _from, state) do
@@ -81,6 +102,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_info(:fetch, state) do
+    state = update_tweets(1)
     set_schedule() # Reschedule once more
     {:noreply, state}
   end
@@ -90,7 +112,11 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_info({:error_json_validate, errors}, state) do
-    # restart?
+    {:stop, :json_parse_error_validate, :error, state}
+  end
+
+  def handle_info({:error_json_trends}, state) do
+    {:stop, :json_parse_error_trends, :error, state}
   end
 
   def terminate(reason, state) do
@@ -119,28 +145,12 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     Base.encode64("#{api_key()}:#{secret_api_key()}")
   end
 
+
+
+
   defp get_bearer_token(secret) do
     headers = ["Authorization": secret, "Context-Type": "application/x-www-form-urlencoded;charset=UTF-8."]
     HTTPoison.post(@default_twitter_url, %{grant_type: "client_credentials"}, headers)
-  end
-
-
-
-
-  @doc """
-  category (optional) - The category you would like to get sources for.
-    Possible options: business, entertainment, gaming, general, music, politics, science-and-nature, sport, technology.
-    Default: empty (all sources returned)
-  language	(optional) - The 2-letter ISO-639-1 code of the language you would like to get sources for.
-    Possible options: en, de, fr.
-    Default: empty (all sources returned)
-  country	(optional) - The 2-letter ISO 3166-1 code of the country you would like to get sources for.
-    Possible options: au, de, gb, in, it, us.
-    Default: empty (all sources returned)
-  """
-
-  defp build_url(url) do
-    url
   end
 
   defp parse_json_validate({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
@@ -165,12 +175,22 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
 
 
-  defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    body |> Poison.decode!(as: %{"sources" => [%Network{}]})
+
+  defp parse_json_trends({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
+    body |> Poison.Parser.parse!(keys: :atoms!)
+  end
+
+  defp parse_json_trends(error) do
+    Process.send(self(),:error_json_trends, [])
+  end
+
+
+  defp parse_json_final({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
+    body |> Poison.decode!(as: %{"statuses" => [%Tweet{}]})
 #    body |> Poison.decode!(as: %{sources: [%Network{}]})
   end
 
-  defp parse_json(error) do
+  defp parse_json_final(error) do
 #    IO.puts "========ERROR: #{inspect error}"
     Process.send(self(),:error_parse_json, [])
   end
