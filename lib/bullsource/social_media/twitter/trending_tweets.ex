@@ -2,28 +2,45 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   use GenServer
 
   @default_twitter_url "https://api.twitter.com"
+  @twitter_search_url "https://twitter.com/search?q="
+  @twitter_search_filter_url "https://api.twitter.com/1.1/search/tweets.json?q="
+  @twitter_trends_url "https://api.twitter.com/1.1/trends/place.json?id="
 
 
   defmodule Bearer, do: defstruct token_type: nil, access_token: nil
-
   defmodule TokenError, do: defstruct code: nil, label: nil, message: nil
 
-  defmodule Tweet do
-    defstruct id: nil,
-              name: nil,
-              description: nil,
-              url: nil,
-              category: nil,
-              language: nil,
-              country: nil,
-              urlsToLogos: %{
-                             small: nil,
-                             medium: nil,
-                             large: nil
-                           },
-              sortBysAvailable: []
-  end
+  defmodule TwitterTrend, do: defstruct name: nil, url: nil, promoted_content: nil, query: nil, tweet_wolume: nil
 
+  defmodule Tweet do
+    defstruct created_at: nil,
+              id: nil,
+              id_str: nil,
+              text: nil,
+              truncated: false,
+              entitities: %{},
+              extended_entitites: %{},
+              metadata: %{},
+              source: nil,
+              in_reply_to_status_id: nil,
+              in_reply_to_status_id_str: nil,
+              in_reply_to_user_id: nil,
+              in_reply_to_user_id_str: nil,
+              in_reply_to_screen_name: nil,
+              user: %{},
+              geo: nil,
+              coordinates: nil,
+              place: nil,
+              contributors: nil,
+              retweeted_status: %{},
+              is_quote_status: false,
+              retweet_count: 0,
+              favorite_count: 0,
+              favorited: false,
+              retweeted: false,
+              possibly_sensitive: false,
+              lang: nil
+  end
 
 
   ###
@@ -55,7 +72,11 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     {:ok, state}
   end
 
-  def handle_call(:get_networks, _from, state) do
+  defp query_twitter(token) do
+    search =
+  end
+
+  def handle_call(:get_tweets, _from, state) do
     {:reply, state, state}
   end
 
@@ -69,7 +90,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_info({:error_json_validate, errors}, state) do
-
+    # restart?
   end
 
   def terminate(reason, state) do
@@ -83,7 +104,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   ###
 
   defp set_schedule() do
-     Process.send_after(self(), :fetch, 1 * 60 * 30 *1000) #check every 30 minutes (rate limit is 15 minutes)
+     Process.send_after(self(), :fetch, 1 * 60 * 30 *1000) #check every 30 minutes (rate limit is 450 requests/15 minutes)
   end
 
   defp api_key do
@@ -141,6 +162,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 #    IO.puts "========ERROR: #{inspect error}"
     Process.send(self(),:error_json_validate, [])
   end
+
+
 
   defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
     body |> Poison.decode!(as: %{"sources" => [%Network{}]})
