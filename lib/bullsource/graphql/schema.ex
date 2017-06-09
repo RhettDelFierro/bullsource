@@ -6,6 +6,7 @@ defmodule Bullsource.GraphQL.Schema do
   import_types Bullsource.GraphQL.Types.DiscussionTypes
   import_types Bullsource.GraphQL.Types.VoteTypes
   import_types Bullsource.GraphQL.Types.AccountTypes
+  import_types Bullsource.GraphQL.Types.NewsTweetTypes
 
   query do
 
@@ -14,6 +15,9 @@ defmodule Bullsource.GraphQL.Schema do
     field :current_user, :user,
       do: resolve &Bullsource.GraphQL.UserResolver.get_current_user/2
 
+    @desc "Get the top news and tweets"
+    field :news_tweet, list_of(:news_tweet)
+      do resolve &Bullsource.GraphQL.NewsTweetsResolver.list/2 end
 
     @desc "Lists all the topics"
     field :topic, list_of(:topic),

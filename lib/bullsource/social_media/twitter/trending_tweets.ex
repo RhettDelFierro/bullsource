@@ -55,7 +55,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
 
-
   ###
   # GenServer API
   ###
