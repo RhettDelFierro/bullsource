@@ -60,7 +60,11 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   # GenServer API
   ###
   def init(_state) do
-    state = update_tweets(1)
+# global woeid = 1
+# united states = 23424977
+
+    state = update_tweets(23424977
+)
     set_schedule()
     {:ok, state}
   end
@@ -113,7 +117,11 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
            end))
       |> Enum.map(&Task.await/1)
       |> Enum.map(&parse_json_final/1)
-      |> Enum.map()
+      |> Enum.map(&Map.get(&1,"statuses"))
+      |> List.flatten
+      |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
+
+    IO.puts "=========#{inspect Enum.count(statuses)}"
     %{token: token, statuses: statuses}
   end
 
