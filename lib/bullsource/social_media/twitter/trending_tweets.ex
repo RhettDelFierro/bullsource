@@ -1,7 +1,7 @@
 defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   use GenServer
 
-  @default_twitter_url "https://api.twitter.com"
+  @oauth2_application_twitter_url "https://api.twitter.com/oauth2/token"
   @twitter_search_filter_url "https://api.twitter.com/1.1/search/tweets.json?q="
   @twitter_trends_url "https://api.twitter.com/1.1/trends/place.json?id="
 
@@ -50,8 +50,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
-  def get_networks(_args)do
-    GenServer.call(__MODULE__, :get_networks)
+  def get_tweets(_args)do
+    GenServer.call(__MODULE__, :get_tweets)
   end
 
 
@@ -60,45 +60,13 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   # GenServer API
   ###
   def init(_state) do
-    #get sources from the other GetNetworks
-    token = encode_secet() |> get_bearer_token()
-    state = %{token: token, results: nil}
-    %{"trends" => trends} = build_trend_url(1) |> HTTPoison.get(%{},["Authorization": "Bearer #{token.access_token}"])
-    trends = parse_json_trends(trends)
-
-    state = %{state| results: results}
+    state = update_tweets(1)
     set_schedule()
     {:ok, state}
   end
 
-# keep in mind, when you have to update, you'll be querying for a new token, find some way to get the token from state?
-  defp update_tweets(woe_id) do
-    token = encode_secet() |> get_bearer_token()
-
-    %{"trends" => trends} = build_trend_url(woe_id) |> search_twitter_trends(token)
-    results = Enum.map( trends, &parse_json_trends(&1))
-    |> Enum.map(&build_search_filter_url(&1))
-    |> Enum.map(&Task.async(fn -> HTTPoison.get(&1, %{}, ["Authorization": "Bearer #{token.access_token}"]) end))
-    |> Enum.map(&Task.await/1)
-    |> Enum.map(&parse_json_final/1)
-
-    %{token: token, results: results}
-  end
-
-  defp build_trend_url(woe_id) do
-    @twitter_trends_url <> "#{woe_id}"
-  end
-
-  defp build_search_filter_url(trend) do
-    @twitter_search_filter_url <> "#{trend.query}&filter:news"
-  end
-
-  defp search_twitter_trends(trend_url, token) do
-    HTTPoison.get(trend_url, %{},["Authorization": "Bearer #{token.access_token}"])
-  end
-
   def handle_call(:get_tweets, _from, state) do
-    {:reply, state, state}
+    {:reply, state.statuses, state}
   end
 
   def handle_info(:fetch, state) do
@@ -119,6 +87,10 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     {:stop, :json_parse_error_trends, :error, state}
   end
 
+  def handle_info({:error_json_final}, state) do
+    {:stop, :json_parse_error_trends, :error, state}
+  end
+
   def terminate(reason, state) do
     {:stop, :error, state}
   end
@@ -129,8 +101,37 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   # Private functions
   ###
 
+# keep in mind, when you have to update, you'll be querying for a new token, find some way to get the token from state?
+  defp update_tweets(woe_id) do
+    token = encode_secret() |> get_bearer_token() |> parse_json_validate()
+#    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token)
+    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token) |> parse_json_trends()
+#    IO.inspect "=================#{inspect trends}"
+    statuses = Enum.map(trends, &build_search_filter_url(&1))
+      |> Enum.map(&Task.async(fn ->
+             HTTPoison.get(&1, ["Authorization": "Bearer #{token.access_token}"])
+           end))
+      |> Enum.map(&Task.await/1)
+      |> Enum.map(&parse_json_final/1)
+      |> Enum.map()
+    %{token: token, statuses: statuses}
+  end
+
+  defp build_trend_url(woe_id) do
+    @twitter_trends_url <> "#{woe_id}"
+  end
+
+  defp build_search_filter_url(trend) do
+    @twitter_search_filter_url <> "#{trend.query}&filter:news"
+  end
+
+  defp search_twitter_trends(trend_url, token) do
+    HTTPoison.get(trend_url, ["Authorization": "Bearer #{token.access_token}"])
+  end
+
+
   defp set_schedule() do
-     Process.send_after(self(), :fetch, 1 * 60 * 30 *1000) #check every 30 minutes (rate limit is 450 requests/15 minutes)
+     Process.send_after(self(), :fetch, 1 * 60 * 30 * 1000) #check every 30 minutes (rate limit is 450 requests/15 minutes)
   end
 
   defp api_key do
@@ -149,23 +150,27 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
 
   defp get_bearer_token(secret) do
-    headers = ["Authorization": secret, "Context-Type": "application/x-www-form-urlencoded;charset=UTF-8."]
-    HTTPoison.post(@default_twitter_url, %{grant_type: "client_credentials"}, headers)
+    headers = ["Authorization": "Basic #{secret}", "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8."]
+    HTTPoison.post(@oauth2_application_twitter_url, "grant_type=client_credentials", headers)
   end
 
   defp parse_json_validate({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
+#    IO.puts "====================1 #{inspect body}"
     body |> Poison.decode!(as: %Bearer{})
 #    body |> Poison.decode!(as: %{sources: [%Network{}]})
   end
 
   defp parse_json_validate({:ok, %HTTPoison.Response{body: body, status_code: 401}}) do
+#    IO.puts "====================2 #{inspect body}"
     errors = body |> Poison.decode!(as: %{"errors" => [%TokenError{}]})
-    Process.send(self(), {:error_json_validate, errors["errors"][0].message})
+    errors = body |> Poison.decode!(as: %{"errors" => [%TokenError{}]})
+    Process.send(self(), {:error_json_validate, errors["errors"][0].message}, [])
   end
 
   defp parse_json_validate({:ok, %HTTPoison.Response{body: body, status_code: 403}}) do
+#    IO.puts "==================3 #{inspect body}"
     errors = body |> Poison.decode!(as: %{"errors" => [%TokenError{}]})
-    Process.send(self(), {:error_json_validate, errors["errors"][0].message})
+    Process.send(self(), {:error_json_validate, errors["errors"][0].message}, [])
   end
 
   defp parse_json_validate(error) do
@@ -177,7 +182,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
 
   defp parse_json_trends({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    body |> Poison.Parser.parse!(keys: :atoms!)
+    body |> Poison.decode!(as: [%{"trends" => [%TwitterTrend{}]}])
   end
 
   defp parse_json_trends(error) do
@@ -192,7 +197,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
   defp parse_json_final(error) do
 #    IO.puts "========ERROR: #{inspect error}"
-    Process.send(self(),:error_parse_json, [])
+    Process.send(self(),:error_json_final, [])
   end
 
 end
