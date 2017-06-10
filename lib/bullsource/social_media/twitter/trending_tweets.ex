@@ -68,7 +68,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_call(:get_tweets, _from, state) do
-    {:reply, state.statuses, state}
+    {:reply, state.stories, state}
   end
 
   def handle_info(:fetch, state) do
@@ -78,6 +78,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_info(:error_parse_json, state) do
+
     {:stop, :json_parse_error, :error, state}
   end
 
@@ -110,11 +111,11 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 #    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token) |> parse_json_trends()
 #    IO.inspect "=================#{inspect trends}"
     news = Bullsource.News.GetNews.get_news([]) |> Enum.filter(&(&1.network.language == "en" && &1.network.country == "us"))
-    statuses = news
+    stories = news
       |> make_tweet_requests([], token)
       |> Enum.map(&format_list(&1, [])) # => [%{network, headline, tweets}]
 
-    statuses
+    stories
 
 
 
@@ -140,6 +141,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
   defp make_tweet_requests([n | ns], acc, token) do
     %{network: network, news: headlines} = n
+    headlines = Enum.take(headlines,3) #take only the top 3 headlines from each news source.
     tasks =
       Enum.map(headlines,&build_search_url_query(&1)) #have search queries
       |> Enum.map(fn {headline, query_url} ->
@@ -195,7 +197,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 #     IO.puts "++++++#{inspect task}"
      tweets = parse_json_final(Task.await(task))
 #     IO.puts "+_+_+_+_+_+_+_+_+_+_+#{inspect tweets}"
-     news = %{network: network, headline: headline, tweets: tweets}
+     news = %{network: network, news: headline, tweets: tweets}
      format_list({network, ts}, [news | acc])
   end
 
@@ -250,7 +252,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   defp parse_json_final(error) do
-    IO.puts "========ERROR: #{inspect error}"
+#    IO.puts "========ERROR: #{inspect error}"
     Process.send(self(),:error_json_final, [])
   end
 
