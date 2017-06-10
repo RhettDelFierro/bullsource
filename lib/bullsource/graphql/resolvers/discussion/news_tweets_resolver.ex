@@ -2,11 +2,43 @@ defmodule Bullsource.GraphQL.NewsTweetsResolver do
   import Bullsource.News.GetNews, only: [get_news: 1]
   import Bullsource.SocialMedia.Twitter.TrendingTweets, only: [get_tweets: 1]
 
+  alias Bullsource.SocialMedia.Twitter.TrendingTweets.Tweet
+  alias Bullsource.News.GetNews.News
+  alias Bullsource.News.GetNetworks.Network
+
   def list(_args, _context) do
     news = get_news([])
 #    IO.inspect news
-#    tweets = get_tweets([])
+    tweets = get_tweets([])
+    matched_stories = Enum.map(news, fn m ->
+       #iterate through m.news and see if any of those urls match the expanded_url
+       #if they do, return both the story and the tweet(s)
+       matching_stories = for headline <- m.news do
+                            filtered_tweets =
+                              Enum.filter(tweets, fn t ->
+                                if (t.retweeted_status["entities"]["urls"] != []  && t.retweeted_status["entities"]["urls"] != nil) do
+#                                  [head | _tail] = t.retweeted_status["entities"]["urls"]
+                                  Enum.take(t.retweeted_status["entities"]["urls"],1)[:expanded_url] == headline.url
+                                else
+                                  :false
+                                end
+                              end)
+                              |> Enum.map(&(Map.new([id: &1.id,
+                                             full_text: &1.retweeted_status["full_text"],
+                                             retweet_count: &1.retweet_count,
+                                             expanded_url: Enum.take(&1.retweeted_status["entities"]["urls"],1)[:expanded_url],
+                                             user_id: &1.user["id"]
+                                            ]
+                                     )
+                                 ))
 
-      #maybe a list comprehension.
+                            %{
+                              network: m.network,
+                              news: headline,
+                              tweets: filtered_tweets
+                            }
+                          end
+    end)
+    {:ok, matched_stories}
   end
 end

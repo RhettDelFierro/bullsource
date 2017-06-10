@@ -4,30 +4,39 @@ defmodule Bullsource.GraphQL.Types.NewsTweetTypes do
 
   @desc "News - network and headlines."
   object :news do
-    field :network, :integer
-    field :headline, :string
+    field :author, :string
+    field :title, :string
     field :description, :string
-    field :headline_url, :string
-    field :headline_image_url, :string
+    field :country, :string
+    field :url, :string
+    field :urlToImage, :string
+    field :publishedAt, :string
+  end
+
+  @desc "Network"
+  object :network do
+    field :id, :string
+    field :name, :string
+    field :description, :string
+    field :url, :string
+    field :category, :string
+    field :language, :string
+    field :country, :string
   end
 
   @desc "Tweet Object."
   object :tweet do
     field :id, :integer
+    field :retweet_count, :integer
     field :full_text, :string
-    field :url, :string
+    field :expanded_url, :string
     field :user_id, :integer
   end
 
   @desc "tweets and matching News"
   object :news_tweet do
-    field :network, :integer
-    field :headline, :string
-    field :headline_url, :string
-    field :headline_image_url, :string
-    field :tweet_id, :integer
-    field :tweet_full_text, :string
-    field :tweet_url, :string
-    field :tweet_user_id, :integer
+    field :network, :network
+    field :news, :news
+    field :tweets, list_of(:tweet)
   end
 end

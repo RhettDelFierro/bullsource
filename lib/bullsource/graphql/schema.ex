@@ -16,8 +16,8 @@ defmodule Bullsource.GraphQL.Schema do
       do: resolve &Bullsource.GraphQL.UserResolver.get_current_user/2
 
     @desc "Get the top news and tweets"
-    field :news_tweet, list_of(:news_tweet)
-      do resolve &Bullsource.GraphQL.NewsTweetsResolver.list/2 end
+    field :news_tweet, list_of(:news_tweet),
+      do: resolve &Bullsource.GraphQL.NewsTweetsResolver.list/2
 
     @desc "Lists all the topics"
     field :topic, list_of(:topic),

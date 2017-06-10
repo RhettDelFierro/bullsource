@@ -119,7 +119,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
       |> List.flatten
       |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
 
-    %{token: token, statuses: statuses}
   end
 
   defp build_trend_url(woe_id) do
