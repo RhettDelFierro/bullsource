@@ -62,9 +62,9 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 # global woeid = 1
 # united states = 23424977
     token = encode_secret() |> get_bearer_token() |> parse_json_validate()
-    statuses = update_tweets(token,23424977)
+    stories = update_tweets(token,23424977)
     set_schedule()
-    {:ok, %{token: token, statuses: statuses}}
+    {:ok, %{token: token, stories: stories}}
   end
 
   def handle_call(:get_tweets, _from, state) do
@@ -72,9 +72,9 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_info(:fetch, state) do
-    statuses = update_tweets(state.token,23424977)
+    stories = update_tweets(state.token,23424977)
     set_schedule() # Reschedule once more
-    {:noreply, %{token: state.token, statuses: statuses}}
+    {:noreply, %{token: state.token, stories: stories}}
   end
 
   def handle_info(:error_parse_json, state) do
@@ -109,23 +109,24 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 #    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token)
 #    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token) |> parse_json_trends()
 #    IO.inspect "=================#{inspect trends}"
-    news = Bullsource.News.GetNews.get_news() |> Enum.filter(&(&1.network.language == "en"))
+    news = Bullsource.News.GetNews.get_news([]) |> Enum.filter(&(&1.network.language == "en" && &1.network.country == "us"))
     statuses = news
       |> make_tweet_requests([], token)
-      |> Enum.map(&format_list(&1))
+      |> Enum.map(&format_list(&1, [])) # => [%{network, headline, tweets}]
+
+    statuses
 
 
 
-
-    statuses = Enum.map(news, &build_search_query(&1))
-      |> Enum.map(&Task.async(fn ->
-             HTTPoison.get(&1, ["Authorization": "Bearer #{token.access_token}"])
-           end))
-      |> Enum.map(&Task.await/1)
-      |> Enum.map(&parse_json_final/1)
-      |> Enum.map(&Map.get(&1,"statuses"))
-      |> List.flatten
-      |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
+#    statuses = Enum.map(news, &build_search_query(&1))
+#      |> Enum.map(&Task.async(fn ->
+#             HTTPoison.get(&1, ["Authorization": "Bearer #{token.access_token}"])
+#           end))
+#      |> Enum.map(&Task.await/1)
+#      |> Enum.map(&parse_json_final/1)
+#      |> Enum.map(&Map.get(&1,"statuses"))
+#      |> List.flatten
+#      |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
 
   end
 
@@ -137,7 +138,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     acc
   end
 
-  defp make_tweet_requests([n| ns], acc, token) do
+  defp make_tweet_requests([n | ns], acc, token) do
     %{network: network, news: headlines} = n
     tasks =
       Enum.map(headlines,&build_search_url_query(&1)) #have search queries
@@ -147,7 +148,9 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
                          ["Authorization": "Bearer #{token.access_token}"])
                        end)}
             end)
-
+#    IO.puts "==========#{inspect tasks}"
+#    tasks = [{headline, tasks}]
+#    acc will be [{network, [{headline, task}],{network, [{headline, task], {network, [{headline, task]]
     make_tweet_requests(ns, [{network, tasks} | acc], token)
   end
 
@@ -185,11 +188,15 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
 
+  defp format_list({network, []}, acc), do: acc
 
-  defp format_list({network, {headline, tasks} }) do
-     tweets = Enum.map(tasks,&parse_json_final(Task.await(&1))) #[%{"statuses" => [%Tweet{}]]
-
-     %{network: network, headline: headline, tweets: tweets}
+  defp format_list({network, [t | ts] }, acc) do
+     {headline, task} = t
+#     IO.puts "++++++#{inspect task}"
+     tweets = parse_json_final(Task.await(task))
+#     IO.puts "+_+_+_+_+_+_+_+_+_+_+#{inspect tweets}"
+     news = %{network: network, headline: headline, tweets: tweets}
+     format_list({network, ts}, [news | acc])
   end
 
 
@@ -234,13 +241,16 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
 
+
+
+
   defp parse_json_final({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
     %{"statuses" => tweets} = body |> Poison.decode!(as: %{"statuses" => [%Tweet{}]})
     tweets
   end
 
   defp parse_json_final(error) do
-#    IO.puts "========ERROR: #{inspect error}"
+    IO.puts "========ERROR: #{inspect error}"
     Process.send(self(),:error_json_final, [])
   end
 
