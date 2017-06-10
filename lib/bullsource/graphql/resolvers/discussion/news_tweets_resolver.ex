@@ -16,21 +16,38 @@ defmodule Bullsource.GraphQL.NewsTweetsResolver do
        matching_stories = for headline <- m.news do
                             filtered_tweets =
                               Enum.filter(tweets, fn t ->
-                                if (t.retweeted_status["entities"]["urls"] != []  && t.retweeted_status["entities"]["urls"] != nil) do
-#                                  [head | _tail] = t.retweeted_status["entities"]["urls"]
-                                  Enum.take(t.retweeted_status["entities"]["urls"],1)[:expanded_url] == headline.url
+                                if (t.retweeted_status["full_text"] != nil) do
+                                  if(t.retweeted_status["full_text"] =~ headline.url) do
+                                   IO.puts "true"
+                                  end
+                                  t.retweeted_status["full_text"] =~ headline.url
                                 else
-                                  :false
+                                 :false
                                 end
+
+
+#                                if (t.retweeted_status["entities"]["urls"] != []  && t.retweeted_status["entities"]["urls"] != nil) do
+##                                  [head | _tail] = t.retweeted_status["entities"]["urls"]
+#                                  [head | _tail] = Enum.take(t.retweeted_status["entities"]["urls"],1)
+#
+#                                  IO.puts "#{if (head["expanded_url"] == headline.url), do: IO.puts "true"}"
+##                                  IO.inspect headline.url
+##                                  Enum.take(t.retweeted_status["entities"]["urls"],1)[:expanded_url] == headline.url
+#                                else
+#                                  :false
+#                                end
+#                              end)
                               end)
-                              |> Enum.map(&(Map.new([id: &1.id,
-                                             full_text: &1.retweeted_status["full_text"],
-                                             retweet_count: &1.retweet_count,
-                                             expanded_url: Enum.take(&1.retweeted_status["entities"]["urls"],1)[:expanded_url],
-                                             user_id: &1.user["id"]
-                                            ]
-                                     )
-                                 ))
+#                              |> Enum.map(&(IO.puts "========#{Enum.take(&1.retweeted_status["entities"]["urls"],1)[:expanded_url]}"))
+#                              |> Enum.map(&(Map.new(
+#                                            [id: &1.id,
+#                                             full_text: &1.retweeted_status["full_text"],
+#                                             retweet_count: &1.retweet_count,
+#                                             expanded_url: Enum.take(&1.retweeted_status["entities"]["urls"],1)[:expanded_url],
+#                                             user_id: &1.user["id"]
+#                                            ]
+#                                     )
+#                                 ))
 
                             %{
                               network: m.network,
@@ -39,6 +56,6 @@ defmodule Bullsource.GraphQL.NewsTweetsResolver do
                             }
                           end
     end)
-    {:ok, matched_stories}
+    {:ok, %{data: matched_stories}}
   end
 end

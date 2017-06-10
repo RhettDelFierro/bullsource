@@ -107,9 +107,17 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   defp update_tweets(token, woe_id) do
 #    token = encode_secret() |> get_bearer_token() |> parse_json_validate()
 #    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token)
-    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token) |> parse_json_trends()
+#    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token) |> parse_json_trends()
 #    IO.inspect "=================#{inspect trends}"
-    statuses = Enum.map(trends, &build_search_filter_url(&1))
+    news = Bullsource.News.GetNews.get_news() |> Enum.filter(&(&1.network.language == "en"))
+    statuses = news
+      |> make_tweet_requests([], token)
+      |> Enum.map(&format_list(&1))
+
+
+
+
+    statuses = Enum.map(news, &build_search_query(&1))
       |> Enum.map(&Task.async(fn ->
              HTTPoison.get(&1, ["Authorization": "Bearer #{token.access_token}"])
            end))
@@ -125,6 +133,30 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     @twitter_trends_url <> "#{woe_id}"
   end
 
+  defp make_tweet_requests([], acc, _token) do
+    acc
+  end
+
+  defp make_tweet_requests([n| ns], acc, token) do
+    %{network: network, news: headlines} = n
+    tasks =
+      Enum.map(headlines,&build_search_url_query(&1)) #have search queries
+      |> Enum.map(fn {headline, query_url} ->
+          {headline,
+            Task.async(fn -> HTTPoison.get(query_url,
+                         ["Authorization": "Bearer #{token.access_token}"])
+                       end)}
+            end)
+
+    make_tweet_requests(ns, [{network, tasks} | acc], token)
+  end
+
+  def build_search_url_query(headline) do
+    encoded_query = URI.encode(headline.url)
+    query_url = @twitter_search_filter_url <> "%22#{encoded_query}%22&filter:news&tweet_mode=extended"
+    {headline, query_url}
+  end
+
   defp build_search_filter_url(trend) do
     @twitter_search_filter_url <> "#{trend.query}&filter:news&tweet_mode=extended"
   end
@@ -132,6 +164,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   defp search_twitter_trends(trend_url, token) do
     HTTPoison.get(trend_url, ["Authorization": "Bearer #{token.access_token}"])
   end
+
+
 
 
   defp set_schedule() do
@@ -151,6 +185,12 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
 
+
+  defp format_list({network, {headline, tasks} }) do
+     tweets = Enum.map(tasks,&parse_json_final(Task.await(&1))) #[%{"statuses" => [%Tweet{}]]
+
+     %{network: network, headline: headline, tweets: tweets}
+  end
 
 
   defp get_bearer_token(secret) do
@@ -195,8 +235,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
 
   defp parse_json_final({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    body |> Poison.decode!(as: %{"statuses" => [%Tweet{}]})
-#    body |> Poison.decode!(as: %{sources: [%Network{}]})
+    %{"statuses" => tweets} = body |> Poison.decode!(as: %{"statuses" => [%Tweet{}]})
+    tweets
   end
 
   defp parse_json_final(error) do

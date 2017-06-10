@@ -4,6 +4,7 @@ defmodule Bullsource.SocialMedia.Supervisor do
   ###
   # Supervisor API
   ###
+  # should I start this after the news supervisor is finished??
   def start_link do
     Supervisor.start_link(__MODULE__,[], name: __MODULE__) #A) start_link is just linking to the supervisor inside the module (itself?) from use Supervisor.
   end
