@@ -100,21 +100,19 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
 
 
+
+
   ###
   # Private functions
   ###
 
 # keep in mind, when you have to update, you'll be querying for a new token, find some way to get the token from state?
   defp update_tweets(token, woe_id) do
-#    token = encode_secret() |> get_bearer_token() |> parse_json_validate()
-#    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token)
-#    [%{"trends" => trends}] = build_trend_url(woe_id) |> search_twitter_trends(token) |> parse_json_trends()
-#    IO.inspect "=================#{inspect trends}"
     news = Bullsource.News.GetNews.get_news([]) |> Enum.filter(&(&1.network.language == "en" && &1.network.country == "us"))
     stories = news
       |> make_tweet_requests([], token)
       |> Enum.map(&format_list(&1, [])) # => [%{network, headline, tweets}]
-
+      |> List.flatten
     stories
 
 
@@ -162,15 +160,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     {headline, query_url}
   end
 
-  defp build_search_filter_url(trend) do
-    @twitter_search_filter_url <> "#{trend.query}&filter:news&tweet_mode=extended"
-  end
-
-  defp search_twitter_trends(trend_url, token) do
-    HTTPoison.get(trend_url, ["Authorization": "Bearer #{token.access_token}"])
-  end
-
-
 
 
   defp set_schedule() do
@@ -196,6 +185,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
      {headline, task} = t
 #     IO.puts "++++++#{inspect task}"
      tweets = parse_json_final(Task.await(task))
+     |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
 #     IO.puts "+_+_+_+_+_+_+_+_+_+_+#{inspect tweets}"
      news = %{network: network, news: headline, tweets: tweets}
      format_list({network, ts}, [news | acc])
@@ -230,19 +220,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 #    IO.puts "========ERROR: #{inspect error}"
     Process.send(self(),:error_json_validate, [])
   end
-
-
-
-
-  defp parse_json_trends({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    body |> Poison.decode!(as: [%{"trends" => [%TwitterTrend{}]}])
-  end
-
-  defp parse_json_trends(error) do
-    Process.send(self(),:error_json_trends, [])
-  end
-
-
 
 
 

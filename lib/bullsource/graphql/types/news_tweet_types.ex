@@ -29,7 +29,6 @@ defmodule Bullsource.GraphQL.Types.NewsTweetTypes do
     field :id, :integer
     field :retweet_count, :integer
     field :full_text, :string
-    field :expanded_url, :string
     field :user_id, :integer
   end
 

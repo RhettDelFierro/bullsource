@@ -7,7 +7,6 @@ defmodule Bullsource.GraphQL.NewsTweetsResolver do
   alias Bullsource.News.GetNetworks.Network
 
   def list(_args, _context) do
-    news = get_news([])
 #    IO.inspect news
     feed = get_tweets([])
     IO.inspect feed
@@ -60,6 +59,6 @@ defmodule Bullsource.GraphQL.NewsTweetsResolver do
 #    IO.inspect tweets
 #    [[feed]] = stories
 #    IO.inspect stories
-    {:ok, %{news_tweet: feed}}
+    {:ok, feed}
   end
 end
