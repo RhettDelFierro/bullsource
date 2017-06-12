@@ -50,10 +50,13 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
-  def get_tweets(_args)do
+  def get_tweets(_args) do
     GenServer.call(__MODULE__, :get_tweets)
   end
 
+  def get_only_tweets(_args) do
+    GenServer.call(__MODULE__, :get_only_tweets)
+  end
 
   ###
   # GenServer API
@@ -70,6 +73,11 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   def handle_call(:get_tweets, _from, state) do
     {:reply, state.stories, state}
   end
+
+  def handle_call(:get_only_tweets, _from, state) do
+    {:reply, Enum.take(state.stories.tweets,2), state}
+  end
+
 
   def handle_info(:fetch, state) do
     stories = update_tweets(state.token,23424977)
@@ -225,7 +233,12 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
   defp parse_json_final({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
     %{"statuses" => tweets} = body |> Poison.decode!(as: %{"statuses" => [%Tweet{}]})
-    tweets
+
+    tweets = Enum.map(tweets,
+        &Map.put(&1,:retweeted_status, Bullsource.Helpers.Converters.str_to_atom_keys(&1.retweeted_status)))
+      |> Enum.map(&Map.put(&1,:user, Bullsource.Helpers.Converters.str_to_atom_keys(&1.user)))
+#      |> Enum.map(&Map.put(&1.retweeted_status,:, Bullsource.Helpers.Converters.str_to_atom_keys(&1.user)))
+
   end
 
   defp parse_json_final(error) do
