@@ -12,7 +12,7 @@ config :bullsource, Bullsource.Web.Endpoint,
   code_reloader: true,
   cache_static_lookup: false, ######<~~~~~~I added this. RD
   check_origin: false,
-  watchers: [npm: ["run", "dev", cd: Path.expand("../assets", __DIR__)]]
+  watchers: [npm: ["run", "serve", cd: Path.expand("../assets", __DIR__)]]
 
 # ## SSL Support
 #

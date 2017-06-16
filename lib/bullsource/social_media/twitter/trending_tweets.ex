@@ -242,7 +242,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   defp parse_json_final(error) do
-#    IO.puts "========ERROR: #{inspect error}"
+    IO.puts "========ERROR: #{inspect error}"
     Process.send(self(),:error_json_final, [])
   end
 
