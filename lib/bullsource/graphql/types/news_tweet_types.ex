@@ -28,8 +28,8 @@ defmodule Bullsource.GraphQL.Types.NewsTweetTypes do
   object :tweet do
     field :id_str, :integer
     field :retweet_count, :integer
-    field :text, :string
-    field :retweeted_status, :retweeted_status
+    field :full_text, :string
+#    field :retweeted_status, :retweeted_status
     field :user, :twitter_user
     field :retweeted, :boolean
   end

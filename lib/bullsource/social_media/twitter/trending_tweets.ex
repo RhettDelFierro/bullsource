@@ -14,7 +14,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   defmodule Tweet do
     defstruct created_at: nil,
               id_str: nil,
-              text: nil,
+              full_text: nil,
               truncated: false,
               entitities: nil,
               extended_entitites: [],
