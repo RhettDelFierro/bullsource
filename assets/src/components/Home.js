@@ -11,7 +11,7 @@ class Home extends Component {
                 <img src={newsTweet.news.urlToImage} />
                 <p><b>{newsTweet.network.name}</b> {newsTweet.news.title}</p>
                   <div>
-                      {newsTweet.tweets.map(tweet => <li key={tweet.id_str}><b>{tweet.user.name}</b> {tweet.text} <b>{tweet.retweetCount}</b> {`${tweet.retweeted}`}</li>)}
+                      {newsTweet.tweets.map(tweet => <li key={tweet.id_str}><b>{tweet.user.name}</b> {tweet.fullText} <b>{tweet.retweetCount}</b> {`${tweet.retweeted}`}</li>)}
                   </div>
               </div>
           )
@@ -47,7 +47,7 @@ const query = gql`
       tweets{
         retweetCount, 
         id_str, 
-        text,
+        fullText,
         user{
           name
         },
