@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
+import './style.css'
 
 export const Nav = () => {
     return (
-        <ul className = 'nav'>
-            <li >
+        <ul className='nav'>
+            <li>
                 <NavLink exact activeClassName='active' to='/'>Home</NavLink>
             </li>
             <li>

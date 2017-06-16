@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Router, { Switch } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ApolloClient, {createNetworkInterface} from "apollo-client";
 import {ApolloProvider} from "react-apollo";
-import Nav from './components/nav/Nav'
+import { Nav } from './components/nav/Nav'
 
 
 import Home from "./components/Home";
+import SignUp from "./components/signup/SignUp";
 
 //create new instance of ApolloClient for the ApolloProvider
 const client = new ApolloClient({
@@ -18,15 +19,16 @@ const client = new ApolloClient({
 const Root = () => {
     return (
         <ApolloProvider client={client}>
-            <Router>
+            <BrowserRouter>
                 <div>
                     <Nav />
                     <Switch>
                         <Route exact path="/" component={Home}/>
+                        <Route path="/signup" component={SignUp}/>
                         <Route render={ () => <p>Not Found</p> }/>
                     </Switch>
                 </div>
-            </Router>
+            </BrowserRouter>
         </ApolloProvider>
     )
 };
