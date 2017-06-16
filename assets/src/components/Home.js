@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 
+import newsTweetQuery from '../queries/fetchNewsTweet'
+
 
 class Home extends Component {
     renderNewsTweets(){
@@ -32,29 +34,4 @@ class Home extends Component {
     }
 }
 
-const query = gql`
-  {
-    newsTweet{
-      network{
-        id
-        name
-        url
-      }
-      news{
-        title
-        url
-      }
-      tweets{
-        retweetCount, 
-        id_str, 
-        fullText,
-        user{
-          name
-        },
-        retweeted
-      }
-    }
-  }
-`;
-
-export default graphql(query)(Home);
+export default graphql(newsTweetQuery)(Home);
