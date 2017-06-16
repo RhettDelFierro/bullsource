@@ -26,10 +26,12 @@ defmodule Bullsource.GraphQL.Types.NewsTweetTypes do
 
   @desc "Tweet Object."
   object :tweet do
-    field :id, :integer
+    field :id_str, :integer
     field :retweet_count, :integer
+    field :text, :string
     field :retweeted_status, :retweeted_status
     field :user, :twitter_user
+    field :retweeted, :boolean
   end
 
   @desc "Retweeted_status of tweets - it's main data.'"

@@ -13,7 +13,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
   defmodule Tweet do
     defstruct created_at: nil,
-              id: nil,
               id_str: nil,
               text: nil,
               truncated: false,
@@ -122,19 +121,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
       |> Enum.map(&format_list(&1, [])) # => [%{network, headline, tweets}]
       |> List.flatten
     stories
-
-
-
-#    statuses = Enum.map(news, &build_search_query(&1))
-#      |> Enum.map(&Task.async(fn ->
-#             HTTPoison.get(&1, ["Authorization": "Bearer #{token.access_token}"])
-#           end))
-#      |> Enum.map(&Task.await/1)
-#      |> Enum.map(&parse_json_final/1)
-#      |> Enum.map(&Map.get(&1,"statuses"))
-#      |> List.flatten
-#      |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
-
   end
 
   defp build_trend_url(woe_id) do
@@ -156,15 +142,14 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
                          ["Authorization": "Bearer #{token.access_token}"])
                        end)}
             end)
-#    IO.puts "==========#{inspect tasks}"
-#    tasks = [{headline, tasks}]
-#    acc will be [{network, [{headline, task}],{network, [{headline, task], {network, [{headline, task]]
     make_tweet_requests(ns, [{network, tasks} | acc], token)
   end
 
   def build_search_url_query(headline) do
     encoded_query = URI.encode(headline.url)
-    query_url = @twitter_search_filter_url <> "%22#{encoded_query}%22&filter:news&tweet_mode=extended"
+    filters = "%20filter:news%20exclude:retweets%20exclude:replies&tweet_mode=extended&result_type=popular"
+
+    query_url = @twitter_search_filter_url <> "%22#{encoded_query}%22#{filters}"
     {headline, query_url}
   end
 

@@ -7,11 +7,11 @@ class Home extends Component {
     renderNewsTweets(){
       return this.props.data.newsTweet.map(newsTweet => {
           return (
-              <div>
+              <div key={`${newsTweet.network.id}  ${newsTweet.news.title}`}>
                 <img src={newsTweet.news.urlToImage} />
                 <p><b>{newsTweet.network.name}</b> {newsTweet.news.title}</p>
                   <div>
-                      {newsTweet.tweets.map(tweet => <li><b>{tweet.user.name}</b> {tweet.retweetedStatus.fullText}</li>)}
+                      {newsTweet.tweets.map(tweet => <li key={tweet.id_str}><b>{tweet.user.name}</b> {tweet.text} <b>{tweet.retweetCount}</b> {`${tweet.retweeted}`}</li>)}
                   </div>
               </div>
           )
@@ -40,8 +40,19 @@ const query = gql`
         name
         url
       }
-      news{title, urlToImage}
-      tweets{retweetCount, id, retweetedStatus{fullText}, user{name}}
+      news{
+        title
+        url
+      }
+      tweets{
+        retweetCount, 
+        id_str, 
+        text,
+        user{
+          name
+        },
+        retweeted
+      }
     }
   }
 `;

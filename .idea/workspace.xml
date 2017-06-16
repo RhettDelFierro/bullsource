@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/Home.js" afterPath="$PROJECT_DIR$/assets/src/components/Home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/web/router.ex" afterPath="$PROJECT_DIR$/lib/bullsource/web/router.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" afterPath="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,81 +16,56 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="router.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/web/router.ex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.exs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/config.exs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="40" column="33" lean-forward="false" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+            <state relative-caret-position="78">
+              <caret line="10" column="55" lean-forward="false" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <marker date="1497589846000" expanded="true" signature="842:1027" ph="{...}" />
-                <marker date="1497589846000" expanded="true" signature="848:857" ph="newsTweet...newsTweet" />
-                <marker date="1497589846000" expanded="true" signature="848:1023" ph="newsTweet...{&#10;      network{&#10;        id&#10;        name&#10;      }&#10;      news{title}&#10;      tweets{retweetCount, id, retweetedStatus{fullText}, user{name}}&#10;    }" />
-                <marker date="1497589846000" expanded="true" signature="857:1023" ph="{...}" />
-                <marker date="1497589846000" expanded="true" signature="865:872" ph="network...network" />
-                <marker date="1497589846000" expanded="true" signature="865:917" ph="network...{&#10;        id&#10;        name&#10;      }" />
-                <marker date="1497589846000" expanded="true" signature="872:917" ph="{...}" />
-                <marker date="1497589846000" expanded="true" signature="882:884" ph="id...id" />
-                <marker date="1497589846000" expanded="true" signature="893:897" ph="name...name" />
-                <marker date="1497589846000" expanded="true" signature="924:928" ph="news...news" />
-                <marker date="1497589846000" expanded="true" signature="924:947" ph="news...{title}" />
-                <marker date="1497589846000" expanded="true" signature="928:947" ph="{...}" />
-                <marker date="1497589846000" expanded="true" signature="929:934" ph="title...title" />
-                <marker date="1497589846000" expanded="true" signature="954:960" ph="tweets...tweets" />
-                <marker date="1497589846000" expanded="true" signature="954:1017" ph="tweets...{retweetCount, id, retweetedStatus{fullText}, user{name}}" />
-                <marker date="1497589846000" expanded="true" signature="960:1017" ph="{...}" />
-                <marker date="1497589846000" expanded="true" signature="961:973" ph="retweetCount...retweetCount" />
-                <marker date="1497589846000" expanded="true" signature="975:977" ph="id...id" />
-                <marker date="1497589846000" expanded="true" signature="979:994" ph="retweetedStatus...retweetedStatus" />
-                <marker date="1497589846000" expanded="true" signature="979:1004" ph="retweetedStatus...{fullText}" />
-                <marker date="1497589846000" expanded="true" signature="994:1004" ph="{...}" />
-                <marker date="1497589846000" expanded="true" signature="995:1003" ph="fullText...fullText" />
-                <marker date="1497589846000" expanded="true" signature="1006:1010" ph="user...user" />
-                <marker date="1497589846000" expanded="true" signature="1006:1016" ph="user...{name}" />
-                <marker date="1497589846000" expanded="true" signature="1010:1016" ph="{...}" />
-                <marker date="1497589846000" expanded="true" signature="1011:1015" ph="name...name" />
+                <marker date="1497602200000" expanded="true" signature="478:675" ph="..." />
+                <marker date="1497602200000" expanded="true" signature="949:1214" ph="{...}" />
+                <marker date="1497602200000" expanded="true" signature="955:964" ph="newsTweet...newsTweet" />
+                <marker date="1497602200000" expanded="true" signature="955:1210" ph="newsTweet...{&#10;      network{&#10;        id&#10;        name&#10;      }&#10;      news{title}&#10;      tweets{retweetCount, id, retweetedStatus{fullText}, user{name}}&#10;    }" />
+                <marker date="1497602200000" expanded="true" signature="964:1210" ph="{...}" />
+                <marker date="1497602200000" expanded="true" signature="972:979" ph="network...network" />
+                <marker date="1497602200000" expanded="true" signature="972:1024" ph="network...{&#10;        id&#10;        name&#10;      }" />
+                <marker date="1497602200000" expanded="true" signature="979:1024" ph="{...}" />
+                <marker date="1497602200000" expanded="true" signature="989:991" ph="id...id" />
+                <marker date="1497602200000" expanded="true" signature="1000:1004" ph="name...name" />
+                <marker date="1497602200000" expanded="true" signature="1031:1035" ph="news...news" />
+                <marker date="1497602200000" expanded="true" signature="1031:1070" ph="news...{title}" />
+                <marker date="1497602200000" expanded="true" signature="1035:1070" ph="{...}" />
+                <marker date="1497602200000" expanded="true" signature="1045:1050" ph="title...title" />
+                <marker date="1497602200000" expanded="true" signature="1077:1083" ph="tweets...tweets" />
+                <marker date="1497602200000" expanded="true" signature="1077:1204" ph="tweets...{retweetCount, id, retweetedStatus{fullText}, user{name}}" />
+                <marker date="1497602200000" expanded="true" signature="1083:1204" ph="{...}" />
+                <marker date="1497602200000" expanded="true" signature="1093:1105" ph="retweetCount...retweetCount" />
+                <marker date="1497602200000" expanded="true" signature="1116:1118" ph="id...id" />
+                <marker date="1497602200000" expanded="true" signature="1147:1151" ph="user...user" />
+                <marker date="1497602200000" expanded="true" signature="1147:1177" ph="user...{name}" />
+                <marker date="1497602200000" expanded="true" signature="1151:1177" ph="{...}" />
+                <marker date="1497602200000" expanded="true" signature="1163:1167" ph="name...name" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_news.ex" pinned="false" current-in-tab="true">
+      <file leaf-file-name="trending_tweets.ex" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="39">
+              <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_news.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/bullsource/news/get_news.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="112" column="0" lean-forward="true" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="33" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -100,7 +75,7 @@
         <entry file="file://$PROJECT_DIR$/lib/bullsource/news/get_networks.ex">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+              <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -119,8 +94,28 @@
       <file leaf-file-name="news_tweet_types.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            <state relative-caret-position="216">
+              <caret line="30" column="18" lean-forward="false" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="discussion_types.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="91" column="20" lean-forward="false" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="account_types.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -139,8 +134,8 @@
       <file leaf-file-name="vote_types.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/vote_types.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-390">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="129">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -164,6 +159,8 @@
       <find>#w</find>
       <find>#</find>
       <find>wrapper</find>
+      <find>bool</find>
+      <find>fulltext</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/assets</dir>
@@ -189,15 +186,15 @@
         <option value="$PROJECT_DIR$/assets/package.json" />
         <option value="$PROJECT_DIR$/assets/src/index.html" />
         <option value="$PROJECT_DIR$/config/dev.exs" />
-        <option value="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
         <option value="$PROJECT_DIR$/assets/src/index.js" />
         <option value="$PROJECT_DIR$/assets/webpack.config.js" />
         <option value="$PROJECT_DIR$/lib/bullsource/web/endpoint.ex" />
         <option value="$PROJECT_DIR$/config/config.exs" />
         <option value="$PROJECT_DIR$/lib/bullsource/web/router.ex" />
-        <option value="$PROJECT_DIR$/assets/src/components/Home.js" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/news/get_news.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex" />
+        <option value="$PROJECT_DIR$/assets/src/components/Home.js" />
+        <option value="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
       </list>
     </option>
   </component>
@@ -311,28 +308,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="social_media" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -360,28 +335,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="twitter" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="news" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -443,106 +396,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphql" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resolvers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="votes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphql" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resolvers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="discussion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphql" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resolvers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -584,24 +437,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -751,14 +586,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/.babelrc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -788,7 +615,7 @@
         <state relative-caret-position="15">
           <caret line="1" column="27" lean-forward="false" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -881,13 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="104" column="25" lean-forward="false" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1016,14 +836,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="67" column="43" lean-forward="false" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
@@ -1069,52 +881,8 @@
         <state relative-caret-position="165">
           <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-            <marker date="1497589846000" expanded="true" signature="842:1027" ph="{...}" />
-            <marker date="1497589846000" expanded="true" signature="848:857" ph="newsTweet...newsTweet" />
-            <marker date="1497589846000" expanded="true" signature="848:1023" ph="newsTweet...{&#10;      network{&#10;        id&#10;        name&#10;      }&#10;      news{title}&#10;      tweets{retweetCount, id, retweetedStatus{fullText}, user{name}}&#10;    }" />
-            <marker date="1497589846000" expanded="true" signature="857:1023" ph="{...}" />
-            <marker date="1497589846000" expanded="true" signature="865:872" ph="network...network" />
-            <marker date="1497589846000" expanded="true" signature="865:917" ph="network...{&#10;        id&#10;        name&#10;      }" />
-            <marker date="1497589846000" expanded="true" signature="872:917" ph="{...}" />
-            <marker date="1497589846000" expanded="true" signature="882:884" ph="id...id" />
-            <marker date="1497589846000" expanded="true" signature="893:897" ph="name...name" />
-            <marker date="1497589846000" expanded="true" signature="924:928" ph="news...news" />
-            <marker date="1497589846000" expanded="true" signature="924:947" ph="news...{title}" />
-            <marker date="1497589846000" expanded="true" signature="928:947" ph="{...}" />
-            <marker date="1497589846000" expanded="true" signature="929:934" ph="title...title" />
-            <marker date="1497589846000" expanded="true" signature="954:960" ph="tweets...tweets" />
-            <marker date="1497589846000" expanded="true" signature="954:1017" ph="tweets...{retweetCount, id, retweetedStatus{fullText}, user{name}}" />
-            <marker date="1497589846000" expanded="true" signature="960:1017" ph="{...}" />
-            <marker date="1497589846000" expanded="true" signature="961:973" ph="retweetCount...retweetCount" />
-            <marker date="1497589846000" expanded="true" signature="975:977" ph="id...id" />
-            <marker date="1497589846000" expanded="true" signature="979:994" ph="retweetedStatus...retweetedStatus" />
-            <marker date="1497589846000" expanded="true" signature="979:1004" ph="retweetedStatus...{fullText}" />
-            <marker date="1497589846000" expanded="true" signature="994:1004" ph="{...}" />
-            <marker date="1497589846000" expanded="true" signature="995:1003" ph="fullText...fullText" />
-            <marker date="1497589846000" expanded="true" signature="1006:1010" ph="user...user" />
-            <marker date="1497589846000" expanded="true" signature="1006:1016" ph="user...{name}" />
-            <marker date="1497589846000" expanded="true" signature="1010:1016" ph="{...}" />
-            <marker date="1497589846000" expanded="true" signature="1011:1015" ph="name...name" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/vote_types.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-390">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1134,26 +902,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex">
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/news/get_networks.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        <state relative-caret-position="150">
+          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/news/get_networks.ex">
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        <state relative-caret-position="159">
+          <caret line="91" column="20" lean-forward="false" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/vote_types.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/news/get_news.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="112" column="0" lean-forward="true" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="33" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="30" column="18" lean-forward="false" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="10" column="55" lean-forward="false" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+            <marker date="1497602200000" expanded="true" signature="478:675" ph="..." />
+            <marker date="1497602200000" expanded="true" signature="949:1214" ph="{...}" />
+            <marker date="1497602200000" expanded="true" signature="955:964" ph="newsTweet...newsTweet" />
+            <marker date="1497602200000" expanded="true" signature="955:1210" ph="newsTweet...{&#10;      network{&#10;        id&#10;        name&#10;      }&#10;      news{title}&#10;      tweets{retweetCount, id, retweetedStatus{fullText}, user{name}}&#10;    }" />
+            <marker date="1497602200000" expanded="true" signature="964:1210" ph="{...}" />
+            <marker date="1497602200000" expanded="true" signature="972:979" ph="network...network" />
+            <marker date="1497602200000" expanded="true" signature="972:1024" ph="network...{&#10;        id&#10;        name&#10;      }" />
+            <marker date="1497602200000" expanded="true" signature="979:1024" ph="{...}" />
+            <marker date="1497602200000" expanded="true" signature="989:991" ph="id...id" />
+            <marker date="1497602200000" expanded="true" signature="1000:1004" ph="name...name" />
+            <marker date="1497602200000" expanded="true" signature="1031:1035" ph="news...news" />
+            <marker date="1497602200000" expanded="true" signature="1031:1070" ph="news...{title}" />
+            <marker date="1497602200000" expanded="true" signature="1035:1070" ph="{...}" />
+            <marker date="1497602200000" expanded="true" signature="1045:1050" ph="title...title" />
+            <marker date="1497602200000" expanded="true" signature="1077:1083" ph="tweets...tweets" />
+            <marker date="1497602200000" expanded="true" signature="1077:1204" ph="tweets...{retweetCount, id, retweetedStatus{fullText}, user{name}}" />
+            <marker date="1497602200000" expanded="true" signature="1083:1204" ph="{...}" />
+            <marker date="1497602200000" expanded="true" signature="1093:1105" ph="retweetCount...retweetCount" />
+            <marker date="1497602200000" expanded="true" signature="1116:1118" ph="id...id" />
+            <marker date="1497602200000" expanded="true" signature="1147:1151" ph="user...user" />
+            <marker date="1497602200000" expanded="true" signature="1147:1177" ph="user...{name}" />
+            <marker date="1497602200000" expanded="true" signature="1151:1177" ph="{...}" />
+            <marker date="1497602200000" expanded="true" signature="1163:1167" ph="name...name" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
           <folding />
         </state>
       </provider>
