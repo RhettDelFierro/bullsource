@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 
 const Root = () => {
     return <div>Bullsource</div>
-}
+};
 
 ReactDOM.render(
     <Root />,
-    document.querySelector('#root')
+    document.getElementById('root')
 );
