@@ -37,6 +37,9 @@
   .navbar {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    padding: 0;
+    grid-gap: 0;
   }
 
   .active {
@@ -46,6 +49,7 @@
   @media screen and (max-width: 740px) {
     .navbar {
       background-color: blue;
+
     }
 
   }
