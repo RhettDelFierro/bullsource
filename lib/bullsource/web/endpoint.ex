@@ -38,7 +38,7 @@ defmodule Bullsource.Web.Endpoint do
     key: "_bullsource_key",
     signing_salt: "MiQCU7QG"
 
-  plug CORSPlug, origin: ["http://localhost:4001"]
+  plug CORSPlug, origin: ["http://localhost:8080"]
 
   plug Bullsource.Web.Router
 

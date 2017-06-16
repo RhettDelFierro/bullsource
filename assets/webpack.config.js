@@ -39,4 +39,8 @@ module.exports = {
         new ExtractTextPlugin('style.css'),
         new webpack.optimize.CommonsChunkPlugin({names: ['vendor', 'manifest']})
     ]
+    // devServer: {
+    //     inline: true,
+    //     port: 4000
+    // },
 };

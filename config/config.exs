@@ -36,3 +36,8 @@ config :guardian, Guardian,
       default: [ :read, :write],
       admin: [:dashboard, :make_payments]
     }
+
+config :cors_plug,
+  origin: ["http://localhost:8080"],
+  max_age: 86400,
+  methods: ["GET", "POST"]
