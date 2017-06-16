@@ -11,12 +11,13 @@
   "author": "Rhett Del Fierro",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.15.3",
     "apollo-client": "^0.8.1",
+    "axios": "^0.15.3",
     "graphql": "^0.8.2",
-    "react-apollo": "^0.9.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-apollo": "^0.9.0",
+    "react-dom": "^15.4.2",
+    "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
     "extract-text-webpack-plugin": "^2.0.0-beta.4",

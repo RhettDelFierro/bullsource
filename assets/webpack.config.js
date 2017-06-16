@@ -3,7 +3,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const VENDOR_LIBS = ["axios", "apollo-client", "graphql", "react-apollo", "react", "react-dom"];
+const VENDOR_LIBS = ["axios", "apollo-client", "graphql", "react-apollo", "react", "react-dom", "react-router-dom"];
 
 module.exports = {
     entry: {
@@ -13,7 +13,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[chunkHash].js',
-        // publicPath: 'dist/'
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -38,9 +38,10 @@ module.exports = {
         }),
         new ExtractTextPlugin('style.css'),
         new webpack.optimize.CommonsChunkPlugin({names: ['vendor', 'manifest']})
-    ]
-    // devServer: {
-    //     inline: true,
-    //     port: 4000
-    // },
+    ],
+    devServer: {
+        historyApiFallback: true,
+        // inline: true,
+        // port: 4000
+    },
 };
