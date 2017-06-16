@@ -4,10 +4,28 @@ import { graphql } from 'react-apollo';
 
 
 class Home extends Component {
+    renderNewsTweets(){
+      return this.props.data.newsTweet.map(newsTweet => {
+          return (
+              <div>
+                <img src={newsTweet.news.urlToImage} />
+                <p><b>{newsTweet.network.name}</b> {newsTweet.news.title}</p>
+                  <div>
+                      {newsTweet.tweets.map(tweet => <li><b>{tweet.user.name}</b> {tweet.retweetedStatus.fullText}</li>)}
+                  </div>
+              </div>
+          )
+      })
+    }
+
     render() {
+
+        if (this.props.data.loading) {return <div>Loading...</div>}
+
         return (
+
             <div>
-                Home
+                {this.renderNewsTweets()}
             </div>
         )
 
@@ -20,8 +38,9 @@ const query = gql`
       network{
         id
         name
+        url
       }
-      news{title}
+      news{title, urlToImage}
       tweets{retweetCount, id, retweetedStatus{fullText}, user{name}}
     }
   }
