@@ -1,39 +1,28 @@
 import React, {Component} from "react";
-import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
 import newsTweetFilterQuery from "../../queries/fetchFilterNewsTweets";
-import signUpMutation from "../../mutations/signup"
+import Headline from "../headline/Headline"
 
 class Categories extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            username: '',
-            email: '',
-            password: '',
-            confirm_password: ''
-        };
+    renderNewsTweets(){
+        console.log(this.props.data.newsTweetsBy);
+        return this.props.data.newsTweetsBy.map(newsTweet => <Headline newsTweet={newsTweet} />)
     }
 
     render() {
 
-        return (
-            <div>
+        if (this.props.data.loading) {return <div>Loading...</div>}
 
+        return (
+
+            <div>
+                {this.renderNewsTweets()}
             </div>
         )
-
-    }
-}
-
-const query = gql`
-    
-`;
-
+    }}
 
 
 export default graphql(newsTweetFilterQuery,{
-    options: (props) => { return { variables: { category: props.match.category } } }
-})(withRouter(Category));
+    options: (props) => { return { variables: { category: props.match.params.category } } }
+})(withRouter(Categories));
