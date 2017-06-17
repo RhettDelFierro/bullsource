@@ -13,5 +13,5 @@ export const Nav = () => {
             </li>
         </ul>
     )
-}
+};
 

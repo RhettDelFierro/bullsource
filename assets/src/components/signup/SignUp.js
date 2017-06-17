@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import gql from "graphql-tag";
-import {graphql} from "react-apollo";
+import { graphql } from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
 import newsTweetQuery from "../../queries/fetchNewsTweets";
 import signUpMutation from "../../mutations/signup"
