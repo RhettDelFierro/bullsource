@@ -41,3 +41,6 @@ config :cors_plug,
   origin: ["http://localhost:8080"],
   max_age: 86400,
   methods: ["GET", "POST"]
+
+config :absinthe,
+  adapter: Absinthe.Adapter.Passthrough

@@ -11,6 +11,8 @@ export default gql`
       news{
         title
         url
+        urlToImage
+        publishedAt  
       }
       tweets{
         retweetCount, 

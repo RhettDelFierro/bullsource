@@ -133,7 +133,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
   defp make_tweet_requests([n | ns], acc, token) do
     %{network: network, news: headlines} = n
-    headlines = Enum.take(headlines,3) #take only the top 3 headlines from each news source.
+    headlines = Enum.take(headlines,5) #take only the top 5 headlines from each news source.
     tasks =
       Enum.map(headlines,&build_search_url_query(&1)) #have search queries
       |> Enum.map(fn {headline, query_url} ->
@@ -147,8 +147,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
   def build_search_url_query(headline) do
     encoded_query = URI.encode(headline.url)
-    filters = "%20filter:news%20exclude:retweets%20exclude:replies&tweet_mode=extended&result_type=popular"
-
+#    filters = "%20filter:news%20exclude:retweets%20exclude:replies&tweet_mode=extended&result_type=popular"
+    filters = "%20filter:news%20exclude:retweets&tweet_mode=extended&result_type=popular"
     query_url = @twitter_search_filter_url <> "%22#{encoded_query}%22#{filters}"
     {headline, query_url}
   end

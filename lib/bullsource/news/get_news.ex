@@ -93,7 +93,7 @@ defmodule Bullsource.News.GetNews do
   end
 
   defp format_list({network,task}) do
-    %{"articles" => articles, "sortBy" => sortBy} = parse_json(Task.await(task))
+    %{articles: articles, sortBy: sortBy} = parse_json(Task.await(task))
 
     %{
       network: network,
@@ -112,7 +112,13 @@ defmodule Bullsource.News.GetNews do
 #  end
 
   defp parse_json({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    body |> Poison.decode!(as: %{"articles" => [%News{}]})
+    %{"articles" => articles, "sortBy" => sortBy} = body |> Poison.decode!(as: %{"articles" => [%News{}]})
+
+    articles = Enum.map(articles, &Map.put(&1, :url_to_image, &1.urlToImage))
+     |> Enum.map(&Map.put(&1, :published_at, &1.publishedAt))
+     |> Enum.map(&Map.drop(&1, [:urlToImage, :publishedAt]))
+
+     %{articles: articles, sortBy: sortBy}
   end
 
   defp parse_json(error) do

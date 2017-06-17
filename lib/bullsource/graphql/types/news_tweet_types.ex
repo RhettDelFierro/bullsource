@@ -9,8 +9,8 @@ defmodule Bullsource.GraphQL.Types.NewsTweetTypes do
     field :description, :string
     field :country, :string
     field :url, :string
-    field :urlToImage, :string
-    field :publishedAt, :string
+    field :url_to_image, :string
+    field :published_at, :string
   end
 
   @desc "Network"

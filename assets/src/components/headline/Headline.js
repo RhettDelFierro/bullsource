@@ -13,11 +13,13 @@ import React from "react";
 *     id   :: String - the network id name
 *     name :: String - name of the network
 *     url  :: String - url of the network's site
-*
+ *
 *   news
-*     title  :: String - title of the article
-*     url    :: String - url link to the article on the network's site
-*
+*     title       :: String - title of the article
+*     url         :: String - url link to the article on the network's site
+*     urlToImage  :: String - url of news image
+*     publishedAt :: String - time the headline was published.
+ *
 *   tweets          :: [Object]
 *     retweetCount  :: Integer - number of times the tweet has been retweeted
 *     id_str        :: String  - id of the tweet
