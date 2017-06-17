@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import gql from "graphql-tag";
 import {graphql} from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
-import newsTweetQuery from '../../queries/fetchNewsTweet'
-
+import newsTweetQuery from "../../queries/fetchNewsTweet";
+import signUpMutation from "../../mutations/signup"
 
 class SignUp extends Component {
     constructor(props) {
@@ -18,7 +18,6 @@ class SignUp extends Component {
     }
 
     onSubmit(event) {
-        console.log('called');
         event.preventDefault();
 
         //attempt mutation:
@@ -29,13 +28,13 @@ class SignUp extends Component {
                 password: this.state.password
             },
             refetchQueries: [{query: newsTweetQuery}]
-        }).then((d) => {
-            let token = d.registerUser.token;
+        }).then((response) => {
+            let token = response.data.registerUser.token;
             localStorage.setItem('token', token);
             this.props.history.push("/");
         })
             .catch((e) => {
-              console.log('error', e);
+                console.log('error', e);
             })
     }
 
@@ -77,20 +76,6 @@ class SignUp extends Component {
     }
 }
 
-const mutation = gql`
-  mutation RegisterUser($email: String, $password: String, $username: String){
-    registerUser(email: $email, 
-                 password: $password, 
-                 username: $username) {
-      token
-      user{
-        id
-        email
-        username
-      }
-    }
-  }  
-`;
 
 
-export default graphql(mutation)(withRouter(SignUp));
+export default graphql(signUpMutation)(withRouter(SignUp));

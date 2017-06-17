@@ -13,6 +13,7 @@ import SignUp from "./components/signup/SignUp";
 const networkInterface = createNetworkInterface({
     uri: 'http://localhost:4000/graphql',
 });
+
 networkInterface.use([{
     applyMiddleware(req, next) {
         if (!req.options.headers) {
