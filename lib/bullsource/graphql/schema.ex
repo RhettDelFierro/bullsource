@@ -19,9 +19,13 @@ defmodule Bullsource.GraphQL.Schema do
     field :news_tweets, list_of(:news_tweet),
       do: resolve &Bullsource.GraphQL.NewsTweetsResolver.list/2
 
-    @desc "Get the top news and tweets"
-    field :news_tweets_by, list_of(:news_tweet),
-      do: resolve &Bullsource.GraphQL.NewsTweetsResolver.filter/2
+    @desc "Get the top news and tweets filtered by category"
+    field :news_tweets_by, list_of(:news_tweet) do
+
+      @desc "The Category of the NewsTweets"
+      arg :category, non_null(:string)
+      resolve &Bullsource.GraphQL.NewsTweetsResolver.filter/2
+    end
 
     @desc "Lists all the topics"
     field :topic, list_of(:topic),
