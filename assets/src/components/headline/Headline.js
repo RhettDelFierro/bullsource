@@ -8,7 +8,7 @@ import React from "react";
 *
 * Parameters:
 *
-* newsTweet  :: Object
+* newsTweets  :: Object
 *   network
 *     id   :: String - the network id name
 *     name :: String - name of the network

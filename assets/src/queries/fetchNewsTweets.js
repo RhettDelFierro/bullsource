@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export default gql`
     {
-    newsTweet{
+    newsTweets{
       network{
         id
         name

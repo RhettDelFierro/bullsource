@@ -7,8 +7,6 @@ defmodule Bullsource.GraphQL.PostResolver do
 
   def list(_args, _context), do: {:ok, Repo.all(Post)}
 
-
-
   def create(%{thread_id: thread_id, post: post}, %{context: %{current_user: current_user}}) do
      post_params = Map.put_new(post, :thread_id, thread_id)
 #     [p|ps] = post.proofs # also will have to loop through all the proofs in ReferenceValidator

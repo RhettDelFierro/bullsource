@@ -12,4 +12,11 @@ defmodule Bullsource.GraphQL.NewsTweetsResolver do
 #    Enum.each(feed,&(IO.inspect &1.tweets))
     {:ok, feed}
   end
+
+  def filter(%{category: category, network: network}, _context) do
+    feed = get_tweets([])
+      |> Enum.filter(&(&1.news.category == category || &1.network.name == network))
+
+    {:ok, feed}
+  end
 end

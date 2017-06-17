@@ -6,13 +6,11 @@ defmodule Bullsource.GraphQL.UserResolver do
 
 
 
-  def get_current__user(_args, %{context: %{current_user: current_user}}),
-    do: {:ok, find(current_user.id)}
-  def get_current__user(_args, _context), do: {:ok, nil}
+  def get_current_user(_args, %{context: %{current_user: current_user}}), do: find(%{id: current_user.id})
+  def get_current_user(_args, _context), do: {:ok, nil}
 
 
   def login_user(args, _context), do: generate_session(&authenticate/1,args)
-
 
   def register(args, _context),   do: generate_session(&create_user/1,args)
 

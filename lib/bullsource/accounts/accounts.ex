@@ -8,7 +8,7 @@ defmodule Bullsource.Accounts do
 
   def find(%{id: id})do
     case Repo.get(User, id) do
-      nil -> {:error, "User id #{id} not found"}
+      nil -> {:error, %{message: "User id #{id} not found"}}
       user -> {:ok, user}
     end
   end

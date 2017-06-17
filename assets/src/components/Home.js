@@ -4,12 +4,12 @@ import { graphql } from 'react-apollo';
 
 import Headline from './headline/Headline';
 
-import newsTweetQuery from '../queries/fetchNewsTweet'
+import newsTweetQuery from '../queries/fetchNewsTweets'
 
 
 class Home extends Component {
     renderNewsTweets(){
-      return this.props.data.newsTweet.map(newsTweet => <Headline newsTweet={newsTweet} />)
+      return this.props.data.newsTweets.map(newsTweet => <Headline newsTweet={newsTweet} />)
     }
 
     render() {
