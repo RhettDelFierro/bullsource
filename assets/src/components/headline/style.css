@@ -1,3 +1,13 @@
 .headline {
+    display: flex;
     border: 1px solid black;
+}
+
+.image_thumbnail {
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;
+    margin: auto;
 }
