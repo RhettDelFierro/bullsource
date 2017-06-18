@@ -43,7 +43,7 @@ const Root = () => {
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route path="/signup" component={SignUp} />
-                        <Route path="/category/:category" component={Categories} />
+                        <Route exact path="/category/:category" component={Categories} />
                         <Route path="/category/:category/:headline_id" component={Discussion} />
                         <Route render={ () => <p>Not Found</p> } />
                     </Switch>

@@ -7,6 +7,7 @@ export default gql`
         id
         name
         url
+        category
       }
       news{
         title

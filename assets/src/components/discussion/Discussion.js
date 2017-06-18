@@ -19,4 +19,4 @@ class Discussion extends Component {
     }
 }
 
-export default graphql(signUpMutation)(withRouter(Discussion));
+export default (withRouter(Discussion));
