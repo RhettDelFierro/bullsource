@@ -120,7 +120,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
       |> make_tweet_requests([], token)
       |> Enum.map(&format_list(&1, [])) # => [%{network, headline, tweets}]
       |> List.flatten
-      |> Enum.filter(&(Enum.count(&1.tweets) >= 1 )) #filter out stories with no tweets.
+      |> Enum.filter(&(length(&1.tweets) >= 1 )) #filter out stories with no tweets.
 #      |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
     stories
   end

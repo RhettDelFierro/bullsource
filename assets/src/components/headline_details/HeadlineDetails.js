@@ -37,10 +37,11 @@ import "./style.css";
  * Returns:
  * <div>
  */
-export default ({ network, news, tweets }) => {
-
+export default ({ newsTweet }) => {
+   const { network, news, tweets } = newsTweet;
     let utcTime;
     let time;
+
     if (news.publishedAt) {
         utcTime = moment.utc(news.publishedAt).fromNow();
         time = utcTime === "Invalid date" ? news.publishedAt : utcTime;
