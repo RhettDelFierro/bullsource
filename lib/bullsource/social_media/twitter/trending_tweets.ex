@@ -120,6 +120,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
       |> make_tweet_requests([], token)
       |> Enum.map(&format_list(&1, [])) # => [%{network, headline, tweets}]
       |> List.flatten
+      |> Enum.filter(&(Enum.count(&1.tweets) >= 1 )) #filter out stories with no tweets.
+#      |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
     stories
   end
 
@@ -176,14 +178,33 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   defp format_list({network, []}, acc), do: acc
 
   defp format_list({network, [t | ts] }, acc) do
+#     {headline, task} = t
+#     tweets = Task.await(task) |> parse_json_final()
+#     |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
+
+#     news = %{network: network, news: headline, tweets: tweets}
+#     format_list({network, ts}, [news | acc])
      {headline, task} = t
-#     IO.puts "++++++#{inspect task}"
-     tweets = parse_json_final(Task.await(task))
-     |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
+     tweets = Task.await(task) |> parse_json_final()
+#       |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
 #     IO.puts "+_+_+_+_+_+_+_+_+_+_+#{inspect tweets}"
      news = %{network: network, news: headline, tweets: tweets}
      format_list({network, ts}, [news | acc])
+
   end
+
+#in the block above:
+#     {headline, task} = t
+#     res_task = Task.await(task)
+#     IO.puts "++++++#{inspect task}"
+#     tweets = parse_json_final(Task.await(task))
+#     tweets = Task.await(task)
+#     IO.inspect headline
+#     tweets = parse_json_final(tweets)
+#     |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
+#     IO.puts "+_+_+_+_+_+_+_+_+_+_+#{inspect tweets}"
+#     news = %{network: network, news: headline, tweets: tweets}
+#     format_list({network, ts}, [news | acc])
 
 
   defp get_bearer_token(secret) do
