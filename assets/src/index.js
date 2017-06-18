@@ -7,8 +7,9 @@ import {ApolloProvider} from "react-apollo";
 import { CategoryNav } from './components/category_nav/CategoryNav'
 import { Nav } from './components/nav/Nav'
 import Home from "./components/Home";
-import SignUp from "./components/signup/SignUp";
 import Categories from "./components/categories/Categories";
+import Discussion from "./components/discussion/Discussion";
+import SignUp from "./components/signup/SignUp";
 
 //create new instance of ApolloClient for the ApolloProvider
 const networkInterface = createNetworkInterface({
@@ -28,7 +29,8 @@ networkInterface.use([{
 }]);
 
 const client = new ApolloClient({
-    networkInterface
+    networkInterface,
+    dataIdFromObject: o => o.id
 });
 
 const Root = () => {
@@ -39,12 +41,11 @@ const Root = () => {
                     <CategoryNav />
                     <Nav />
                     <Switch>
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/signup" component={SignUp}/>
-                        <Route path="/category/:category" component={Categories}/>
-                        {/*this will be for discussion*/}
-                        {/*<Route path="/category/:category/:headline_id" component={Discussion}/>*/}
-                        <Route render={ () => <p>Not Found</p> }/>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/signup" component={SignUp} />
+                        <Route path="/category/:category" component={Categories} />
+                        <Route path="/category/:category/:headline_id" component={Discussion} />
+                        <Route render={ () => <p>Not Found</p> } />
                     </Switch>
                 </div>
             </BrowserRouter>

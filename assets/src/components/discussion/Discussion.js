@@ -1,35 +1,22 @@
 import React, {Component} from "react";
-import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
-import newsTweetFilterQuery from "../../queries/fetchFilterNewsTweets";
+
+import PostForm from '../post_form/PostForm';
+import fetchThread from "../../queries/fetchThread";
 import signUpMutation from "../../mutations/signup"
 
-class Categories extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            username: '',
-            email: '',
-            password: '',
-            confirm_password: ''
-        };
-    }
-
+class Discussion extends Component {
+    //make will get props from the /category/:category/:headline_id # see the router.
     render() {
 
         return (
             <div>
-
+              <PostForm/>
             </div>
         )
 
     }
 }
 
-const query = gql`
-
-`;
-
-export default graphql(signUpMutation)(withRouter(Category));
+export default graphql(signUpMutation)(withRouter(Discussion));
