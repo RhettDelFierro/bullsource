@@ -148,7 +148,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   def build_search_url_query(headline) do
     encoded_query = URI.encode(headline.url)
 #    filters = "%20filter:news%20exclude:retweets%20exclude:replies&tweet_mode=extended&result_type=popular"
-    filters = "%20filter:news%20exclude:retweets&tweet_mode=extended&result_type=popular"
+#    filters = "%20filter:news%20exclude:retweets&tweet_mode=extended&result_type=popular"
+    filters = "%20filter:news%20exclude:retweets&tweet_mode=extended"
     query_url = @twitter_search_filter_url <> "%22#{encoded_query}%22#{filters}"
     {headline, query_url}
   end

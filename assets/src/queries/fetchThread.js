@@ -1,28 +1,30 @@
 import gql from 'graphql-tag'
 
 export default gql`
-    {
-    newsTweets{
-      network{
-        id
-        name
-        url
-      }
-      news{
-        title
-        url
-        urlToImage
-        publishedAt  
-      }
-      tweets{
-        retweetCount, 
-        id_str, 
-        fullText,
-        user{
-          name
-        },
-        retweeted
-      }
+    query NewsTweet($title: String!){
+        newsTweet(title: $title) {
+            network{
+                id
+                name
+                url
+                category
+            }
+            news{
+                title
+                url
+                urlToImage
+                publishedAt
+                description
+            }
+            tweets{
+                retweetCount,
+                id_str,
+                fullText,
+                user{
+                    name
+                },
+                retweeted
+            }
+        }
     }
-  }
 `;

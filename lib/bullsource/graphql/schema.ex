@@ -27,6 +27,14 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.NewsTweetsResolver.filter/2
     end
 
+    @desc "Get one NewsTweet."
+    field :news_tweet, :news_tweet do
+
+      @desc "The title of the NewsTweet"
+      arg :title, non_null(:string)
+      resolve &Bullsource.GraphQL.NewsTweetsResolver.get_one_by_title/2
+    end
+
     @desc "Lists all the topics"
     field :topic, list_of(:topic),
       do: resolve &Bullsource.GraphQL.TopicResolver.list/2

@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/components/headline_details/HeadlineDetails.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/components/headline_details/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/discussion/Discussion.js" afterPath="$PROJECT_DIR$/assets/src/components/discussion/Discussion.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/index.js" afterPath="$PROJECT_DIR$/assets/src/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/queries/fetchFilterNewsTweets.js" afterPath="$PROJECT_DIR$/assets/src/queries/fetchFilterNewsTweets.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/queries/fetchNewsTweets.js" afterPath="$PROJECT_DIR$/assets/src/queries/fetchNewsTweets.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/headline/Headline.js" afterPath="$PROJECT_DIR$/assets/src/components/headline/Headline.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/queries/fetchThread.js" afterPath="$PROJECT_DIR$/assets/src/queries/fetchThread.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" afterPath="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,23 +22,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/Home.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-127">
-              <caret line="0" column="7" lean-forward="true" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Headline.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/headline/Headline.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="43" column="73" lean-forward="true" selection-start-line="43" selection-start-column="73" selection-end-line="43" selection-end-column="73" />
+            <state relative-caret-position="353">
+              <caret line="69" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -45,8 +37,8 @@
       <file leaf-file-name="Categories.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/categories/Categories.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="128">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -57,8 +49,8 @@
       <file leaf-file-name="Discussion.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/discussion/Discussion.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="257">
+              <caret line="18" column="17" lean-forward="false" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -66,21 +58,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostForm.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
+      <file leaf-file-name="HeadlineDetails.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/headline_details/HeadlineDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-              <folding />
+            <state relative-caret-position="293">
+              <caret line="57" column="12" lean-forward="false" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/style.css">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/headline_details/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="45">
+              <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -89,8 +83,8 @@
       <file leaf-file-name="fetchFilterNewsTweets.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchFilterNewsTweets.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+            <state relative-caret-position="326">
+              <caret line="28" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <marker date="1497749694000" expanded="true" signature="54:444" ph="query...{&#10;    newsTweetsBy(category: $category) {&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt&#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }  &#10;  }" />
                 <marker date="1497749694000" expanded="true" signature="60:72" ph="NewsTweetsBy...NewsTweetsBy" />
@@ -137,60 +131,75 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
               <caret line="29" column="55" lean-forward="false" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fetchNewsTweets.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchNewsTweets.js">
+      <file leaf-file-name="schema.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-              <folding>
-                <marker date="1497749699000" expanded="true" signature="55:383" ph="{...}" />
-                <marker date="1497749699000" expanded="true" signature="61:71" ph="newsTweets...newsTweets" />
-                <marker date="1497749699000" expanded="true" signature="61:379" ph="newsTweets...{&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt  &#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }" />
-                <marker date="1497749699000" expanded="true" signature="71:379" ph="{...}" />
-                <marker date="1497749699000" expanded="true" signature="79:86" ph="network...network" />
-                <marker date="1497749699000" expanded="true" signature="79:148" ph="network...{&#10;        id&#10;        name&#10;        url&#10;      }" />
-                <marker date="1497749699000" expanded="true" signature="86:148" ph="{...}" />
-                <marker date="1497749699000" expanded="true" signature="96:98" ph="id...id" />
-                <marker date="1497749699000" expanded="true" signature="107:111" ph="name...name" />
-                <marker date="1497749699000" expanded="true" signature="120:123" ph="url...url" />
-                <marker date="1497749699000" expanded="true" signature="132:140" ph="category...category" />
-                <marker date="1497749699000" expanded="true" signature="155:159" ph="news...news" />
-                <marker date="1497749699000" expanded="true" signature="155:235" ph="news...{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt  &#10;      }" />
-                <marker date="1497749699000" expanded="true" signature="159:235" ph="{...}" />
-                <marker date="1497749699000" expanded="true" signature="169:174" ph="title...title" />
-                <marker date="1497749699000" expanded="true" signature="183:186" ph="url...url" />
-                <marker date="1497749699000" expanded="true" signature="195:205" ph="urlToImage...urlToImage" />
-                <marker date="1497749699000" expanded="true" signature="214:225" ph="publishedAt...publishedAt" />
-                <marker date="1497749699000" expanded="true" signature="242:248" ph="tweets...tweets" />
-                <marker date="1497749699000" expanded="true" signature="242:373" ph="tweets...{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }" />
-                <marker date="1497749699000" expanded="true" signature="248:373" ph="{...}" />
-                <marker date="1497749699000" expanded="true" signature="258:270" ph="retweetCount...retweetCount" />
-                <marker date="1497749699000" expanded="true" signature="281:287" ph="id_str...id_str" />
-                <marker date="1497749699000" expanded="true" signature="298:306" ph="fullText...fullText" />
-                <marker date="1497749699000" expanded="true" signature="316:320" ph="user...user" />
-                <marker date="1497749699000" expanded="true" signature="316:346" ph="user...{&#10;          name&#10;        }" />
-                <marker date="1497749699000" expanded="true" signature="320:346" ph="{...}" />
-                <marker date="1497749699000" expanded="true" signature="332:336" ph="name...name" />
-                <marker date="1497749699000" expanded="true" signature="356:365" ph="retweeted...retweeted" />
-              </folding>
+            <state relative-caret-position="230">
+              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/assets/src/index.js">
+      <file leaf-file-name="news_tweets_resolver.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="45" column="37" lean-forward="false" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+            <state relative-caret-position="278">
+              <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fetchThread.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchThread.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <marker date="1497753846000" expanded="true" signature="55:622" ph="query...{&#10;        getOneHeadline(title: $title) {&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }&#10;    }" />
+                <marker date="1497753846000" expanded="true" signature="61:70" ph="NewsTweet...NewsTweet" />
+                <marker date="1497753846000" expanded="true" signature="70:87" ph="(...)" />
+                <marker date="1497753846000" expanded="true" signature="79:85" ph="String...String" />
+                <marker date="1497753846000" expanded="true" signature="87:622" ph="{...}" />
+                <marker date="1497753846000" expanded="true" signature="97:106" ph="newsTweet...newsTweet" />
+                <marker date="1497753846000" expanded="true" signature="97:616" ph="newsTweet...{&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;                description&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }" />
+                <marker date="1497753846000" expanded="true" signature="106:121" ph="(...)" />
+                <marker date="1497753846000" expanded="true" signature="106:616" ph="getOneHeadline...{&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }" />
+                <marker date="1497753846000" expanded="true" signature="107:112" ph="title...title" />
+                <marker date="1497753846000" expanded="true" signature="122:616" ph="{...}" />
+                <marker date="1497753846000" expanded="true" signature="136:143" ph="network...network" />
+                <marker date="1497753846000" expanded="true" signature="136:243" ph="network...{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }" />
+                <marker date="1497753846000" expanded="true" signature="143:243" ph="{...}" />
+                <marker date="1497753846000" expanded="true" signature="161:163" ph="id...id" />
+                <marker date="1497753846000" expanded="true" signature="180:184" ph="name...name" />
+                <marker date="1497753846000" expanded="true" signature="201:204" ph="url...url" />
+                <marker date="1497753846000" expanded="true" signature="221:229" ph="category...category" />
+                <marker date="1497753846000" expanded="true" signature="256:260" ph="news...news" />
+                <marker date="1497753846000" expanded="true" signature="256:400" ph="news...{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }" />
+                <marker date="1497753846000" expanded="true" signature="260:400" ph="{...}" />
+                <marker date="1497753846000" expanded="true" signature="278:283" ph="title...title" />
+                <marker date="1497753846000" expanded="true" signature="300:303" ph="url...url" />
+                <marker date="1497753846000" expanded="true" signature="320:330" ph="urlToImage...urlToImage" />
+                <marker date="1497753846000" expanded="true" signature="347:358" ph="publishedAt...publishedAt" />
+                <marker date="1497753846000" expanded="true" signature="375:386" ph="description...description" />
+                <marker date="1497753846000" expanded="true" signature="413:419" ph="tweets...tweets" />
+                <marker date="1497753846000" expanded="true" signature="413:606" ph="tweets...{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }" />
+                <marker date="1497753846000" expanded="true" signature="419:606" ph="{...}" />
+                <marker date="1497753846000" expanded="true" signature="437:449" ph="retweetCount...retweetCount" />
+                <marker date="1497753846000" expanded="true" signature="467:473" ph="id_str...id_str" />
+                <marker date="1497753846000" expanded="true" signature="491:499" ph="fullText...fullText" />
+                <marker date="1497753846000" expanded="true" signature="517:521" ph="user...user" />
+                <marker date="1497753846000" expanded="true" signature="517:565" ph="user...{&#10;                    name&#10;                }" />
+                <marker date="1497753846000" expanded="true" signature="521:565" ph="{...}" />
+                <marker date="1497753846000" expanded="true" signature="543:547" ph="name...name" />
+                <marker date="1497753846000" expanded="true" signature="583:592" ph="retweeted...retweeted" />
+                <marker date="1497753846000" expanded="true" signature="619:622" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -266,13 +275,9 @@
         <option value="$PROJECT_DIR$/assets/src/components/signup/SignUp.js" />
         <option value="$PROJECT_DIR$/assets/src/components/category/Category.js" />
         <option value="$PROJECT_DIR$/assets/src/mutations/post.js" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex" />
         <option value="$PROJECT_DIR$/assets/src/components/category_nav/CategoryNav.js" />
-        <option value="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
         <option value="$PROJECT_DIR$/config/config.exs" />
         <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex" />
-        <option value="$PROJECT_DIR$/assets/src/queries/fetchThread.js" />
         <option value="$PROJECT_DIR$/assets/webpack.config.js" />
         <option value="$PROJECT_DIR$/assets/src/components/headline/style.css" />
         <option value="$PROJECT_DIR$/lib/bullsource/news/get_news.ex" />
@@ -280,9 +285,15 @@
         <option value="$PROJECT_DIR$/assets/src/components/categories/Categories.js" />
         <option value="$PROJECT_DIR$/assets/src/queries/fetchFilterNewsTweets.js" />
         <option value="$PROJECT_DIR$/assets/src/queries/fetchNewsTweets.js" />
-        <option value="$PROJECT_DIR$/assets/src/components/headline/Headline.js" />
-        <option value="$PROJECT_DIR$/assets/src/components/discussion/Discussion.js" />
         <option value="$PROJECT_DIR$/assets/src/index.js" />
+        <option value="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex" />
+        <option value="$PROJECT_DIR$/assets/src/components/headline/Headline.js" />
+        <option value="$PROJECT_DIR$/assets/src/queries/fetchThread.js" />
+        <option value="$PROJECT_DIR$/assets/src/components/headline_details/style.css" />
+        <option value="$PROJECT_DIR$/assets/src/components/discussion/Discussion.js" />
+        <option value="$PROJECT_DIR$/assets/src/components/headline_details/HeadlineDetails.js" />
       </list>
     </option>
   </component>
@@ -356,6 +367,150 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="social_media" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="social_media" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resolvers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resolvers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discussion" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -457,33 +612,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="post_form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="headline" />
+              <option name="myItemId" value="headline_details" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -510,58 +639,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="discussion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="category_nav" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bullsource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="categories" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -702,7 +779,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -712,7 +788,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38297874" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38297874" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -735,15 +811,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="27" column="8" lean-forward="false" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/webpack.config.js" />
     <entry file="file://$PROJECT_DIR$/assets/dist/bundle.028ab2b61f3b27e373de.js" />
     <entry file="file://$PROJECT_DIR$/assets/.babelrc">
       <provider selected="true" editor-type-id="text-editor">
@@ -909,6 +976,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="54" lean-forward="false" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -916,6 +984,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -924,13 +993,6 @@
         <state relative-caret-position="-3">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -955,13 +1017,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1497">
-          <caret line="25" column="38" lean-forward="false" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/config.exs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
@@ -980,50 +1035,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="223" column="94" lean-forward="false" selection-start-line="223" selection-start-column="94" selection-end-line="223" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchThread.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-          <folding>
-            <marker date="1497689258000" expanded="true" signature="55:366" ph="{...}" />
-            <marker date="1497689258000" expanded="true" signature="61:71" ph="newsTweets...newsTweets" />
-            <marker date="1497689258000" expanded="true" signature="61:362" ph="newsTweets...{&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt  &#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }" />
-            <marker date="1497689258000" expanded="true" signature="71:362" ph="{...}" />
-            <marker date="1497689258000" expanded="true" signature="79:86" ph="network...network" />
-            <marker date="1497689258000" expanded="true" signature="79:131" ph="network...{&#10;        id&#10;        name&#10;        url&#10;      }" />
-            <marker date="1497689258000" expanded="true" signature="86:131" ph="{...}" />
-            <marker date="1497689258000" expanded="true" signature="96:98" ph="id...id" />
-            <marker date="1497689258000" expanded="true" signature="107:111" ph="name...name" />
-            <marker date="1497689258000" expanded="true" signature="120:123" ph="url...url" />
-            <marker date="1497689258000" expanded="true" signature="138:142" ph="news...news" />
-            <marker date="1497689258000" expanded="true" signature="138:218" ph="news...{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt  &#10;      }" />
-            <marker date="1497689258000" expanded="true" signature="142:218" ph="{...}" />
-            <marker date="1497689258000" expanded="true" signature="152:157" ph="title...title" />
-            <marker date="1497689258000" expanded="true" signature="166:169" ph="url...url" />
-            <marker date="1497689258000" expanded="true" signature="178:188" ph="urlToImage...urlToImage" />
-            <marker date="1497689258000" expanded="true" signature="197:208" ph="publishedAt...publishedAt" />
-            <marker date="1497689258000" expanded="true" signature="225:231" ph="tweets...tweets" />
-            <marker date="1497689258000" expanded="true" signature="225:356" ph="tweets...{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }" />
-            <marker date="1497689258000" expanded="true" signature="231:356" ph="{...}" />
-            <marker date="1497689258000" expanded="true" signature="241:253" ph="retweetCount...retweetCount" />
-            <marker date="1497689258000" expanded="true" signature="264:270" ph="id_str...id_str" />
-            <marker date="1497689258000" expanded="true" signature="281:289" ph="fullText...fullText" />
-            <marker date="1497689258000" expanded="true" signature="299:303" ph="user...user" />
-            <marker date="1497689258000" expanded="true" signature="299:329" ph="user...{&#10;          name&#10;        }" />
-            <marker date="1497689258000" expanded="true" signature="303:329" ph="{...}" />
-            <marker date="1497689258000" expanded="true" signature="315:319" ph="name...name" />
-            <marker date="1497689258000" expanded="true" signature="339:348" ph="retweeted...retweeted" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1064,73 +1075,33 @@
         <state relative-caret-position="-127">
           <caret line="0" column="7" lean-forward="true" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchNewsTweets.js">
+    <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-          <folding>
-            <marker date="1497749699000" expanded="true" signature="55:383" ph="{...}" />
-            <marker date="1497749699000" expanded="true" signature="61:71" ph="newsTweets...newsTweets" />
-            <marker date="1497749699000" expanded="true" signature="61:379" ph="newsTweets...{&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt  &#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }" />
-            <marker date="1497749699000" expanded="true" signature="71:379" ph="{...}" />
-            <marker date="1497749699000" expanded="true" signature="79:86" ph="network...network" />
-            <marker date="1497749699000" expanded="true" signature="79:148" ph="network...{&#10;        id&#10;        name&#10;        url&#10;      }" />
-            <marker date="1497749699000" expanded="true" signature="86:148" ph="{...}" />
-            <marker date="1497749699000" expanded="true" signature="96:98" ph="id...id" />
-            <marker date="1497749699000" expanded="true" signature="107:111" ph="name...name" />
-            <marker date="1497749699000" expanded="true" signature="120:123" ph="url...url" />
-            <marker date="1497749699000" expanded="true" signature="132:140" ph="category...category" />
-            <marker date="1497749699000" expanded="true" signature="155:159" ph="news...news" />
-            <marker date="1497749699000" expanded="true" signature="155:235" ph="news...{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt  &#10;      }" />
-            <marker date="1497749699000" expanded="true" signature="159:235" ph="{...}" />
-            <marker date="1497749699000" expanded="true" signature="169:174" ph="title...title" />
-            <marker date="1497749699000" expanded="true" signature="183:186" ph="url...url" />
-            <marker date="1497749699000" expanded="true" signature="195:205" ph="urlToImage...urlToImage" />
-            <marker date="1497749699000" expanded="true" signature="214:225" ph="publishedAt...publishedAt" />
-            <marker date="1497749699000" expanded="true" signature="242:248" ph="tweets...tweets" />
-            <marker date="1497749699000" expanded="true" signature="242:373" ph="tweets...{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }" />
-            <marker date="1497749699000" expanded="true" signature="248:373" ph="{...}" />
-            <marker date="1497749699000" expanded="true" signature="258:270" ph="retweetCount...retweetCount" />
-            <marker date="1497749699000" expanded="true" signature="281:287" ph="id_str...id_str" />
-            <marker date="1497749699000" expanded="true" signature="298:306" ph="fullText...fullText" />
-            <marker date="1497749699000" expanded="true" signature="316:320" ph="user...user" />
-            <marker date="1497749699000" expanded="true" signature="316:346" ph="user...{&#10;          name&#10;        }" />
-            <marker date="1497749699000" expanded="true" signature="320:346" ph="{...}" />
-            <marker date="1497749699000" expanded="true" signature="332:336" ph="name...name" />
-            <marker date="1497749699000" expanded="true" signature="356:365" ph="retweeted...retweeted" />
-          </folding>
+        <state relative-caret-position="180">
+          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/category_nav/CategoryNav.js">
+    <entry file="file://$PROJECT_DIR$/assets/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="29" column="55" lean-forward="false" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
+        <state relative-caret-position="621">
+          <caret line="45" column="37" lean-forward="false" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/headline/Headline.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="43" column="73" lean-forward="true" selection-start-line="43" selection-start-column="73" selection-end-line="43" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchFilterNewsTweets.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+        <state relative-caret-position="326">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
             <marker date="1497749694000" expanded="true" signature="54:444" ph="query...{&#10;    newsTweetsBy(category: $category) {&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt&#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }  &#10;  }" />
             <marker date="1497749694000" expanded="true" signature="60:72" ph="NewsTweetsBy...NewsTweetsBy" />
@@ -1171,38 +1142,165 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
+    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchNewsTweets.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        <state relative-caret-position="81">
+          <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding>
+            <marker date="1497749699000" expanded="true" signature="55:383" ph="{...}" />
+            <marker date="1497749699000" expanded="true" signature="61:71" ph="newsTweets...newsTweets" />
+            <marker date="1497749699000" expanded="true" signature="61:379" ph="newsTweets...{&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt  &#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }" />
+            <marker date="1497749699000" expanded="true" signature="71:379" ph="{...}" />
+            <marker date="1497749699000" expanded="true" signature="79:86" ph="network...network" />
+            <marker date="1497749699000" expanded="true" signature="79:148" ph="network...{&#10;        id&#10;        name&#10;        url&#10;      }" />
+            <marker date="1497749699000" expanded="true" signature="86:148" ph="{...}" />
+            <marker date="1497749699000" expanded="true" signature="96:98" ph="id...id" />
+            <marker date="1497749699000" expanded="true" signature="107:111" ph="name...name" />
+            <marker date="1497749699000" expanded="true" signature="120:123" ph="url...url" />
+            <marker date="1497749699000" expanded="true" signature="132:140" ph="category...category" />
+            <marker date="1497749699000" expanded="true" signature="155:159" ph="news...news" />
+            <marker date="1497749699000" expanded="true" signature="155:235" ph="news...{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt  &#10;      }" />
+            <marker date="1497749699000" expanded="true" signature="159:235" ph="{...}" />
+            <marker date="1497749699000" expanded="true" signature="169:174" ph="title...title" />
+            <marker date="1497749699000" expanded="true" signature="183:186" ph="url...url" />
+            <marker date="1497749699000" expanded="true" signature="195:205" ph="urlToImage...urlToImage" />
+            <marker date="1497749699000" expanded="true" signature="214:225" ph="publishedAt...publishedAt" />
+            <marker date="1497749699000" expanded="true" signature="242:248" ph="tweets...tweets" />
+            <marker date="1497749699000" expanded="true" signature="242:373" ph="tweets...{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }" />
+            <marker date="1497749699000" expanded="true" signature="248:373" ph="{...}" />
+            <marker date="1497749699000" expanded="true" signature="258:270" ph="retweetCount...retweetCount" />
+            <marker date="1497749699000" expanded="true" signature="281:287" ph="id_str...id_str" />
+            <marker date="1497749699000" expanded="true" signature="298:306" ph="fullText...fullText" />
+            <marker date="1497749699000" expanded="true" signature="316:320" ph="user...user" />
+            <marker date="1497749699000" expanded="true" signature="316:346" ph="user...{&#10;          name&#10;        }" />
+            <marker date="1497749699000" expanded="true" signature="320:346" ph="{...}" />
+            <marker date="1497749699000" expanded="true" signature="332:336" ph="name...name" />
+            <marker date="1497749699000" expanded="true" signature="356:365" ph="retweeted...retweeted" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2340">
+          <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/category_nav/CategoryNav.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="29" column="55" lean-forward="false" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/categories/Categories.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="128">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/headline/Headline.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="69" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/headline_details/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/discussion/Discussion.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="257">
+          <caret line="18" column="17" lean-forward="false" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/index.js">
+    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchThread.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="45" column="37" lean-forward="false" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+        <state relative-caret-position="107">
+          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <folding>
+            <marker date="1497753846000" expanded="true" signature="55:622" ph="query...{&#10;        getOneHeadline(title: $title) {&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }&#10;    }" />
+            <marker date="1497753846000" expanded="true" signature="61:70" ph="NewsTweet...NewsTweet" />
+            <marker date="1497753846000" expanded="true" signature="70:87" ph="(...)" />
+            <marker date="1497753846000" expanded="true" signature="79:85" ph="String...String" />
+            <marker date="1497753846000" expanded="true" signature="87:622" ph="{...}" />
+            <marker date="1497753846000" expanded="true" signature="97:106" ph="newsTweet...newsTweet" />
+            <marker date="1497753846000" expanded="true" signature="97:616" ph="newsTweet...{&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;                description&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }" />
+            <marker date="1497753846000" expanded="true" signature="106:121" ph="(...)" />
+            <marker date="1497753846000" expanded="true" signature="106:616" ph="getOneHeadline...{&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }" />
+            <marker date="1497753846000" expanded="true" signature="107:112" ph="title...title" />
+            <marker date="1497753846000" expanded="true" signature="122:616" ph="{...}" />
+            <marker date="1497753846000" expanded="true" signature="136:143" ph="network...network" />
+            <marker date="1497753846000" expanded="true" signature="136:243" ph="network...{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }" />
+            <marker date="1497753846000" expanded="true" signature="143:243" ph="{...}" />
+            <marker date="1497753846000" expanded="true" signature="161:163" ph="id...id" />
+            <marker date="1497753846000" expanded="true" signature="180:184" ph="name...name" />
+            <marker date="1497753846000" expanded="true" signature="201:204" ph="url...url" />
+            <marker date="1497753846000" expanded="true" signature="221:229" ph="category...category" />
+            <marker date="1497753846000" expanded="true" signature="256:260" ph="news...news" />
+            <marker date="1497753846000" expanded="true" signature="256:400" ph="news...{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }" />
+            <marker date="1497753846000" expanded="true" signature="260:400" ph="{...}" />
+            <marker date="1497753846000" expanded="true" signature="278:283" ph="title...title" />
+            <marker date="1497753846000" expanded="true" signature="300:303" ph="url...url" />
+            <marker date="1497753846000" expanded="true" signature="320:330" ph="urlToImage...urlToImage" />
+            <marker date="1497753846000" expanded="true" signature="347:358" ph="publishedAt...publishedAt" />
+            <marker date="1497753846000" expanded="true" signature="375:386" ph="description...description" />
+            <marker date="1497753846000" expanded="true" signature="413:419" ph="tweets...tweets" />
+            <marker date="1497753846000" expanded="true" signature="413:606" ph="tweets...{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }" />
+            <marker date="1497753846000" expanded="true" signature="419:606" ph="{...}" />
+            <marker date="1497753846000" expanded="true" signature="437:449" ph="retweetCount...retweetCount" />
+            <marker date="1497753846000" expanded="true" signature="467:473" ph="id_str...id_str" />
+            <marker date="1497753846000" expanded="true" signature="491:499" ph="fullText...fullText" />
+            <marker date="1497753846000" expanded="true" signature="517:521" ph="user...user" />
+            <marker date="1497753846000" expanded="true" signature="517:565" ph="user...{&#10;                    name&#10;                }" />
+            <marker date="1497753846000" expanded="true" signature="521:565" ph="{...}" />
+            <marker date="1497753846000" expanded="true" signature="543:547" ph="name...name" />
+            <marker date="1497753846000" expanded="true" signature="583:592" ph="retweeted...retweeted" />
+            <marker date="1497753846000" expanded="true" signature="619:622" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/headline_details/HeadlineDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="57" column="12" lean-forward="false" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

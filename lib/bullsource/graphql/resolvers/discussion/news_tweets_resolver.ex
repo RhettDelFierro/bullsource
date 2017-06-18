@@ -19,4 +19,9 @@ defmodule Bullsource.GraphQL.NewsTweetsResolver do
 
     {:ok, feed}
   end
+
+  def get_one_by_title(%{title: title} = args, _context) do
+    news_tweet = get_tweets([]) |> Enum.find(&(&1.news.title == title))
+    {:ok, news_tweet}
+  end
 end

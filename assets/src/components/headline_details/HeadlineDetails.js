@@ -7,7 +7,7 @@ import "./style.css";
 
 
 /**
- * Is an SFC - this will create each headline. Is child component of Home, Category, and Discussion components.
+ * Is an SFC - Details of each Headline. Is child of the Discussion component.
  *
  * Parameters:
  *
@@ -23,6 +23,7 @@ import "./style.css";
  *     url         :: String - url link to the article on the network's site
  *     urlToImage  :: String - url of news image
  *     publishedAt :: String - time the headline was published.
+ *     description :: String - description of the news headline
  *
  *   tweets  :: [Object]
  *     retweetCount  :: Integer - number of times the tweet has been retweeted
@@ -36,23 +37,27 @@ import "./style.css";
  * Returns:
  * <div>
  */
-export default ({newsTweet}) => {
+export default ({ network, news, tweets }) => {
 
-    const {network, news, tweets} = newsTweet;
-    const title = news.title.split(" ").join('_');
-    const utcTime = moment.utc(news.publishedAt).fromNow();
-    const time = utcTime === "Invalid date" ? news.publishedAt : utcTime;
+    let utcTime;
+    let time;
+    if (news.publishedAt) {
+        utcTime = moment.utc(news.publishedAt).fromNow();
+        time = utcTime === "Invalid date" ? news.publishedAt : utcTime;
+    }
+
     return (
-        <div className="headline" key={`${network.id}${news.title}`}>
+        <div className="container">
             <div>
-                <img className="img_thumbnail" width="100" height="100" src={news.urlToImage}/>
+                <a href={news.url}>{news.title}</a>
+                <p>{news.description}</p>
             </div>
-            <Link to={`/category/${network.category}/${title}`}>
-                <p><b>{network.name}</b> {news.title}</p>
-            </Link>
+            {/*<Link to={`/category/${network.category}/${title}`}>*/}
+                {/*<p><b>{network.name}</b> {news.title}</p>*/}
+            {/*</Link>*/}
             <p>{time}</p>
 
-            <TweetContainer tweets={tweets} />
+            {/*<TweetContainer tweets={tweets} />*/}
         </div>
     )
 }
