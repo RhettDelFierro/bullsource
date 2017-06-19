@@ -26,5 +26,8 @@ export default gql`
                 retweeted
             }
         }
+        currentUser{
+            id
+        }
     }
 `;

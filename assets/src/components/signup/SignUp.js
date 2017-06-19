@@ -13,13 +13,26 @@ class SignUp extends Component {
             username: '',
             email: '',
             password: '',
-            confirm_password: ''
+            confirm_password: '',
+            usernameError: '',
+            emailError: '',
+            passwordError: '',
+            confirmPasswordError: ''
         };
     }
 
     onSubmit(event) {
         event.preventDefault();
+        if(this.state.password !== this.state.confirm_password) {
+            let passwordErrors = "The passwords you've entered do not match.";
 
+            this.setState({
+                passwordError: passwordErrors,
+                confirmPasswordError: passwordErrors
+
+            });
+            return
+        }
         //attempt mutation:
         this.props.mutate({
             variables: {
@@ -62,12 +75,14 @@ class SignUp extends Component {
                            onChange={event => this.setState({password: event.target.value})}
                            value={this.state.password}
                     />
+                    <p>{this.state.passwordError}</p>
 
                     <label>Confirm Password</label>
                     <input type="password"
                            onChange={event => this.setState({confirm_password: event.target.value})}
                            value={this.state.confirm_password}
                     />
+                    <p>{this.state.confirmPasswordError}</p>
                     <input type="submit" onClick={this.onSubmit.bind(this)}/>
                 </form>
             </div>

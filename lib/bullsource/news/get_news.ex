@@ -92,7 +92,7 @@ defmodule Bullsource.News.GetNews do
   end
 
   defp format_list({network,task}) do
-    %{articles: articles, sortBy: sortBy} = parse_json(Task.await(task))
+    %{articles: articles, sortBy: sortBy} = Task.await(task) |> parse_json()
 
     %{ network: network, news: articles, sortBy: sortBy }
   end

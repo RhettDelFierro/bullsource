@@ -70,7 +70,18 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_call(:get_tweets, _from, state) do
-    {:reply, state.stories, state}
+    #maybe extract this into another function that will call when it first fires up, that way it doesn't sort on every call.
+    ordered_stories_by_tweets = state.stories
+      |> Enum.map(fn(story) ->
+          ordered_tweets = Enum.sort(story.tweets,&(&1.retweet_count >= &2.retweet_count))
+          %{network: story.network, news: story.news, tweets: ordered_tweets}
+         end)
+
+    {:reply, ordered_stories_by_tweets, state}
+  end
+
+  def sort_tweets([]), do: []
+  def sort_tweets([%{network: network, stories: stories, token: token} = t | ts]) do
   end
 
   def handle_call(:get_only_tweets, _from, state) do
@@ -151,7 +162,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
     encoded_query = URI.encode(headline.url)
 #    filters = "%20filter:news%20exclude:retweets%20exclude:replies&tweet_mode=extended&result_type=popular"
 #    filters = "%20filter:news%20exclude:retweets&tweet_mode=extended&result_type=popular"
-    filters = "%20filter:news%20exclude:retweets&tweet_mode=extended"
+    filters = "%20filter:news%20exclude:retweets&tweet_mode=extended&result_type=popular"
     query_url = @twitter_search_filter_url <> "%22#{encoded_query}%22#{filters}"
     {headline, query_url}
   end

@@ -23,10 +23,13 @@ defmodule Bullsource.Web.Context do
                                                                  # }
       {:error, reason} ->
         conn
+#        |> send_resp(403, reason)
+#        |> halt()
 
       _ ->
         conn
-
+#       |> send_resp(400, "Bad Request - from Context. - RD")
+#       |> halt()
     end
 
   end
