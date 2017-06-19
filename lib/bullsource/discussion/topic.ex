@@ -1,14 +1,14 @@
 defmodule Bullsource.Discussion.Topic do
   use Ecto.Schema
 
-  alias Bullsource.Discussion.Thread
+  alias Bullsource.Discussion.Headline
 
   schema "topics" do
 
     field :name, :string, unique: true
     field :description, :string
 
-    has_many :threads, Thread
+    has_many :headliness, Headline
 
     timestamps()
 

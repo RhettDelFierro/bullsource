@@ -1,6 +1,6 @@
 defmodule Bullsource.Discussion do
   import Ecto.{Changeset, Query}
-  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic}
+  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Headline, Topic}
   alias Bullsource.Accounts.User
   alias Bullsource.Repo
   alias Ecto.Multi
@@ -9,12 +9,12 @@ defmodule Bullsource.Discussion do
     Repo.all(Topic) |> Repo.preload(:threads)
   end
 
-  def list_threads_in_topic(topic_id) do
-    Repo.get(Topic,topic_id) |> Repo.preload([{:threads, :user}])
+  def list_headlines_in_topic(topic_id) do
+    Repo.get(Topic,topic_id) |> Repo.preload([{:headliness, :user}])
   end
 
-  def list_posts_in_thread(thread_id) do
-    Repo.get(Thread,thread_id)
+  def list_posts_in_headline(headline_id) do
+    Repo.get(Headline,headline_id)
     |> Repo.preload(:user)
     |> Repo.preload(posts: [:user, :proofs, proofs: :reference, proofs: :article, proofs: :comment])
   end
