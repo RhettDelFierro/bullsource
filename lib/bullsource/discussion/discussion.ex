@@ -6,7 +6,7 @@ defmodule Bullsource.Discussion do
   alias Ecto.Multi
 
   def list_topics do
-    Repo.all(Topic) |> Repo.preload(:threads)
+    Repo.all(Topic) |> Repo.preload(:headliness)
   end
 
   def list_headlines_in_topic(topic_id) do
@@ -15,7 +15,6 @@ defmodule Bullsource.Discussion do
 
   def list_posts_in_headline(headline_id) do
     Repo.get(Headline,headline_id)
-    |> Repo.preload(:user)
     |> Repo.preload(posts: [:user, :proofs, proofs: :reference, proofs: :article, proofs: :comment])
   end
 
@@ -37,14 +36,14 @@ defmodule Bullsource.Discussion do
   def create_topic(params),
     do: topic_changeset(%Topic{},params) |> Repo.insert
 
-  def create_thread(thread_params, post_params, user) do
+  def create_headline(headline_params, post_params, user) do
 
     Repo.transaction(fn ->
-      with {:ok, thread}  <- insert_thread(thread_params, user),
-           {:ok, post}    <- insert_post(thread, post_params, user),
+      with {:ok, headline}  <- insert_headline(headline_params),
+           {:ok, post}    <- insert_post(headline, post_params, user),
            {:ok, post_with_proofs} <- create_proof_components(post, post_params.proofs)
       do
-        thread
+        headline
       else
         {:error, error_changeset} ->
           Repo.rollback(error_changeset)
@@ -56,11 +55,11 @@ defmodule Bullsource.Discussion do
 
 
   def create_post(post_params, user) do
-    thread = Repo.get(Thread,post_params.thread_id)
+    headline = Repo.get(Headline,post_params.headline_id)
 
     Repo.transaction( fn -> #Repo.transaction return {:ok, ....whatever....}, the ...whatever... here is determined by the do block in the with macro.
-      #can I abstract this part because of it's similarity to create_thread?
-      with {:ok, post}             <- insert_post(thread, post_params, user),
+      #can I abstract this part because of it's similarity to create_headline?
+      with {:ok, post}             <- insert_post(headline, post_params, user),
            {:ok, post_with_proofs} <- create_proof_components(post, post_params.proofs)
       do
         post
@@ -192,13 +191,14 @@ defmodule Bullsource.Discussion do
 
   end
 
-  defp insert_thread(thread, user) do
-    thread_changeset(%Thread{},%{topic_id: thread.topic_id, user_id: user.id, title: thread.title})
+  defp insert_headline(headline) do
+    headline_changeset(%Headline{},%{topic_id: headline.topic_id, title: headline.title, network: headline.network,
+                                     url: headline.url, description: headline.description, published_at: headline.published_at})
     |> Repo.insert
   end
 
-  defp insert_post(thread, post,user) do
-    post_changeset(%Post{},%{intro: post.intro, user_id: user.id, thread_id: thread.id})
+  defp insert_post(headline, post,user) do
+    post_changeset(%Post{},%{intro: post.intro, user_id: user.id, headline_id: headline.id})
     |> Repo.insert
   end
 
@@ -221,22 +221,22 @@ defmodule Bullsource.Discussion do
     |> unique_constraint(:name)
   end
 
-  def thread_changeset(struct,params \\ %{}) do
+  def headline_changeset(struct,params \\ %{}) do
     struct
-    |> cast(params, [:title, :user_id, :topic_id])
-    |> validate_required([:title, :user_id, :topic_id])
+    |> cast(params, [:topic_id, :title, :network, :url, :description, :published_at])
+    |> validate_required([:topic_id, :title, :network, :url, :description, :published_at])
     |> validate_length(:title, max: 300)
     |> validate_length(:title, min: 3)
+    |> validate_length(:description, max: 500)
     |> assoc_constraint(:topic)
-    |> assoc_constraint(:user)
   end
 
   def post_changeset(struct,params \\ %{}) do
     struct
-    |> cast(params, [:intro, :user_id, :thread_id])
-    |> validate_required([:user_id, :thread_id])
+    |> cast(params, [:intro, :user_id, :headline_id])
+    |> validate_required([:user_id, :headline_id])
     |> validate_length(:intro, min: 3)
-    |> assoc_constraint(:thread)
+    |> assoc_constraint(:headline)
     |> assoc_constraint(:user)
   end
 

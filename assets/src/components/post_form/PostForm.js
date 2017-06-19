@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo'
 
-import threadMutation from "../../createThread"
+import headlineMutation from "../../mutations/createHeadline"
 import postMutation from "../../mutations/createPost"
 
 class PostForm extends Component {
@@ -35,8 +35,8 @@ class PostForm extends Component {
     }
 }
 
-// we'll create this as a thread first, then run the approriate mutation
-//   - maybe graphql(postMutation)(graphql(threadMutation)(PostForm)) ??
+// we'll create this as a headline first, then run the approriate mutation
+//   - maybe graphql(postMutation)(graphql(headlineMutation)(PostForm)) ??
 
-// maybe write a query to run a check in database if this is a thread?
-export default graphql(threadMutation)(PostForm);
+// maybe write a query to run a check in database if this is a headline?
+export default graphql(headlineMutation)(PostForm);

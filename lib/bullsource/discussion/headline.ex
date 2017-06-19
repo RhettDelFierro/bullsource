@@ -7,7 +7,7 @@ defmodule Bullsource.Discussion.Headline do
     field :title, :string
     field :network, :string
     field :url, :string
-    field :description, :text
+    field :description, :string
     field :published_at, :string
     belongs_to :topic, Topic
 

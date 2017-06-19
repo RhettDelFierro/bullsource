@@ -1,6 +1,6 @@
 defmodule Bullsource.Votes do
   import Ecto.{Changeset, Query}
-  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Thread, Topic}
+  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Headline, Topic}
   alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ProofVoteUp,
                             ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
   alias Bullsource.Repo

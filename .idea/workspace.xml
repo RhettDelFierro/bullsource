@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bullsource/discussion/headline.ex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bullsource/discussion/tweet.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/discussion/post.ex" afterPath="$PROJECT_DIR$/lib/bullsource/discussion/post.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/discussion/topic.ex" afterPath="$PROJECT_DIR$/lib/bullsource/discussion/topic.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/priv/repo/migrations/20170619203355_create_news_table_delete_threads_table.exs" afterPath="$PROJECT_DIR$/priv/repo/migrations/20170619203355_create_news_table_delete_threads_table.exs" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/bullsource/discussion/thread.ex" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/src/mutations/createThread.js" afterPath="$PROJECT_DIR$/assets/src/mutations/createHeadline.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/thread_resolver.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/headline_resolver.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" afterPath="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/accounts/user.ex" afterPath="$PROJECT_DIR$/lib/bullsource/accounts/user.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex" afterPath="$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/discussion/headline.ex" afterPath="$PROJECT_DIR$/lib/bullsource/discussion/headline.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/votes/votes.ex" afterPath="$PROJECT_DIR$/lib/bullsource/votes/votes.ex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,71 +26,103 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_news.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/news/get_news.ex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20170619203355_create_news_table_delete_threads_table.exs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/priv/repo/migrations/20170619203355_create_news_table_delete_threads_table.exs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="topic.ex" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/topic.ex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="headline.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/headline.ex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/post.ex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tweet.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/tweet.ex">
+      <file leaf-file-name="Discussion.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/discussion/Discussion.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+              <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="thread.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/thread.ex">
+      <file leaf-file-name="votes.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/votes/votes.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="145">
+              <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="thread_view.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/web/views/api/thread_view.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/accounts/user.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="discussion.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="67" column="9" lean-forward="true" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PostForm.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schema.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="52" column="23" lean-forward="false" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="news_tweet_types.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-113">
+              <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="account_types.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="30" lean-forward="false" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vote_types.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/vote_types.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="199">
+              <caret line="66" column="27" lean-forward="false" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -92,13 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fs</find>
-      <find>wra</find>
-      <find>'wrapper'</find>
-      <find>wrapper'</find>
-      <find>#wrapper'</find>
-      <find>#wrapper</find>
-      <find>#wrappe</find>
       <find>#wrapp</find>
       <find>#wrap</find>
       <find>#wra</find>
@@ -107,7 +140,6 @@
       <find>#</find>
       <find>wrapper</find>
       <find>bool</find>
-      <find>text</find>
       <find>fulltext</find>
       <find>u</find>
       <find>urlt</find>
@@ -116,10 +148,27 @@
       <find>urltoim</find>
       <find>urltoima</find>
       <find>urltoimage</find>
+      <find>text</find>
+      <find>c</find>
+      <find>crea</find>
+      <find>creat</find>
+      <find>createT</find>
+      <find>createThre</find>
+      <find>create</find>
+      <find>headline</find>
+      <find>createThread</find>
+      <find>thre</find>
+      <find>he</find>
+      <find>h</find>
+      <find>t</find>
+      <find>thread</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/assets</dir>
+      <dir>$PROJECT_DIR$/assets/src</dir>
       <dir>$PROJECT_DIR$/lib/bullsource</dir>
+      <dir>$PROJECT_DIR$/assets/src/components</dir>
+      <dir>$PROJECT_DIR$/lib</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -128,11 +177,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/bullsource/reference_validator/reference_validator.ex" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/assets/src/webpack.config.js" />
-        <option value="$PROJECT_DIR$/assets/.babelrc" />
-        <option value="$PROJECT_DIR$/assets/package.json" />
         <option value="$PROJECT_DIR$/assets/src/index.html" />
         <option value="$PROJECT_DIR$/config/dev.exs" />
         <option value="$PROJECT_DIR$/lib/bullsource/web/endpoint.ex" />
@@ -141,7 +185,6 @@
         <option value="$PROJECT_DIR$/assets/src/components/nav/style.css" />
         <option value="$PROJECT_DIR$/assets/src/components/queries/fetchHeadlines.js" />
         <option value="$PROJECT_DIR$/assets/src/mutations/signup.js" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/accounts/accounts.ex" />
         <option value="$PROJECT_DIR$/assets/src/queries/fetchNewsTweet.js" />
         <option value="$PROJECT_DIR$/assets/src/components/Home.js" />
@@ -169,16 +212,22 @@
         <option value="$PROJECT_DIR$/assets/src/queries/fetchThread.js" />
         <option value="$PROJECT_DIR$/assets/src/components/signup/SignUp.js" />
         <option value="$PROJECT_DIR$/assets/src/mutations/post.js" />
-        <option value="$PROJECT_DIR$/assets/src/mutations/createThread.js" />
         <option value="$PROJECT_DIR$/assets/src/components/discussion/Discussion.js" />
-        <option value="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex" />
         <option value="$PROJECT_DIR$/priv/repo/migrations/20170619203355_create_news_table_delete_threads_table.exs" />
-        <option value="$PROJECT_DIR$/lib/bullsource/discussion/headline.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/post.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/tweet.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/topic.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/headline_resolver.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/discussion/headline.ex" />
+        <option value="$PROJECT_DIR$/assets/src/mutations/createThread.js" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/votes/votes.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/accounts/user.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex" />
+        <option value="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" />
       </list>
     </option>
   </component>
@@ -302,6 +351,156 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="queries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mutations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="post_form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -435,10 +634,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="GraphQL" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38276836" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38700566" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -446,7 +646,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -461,83 +660,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/src/components/categories/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/category_nav/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/discussion/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/proof_resolver.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/reference_resolver.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/vote_types.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.exs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="45" column="39" lean-forward="false" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-249">
-          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/news/get_networks.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="70" lean-forward="false" selection-start-line="6" selection-start-column="70" selection-end-line="6" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/headline/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -577,6 +699,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="29" column="55" lean-forward="false" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -662,34 +785,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/article_resolver.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="72" column="124" lean-forward="false" selection-start-line="72" selection-start-column="124" selection-end-line="72" selection-end-column="124" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="54" lean-forward="false" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -706,50 +805,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
           <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding>
-            <marker date="1497899685000" expanded="true" signature="55:668" ph="query...{&#10;        getOneHeadline(title: $title) {&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }&#10;    }" />
-            <marker date="1497899685000" expanded="true" signature="61:70" ph="NewsTweet...NewsTweet" />
-            <marker date="1497899685000" expanded="true" signature="70:87" ph="(...)" />
-            <marker date="1497899685000" expanded="true" signature="79:85" ph="String...String" />
-            <marker date="1497899685000" expanded="true" signature="87:668" ph="{...}" />
-            <marker date="1497899685000" expanded="true" signature="97:106" ph="newsTweet...newsTweet" />
-            <marker date="1497899685000" expanded="true" signature="97:616" ph="newsTweet...{&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;                description&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }" />
-            <marker date="1497899685000" expanded="true" signature="106:121" ph="(...)" />
-            <marker date="1497899685000" expanded="true" signature="106:616" ph="getOneHeadline...{&#10;            network{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }&#10;            news{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }&#10;            tweets{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }&#10;        }" />
-            <marker date="1497899685000" expanded="true" signature="107:112" ph="title...title" />
-            <marker date="1497899685000" expanded="true" signature="122:616" ph="{...}" />
-            <marker date="1497899685000" expanded="true" signature="136:143" ph="network...network" />
-            <marker date="1497899685000" expanded="true" signature="136:243" ph="network...{&#10;                id&#10;                name&#10;                url&#10;                category&#10;            }" />
-            <marker date="1497899685000" expanded="true" signature="143:243" ph="{...}" />
-            <marker date="1497899685000" expanded="true" signature="161:163" ph="id...id" />
-            <marker date="1497899685000" expanded="true" signature="180:184" ph="name...name" />
-            <marker date="1497899685000" expanded="true" signature="201:204" ph="url...url" />
-            <marker date="1497899685000" expanded="true" signature="221:229" ph="category...category" />
-            <marker date="1497899685000" expanded="true" signature="256:260" ph="news...news" />
-            <marker date="1497899685000" expanded="true" signature="256:400" ph="news...{&#10;                title&#10;                url&#10;                urlToImage&#10;                publishedAt&#10;            }" />
-            <marker date="1497899685000" expanded="true" signature="260:400" ph="{...}" />
-            <marker date="1497899685000" expanded="true" signature="278:283" ph="title...title" />
-            <marker date="1497899685000" expanded="true" signature="300:303" ph="url...url" />
-            <marker date="1497899685000" expanded="true" signature="320:330" ph="urlToImage...urlToImage" />
-            <marker date="1497899685000" expanded="true" signature="347:358" ph="publishedAt...publishedAt" />
-            <marker date="1497899685000" expanded="true" signature="375:386" ph="description...description" />
-            <marker date="1497899685000" expanded="true" signature="413:419" ph="tweets...tweets" />
-            <marker date="1497899685000" expanded="true" signature="413:606" ph="tweets...{&#10;                retweetCount,&#10;                id_str,&#10;                fullText,&#10;                user{&#10;                    name&#10;                },&#10;                retweeted&#10;            }" />
-            <marker date="1497899685000" expanded="true" signature="419:606" ph="{...}" />
-            <marker date="1497899685000" expanded="true" signature="437:449" ph="retweetCount...retweetCount" />
-            <marker date="1497899685000" expanded="true" signature="467:473" ph="id_str...id_str" />
-            <marker date="1497899685000" expanded="true" signature="491:499" ph="fullText...fullText" />
-            <marker date="1497899685000" expanded="true" signature="517:521" ph="user...user" />
-            <marker date="1497899685000" expanded="true" signature="517:565" ph="user...{&#10;                    name&#10;                }" />
-            <marker date="1497899685000" expanded="true" signature="521:565" ph="{...}" />
-            <marker date="1497899685000" expanded="true" signature="543:547" ph="name...name" />
-            <marker date="1497899685000" expanded="true" signature="583:592" ph="retweeted...retweeted" />
-            <marker date="1497899685000" expanded="true" signature="625:636" ph="currentUser...currentUser" />
-            <marker date="1497899685000" expanded="true" signature="625:662" ph="currentUser...{&#10;            id&#10;        }" />
-            <marker date="1497899685000" expanded="true" signature="636:662" ph="{...}" />
-            <marker date="1497899685000" expanded="true" signature="650:652" ph="id...id" />
-            <marker date="1497899685000" expanded="true" signature="665:668" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -797,67 +853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/mutations/createThread.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/discussion/Discussion.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="107" lean-forward="false" selection-start-line="17" selection-start-column="107" selection-end-line="17" selection-end-column="107" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-            <marker date="1497902096000" expanded="true" signature="432:881" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1457">
-          <caret line="101" column="26" lean-forward="false" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/accounts/accounts.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/accounts/user.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/news/get_news.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -898,34 +893,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/thread.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/post.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/tweet.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/headline.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -938,11 +909,205 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/post.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/topic.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+        <state relative-caret-position="210">
+          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/thread.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/accounts/accounts.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="42" lean-forward="false" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/article_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="10" lean-forward="false" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/comment_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="36" lean-forward="false" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/news_tweets_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="11" column="54" lean-forward="false" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/proof_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/reference_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/headline_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="53" column="15" lean-forward="false" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/headline.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="31" lean-forward="false" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/mutations/createHeadline.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="2" lean-forward="true" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="52" column="23" lean-forward="false" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/vote_types.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="66" column="27" lean-forward="false" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/news_tweet_types.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-113">
+          <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="30" lean-forward="false" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/discussion/Discussion.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/votes/votes.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/web/views/api/thread_view.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/accounts/user.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="67" column="9" lean-forward="true" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

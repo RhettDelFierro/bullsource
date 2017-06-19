@@ -3,7 +3,7 @@ defmodule Bullsource.Accounts.User do
 
   alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ProofVoteUp,
                           ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
-  alias Bullsource.Discussion.{Post, Thread}
+  alias Bullsource.Discussion.Post
 
 
 
@@ -15,7 +15,6 @@ defmodule Bullsource.Accounts.User do
     field :password, :string, virtual: true
 
     has_many :posts, Post
-    has_many :threads, Thread
     has_many :post_votes_down, PostVoteDown
     has_many :post_votes_up, PostVoteUp
     has_many :proof_votes_down, ProofVoteDown

@@ -2,31 +2,34 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
   use Absinthe.Ecto, repo: Bullsource.Repo
   use Absinthe.Schema.Notation
 
-  @desc "Topics has many threads."
+  @desc "Topics has many headlines."
   object :topic do
     field :id, :integer
     field :name, :string
     field :description, :string
 
-    #because :topic has_many :threads, we're going to add a :threads field
-    field :threads, list_of(:thread), resolve: assoc(:threads)
+    #because :topic has_many :headlines, we're going to add a :headlines field
+    field :headlines, list_of(:headline), resolve: assoc(:headlines)
   end
 
-  @desc "Threads belong to topics and users. Has many posts."
-  object :thread do
+  @desc "Headlines belong to topics and users. Has many posts."
+  object :headline do
     field :id, :integer
     field :title, :string
-    field :user, :user, resolve: assoc(:user)
+    field :network, :string
+    field :url, :string
+    field :description, :string
+    field :published_at, :string
     field :posts, list_of(:post), resolve: assoc(:posts)
   end
 
 
 
-  @desc "Posts belong to Threads and Users. Has many Proofs and References"
+  @desc "Posts belong to Headliness and Users. Has many Proofs and References"
   object :post do
     field :id, :integer
     field :intro, :string
-    field :thread_id, :integer
+    field :headline_id, :integer
     field :user_id, :integer
     field :proofs, list_of(:proof), resolve: assoc(:proofs)
     field :up_votes, list_of(:post_vote_up), resolve: assoc(:post_vote_up)

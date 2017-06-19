@@ -39,11 +39,11 @@ defmodule Bullsource.GraphQL.Schema do
     field :topic, list_of(:topic),
       do: resolve &Bullsource.GraphQL.TopicResolver.list/2
 
-    @desc "Lists all threads in topic"
-    field :thread, list_of(:thread),
-      do: resolve &Bullsource.GraphQL.ThreadResolver.list/2
+    @desc "Lists all headliness in topic"
+    field :headline, list_of(:headline),
+      do: resolve &Bullsource.GraphQL.HeadlineResolver.list/2
 
-    @desc "Lists all posts in thread"
+    @desc "Lists all posts in headline"
     field :post, list_of(:post) do
       arg :id, non_null(:integer)
       resolve &Bullsource.GraphQL.PostResolver.list/2
@@ -86,19 +86,23 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.TopicResolver.create/2
     end
 
-    @desc "Create a thread"
-    field :create_thread, :thread do
+    @desc "Create a headline"
+    field :create_headline, :headline do
       arg :title, non_null(:string)
+      arg :network, non_null(:string)
+      arg :url, non_null(:string)
+      arg :description, :string
+      arg :published_at, :string
       arg :topic_id, non_null(:integer)
       arg :post, non_null(:input_post)
       middleware Bullsource.Web.Authentication
-      resolve &Bullsource.GraphQL.ThreadResolver.create/2
+      resolve &Bullsource.GraphQL.HeadlineResolver.create/2
       middleware Bullsource.Web.HandleError
     end
 
-    @desc "Create a post - for threads already made."
+    @desc "Create a post - for headlines already made."
     field :create_post, :post do
-      arg :thread_id, non_null(:integer)
+      arg :headline_id, non_null(:integer)
       arg :post, non_null(:input_post)
       middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.PostResolver.create/2

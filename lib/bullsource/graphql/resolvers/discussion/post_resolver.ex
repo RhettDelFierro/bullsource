@@ -7,8 +7,8 @@ defmodule Bullsource.GraphQL.PostResolver do
 
   def list(_args, _context), do: {:ok, Repo.all(Post)}
 
-  def create(%{thread_id: thread_id, post: post}, %{context: %{current_user: current_user}}) do
-     post_params = Map.put_new(post, :thread_id, thread_id)
+  def create(%{headline_id: headline_id, post: post}, %{context: %{current_user: current_user}}) do
+     post_params = Map.put_new(post, :headline_id, headline_id)
 #     [p|ps] = post.proofs # also will have to loop through all the proofs in ReferenceValidator
 #     reference_post = Bullsource.ReferenceValidator.verify_reference(p.reference.link) #should maybe be in an if block to cancel the post if it's not verified.'
 #     IO.puts "++++++++++++++reference_post+++++++++++"

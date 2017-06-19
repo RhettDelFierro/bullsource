@@ -2,7 +2,7 @@ defmodule Bullsource.GraphQL.Types.AccountTypes do
   use Absinthe.Ecto, repo: Bullsource.Repo
   use Absinthe.Schema.Notation
 
-  @desc "User - has many Posts, Threads and all Votes."
+  @desc "User - has many Posts and all Votes."
   object :user do
     field :id, :integer
     field :username, :string
