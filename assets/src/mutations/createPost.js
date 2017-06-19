@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export default gql`
- mutation CreatePost($thread_id: Int, $post: ){
+ mutation CreatePost($thread_id: Int!, $post: InputPost!){
   createPost(threadId: 133, post:{
     proofs:[{
       article: "4th proof in thread, 1st proof in 2nd article",

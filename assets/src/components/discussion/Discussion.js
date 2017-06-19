@@ -3,6 +3,7 @@ import {graphql} from "react-apollo";
 import {withRouter} from "react-router-dom";
 
 import HeadlineDetails from "../headline_details/HeadlineDetails";
+import PostForm from "../post_form/PostForm"
 
 import fetchThreadQuery from "../../queries/fetchThread";
 
@@ -14,6 +15,7 @@ class Discussion extends Component {
             return <div>Loading...</div>
         }
 
+        // const isthread = this.props.data. ####check if this is a thread, then can pass prop to postform.
         const logged_in = this.props.data.currentUser ? <PostForm /> : '';
 
         return (

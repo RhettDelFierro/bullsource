@@ -77,7 +77,7 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
   @desc "An input object for :post"
   input_object :input_post do
     field :intro, :string
-    field :proofs, list_of(non_null(:input_proof))
+    field :proofs, list_of(:input_proof)
   end
 
 
