@@ -48,6 +48,7 @@ class PostForm extends Component {
 
     onSubmit(event) {
         event.preventDefault();
+
         //attempt mutation:
         this.props.mutate({
             variables: {

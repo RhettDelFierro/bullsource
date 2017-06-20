@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {graphql} from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
+import {signIn} from "../../helpers/async_calls";
 import signInMutation from "../../mutations/signin";
 import currentUser from "../../queries/currentUser";
 
@@ -12,50 +13,29 @@ class SignIn extends Component {
             username: '',
             password: '',
             validationMessage: '',
-            validationError: ''
+            validationErrors: []
         };
     }
 
     async onSubmit(event) {
         event.preventDefault();
-        if (this.state.username === '') {
-            this.setState({validationError: 'username cannot be blank'});
-            return
-        }
-        if (this.state.password === '') {
-            this.setState({validationError: 'password cannot be blank'});
-            return
-        }
 
         //attempt mutation:
         try {
-            const mutation = await this.props.mutate({
-                variables: {
-                    username: this.state.username,
-                    password: this.state.password
-                },
-            });
-
-            const {user, token} = mutation.data.loginUser;
-
-            this.setState({
-                validationMessage: `Welcome back ${user.username}!`,
-                validationError: ''
-            });
+            const mutation = await signIn(this.props.mutate, this.state);
+            const token = mutation.data.loginUser.token;
 
             localStorage.setItem('token', token);
 
             await this.props.data.refetch();
             this.props.history.push("/");
-
         }
         catch (e) {
-            if (e.graphQLErrors[0].message === "In field \"loginUser\": No user with this username was found!" ||
-                e.graphQLErrors[0].message === "In field \"loginUser\": Incorrect password") {
-                this.setState({
-                    validationError: 'Invalid Username and/or password.'
-                })
-            }
+            const errors = e.graphQLErrors.map((error) => {
+                return error.message.split(": ")[1];
+            });
+
+            this.setState({validationErrors: errors})
         }
     }
 
@@ -79,7 +59,9 @@ class SignIn extends Component {
                            value={this.state.password}
                     />
 
-                    <p style={{color: "red"}}>{this.state.validationError}</p>
+                    {this.state.validationErrors.map(error => {
+                        return <p style={{color: "red"}}>{error}</p>
+                    })}
                     <input type="submit" onClick={this.onSubmit.bind(this)}/>
                 </form>
             </div>
