@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import { graphql } from "react-apollo";
+import {graphql} from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
-import newsTweetQuery from "../../queries/fetchNewsTweets";
-import signUpMutation from "../../mutations/signup"
+import currentUserQuery from "../../queries/currentUser"
+import signUpMutation from "../../mutations/signup";
+import {signUpAPI} from "../../helpers/async_calls";
 
 class SignUp extends Component {
     constructor(props) {
@@ -16,38 +17,37 @@ class SignUp extends Component {
             usernameError: '',
             emailError: '',
             passwordError: '',
-            confirmPasswordError: ''
+            validationErrors: []
         };
     }
 
-    onSubmit(event) {
+    async onSubmit(event) {
         event.preventDefault();
-        if(this.state.password !== this.state.confirm_password) {
-            let passwordErrors = "The passwords you've entered do not match.";
-
+        if (this.state.password !== this.state.confirm_password) {
+            let passwordError = "The passwords you've entered do not match.";
             this.setState({
-                passwordError: passwordErrors,
-                confirmPasswordError: passwordErrors
-
+                validationErrors: [passwordError]
             });
             return
         }
-        //attempt mutation:
-        this.props.mutate({
-            variables: {
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password
-            },
-            refetchQueries: [{query: newsTweetQuery}]
-        }).then((response) => {
-            let token = response.data.registerUser.token;
-            localStorage.setItem('token', token);
+
+        try {
+            this.setState({
+                validationErrors: []
+            });
+            //register and authenticate user - sets jwt.
+            await signUpAPI(this.props.mutate, this.state);
+            await this.props.data.refetch();
             this.props.history.push("/");
-        })
-            .catch((e) => {
-                console.log('error', e);
-            })
+        }
+        catch (e) {
+            const errors = e.graphQLErrors[0].error_list.map((error) => {
+                return `${Object.keys(error)[0]} ${error[Object.keys(error)[0]]}`;
+            });
+
+            this.setState({validationErrors: errors})
+        }
+
     }
 
     render() {
@@ -82,6 +82,10 @@ class SignUp extends Component {
                            value={this.state.confirm_password}
                     />
                     <p>{this.state.confirmPasswordError}</p>
+
+                    {this.state.validationErrors.map(error => {
+                        return <p style={{color: "red"}}>{error}</p>
+                    })}
                     <input type="submit" onClick={this.onSubmit.bind(this)}/>
                 </form>
             </div>
@@ -91,5 +95,4 @@ class SignUp extends Component {
 }
 
 
-
-export default graphql(signUpMutation)(withRouter(SignUp));
+export default graphql(signUpMutation)(graphql(currentUserQuery)(withRouter(SignUp)));

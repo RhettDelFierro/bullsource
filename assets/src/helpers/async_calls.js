@@ -1,9 +1,9 @@
-export async function signIn(cb,state) {
-    return cb({
-        variables: {
-            username: state.username,
-            password: state.password
-        }
-    })
+export async function signInAPI(cb, {username, password}) {
+    const mutation = await cb({variables: {username, password}});
+    localStorage.setItem('token', mutation.data.loginUser.token);
 }
 
+export async function signUpAPI(cb, {username, email, password}) {
+    const mutation = await cb({variables: {username, email, password}});
+    localStorage.setItem('token', mutation.data.registerUser.token)
+}

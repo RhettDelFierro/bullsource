@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/helpers/async_calls.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" afterPath="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/signin/SignIn.js" afterPath="$PROJECT_DIR$/assets/src/components/signin/SignIn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/signup/SignUp.js" afterPath="$PROJECT_DIR$/assets/src/components/signup/SignUp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/helpers/async_calls.js" afterPath="$PROJECT_DIR$/assets/src/helpers/async_calls.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,21 +17,23 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SignIn.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/signin/SignIn.js">
+      <file leaf-file-name="PostForm.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="-435">
+              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostForm.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
+      <file leaf-file-name="SignIn.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/signin/SignIn.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-725">
-              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            <state relative-caret-position="292">
+              <caret line="59" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -42,8 +44,8 @@
       <file leaf-file-name="async_calls.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/helpers/async_calls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="120">
+              <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -109,12 +111,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="endpoint.ex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/web/endpoint.ex">
+      <file leaf-file-name="SignUp.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/signup/SignUp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-271">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="283">
+              <caret line="46" column="12" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+                <marker date="1498002855000" expanded="true" signature="1612:3182" ph="..." />
+                <marker date="1498002855000" expanded="true" signature="1746:3163" ph="..." />
+                <marker date="1498002855000" expanded="true" signature="1830:1872" ph="..." />
+                <marker date="1498002855000" expanded="true" signature="2082:2124" ph="..." />
+                <marker date="1498002855000" expanded="true" signature="2335:2377" ph="..." />
+                <marker date="1498002855000" expanded="true" signature="2656:2698" ph="..." />
+                <marker date="1498002855000" expanded="false" signature="3010:3018" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,7 +207,6 @@
         <option value="$PROJECT_DIR$/lib/bullsource/accounts/user.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex" />
         <option value="$PROJECT_DIR$/assets/package.json" />
-        <option value="$PROJECT_DIR$/assets/src/components/signup/SignUp.js" />
         <option value="$PROJECT_DIR$/assets/src/components/discussion/Discussion.js" />
         <option value="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex" />
@@ -216,9 +226,10 @@
         <option value="$PROJECT_DIR$/assets/src/components/nav/Nav.js" />
         <option value="$PROJECT_DIR$/assets/webpack.config.js" />
         <option value="$PROJECT_DIR$/assets/.babelrc" />
-        <option value="$PROJECT_DIR$/assets/src/helpers/async_calls.js" />
         <option value="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" />
         <option value="$PROJECT_DIR$/assets/src/components/signin/SignIn.js" />
+        <option value="$PROJECT_DIR$/assets/src/helpers/async_calls.js" />
+        <option value="$PROJECT_DIR$/assets/src/components/signup/SignUp.js" />
       </list>
     </option>
   </component>
@@ -240,7 +251,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1440" />
+    <option name="width" value="1060" />
     <option name="height" value="800" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -445,6 +456,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="signup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="signin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -575,10 +612,10 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="800" extended-state="6" />
+    <frame x="0" y="23" width="1060" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19527897" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2681729" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -786,14 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/signup/SignUp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="35" column="27" lean-forward="false" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/category_nav/CategoryNav.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -974,17 +1003,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/helpers/async_calls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-725">
+        <state relative-caret-position="-435">
           <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -992,11 +1013,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/helpers/async_calls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/signin/SignIn.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="292">
+          <caret line="59" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/signup/SignUp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="46" column="12" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+            <marker date="1498002855000" expanded="true" signature="1612:3182" ph="..." />
+            <marker date="1498002855000" expanded="true" signature="1746:3163" ph="..." />
+            <marker date="1498002855000" expanded="true" signature="1830:1872" ph="..." />
+            <marker date="1498002855000" expanded="true" signature="2082:2124" ph="..." />
+            <marker date="1498002855000" expanded="true" signature="2335:2377" ph="..." />
+            <marker date="1498002855000" expanded="true" signature="2656:2698" ph="..." />
+            <marker date="1498002855000" expanded="false" signature="3010:3018" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
