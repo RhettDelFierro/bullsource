@@ -5,7 +5,7 @@ import ApolloClient, {createNetworkInterface} from "apollo-client";
 import {ApolloProvider} from "react-apollo";
 
 import { CategoryNav } from './components/category_nav/CategoryNav'
-import { Nav } from './components/nav/Nav'
+import Nav from './components/nav/Nav'
 import Categories from "./components/categories/Categories";
 import Discussion from "./components/discussion/Discussion";
 import Home from "./components/Home";
@@ -30,7 +30,7 @@ networkInterface.use([{
 }]);
 
 const client = new ApolloClient({
-    networkInterface,
+    networkInterface, // our customized networkInterface rather than the default networkInterface that Apollo uses.
     dataIdFromObject: o => o.id
 });
 

@@ -1,11 +1,12 @@
-.nav {
+.category-nav {
     display: flex;
+    background-image: linear-gradient( 135deg, #43CBFF 0%, #9708CC 100%);
 }
 
 .active {
     font-weight: bold;
 }
 
-.nav li {
+.category-nav li {
     margin-right: 5px;
 }

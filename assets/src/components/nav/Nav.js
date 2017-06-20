@@ -1,20 +1,59 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom'
-import './style.css'
+import React, {Component} from "react";
+import {NavLink} from "react-router-dom";
+import { graphql } from 'react-apollo'
+import "./style.css";
 
-export const Nav = () => {
-    return (
-        <ul className='nav'>
-            <li>
-                <NavLink exact activeClassName='active' to='/'>Home</NavLink>
-            </li>
-            <li>
-                <NavLink activeClassName='active' to='/signup'>Sign-Up</NavLink>
-            </li>
-            <li>
-                <NavLink activeClassName='active' to='/signin'>Sign-In</NavLink>
-            </li>
-        </ul>
-    )
-};
+import currentUserQuery from "../../queries/currentUser";
+import signOutMutation from "../../mutations/signout";
+
+class Nav extends Component {
+
+    onLogout() {
+        this.props.mutate({}).then((res) => {
+            // res.data.signOut.id and res.data.signOut.user
+            localStorage.removeItem('token');
+            this.props.data.refetch();
+        })
+    }
+
+    renderStatus() {
+        const {loading, currentUser} = this.props.data;
+        if (loading) {
+            return <div />
+        }
+        if (currentUser) {
+            return (
+                <ul className='nav'>
+                    <li>Welcome {currentUser.username}</li>
+                    <li>
+                        <a onClick={this.onLogout.bind(this)}>
+                            Log Out
+                        </a>
+                    </li>
+                </ul>
+            )
+        } else {
+            return (
+                <ul className='nav'>
+                    <li>
+                        <NavLink activeClassName='active' to='/signup'>Sign-Up</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeClassName='active' to='/signin'> Sign-In</NavLink>
+                    </li>
+                </ul>
+            )
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                {this.renderStatus()}
+            </div>
+        )
+    }
+}
+
+export default graphql(signOutMutation)(graphql(currentUserQuery)(Nav));
 

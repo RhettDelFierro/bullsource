@@ -4,7 +4,10 @@ import './style.css'
 
 export const CategoryNav = () => {
     return (
-        <ul className='nav'>
+        <ul className='category-nav'>
+            <li>
+                <NavLink exact activeClassName='active' to='/'>Home</NavLink>
+            </li>
             <li>
                 <NavLink activeClassName='active' to='/category/entertainment'>Entertainment</NavLink>
             </li>

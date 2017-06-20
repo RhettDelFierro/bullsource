@@ -3,6 +3,7 @@ import {graphql} from "react-apollo";
 import { Link, withRouter } from "react-router-dom";
 import newsTweetFilterQuery from "../../queries/fetchFilterNewsTweets";
 import Headline from "../headline/Headline";
+import './style.css'
 
 class Categories extends Component {
     renderNewsTweets() {

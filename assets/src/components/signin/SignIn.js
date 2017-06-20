@@ -10,7 +10,6 @@ class SignIn extends Component {
 
         this.state = {
             username: '',
-            email: '',
             password: '',
             signInError: ''
         };
@@ -23,17 +22,23 @@ class SignIn extends Component {
         this.props.mutate({
             variables: {
                 username: this.state.username,
-                email: this.state.email,
                 password: this.state.password
             },
             refetchQueries: [{query: newsTweetQuery}]
         }).then((response) => {
             let token = response.data.loginUser.token;
             localStorage.setItem('token', token);
+            this.setState({
+                username: '',
+                password: '',
+                signInError: ''
+            });
             this.props.history.push("/");
         })
             .catch((e) => {
-                console.log('error', e);
+                this.setState({
+                    signInError: 'Invalid Username and/or password.'
+                })
             })
     }
 
@@ -50,18 +55,12 @@ class SignIn extends Component {
                            value={this.state.username}
                     />
 
-                    <label>Email</label>
-                    <input type="text"
-                           onChange={event => this.setState({email: event.target.value})}
-                           value={this.state.email}
-                    />
-
                     <label>Password</label>
                     <input type="password"
                            onChange={event => this.setState({password: event.target.value})}
                            value={this.state.password}
                     />
-                    <p>{this.state.passwordError}</p>
+                    <p>{this.state.signInError}</p>
 
                     <input type="submit" onClick={this.onSubmit.bind(this)}/>
                 </form>
