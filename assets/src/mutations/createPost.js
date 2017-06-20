@@ -16,6 +16,7 @@ export default gql`
     id
     upVotes{
       user{
+        id
         username
       }
     }

@@ -6,7 +6,6 @@ defmodule Bullsource.GraphQL.Types.AccountTypes do
   object :user do
     field :id, :integer
     field :username, :string
-    field :email, :string
   end
 
   @desc "A JWT Token"

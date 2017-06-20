@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/mutations/signout.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" afterPath="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/mutations/createPost.js" afterPath="$PROJECT_DIR$/assets/src/mutations/createPost.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/mutations/signin.js" afterPath="$PROJECT_DIR$/assets/src/mutations/signin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/mutations/signup.js" afterPath="$PROJECT_DIR$/assets/src/mutations/signup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,80 +21,98 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PostForm.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/post_form/PostForm.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="trending_tweets.ex" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="265" column="0" lean-forward="true" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignIn.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/signin/SignIn.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="900">
-              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Discussion.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/discussion/Discussion.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="18" column="93" lean-forward="false" selection-start-line="18" selection-start-column="93" selection-end-line="18" selection-end-column="93" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="signin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/mutations/signin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="2" lean-forward="false" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+            <state relative-caret-position="180">
+              <caret line="12" column="2" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Nav.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/nav/Nav.js">
+      <file leaf-file-name="signout.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/src/mutations/signout.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+            <state relative-caret-position="120">
+              <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createPost.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/mutations/createPost.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" column="1" lean-forward="false" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fetchThread.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchThread.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fetchNewsTweets.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchNewsTweets.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fetchFilterNewsTweets.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchFilterNewsTweets.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <marker date="1497749694000" expanded="true" signature="54:444" ph="query...{&#10;    newsTweetsBy(category: $category) {&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt&#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }  &#10;  }" />
+                <marker date="1497749694000" expanded="true" signature="60:72" ph="NewsTweetsBy...NewsTweetsBy" />
+                <marker date="1497749694000" expanded="true" signature="72:92" ph="(...)" />
+                <marker date="1497749694000" expanded="true" signature="84:90" ph="String...String" />
+                <marker date="1497749694000" expanded="true" signature="92:444" ph="{...}" />
+                <marker date="1497749694000" expanded="true" signature="98:110" ph="newsTweetsBy...newsTweetsBy" />
+                <marker date="1497749694000" expanded="true" signature="98:438" ph="newsTweetsBy...{&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt&#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }" />
+                <marker date="1497749694000" expanded="true" signature="110:131" ph="(...)" />
+                <marker date="1497749694000" expanded="true" signature="111:119" ph="category...category" />
+                <marker date="1497749694000" expanded="true" signature="132:438" ph="{...}" />
+                <marker date="1497749694000" expanded="true" signature="140:147" ph="network...network" />
+                <marker date="1497749694000" expanded="true" signature="140:209" ph="network...{&#10;        id&#10;        name&#10;        url&#10;      }" />
+                <marker date="1497749694000" expanded="true" signature="147:209" ph="{...}" />
+                <marker date="1497749694000" expanded="true" signature="157:159" ph="id...id" />
+                <marker date="1497749694000" expanded="true" signature="168:172" ph="name...name" />
+                <marker date="1497749694000" expanded="true" signature="181:184" ph="url...url" />
+                <marker date="1497749694000" expanded="true" signature="193:201" ph="category...category" />
+                <marker date="1497749694000" expanded="true" signature="216:220" ph="news...news" />
+                <marker date="1497749694000" expanded="true" signature="216:294" ph="news...{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt&#10;      }" />
+                <marker date="1497749694000" expanded="true" signature="220:294" ph="{...}" />
+                <marker date="1497749694000" expanded="true" signature="230:235" ph="title...title" />
+                <marker date="1497749694000" expanded="true" signature="244:247" ph="url...url" />
+                <marker date="1497749694000" expanded="true" signature="256:266" ph="urlToImage...urlToImage" />
+                <marker date="1497749694000" expanded="true" signature="275:286" ph="publishedAt...publishedAt" />
+                <marker date="1497749694000" expanded="true" signature="301:307" ph="tweets...tweets" />
+                <marker date="1497749694000" expanded="true" signature="301:432" ph="tweets...{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }" />
+                <marker date="1497749694000" expanded="true" signature="307:432" ph="{...}" />
+                <marker date="1497749694000" expanded="true" signature="317:329" ph="retweetCount...retweetCount" />
+                <marker date="1497749694000" expanded="true" signature="340:346" ph="id_str...id_str" />
+                <marker date="1497749694000" expanded="true" signature="357:365" ph="fullText...fullText" />
+                <marker date="1497749694000" expanded="true" signature="375:379" ph="user...user" />
+                <marker date="1497749694000" expanded="true" signature="375:405" ph="user...{&#10;          name&#10;        }" />
+                <marker date="1497749694000" expanded="true" signature="379:405" ph="{...}" />
+                <marker date="1497749694000" expanded="true" signature="391:395" ph="name...name" />
+                <marker date="1497749694000" expanded="true" signature="415:424" ph="retweeted...retweeted" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="37" lean-forward="false" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -96,21 +120,19 @@
       <file leaf-file-name="signup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/mutations/signup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="2" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="2" />
+            <state relative-caret-position="135">
+              <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignUp.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/signup/SignUp.js">
+      <file leaf-file-name="user_resolver.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="49" column="14" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="49" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="195">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,8 +140,18 @@
       <file leaf-file-name="createHeadline.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/mutations/createHeadline.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="82" lean-forward="false" selection-start-line="6" selection-start-column="82" selection-end-line="6" selection-end-column="82" />
+            <state relative-caret-position="270">
+              <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="account_types.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="28" lean-forward="false" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -174,13 +206,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/assets/src/components/nav/style.css" />
-        <option value="$PROJECT_DIR$/assets/src/components/queries/fetchHeadlines.js" />
-        <option value="$PROJECT_DIR$/assets/src/mutations/signup.js" />
         <option value="$PROJECT_DIR$/lib/bullsource/accounts/accounts.ex" />
         <option value="$PROJECT_DIR$/assets/src/queries/fetchNewsTweet.js" />
         <option value="$PROJECT_DIR$/assets/src/components/Home.js" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex" />
         <option value="$PROJECT_DIR$/assets/src/components/category_nav/Category_Nav.js" />
         <option value="$PROJECT_DIR$/assets/src/components/category_nav/style.css" />
         <option value="$PROJECT_DIR$/assets/src/components/category/Category.js" />
@@ -204,27 +232,31 @@
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/post.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/tweet.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/topic.ex" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/headline_resolver.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/headline.ex" />
         <option value="$PROJECT_DIR$/assets/src/mutations/createThread.js" />
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/votes/votes.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/accounts/user.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex" />
         <option value="$PROJECT_DIR$/assets/package.json" />
         <option value="$PROJECT_DIR$/assets/.babelrc" />
-        <option value="$PROJECT_DIR$/assets/src/mutations/createHeadline.js" />
         <option value="$PROJECT_DIR$/assets/src/components/signup/SignUp.js" />
-        <option value="$PROJECT_DIR$/assets/src/mutations/signin.js" />
         <option value="$PROJECT_DIR$/assets/src/index.js" />
         <option value="$PROJECT_DIR$/assets/src/components/signin/SignIn.js" />
         <option value="$PROJECT_DIR$/assets/src/components/nav/Nav.js" />
         <option value="$PROJECT_DIR$/assets/src/components/discussion/Discussion.js" />
         <option value="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" />
         <option value="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex" />
+        <option value="$PROJECT_DIR$/assets/src/mutations/signup.js" />
+        <option value="$PROJECT_DIR$/assets/src/mutations/signin.js" />
+        <option value="$PROJECT_DIR$/assets/src/mutations/createPost.js" />
+        <option value="$PROJECT_DIR$/assets/src/mutations/createHeadline.js" />
+        <option value="$PROJECT_DIR$/assets/src/mutations/signout.js" />
       </list>
     </option>
   </component>
@@ -382,6 +414,198 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="types" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resolvers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="votes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resolvers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discussion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resolvers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="accounts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mutations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -517,52 +741,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/src/components/categories/Categories.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/headline_details/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchFilterNewsTweets.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/headline/Headline.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="57" column="1" lean-forward="false" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/headline_details/HeadlineDetails.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
           <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/web/context.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-182">
-          <caret line="21" column="43" lean-forward="false" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchThread.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -577,13 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/mutations/createPost.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="2" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -655,13 +830,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
           <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="42" lean-forward="false" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -697,6 +866,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -711,6 +881,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -728,13 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="52" column="23" lean-forward="false" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/vote_types.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
@@ -746,13 +910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-113">
           <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="30" lean-forward="false" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -788,6 +945,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
           <caret line="24" column="29" lean-forward="false" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -795,30 +953,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="48" lean-forward="false" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/mutations/createHeadline.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="82" lean-forward="false" selection-start-line="6" selection-start-column="82" selection-end-line="6" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/mutations/signup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="2" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/mutations/signin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="2" lean-forward="false" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -836,7 +970,7 @@
         <state relative-caret-position="900">
           <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -846,7 +980,7 @@
         <state relative-caret-position="195">
           <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -856,7 +990,7 @@
         <state relative-caret-position="165">
           <caret line="18" column="93" lean-forward="false" selection-start-line="18" selection-start-column="93" selection-end-line="18" selection-end-column="93" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -866,7 +1000,7 @@
         <state relative-caret-position="675">
           <caret line="49" column="14" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="49" selection-end-column="14" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -876,7 +1010,7 @@
         <state relative-caret-position="527">
           <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -885,6 +1019,146 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="265" column="0" lean-forward="true" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/web/context.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="21" column="43" lean-forward="false" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/web/authentication.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/resolvers/accounts/user_resolver.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/account_types.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="28" lean-forward="false" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchNewsTweets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchFilterNewsTweets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+          <folding>
+            <marker date="1497749694000" expanded="true" signature="54:444" ph="query...{&#10;    newsTweetsBy(category: $category) {&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt&#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }  &#10;  }" />
+            <marker date="1497749694000" expanded="true" signature="60:72" ph="NewsTweetsBy...NewsTweetsBy" />
+            <marker date="1497749694000" expanded="true" signature="72:92" ph="(...)" />
+            <marker date="1497749694000" expanded="true" signature="84:90" ph="String...String" />
+            <marker date="1497749694000" expanded="true" signature="92:444" ph="{...}" />
+            <marker date="1497749694000" expanded="true" signature="98:110" ph="newsTweetsBy...newsTweetsBy" />
+            <marker date="1497749694000" expanded="true" signature="98:438" ph="newsTweetsBy...{&#10;      network{&#10;        id&#10;        name&#10;        url&#10;      }&#10;      news{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt&#10;      }&#10;      tweets{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }&#10;    }" />
+            <marker date="1497749694000" expanded="true" signature="110:131" ph="(...)" />
+            <marker date="1497749694000" expanded="true" signature="111:119" ph="category...category" />
+            <marker date="1497749694000" expanded="true" signature="132:438" ph="{...}" />
+            <marker date="1497749694000" expanded="true" signature="140:147" ph="network...network" />
+            <marker date="1497749694000" expanded="true" signature="140:209" ph="network...{&#10;        id&#10;        name&#10;        url&#10;      }" />
+            <marker date="1497749694000" expanded="true" signature="147:209" ph="{...}" />
+            <marker date="1497749694000" expanded="true" signature="157:159" ph="id...id" />
+            <marker date="1497749694000" expanded="true" signature="168:172" ph="name...name" />
+            <marker date="1497749694000" expanded="true" signature="181:184" ph="url...url" />
+            <marker date="1497749694000" expanded="true" signature="193:201" ph="category...category" />
+            <marker date="1497749694000" expanded="true" signature="216:220" ph="news...news" />
+            <marker date="1497749694000" expanded="true" signature="216:294" ph="news...{&#10;        title&#10;        url&#10;        urlToImage&#10;        publishedAt&#10;      }" />
+            <marker date="1497749694000" expanded="true" signature="220:294" ph="{...}" />
+            <marker date="1497749694000" expanded="true" signature="230:235" ph="title...title" />
+            <marker date="1497749694000" expanded="true" signature="244:247" ph="url...url" />
+            <marker date="1497749694000" expanded="true" signature="256:266" ph="urlToImage...urlToImage" />
+            <marker date="1497749694000" expanded="true" signature="275:286" ph="publishedAt...publishedAt" />
+            <marker date="1497749694000" expanded="true" signature="301:307" ph="tweets...tweets" />
+            <marker date="1497749694000" expanded="true" signature="301:432" ph="tweets...{&#10;        retweetCount, &#10;        id_str, &#10;        fullText,&#10;        user{&#10;          name&#10;        },&#10;        retweeted&#10;      }" />
+            <marker date="1497749694000" expanded="true" signature="307:432" ph="{...}" />
+            <marker date="1497749694000" expanded="true" signature="317:329" ph="retweetCount...retweetCount" />
+            <marker date="1497749694000" expanded="true" signature="340:346" ph="id_str...id_str" />
+            <marker date="1497749694000" expanded="true" signature="357:365" ph="fullText...fullText" />
+            <marker date="1497749694000" expanded="true" signature="375:379" ph="user...user" />
+            <marker date="1497749694000" expanded="true" signature="375:405" ph="user...{&#10;          name&#10;        }" />
+            <marker date="1497749694000" expanded="true" signature="379:405" ph="{...}" />
+            <marker date="1497749694000" expanded="true" signature="391:395" ph="name...name" />
+            <marker date="1497749694000" expanded="true" signature="415:424" ph="retweeted...retweeted" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/queries/fetchThread.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/mutations/createHeadline.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/mutations/createPost.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="1" lean-forward="false" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/mutations/signup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/mutations/signin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="2" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/mutations/signout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
           <folding />
         </state>
       </provider>

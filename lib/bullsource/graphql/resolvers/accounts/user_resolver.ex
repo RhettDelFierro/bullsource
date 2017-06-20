@@ -14,6 +14,7 @@ defmodule Bullsource.GraphQL.UserResolver do
 
   def register(args, _context),   do: generate_session(&create_user/1,args)
 
+  def sign_out(args, %{context: %{current_user: current_user}}), do: {:ok, current_user}
 
   defp generate_session(func, args) do
     with {:ok, user}  <- func.(args),

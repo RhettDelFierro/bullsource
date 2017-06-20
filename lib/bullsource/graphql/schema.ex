@@ -76,7 +76,10 @@ defmodule Bullsource.GraphQL.Schema do
       middleware Bullsource.Web.HandleError
     end
 
-
+    field :sign_out, :user do
+      middleware Bullsource.Web.Authentication
+      resolve &Bullsource.GraphQL.UserResolver.sign_out/2
+    end
 
     @desc "Create a topic"
     field :create_topic, :topic do
