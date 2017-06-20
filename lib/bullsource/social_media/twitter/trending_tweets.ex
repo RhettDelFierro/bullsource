@@ -170,7 +170,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
 
   defp set_schedule() do
-     Process.send_after(self(), :fetch, 1 * 60 * 30 * 1000) #check every 30 minutes (rate limit is 450 requests/15 minutes)
+     Process.send_after(self(), :fetch, 1 * 60 * 35 * 1000) #check every 30 minutes (rate limit is 450 requests/15 minutes)
   end
 
   defp api_key do
