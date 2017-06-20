@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {graphql} from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
 import signInMutation from "../../mutations/signin";
-import currentUser from "../../queries/currentUser"
+import currentUser from "../../queries/currentUser";
 
 class SignIn extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class SignIn extends Component {
         };
     }
 
-    onSubmit(event) {
+    async onSubmit(event) {
         event.preventDefault();
         if (this.state.username === '') {
             this.setState({validationError: 'username cannot be blank'});
@@ -28,31 +28,35 @@ class SignIn extends Component {
         }
 
         //attempt mutation:
-        this.props.mutate({
-            variables: {
-                username: this.state.username,
-                password: this.state.password
-            },
-        }).then((response) => {
-            const {user, token} = response.data.loginUser;
+        try {
+            const mutation = await this.props.mutate({
+                variables: {
+                    username: this.state.username,
+                    password: this.state.password
+                },
+            });
 
-            localStorage.setItem('token', token);
+            const {user, token} = mutation.data.loginUser;
+
             this.setState({
                 validationMessage: `Welcome back ${user.username}!`,
                 validationError: ''
             });
-            this.props.data.refetch()
-                .then((_) => this.props.history.push("/"))
-        })
-            .catch((e) => {
-                if (e.graphQLErrors[0].message === "In field \"loginUser\": No user with this username was found!" ||
-                    e.graphQLErrors[0].message === "In field \"loginUser\": Incorrect password") {
-                    this.setState({usernameError: "No user with this username was found!"})
-                }
+
+            localStorage.setItem('token', token);
+
+            await this.props.data.refetch();
+            this.props.history.push("/");
+
+        }
+        catch (e) {
+            if (e.graphQLErrors[0].message === "In field \"loginUser\": No user with this username was found!" ||
+                e.graphQLErrors[0].message === "In field \"loginUser\": Incorrect password") {
                 this.setState({
                     validationError: 'Invalid Username and/or password.'
                 })
-            })
+            }
+        }
     }
 
     render() {
