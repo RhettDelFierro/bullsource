@@ -11,6 +11,9 @@ export const Nav = () => {
             <li>
                 <NavLink activeClassName='active' to='/signup'>Sign-Up</NavLink>
             </li>
+            <li>
+                <NavLink activeClassName='active' to='/signin'>Sign-In</NavLink>
+            </li>
         </ul>
     )
 };

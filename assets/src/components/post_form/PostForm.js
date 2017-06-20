@@ -22,42 +22,64 @@ class PostForm extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-        if (nextProps.isFirstPost) {
-            const {newsTweet, topicId} = nextProps;
-            const {network, news, tweets} = newsTweet;
+    componentWillMount() {
+        // console.log('componentWilReceivePropssssss - next{rops', nextProps);
+        // if (nextProps.isFirstPost) {
+        const {newsTweet, topicId} = this.props;
+        const {network, news, tweets} = newsTweet;
 
-            this.setState({
-                title: news.title,
-                network: network.name,
-                topicId: topicId || '', // will be the topic/category and a number based on the category.
-                url: news.url,
-                description: news.description,
-                publishedAt: news.publishedAt,
-            })
-        }
+        this.setState({
+            title: news.title,
+            network: network.name,
+            topicId: topicId || '', // will be the topic/category and a number based on the category.
+            url: news.url,
+            description: news.description,
+            publishedAt: news.publishedAt,
+        })
+        // }
     }
 
     handlePostBodyChange(event) {
-        let postBody = { ...this.state.post };
-        postBody.intro = event.target.value;
-        this.setState({postBody})
+        let post = {...this.state.post};
+        post.intro = event.target.value;
+        this.setState({post})
     }
 
 
     onSubmit(event) {
+        event.preventDefault();
+        //attempt mutation:
+        this.props.mutate({
+            variables: {
+                title: this.state.title,
+                network: this.state.network,
+                topicId: this.state.topicId,
+                url: this.state.url,
+                description: this.state.description,
+                publishedAt: this.state.publishedAt,
+                post: this.state.post,
 
+            },
+            refetchQueries: [{query: newsTweetQuery}]
+        }).then((response) => {
+            let token = response.data.registerUser.token;
+            localStorage.setItem('token', token);
+            this.props.history.push("/");
+        })
+            .catch((e) => {
+                console.log('error', e);
+            })
     }
 
     render() {
+        console.log("initial propssssss", this.props);
         return (
             <div>
                 <form onSubmit={this.onSubmit.bind(this)}>
-                    <label>Song Title:</label>
+                    <label>Post:</label>
                     <input
                         onChange={this.handlePostBodyChange.bind(this)}
-                        value={this.state.title}
+                        value={this.state.post.intro}
                     />
 
                 </form>

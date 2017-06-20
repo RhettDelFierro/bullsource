@@ -2,9 +2,9 @@ import React, {Component} from "react";
 import { graphql } from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
 import newsTweetQuery from "../../queries/fetchNewsTweets";
-import signUpMutation from "../../mutations/signup"
+import signInMutation from "../../mutations/signin"
 
-class SignUp extends Component {
+class SignIn extends Component {
     constructor(props) {
         super(props);
 
@@ -12,26 +12,13 @@ class SignUp extends Component {
             username: '',
             email: '',
             password: '',
-            confirm_password: '',
-            usernameError: '',
-            emailError: '',
-            passwordError: '',
-            confirmPasswordError: ''
+            signInError: ''
         };
     }
 
     onSubmit(event) {
         event.preventDefault();
-        if(this.state.password !== this.state.confirm_password) {
-            let passwordErrors = "The passwords you've entered do not match.";
 
-            this.setState({
-                passwordError: passwordErrors,
-                confirmPasswordError: passwordErrors
-
-            });
-            return
-        }
         //attempt mutation:
         this.props.mutate({
             variables: {
@@ -41,7 +28,7 @@ class SignUp extends Component {
             },
             refetchQueries: [{query: newsTweetQuery}]
         }).then((response) => {
-            let token = response.data.registerUser.token;
+            let token = response.data.loginUser.token;
             localStorage.setItem('token', token);
             this.props.history.push("/");
         })
@@ -55,7 +42,7 @@ class SignUp extends Component {
         return (
             <div>
                 <Link to="/">Back</Link>
-                <h3>Sign up!</h3>
+                <h3>Sign In!</h3>
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <label>Username</label>
                     <input type="text"
@@ -76,12 +63,6 @@ class SignUp extends Component {
                     />
                     <p>{this.state.passwordError}</p>
 
-                    <label>Confirm Password</label>
-                    <input type="password"
-                           onChange={event => this.setState({confirm_password: event.target.value})}
-                           value={this.state.confirm_password}
-                    />
-                    <p>{this.state.confirmPasswordError}</p>
                     <input type="submit" onClick={this.onSubmit.bind(this)}/>
                 </form>
             </div>
@@ -92,4 +73,4 @@ class SignUp extends Component {
 
 
 
-export default graphql(signUpMutation)(withRouter(SignUp));
+export default graphql(signInMutation)(withRouter(SignIn));

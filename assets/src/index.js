@@ -6,9 +6,10 @@ import {ApolloProvider} from "react-apollo";
 
 import { CategoryNav } from './components/category_nav/CategoryNav'
 import { Nav } from './components/nav/Nav'
-import Home from "./components/Home";
 import Categories from "./components/categories/Categories";
 import Discussion from "./components/discussion/Discussion";
+import Home from "./components/Home";
+import SignIn from './components/signin/SignIn'
 import SignUp from "./components/signup/SignUp";
 
 //create new instance of ApolloClient for the ApolloProvider
@@ -43,6 +44,7 @@ const Root = () => {
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route path="/signup" component={SignUp} />
+                        <Route path="/signin" component={SignIn} />
                         <Route exact path="/category/:category" component={Categories} />
                         <Route path="/category/:category/:headline_id" component={Discussion} />
                         <Route render={ () => <p>Not Found</p> } />
