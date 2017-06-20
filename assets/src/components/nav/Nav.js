@@ -7,10 +7,14 @@ import currentUserQuery from "../../queries/currentUser";
 import signOutMutation from "../../mutations/signout";
 
 class Nav extends Component {
-
+    // componentWillReceiveProps(nextProps){
+    //     if (this.props.data.currentUser !== nextProps.data.currentUser) {
+    //
+    //     }
+    // }
     onLogout() {
         this.props.mutate({}).then((res) => {
-            // res.data.signOut.id and res.data.signOut.user
+            // res.data.signOut.id and res.data.signOut.username
             localStorage.removeItem('token');
             this.props.data.refetch();
         })

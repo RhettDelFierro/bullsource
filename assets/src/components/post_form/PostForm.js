@@ -72,7 +72,6 @@ class PostForm extends Component {
     }
 
     render() {
-        console.log("initial propssssss", this.props);
         return (
             <div>
                 <form onSubmit={this.onSubmit.bind(this)}>

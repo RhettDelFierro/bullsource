@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {graphql} from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
 import signInMutation from "../../mutations/signin";
+import currentUser from "../../queries/currentUser"
 
 class SignIn extends Component {
     constructor(props) {
@@ -25,25 +26,23 @@ class SignIn extends Component {
             this.setState({validationError: 'password cannot be blank'});
             return
         }
+
         //attempt mutation:
         this.props.mutate({
             variables: {
                 username: this.state.username,
                 password: this.state.password
             },
-            // refetchQueries: [{query: currentUser}]
         }).then((response) => {
             const {user, token} = response.data.loginUser;
 
             localStorage.setItem('token', token);
             this.setState({
-                username: '',
-                password: '',
                 validationMessage: `Welcome back ${user.username}!`,
                 validationError: ''
             });
-
-            this.props.history.push("/");
+            this.props.data.refetch()
+                .then((_) => this.props.history.push("/"))
         })
             .catch((e) => {
                 if (e.graphQLErrors[0].message === "In field \"loginUser\": No user with this username was found!" ||
@@ -62,7 +61,6 @@ class SignIn extends Component {
             <div>
                 <Link to="/">Back</Link>
                 <h3>{message}</h3>
-                <p style={{color: "red"}}>{this.state.validationError}</p>
 
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <label>Username</label>
@@ -77,7 +75,7 @@ class SignIn extends Component {
                            value={this.state.password}
                     />
 
-
+                    <p style={{color: "red"}}>{this.state.validationError}</p>
                     <input type="submit" onClick={this.onSubmit.bind(this)}/>
                 </form>
             </div>
@@ -87,4 +85,4 @@ class SignIn extends Component {
 }
 
 
-export default graphql(signInMutation)(withRouter(SignIn));
+export default graphql(signInMutation)(graphql(currentUser)(withRouter(SignIn)));
