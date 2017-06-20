@@ -1,24 +1,19 @@
 import gql from "graphql-tag";
 
 export default gql`
- mutation CreateHeadline($headline_id: Int!, $post: InputPost!){
-  createHeadline(headlineId: 133, post:{
-    proofs:[{
-      article: "4th proof in thread, 1st proof in 2nd article",
-      comment: "4th proof in thread, 1st proof in 2nd comment",
-      reference: {
-        link: "http://snapchat.com",
-        title: "graphql createpost3 title"
-      }
-    }],
-    intro: "4th post in first graphql thread, made from createPost mutation."
-  }){
-    id
-    upVotes{
-      user{
-        username
-      }
-    }
-  }
+ mutation CreateHeadline($title: String!, $network: String!, $post: InputPost!, $topicId: Int!, 
+                         $url: String!, $description: String, $publishedAt: String){
+   createHeadline(title: $title, network: $network, post: $post, topicId: $topicId, 
+                  url: $url, description: $description, publishedAt: $publishedAt) {
+     description
+     id
+     network
+     publishedAt
+     title
+     url
+     posts{
+       id
+     }
+   }
 }
 `;

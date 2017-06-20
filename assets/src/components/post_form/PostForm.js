@@ -1,20 +1,52 @@
-import React, { Component } from 'react';
-import { graphql } from 'react-apollo'
+import React, {Component} from "react";
+import {graphql} from "react-apollo";
 
-import headlineMutation from "../../mutations/createHeadline"
-import postMutation from "../../mutations/createPost"
+import headlineMutation from "../../mutations/createHeadline";
 
 class PostForm extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
-            
+            title: '',
+            network: '',
+            topicId: '', // will be the topic/category and a number based on the category.
+            url: '',
+            description: '',
+            publishedAt: '',
+            post: {
+                intro: '',
+                proofs: []
+            }
+
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        if (nextProps.isFirstPost) {
+            const {newsTweet, topicId} = nextProps;
+            const {network, news, tweets} = newsTweet;
 
-    onSubmit(event){
+            this.setState({
+                title: news.title,
+                network: network.name,
+                topicId: topicId || '', // will be the topic/category and a number based on the category.
+                url: news.url,
+                description: news.description,
+                publishedAt: news.publishedAt,
+            })
+        }
+    }
+
+    handlePostBodyChange(event) {
+        let postBody = { ...this.state.post };
+        postBody.intro = event.target.value;
+        this.setState({postBody})
+    }
+
+
+    onSubmit(event) {
 
     }
 
@@ -24,12 +56,11 @@ class PostForm extends Component {
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <label>Song Title:</label>
                     <input
-                        onChange={event => this.setState({ title: event.target.value })}
+                        onChange={this.handlePostBodyChange.bind(this)}
                         value={this.state.title}
                     />
 
                 </form>
-                The PostForm goes here.
             </div>
         )
     }
