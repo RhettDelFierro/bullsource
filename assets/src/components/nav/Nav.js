@@ -6,6 +6,8 @@ import styles from "./style.css";
 import currentUserQuery from "../../queries/currentUser";
 import signOutMutation from "../../mutations/signout";
 
+import screenSize from "../screenSize";
+
 class Nav extends Component {
     onLogout() {
         this.props.mutate({}).then((res) => {
@@ -54,5 +56,5 @@ class Nav extends Component {
     }
 }
 
-export default withApollo(graphql(signOutMutation)(graphql(currentUserQuery)(Nav)));
+export default withApollo(graphql(signOutMutation)(graphql(currentUserQuery)(screenSize(Nav))));
 

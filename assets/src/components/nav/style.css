@@ -1,5 +1,11 @@
 .nav {
     display: flex;
+    /*color: rgb(119,253,119);*/
+    background-color: rgb(172,215,251);
+}
+
+.nav a {
+    color: rgb(119,253,119);
 }
 
 .active {

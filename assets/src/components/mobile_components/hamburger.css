@@ -1,0 +1,100 @@
+.hamburger-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 18px;
+    height: 17px;
+    margin: 6px 0;
+}
+
+.hamburger {
+    position: relative;
+    height: 1px;
+    background-color: black;
+    width: 18px;
+}
+
+.hamburger::before {
+    content: "";
+    position: absolute;
+    background-color: black;
+    height: 1px;
+    top: -5px;
+    left: 0;
+    width: 18px;
+}
+
+.hamburger::after {
+    content: "";
+    position: absolute;
+    background-color: black;
+    height: 1px;
+    top: 5px;
+    left: 0;
+    width: 18px;
+}
+
+/*.hamburger-container:hover .hamburger::before {*/
+    /*animation: animateTop 1s forwards;*/
+/*}*/
+
+/*.hamburger-container:hover .hamburger::after {*/
+    /*animation: animateBottom 1s forwards;*/
+/*}*/
+
+.hamburger-container:hover {
+    animation: animateBlink 0.2s;
+}
+.hamburger-container:hover .hamburger::before {
+    animation: animateTop 0.5s 0.2s forwards;
+}
+.hamburger-container:hover .hamburger::after {
+    animation: animateBottom 0.5s 0.2s forwards;
+}
+
+/*@media screen and (max-width: 739px) {*/
+
+/*}*/
+
+@keyframes animateBlink {
+    0%{
+        /*background-color: lightblue;*/
+        background-color: rgb(176,226,245);
+        border-radius: 14%;
+    }
+    99% {
+        /*background-color: lightblue;*/
+        background-color: rgb(176,226,245);
+        border-radius: 14%;
+    }
+    100% {
+        background-color: #fff;
+
+    }
+}
+
+@keyframes animateTop {
+    0% {
+        transform: translate(0,-4px);
+    }
+
+    50% {
+        transform: translate(0,-7px);
+    }
+
+    100% {
+        transform: translate(0,-6px);
+    }
+}
+
+@keyframes animateBottom {
+    0% {
+        transform: translate(0,4px);
+    }
+    50% {
+        transform: translate(0,7px);
+    }
+    100% {
+        transform: translate(0,6px);
+    }
+}

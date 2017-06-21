@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import ApolloClient, {createNetworkInterface} from "apollo-client";
 import {ApolloProvider} from "react-apollo";
 
-import {CategoryNav} from "./components/category_nav/CategoryNav";
+import CategoryNav from "./components/category_nav/CategoryNav";
 import Nav from "./components/nav/Nav";
 import Categories from "./components/categories/Categories";
 import Discussion from "./components/discussion/Discussion";
@@ -43,10 +43,10 @@ const Root = () => {
         <ApolloProvider client={client}>
             <BrowserRouter>
                 <div className={styles['root-container']}>
-                    {screenSize(CategoryNav)}
-                    {screenSize(Nav)}
+                    <CategoryNav />
+                    <Nav />
                     <Switch>
-                        <Route exact path="/" component={screenSize(Home)}/>
+                        <Route exact path="/" component={Home}/>
                         <Route path="/signup" component={SignUp}/>
                         <Route path="/signin" component={SignIn}/>
                         <Route exact path="/category/:category" component={Categories}/>

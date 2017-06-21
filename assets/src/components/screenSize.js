@@ -9,7 +9,6 @@ export default (WrappedComponent) => {
         }
 
         checkScreenWidth() {
-            console.log(window.innerWidth);
             if (window.innerWidth <= 440) {
                 this.setState({isMobile: true})
             } else {
