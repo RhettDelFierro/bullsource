@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {graphql} from "react-apollo";
+import {graphql, withApollo} from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
-import currentUserQuery from "../../queries/currentUser"
+import currentUserQuery from "../../queries/currentUser";
 import signUpMutation from "../../mutations/signup";
 import {signUpAPI} from "../../helpers/async_calls";
 
@@ -21,6 +21,13 @@ class SignUp extends Component {
         };
     }
 
+    componentWillUpdate(nextProps) {
+        if (!this.props.data.currentUser && nextProps.data.currentUser) {
+            this.props.history.push("/");
+        }
+    }
+
+
     async onSubmit(event) {
         event.preventDefault();
         if (this.state.password !== this.state.confirm_password) {
@@ -37,8 +44,7 @@ class SignUp extends Component {
             });
             //register and authenticate user - sets jwt.
             await signUpAPI(this.props.mutate, this.state);
-            await this.props.data.refetch();
-            this.props.history.push("/");
+            this.props.client.resetStore();
         }
         catch (e) {
             const errors = e.graphQLErrors[0].error_list.map((error) => {
@@ -95,4 +101,4 @@ class SignUp extends Component {
 }
 
 
-export default graphql(signUpMutation)(graphql(currentUserQuery)(withRouter(SignUp)));
+export default withApollo(graphql(signUpMutation)(graphql(currentUserQuery)(withRouter(SignUp))));
