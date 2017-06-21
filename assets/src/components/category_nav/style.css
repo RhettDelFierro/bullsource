@@ -1,6 +1,6 @@
-.category-nav {
-    display: flex;
-    background-image: linear-gradient( 135deg, #EECE13 0%, #B210FF 100%);
+.category-nav { /*making this a dropdown in mobile*/
+    position: relative;
+    display: inline-block;
 }
 
 .active {
@@ -9,4 +9,29 @@
 
 .category-nav li {
     margin-right: 5px;
+}
+
+
+/*<------------FULL SCREEN------------>*/
+
+@media (min-width: 740px) {
+    .category-nav {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        background-image: linear-gradient(135deg, #EECE13 0%, #B210FF 100%);
+    }
+
+    .category-nav a {
+        display: flex;
+        justify-content: center;
+    }
+
+    .active {
+        font-weight: bold;
+    }
+
+
+    /*.category-nav li {*/
+        /*margin-right: 5px;*/
+    /*}*/
 }
