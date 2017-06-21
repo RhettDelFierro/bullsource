@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {graphql} from "react-apollo";
+import {withApollo,graphql} from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
 import {signInAPI} from "../../helpers/async_calls";
 import signInMutation from "../../mutations/signin";
@@ -17,14 +17,19 @@ class SignIn extends Component {
         };
     }
 
+    componentWillUpdate(nextProps) {
+        if (!this.props.data.currentUser && nextProps.data.currentUser) {
+            this.props.history.push("/");
+        }
+    }
+
     async onSubmit(event) {
         event.preventDefault();
-
+        console.log('onSubmit!!');
         try {
             // signIn authenticates and sets jwt token.
             await signInAPI(this.props.mutate, this.state);
-            await this.props.data.refetch();
-            this.props.history.push("/");
+            this.props.client.resetStore();
         }
         catch (e) {
             const errors = e.graphQLErrors.map((error) => {
@@ -66,4 +71,4 @@ class SignIn extends Component {
 }
 
 
-export default graphql(signInMutation)(graphql(currentUser)(withRouter(SignIn)));
+export default withApollo(graphql(currentUser)(graphql(signInMutation)(withRouter(SignIn))));

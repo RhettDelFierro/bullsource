@@ -1,5 +1,10 @@
 export async function signInAPI(cb, {username, password}) {
-    const mutation = await cb({variables: {username, password}});
+    const mutation = await cb(
+        {
+            variables: {username, password},
+            // refetchQueries: [{query}]
+        });
+
     localStorage.setItem('token', mutation.data.loginUser.token);
 }
 

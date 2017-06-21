@@ -1,6 +1,6 @@
 .category-nav {
     display: flex;
-    background-image: linear-gradient( 135deg, #43CBFF 0%, #9708CC 100%);
+    background-image: linear-gradient( 135deg, #EECE13 0%, #B210FF 100%);
 }
 
 .active {
