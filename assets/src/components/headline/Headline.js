@@ -7,7 +7,7 @@ import "./style.css";
 
 
 /**
- * Is an SFC - this will create each headline. Is child component of Home, Category, and Discussion components.
+ * Is an SFC - this will create each Headline and is a child component of Home and Category components.
  *
  * Parameters:
  *

@@ -18,6 +18,8 @@ class SignIn extends Component {
     }
 
     componentWillUpdate(nextProps) {
+        //after a user has signed on, they will be redirected to the home page.
+        //will also protect a signed in user form going to /signin
         if (!this.props.data.currentUser && nextProps.data.currentUser) {
             this.props.history.push("/");
         }
@@ -25,7 +27,6 @@ class SignIn extends Component {
 
     async onSubmit(event) {
         event.preventDefault();
-        console.log('onSubmit!!');
         try {
             // signIn authenticates and sets jwt token.
             await signInAPI(this.props.mutate, this.state);
@@ -71,4 +72,10 @@ class SignIn extends Component {
 }
 
 
-export default withApollo(graphql(currentUser)(graphql(signInMutation)(withRouter(SignIn))));
+export default withApollo(
+    graphql(currentUser)(
+        graphql(signInMutation)(
+            withRouter(SignIn)
+        )
+    )
+);

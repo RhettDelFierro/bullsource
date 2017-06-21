@@ -12,6 +12,8 @@ import Home from "./components/Home";
 import SignIn from './components/signin/SignIn'
 import SignUp from "./components/signup/SignUp";
 
+import './style.css'
+
 //create new instance of ApolloClient for the ApolloProvider
 const networkInterface = createNetworkInterface({
     uri: 'http://localhost:4000/graphql',
@@ -34,11 +36,13 @@ const client = new ApolloClient({
     dataIdFromObject: o => o.id
 });
 
+
+
 const Root = () => {
     return (
         <ApolloProvider client={client}>
             <BrowserRouter>
-                <div>
+                <div className="rootContainer">
                     <CategoryNav />
                     <Nav />
                     <Switch>

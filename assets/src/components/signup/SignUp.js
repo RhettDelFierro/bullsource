@@ -101,4 +101,10 @@ class SignUp extends Component {
 }
 
 
-export default withApollo(graphql(signUpMutation)(graphql(currentUserQuery)(withRouter(SignUp))));
+export default withApollo(
+    graphql(signUpMutation)(
+        graphql(currentUserQuery)(
+            withRouter(SignUp)
+        )
+    )
+);
