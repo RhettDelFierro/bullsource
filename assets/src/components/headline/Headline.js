@@ -43,7 +43,7 @@ export default ({newsTweet}) => {
     const utcTime = moment.utc(news.publishedAt).fromNow();
     const time = utcTime === "Invalid date" ? news.publishedAt : utcTime;
     return (
-        <div className={styles-headline} key={`${network.id}${news.title}`}>
+        <div className={styles.headline} key={`${network.id}${news.title}`}>
             <div>
                 <img className={styles["img-thumbnail"]} width="100" height="100" src={news.urlToImage}/>
             </div>
