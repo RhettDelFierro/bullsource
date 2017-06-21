@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
 import {withApollo, graphql } from 'react-apollo'
-import "./style.css";
+import styles from "./style.css";
 
 import currentUserQuery from "../../queries/currentUser";
 import signOutMutation from "../../mutations/signout";
@@ -22,7 +22,7 @@ class Nav extends Component {
         }
         if (currentUser) {
             return (
-                <ul className='nav'>
+                <ul className={styles.nav}>
                     <li>Welcome {currentUser.username}</li>
                     <li>
                         <a onClick={this.onLogout.bind(this)}>
@@ -33,12 +33,12 @@ class Nav extends Component {
             )
         } else {
             return (
-                <ul className='nav'>
+                <ul className={styles.nav}>
                     <li>
-                        <NavLink activeClassName='active' to='/signup'>Sign-Up</NavLink>
+                        <NavLink activeClassName={styles.active} to='/signup'>Sign-Up</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName='active' to='/signin'> Sign-In</NavLink>
+                        <NavLink activeClassName={styles.active} to='/signin'> Sign-In</NavLink>
                     </li>
                 </ul>
             )

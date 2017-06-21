@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { Link } from 'react-router-dom';
 
-import "./style.css";
+import styles from "./style.css";
 
 
 
@@ -43,9 +43,9 @@ export default ({newsTweet}) => {
     const utcTime = moment.utc(news.publishedAt).fromNow();
     const time = utcTime === "Invalid date" ? news.publishedAt : utcTime;
     return (
-        <div className="headline" key={`${network.id}${news.title}`}>
+        <div className={styles-headline} key={`${network.id}${news.title}`}>
             <div>
-                <img className="img_thumbnail" width="100" height="100" src={news.urlToImage}/>
+                <img className={styles["img-thumbnail"]} width="100" height="100" src={news.urlToImage}/>
             </div>
             <Link to={`/category/${network.category}/${title}`}>
                 <p><b>{network.name}</b> {news.title}</p>

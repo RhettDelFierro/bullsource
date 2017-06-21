@@ -12,7 +12,7 @@ import Home from "./components/Home";
 import SignIn from './components/signin/SignIn'
 import SignUp from "./components/signup/SignUp";
 
-import './style.css'
+import styles from './style.css'
 
 //create new instance of ApolloClient for the ApolloProvider
 const networkInterface = createNetworkInterface({
@@ -42,7 +42,7 @@ const Root = () => {
     return (
         <ApolloProvider client={client}>
             <BrowserRouter>
-                <div className="rootContainer">
+                <div className={styles['root-container']}>
                     <CategoryNav />
                     <Nav />
                     <Switch>

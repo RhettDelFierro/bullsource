@@ -4,13 +4,13 @@
     padding: 0;
 }
 
-.rootContainer {
+.root-container {
     display: grid;
     grid-template-rows: 150px auto;
 }
 
-@media (min-width: 740px) {
-  .rootContainer{
+@media (min-width: 440px) {
+  .root-container{
     grid-template-rows: 18px auto;
   }
 }

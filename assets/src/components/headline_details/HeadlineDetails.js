@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { Link } from 'react-router-dom';
 
-import "./style.css";
+import styles from "./style.css";
 
 
 
@@ -48,7 +48,7 @@ export default ({ newsTweet }) => {
     }
 
     return (
-        <div className="container">
+        <div className={styles.container}>
             <div>
                 <a href={news.url}>{news.title}</a>
                 <p>{news.description}</p>

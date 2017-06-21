@@ -24,7 +24,8 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                use: ExtractTextPlugin.extract({loader: 'css-loader'}),
+                // use: ExtractTextPlugin.extract({loader: 'css-loader'}),
+                use: ExtractTextPlugin.extract({fallback: 'style-loader', loader: "css-loader?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]"}),
                 test: /\.css$/
             },
             {
@@ -45,4 +46,5 @@ module.exports = {
         // inline: true,
         // port: 4000
     },
+    devtool: 'cheap-module-inline-source-map',
 };

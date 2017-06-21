@@ -14,7 +14,7 @@
 
 /*<------------FULL SCREEN------------>*/
 
-@media (min-width: 740px) {
+@media (min-width: 440px) {
     .category-nav {
         display: grid;
         grid-template-columns: repeat(9, 1fr);

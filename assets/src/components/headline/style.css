@@ -3,7 +3,7 @@
     border: 1px solid black;
 }
 
-.image_thumbnail {
+.image-thumbnail {
     display: block;
     max-width:230px;
     max-height:95px;
@@ -18,7 +18,7 @@
         border: 1px solid black;
     }
 
-    .image_thumbnail {
+    .image-thumbnail {
         display: block;
         max-width:230px;
         max-height:95px;
