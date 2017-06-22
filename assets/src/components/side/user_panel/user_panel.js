@@ -13,6 +13,17 @@ import {signOutAPI} from '../../../helpers/async_calls';
     // user info if they are
     // app info
 class UserPanel extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            showForms: true
+        }
+    }
+
+    renderForms(){
+        this.setState({showForms: false})
+    }
+
     async onSignOut() {
         await signOutAPI(this.props.mutate);
         this.props.client.resetStore();
@@ -39,20 +50,16 @@ class UserPanel extends Component {
             //I want these forms to render on the side, not on the main content page.
             //reddit makes a popup modal on mobile and on the main page.
             return (
-                <div>
-                    <div>
-                        <NavLink activeClassName={styles.active} to='/signup'>Sign-Up</NavLink>
-                    </div>
-                    <div>
-                        <NavLink activeClassName={styles.active} to='/signin'> Sign-In</NavLink>
-                    </div>
+                <div className={styles['visitor']}>
+                    <button onClick={this.renderForms}>
+                       Login or Sign up
+                    </button>
                 </div>
             )
         }
     }
 
     render() {
-        console.log('did side panel get rendered?');
         return (
             <div className={styles['user-panel']}>
                 {this.renderStatus()}

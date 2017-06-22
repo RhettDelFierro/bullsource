@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/header/category_nav/style.css" afterPath="$PROJECT_DIR$/assets/src/components/header/category_nav/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/hoc/auth.js" afterPath="$PROJECT_DIR$/assets/src/components/hoc/auth.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/sfc/tweets/tweets.js" afterPath="$PROJECT_DIR$/assets/src/components/sfc/tweets/tweets.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/side/side_panel/side_panel.js" afterPath="$PROJECT_DIR$/assets/src/components/side/side_panel/side_panel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/side/side_panel/style.css" afterPath="$PROJECT_DIR$/assets/src/components/side/side_panel/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.css" afterPath="$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/side/user_panel/style.css" afterPath="$PROJECT_DIR$/assets/src/components/side/user_panel/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/side/user_panel/user_panel.js" afterPath="$PROJECT_DIR$/assets/src/components/side/user_panel/user_panel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/helpers/async_calls.js" afterPath="$PROJECT_DIR$/assets/src/helpers/async_calls.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,18 +17,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="tweets.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/sfc/tweets/tweets.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="35" column="2" lean-forward="true" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="side_panel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/side/side_panel/side_panel.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -66,21 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="auth.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/hoc/auth.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="user_panel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/side/user_panel/user_panel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="25" column="30" lean-forward="true" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+            <state relative-caret-position="960">
+              <caret line="64" column="37" lean-forward="true" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -91,8 +64,28 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/side/user_panel/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+            <state relative-caret-position="371">
+              <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hamburger.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="10" column="2" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hamburger.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -108,7 +101,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/header/category_nav/style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
@@ -132,8 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>urltoi</find>
-      <find>urltoim</find>
       <find>urltoima</find>
       <find>urltoimage</find>
       <find>text</find>
@@ -162,6 +153,8 @@
       <find>currentuser</find>
       <find>nav</find>
       <find>screen</find>
+      <find>flex</find>
+      <find>user-panel</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/assets</dir>
@@ -177,7 +170,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
         <option value="$PROJECT_DIR$/assets/.babelrc" />
         <option value="$PROJECT_DIR$/assets/src/components/post_form/PostForm.js" />
         <option value="$PROJECT_DIR$/assets/src/components/signup/SignUp.js" />
@@ -225,9 +217,10 @@
         <option value="$PROJECT_DIR$/assets/src/helpers/async_calls.js" />
         <option value="$PROJECT_DIR$/assets/src/components/side/side_panel/side_panel.js" />
         <option value="$PROJECT_DIR$/assets/src/components/side/side_panel/style.css" />
+        <option value="$PROJECT_DIR$/assets/src/components/header/category_nav/style.css" />
         <option value="$PROJECT_DIR$/assets/src/components/side/user_panel/user_panel.js" />
         <option value="$PROJECT_DIR$/assets/src/components/side/user_panel/style.css" />
-        <option value="$PROJECT_DIR$/assets/src/components/header/category_nav/style.css" />
+        <option value="$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.css" />
       </list>
     </option>
   </component>
@@ -638,6 +631,40 @@
               <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamburger" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -710,14 +737,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="header" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="category_nav" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1028,24 +1047,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="2" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/side/signup/SignUp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1225,6 +1226,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/header/category_nav/CategoryNav.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="31" lean-forward="false" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/header/category_nav/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1253,34 +1270,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/side/user_panel/user_panel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="25" column="30" lean-forward="true" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+        <state relative-caret-position="960">
+          <caret line="64" column="37" lean-forward="true" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" column="2" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/side/user_panel/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        <state relative-caret-position="371">
+          <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/header/category_nav/CategoryNav.js">
+    <entry file="file://$PROJECT_DIR$/assets/src/components/sfc/hamburger/hamburger.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="31" lean-forward="false" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/header/category_nav/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        <state relative-caret-position="192">
+          <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
           <folding />
         </state>
       </provider>

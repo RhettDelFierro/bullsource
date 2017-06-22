@@ -46,8 +46,13 @@
 .hamburger-container:hover {
     animation: animateBlink 0.2s;
 }
+
 .hamburger-container:hover .hamburger::before {
     animation: animateTop 0.5s 0.2s forwards;
+}
+
+.hamburger-container:hover .hamburger {
+    animation: animateMiddle 0.5s 0.2s forwards;
 }
 .hamburger-container:hover .hamburger::after {
     animation: animateBottom 0.5s 0.2s forwards;
@@ -60,42 +65,63 @@
 @keyframes animateBlink {
     0%{
         /*background-color: lightblue;*/
-        background-color: rgb(176,226,245);
+        /*background-color: rgb(176,226,245);*/
+        background-color: rgb(172,215,251);
         border-radius: 14%;
     }
     99% {
         /*background-color: lightblue;*/
-        background-color: rgb(176,226,245);
+        /*background-color: rgb(176,226,245);*/
+        background-color: rgb(172,215,251);
         border-radius: 14%;
     }
     100% {
         background-color: #fff;
-
     }
 }
 
 @keyframes animateTop {
     0% {
+        background-color: rgb(119,253,119);
         transform: translate(0,-4px);
     }
 
     50% {
+        background-color: rgb(119,253,119);
         transform: translate(0,-7px);
     }
 
     100% {
+        background-color: rgb(172,215,251);
         transform: translate(0,-6px);
+    }
+}
+
+@keyframes animateMiddle {
+    0% {
+        background-color: rgb(119,253,119);
+    }
+
+    50% {
+        background-color: rgb(119,253,119);
+    }
+
+    100% {
+        background-color: rgb(172,215,251);
     }
 }
 
 @keyframes animateBottom {
     0% {
+        background-color: rgb(119,253,119);
         transform: translate(0,4px);
     }
     50% {
+        background-color: rgb(119,253,119);
         transform: translate(0,7px);
     }
     100% {
+        background-color: rgb(172,215,251);
         transform: translate(0,6px);
     }
 }
