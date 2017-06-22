@@ -12,3 +12,8 @@ export async function signUpAPI(cb, {username, email, password}) {
     const mutation = await cb({variables: {username, email, password}});
     localStorage.setItem('token', mutation.data.registerUser.token)
 }
+
+export async function signOutAPI(cb, resetFunc) {
+    await cb({});
+    localStorage.removeItem('token');
+}

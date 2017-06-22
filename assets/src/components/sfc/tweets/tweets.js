@@ -9,19 +9,22 @@ export const Tweets = ({toggle, showTweets, tweets}) => {
                 <div>
                     {tweets.map(tweet => {
                         return (
-                            <div className={styles['returned-tweet']}><Tweet key={tweet.id_str}
-                                        tweetId={tweet.id_str}
-                                        options={{
-                                            cards: "hidden",
-                                            hide_thread: "true",
-                                            conversation: "none"
-                                        }}/>
+                            <div className={styles['returned-tweet']}>
+                                <Tweet key={tweet.id_str}
+                                       tweetId={tweet.id_str}
+                                       options={
+                                           {cards: "hidden", hide_thread: "true", conversation: "none"}
+                                       }
+                                />
                             </div>
                         )
                     })}
                 </div>
-                <i className="fa fa-caret-right" aria-hidden="true" onClick={toggle}
-                   style={{"gridArea": "1 / 1 / 2 / 3"}}/>
+
+                <i className="fa fa-caret-right" aria-hidden="true"
+                   onClick={toggle}
+                   style={{"gridArea": "1 / 1 / 2 / 3"}}
+                />
             </div>
             :
             <div className={styles['hidden-tweet-container']} onClick={toggle}>

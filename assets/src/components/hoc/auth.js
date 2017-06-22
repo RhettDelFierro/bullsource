@@ -15,6 +15,7 @@ export default (WrappedComponent) => {
                 this.setState({authed: false});
                 //instead of redirect, you can just set state in this component to false.
                 //then use that false state to determine if the content should render.
+
                 this.props.history.push('/signin')
             } else {
                 this.setState({authed: true})
@@ -26,6 +27,5 @@ export default (WrappedComponent) => {
             return <WrappedComponent {...this.props} />
         }
     }
-    return graphql(currentUserQuery)(withRouter(Auth));
+    return graphql(currentUserQuery)(Auth);
 }
-
