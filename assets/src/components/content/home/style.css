@@ -1,7 +1,13 @@
 .home {
     grid-area: home;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 @media (min-width: 440px) {
-
+  .home{
+      width: 1000px;
+      margin-left: 5px;
+      margin-right: 5px;
+  }
 }

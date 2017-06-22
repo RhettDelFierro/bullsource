@@ -1,6 +1,5 @@
 .category-nav { /*making this a dropdown in mobile*/
-    position: relative;
-    display: inline-block;
+    width: 100%;
 }
 
 .active {

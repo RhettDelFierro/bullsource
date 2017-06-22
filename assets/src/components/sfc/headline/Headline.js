@@ -44,13 +44,18 @@ export default ({newsTweet}) => {
     const time = utcTime === "Invalid date" ? news.publishedAt : utcTime;
     return (
         <div className={styles.headline} key={`${network.id}${news.title}`}>
-            <div>
+            <div className={styles['image-holder']}>
                 <img className={styles["img-thumbnail"]} width="100" height="100" src={news.urlToImage}/>
             </div>
-            <Link to={`/category/${network.category}/${title}`}>
-                <p><b>{network.name}</b> {news.title}</p>
-            </Link>
-            <p>{time}</p>
+            <div className={styles.info}>
+                <Link to={`/category/${network.category}/${title}`}>
+                    {news.title}
+                </Link>
+                <p><b>Network</b>: <a href={network.url}>{network.name}</a></p>
+                <p>{time}</p>
+                <div>comment info</div>
+            </div>
+
 
             <TweetContainer tweets={tweets} />
         </div>

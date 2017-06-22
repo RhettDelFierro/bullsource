@@ -1,10 +1,19 @@
 .headline {
+    width: 100%;
     display: flex;
     border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.image-holder{
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .image-thumbnail {
     display: block;
+    align-self: center;
     max-width:230px;
     max-height:95px;
     width: auto;
@@ -12,18 +21,28 @@
     margin: auto;
 }
 
+.info {
+  display: grid;
+  grid-column-start: 2;
+}
+
 @media (min-width: 740px) {
     .headline {
-        display: flex;
+        display: grid;
+        grid-template-columns: 110px 1fr;
         border: 1px solid black;
     }
 
     .image-thumbnail {
         display: block;
-        max-width:230px;
-        max-height:95px;
+        max-width:100px;
+        max-height:100px;
         width: auto;
         height: auto;
         margin: auto;
+    }
+
+    .info {
+        padding: 20px;
     }
 }

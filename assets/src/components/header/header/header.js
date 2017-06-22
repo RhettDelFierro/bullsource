@@ -1,12 +1,15 @@
 import React, {Component} from "react";
+import CategoryNav from "../category_nav/CategoryNav";
 import screenSize from "../../hoc/screenSize";
+import style from "./style.css"
 
 class Header extends Component {
     render() {
         return (
-            <div>
-                Header
+            <div className={style.header}>
+                <CategoryNav isMobile={this.props.isMobile}/>
             </div>
+
         )
 
     }

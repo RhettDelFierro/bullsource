@@ -1,3 +1,4 @@
-.container {
+.side-panel {
     grid-area: side-panel;
+    grid-column-start: 3;
 }
