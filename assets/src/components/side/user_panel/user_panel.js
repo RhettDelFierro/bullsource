@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {NavLink} from "react-router-dom";
 import {graphql, withApollo} from "react-apollo";
 import styles from "./style.css";
 
@@ -7,21 +6,28 @@ import currentUserQuery from "../../../queries/currentUser";
 import signOutMutation from "../../../mutations/signout";
 
 import screenSize from "../../hoc/screenSize";
-import {signOutAPI} from '../../../helpers/async_calls';
+import {signOutAPI} from "../../../helpers/async_calls";
+
+import SignIn from "../signin/SignIn";
+import SignUp from "../signup/SignUp";
 
 //I want this user panel to render an empty form if the user is not signed in
-    // user info if they are
-    // app info
+// user info if they are
+// app info
 class UserPanel extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            showForms: true
+            showSignIn: false,
+            showSignUp: false
         }
     }
 
-    renderForms(){
-        this.setState({showForms: false})
+    toggleForms() {
+        this.setState({
+            showSignIn: false,
+            showSignUp: false
+        })
     }
 
     async onSignOut() {
@@ -31,28 +37,29 @@ class UserPanel extends Component {
 
     renderStatus() {
         const {loading, currentUser} = this.props.data;
-            if (loading) {
-                return <div />
-            }
-            if (currentUser) {
-                //render the user panel:
-                return (
-                    <div className={styles['current-user']}>
-                        <div>Welcome {currentUser.username}</div>
-                        <i className="fa fa-envelope-open" aria-hidden="true" />
-                        <button className={styles.logout} onClick={this.onSignOut.bind(this)}>
-                            Log Out
-                        </button>
-                    </div>
-                )
+        if (loading) {
+            return <div />
+        }
+        if (currentUser) {
+            //render the user panel:
+            return (
+                <div className={styles['current-user']}>
+                    <div>Welcome {currentUser.username}</div>
+                    <i className="fa fa-envelope-open" aria-hidden="true"/>
+                    <button className={styles.logout} onClick={this.onSignOut.bind(this)}>
+                        Log Out
+                    </button>
+                </div>
+            )
         } else {
-            //render forms / (links to signup/signin)?
-            //I want these forms to render on the side, not on the main content page.
-            //reddit makes a popup modal on mobile and on the main page.
             return (
                 <div className={styles['visitor']}>
-                    <button onClick={this.renderForms}>
-                       Login or Sign up
+                    <button onClick={() => this.setState({showSignIn: !this.state.showSignIn, showSignUp: false})}>
+                        Sign In
+                    </button>
+
+                    <button onClick={() => this.setState({showSignUp: !this.state.showSignUp, showSignIn: false})}>
+                        Sign up
                     </button>
                 </div>
             )
@@ -63,6 +70,13 @@ class UserPanel extends Component {
         return (
             <div className={styles['user-panel']}>
                 {this.renderStatus()}
+                {this.props.data.currentUser ? ''
+                    : <div>
+                        {this.state.showSignIn ? <SignIn /> : ''}
+                        {this.state.showSignUp ? <SignUp /> : ''}
+                      </div>
+                }
+                <div>BLAH!</div>
             </div>
         )
     }

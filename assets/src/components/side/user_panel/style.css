@@ -1,4 +1,11 @@
-.current-user, .visitor {
+.user-panel{
+    background-color: #C9BCB3;
+}
+
+
+
+
+.current-user {
     display: grid;
     padding: 2px;
     height: 30px;
@@ -6,17 +13,7 @@
     grid-template-columns: repeat(3,1fr);
     background-color: rgb(172,215,251);
     grid-area: user;
-}
-
-.visitor > button {
-    padding: 0;
-    height: 100%;
-    grid-column: 1 / 4;
-    color: blue;
-}
-
-.visitor > button:hover {
-    cursor: pointer;
+    align-items: center;
 }
 
 .current-user {
@@ -25,17 +22,52 @@
 }
 
 .current-user > div {
+    color: #F15A24;
+}
+
+.current-user > i {
     color: rgb(119,253,119);
+}
+
+.current-user > button {
+    align-self: stretch;
 }
 
 .active {
     font-weight: bold;
 }
 
-/*.user-panel {*/
-     /*padding: 2px;*/
- /*}*/
 
-.logout{
 
+
+
+/*<------------VISITORS - NON-AUTHED USERS----------->*/
+
+.visitor {
+    display: grid;
+    padding: 2px;
+    height: 30px;
+    /*color: rgb(119,253,119);*/
+    grid-template-columns: repeat(4, 1fr);
+    background-color: rgb(172,215,251);
+    grid-area: user;
+    align-items: center;
+}
+
+.visitor :nth-child(1) {
+    padding: 0;
+    height: 100%;
+    grid-column: 1 / 3;
+    color: blue;
+}
+
+.visitor :nth-child(2) {
+    padding: 0;
+    height: 100%;
+    grid-column: 3 / 5;
+    color: blue;
+}
+
+.visitor > button:hover {
+    cursor: pointer;
 }
