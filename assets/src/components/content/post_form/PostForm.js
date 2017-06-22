@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {graphql} from "react-apollo";
 
-import headlineMutation from "../../mutations/createHeadline";
+import headlineMutation from "../../../mutations/createHeadline";
 
 class PostForm extends Component {
     constructor(props) {

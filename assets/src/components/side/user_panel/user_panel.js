@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
-import {withApollo, graphql } from 'react-apollo'
+import {graphql, withApollo} from "react-apollo";
 import styles from "./style.css";
 
-import currentUserQuery from "../../queries/currentUser";
-import signOutMutation from "../../mutations/signout";
+import currentUserQuery from "../../../queries/currentUser";
+import signOutMutation from "../../../mutations/signout";
 
-import screenSize from "../screenSize";
+import screenSize from "../../hoc/screenSize";
 
-class Nav extends Component {
+class UserPanel extends Component {
     onLogout() {
         this.props.mutate({}).then((res) => {
             // res.data.signOut.id and res.data.signOut.username
@@ -24,18 +24,18 @@ class Nav extends Component {
         }
         if (currentUser) {
             return (
-                <ul className={styles.nav}>
-                    <li>Welcome {currentUser.username}</li>
-                    <li>
-                        <a onClick={this.onLogout.bind(this)}>
-                            Log Out
-                        </a>
-                    </li>
-                </ul>
+                <div>
+                    <div className={styles.user}>Welcome {currentUser.username}</div>
+
+                    <div className={styles.logout} onClick={this.onLogout.bind(this)}>
+                        Log Out
+                    </div>
+
+                </div>
             )
         } else {
             return (
-                <ul className={styles.nav}>
+                <ul>
                     <li>
                         <NavLink activeClassName={styles.active} to='/signup'>Sign-Up</NavLink>
                     </li>
@@ -49,12 +49,12 @@ class Nav extends Component {
 
     render() {
         return (
-            <div>
+            <div className={styles['user-panel']}>
                 {this.renderStatus()}
             </div>
         )
     }
 }
 
-export default withApollo(graphql(signOutMutation)(graphql(currentUserQuery)(screenSize(Nav))));
+export default withApollo(graphql(signOutMutation)(graphql(currentUserQuery)(screenSize(UserPanel))));
 

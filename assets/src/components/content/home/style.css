@@ -1,0 +1,7 @@
+.home {
+    grid-area: home;
+}
+
+@media (min-width: 440px) {
+
+}

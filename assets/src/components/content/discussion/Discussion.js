@@ -2,10 +2,10 @@ import React, {Component} from "react";
 import {graphql} from "react-apollo";
 import {withRouter} from "react-router-dom";
 
-import HeadlineDetails from "../headline_details/HeadlineDetails";
+import HeadlineDetails from "../../sfc/headline_details/HeadlineDetails";
 import PostForm from "../post_form/PostForm"
 
-import fetchThreadQuery from "../../queries/fetchThread";
+import fetchThreadQuery from "../../../queries/fetchThread";
 
 class Discussion extends Component {
     //make will get props from the /category/:category/:headline_id # see the router.

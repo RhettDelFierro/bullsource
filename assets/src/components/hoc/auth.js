@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import {graphql} from "react-apollo";
-import currentUserQuery from "../queries/currentUser";
+import currentUserQuery from "../../queries/currentUser";
 
 export default (WrappedComponent) => {
     class Auth extends Component {

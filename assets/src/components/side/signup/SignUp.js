@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {graphql, withApollo} from "react-apollo";
 import {Link, withRouter} from "react-router-dom";
-import currentUserQuery from "../../queries/currentUser";
-import signUpMutation from "../../mutations/signup";
-import {signUpAPI} from "../../helpers/async_calls";
+import currentUserQuery from "../../../queries/currentUser";
+import signUpMutation from "../../../mutations/signup";
+import {signUpAPI} from "../../../helpers/async_calls";
 
 class SignUp extends Component {
     constructor(props) {

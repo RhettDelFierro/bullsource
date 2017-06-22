@@ -4,14 +4,14 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import ApolloClient, {createNetworkInterface} from "apollo-client";
 import {ApolloProvider} from "react-apollo";
 
-import CategoryNav from "./components/category_nav/CategoryNav";
-import Nav from "./components/nav/Nav";
-import Categories from "./components/categories/Categories";
-import Discussion from "./components/discussion/Discussion";
-import Home from "./components/Home";
-import SignIn from "./components/signin/SignIn";
-import SignUp from "./components/signup/SignUp";
-import screenSize from "./components/screenSize";
+import Header from "./components/header/header/header";
+import SidePanel from "./components/side/side_panel/side_panel";
+import Categories from "./components/content/categories/Categories";
+import Discussion from "./components/content/discussion/Discussion";
+import Home from "./components/content/home/Home";
+import SignIn from "./components/side/signin/SignIn";
+import SignUp from "./components/side/signup/SignUp";
+
 
 import styles from "./style.css";
 
@@ -43,8 +43,7 @@ const Root = () => {
         <ApolloProvider client={client}>
             <BrowserRouter>
                 <div className={styles['root-container']}>
-                    <CategoryNav />
-                    <Nav />
+                    <Header />
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/signup" component={SignUp}/>
@@ -53,6 +52,7 @@ const Root = () => {
                         <Route path="/category/:category/:headline_id" component={Discussion}/>
                         <Route render={ () => <p>Not Found</p> }/>
                     </Switch>
+                    <SidePanel />
                 </div>
             </BrowserRouter>
         </ApolloProvider>

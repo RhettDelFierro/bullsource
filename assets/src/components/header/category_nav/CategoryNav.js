@@ -1,8 +1,8 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import styles from "./style.css";
-import screenSize from "../screenSize";
-import {Hamburger} from "../mobile_components/hamburger";
+import screenSize from "../../hoc/screenSize";
+import {Hamburger} from "../../sfc/hamburger/hamburger";
 
 const CategoryNav = ({isMobile}) => {
     return (

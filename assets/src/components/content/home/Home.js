@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
+import styles from './style.css';
 
-import Headline from './headline/Headline';
+import Headline from '../../sfc/headline/Headline';
 
-import newsTweetQuery from '../queries/fetchNewsTweets'
+import newsTweetQuery from '../../../queries/fetchNewsTweets'
 
 
 class Home extends Component {
@@ -18,7 +18,7 @@ class Home extends Component {
 
         return (
 
-            <div>
+            <div className={styles.home}>
                 {this.renderNewsTweets()}
             </div>
         )

@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {graphql} from "react-apollo";
 import { Link, withRouter } from "react-router-dom";
-import newsTweetFilterQuery from "../../queries/fetchFilterNewsTweets";
-import Headline from "../headline/Headline";
+import newsTweetFilterQuery from "../../../queries/fetchFilterNewsTweets";
+import Headline from "../../sfc/headline/Headline";
 import './style.css'
 
 class Categories extends Component {

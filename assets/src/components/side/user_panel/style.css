@@ -1,0 +1,22 @@
+.user-panel {
+    display: grid;
+    /*color: rgb(119,253,119);*/
+    grid-template-columns: repeat(3,1fr);
+    background-color: rgb(172,215,251);
+    grid-area: nav;
+    height: 24px;
+}
+
+.user-panel .user {
+    color: rgb(119,253,119);
+}
+
+.active {
+    font-weight: bold;
+}
+
+.user-panel div {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
