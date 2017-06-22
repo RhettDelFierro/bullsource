@@ -1,3 +1,35 @@
-.tweet-container{
+.tweet-container {
+    display: grid;
     width: 100%;
+    max-height: 135px;
+    grid-area: 1 / 3 / 2 / 4;
+    overflow-y: scroll;
+}
+
+.returned-tweet {
+    margin-bottom: 1px;
+}
+
+.twitter-tweet {
+    margin: 0;
+}
+
+#twitter-tweet-rendered {
+    margin: 0;
+}
+
+.EmbeddedTweet-tweet {
+    padding: 0;
+}
+
+.hidden-tweet-container {
+    grid-area: 1 / 3 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.hidden-tweet-container i{
+    width: 10px;
 }

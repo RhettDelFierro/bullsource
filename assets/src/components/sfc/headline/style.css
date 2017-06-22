@@ -3,7 +3,6 @@
     display: flex;
     border: 1px solid black;
     margin-bottom: 5px;
-    overflow: scroll;
 }
 
 .image-holder{
@@ -32,6 +31,7 @@
         display: grid;
         grid-template-columns: 110px 1fr;
         border: 1px solid black;
+        max-height: 140px;
     }
 
     .image-thumbnail {
