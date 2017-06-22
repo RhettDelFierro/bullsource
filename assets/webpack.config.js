@@ -4,7 +4,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const VENDOR_LIBS = ["axios", "apollo-client", "graphql", "react-apollo",
-                     "react", "react-dom", "react-router-dom", "moment"];
+                     "react", "react-dom", "react-router-dom", "moment",
+                     'react-twitter-widgets'];
 
 module.exports = {
     entry: {

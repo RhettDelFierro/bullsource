@@ -1,15 +1,19 @@
-import React from 'react';
-import styles from './style.css'
+import React from "react";
+import styles from "./style.css";
+import {Tweet} from 'react-twitter-widgets';
 
-export const Tweets = ({toggle, hideTweets, tweets}) => {
+export const Tweets = ({toggle, showTweets, tweets}) => {
     return (
-        toggle ?
-        <div className={styles['tweet-container']} onClick={toggle}>
-            {tweets.map(tweet => <li key={tweet.id_str}><b>{tweet.user.name}</b> {tweet.fullText}
-                <b>{tweet.retweetCount}</b></li>)}
-        </div>
-        :
-            <div className={styles['hidden-tweet-container']}><i className="fa fa-twitter" aria-hidden="true"/> <i className="fa fa-caret-right" aria-hidden="true"/></div>
+        showTweets ?
+            <div className={styles['tweet-container']}>
+                {tweets.map(tweet => <Tweet tweetId={tweet.id_str} options={{cards: "hidden"}}/>)}
+                <i className="fa fa-caret-right" aria-hidden="true" onClick={toggle}/>
+            </div>
+            :
+            <div className={styles['hidden-tweet-container']} onClick={toggle}>
+                <i className="fa fa-caret-left" aria-hidden="true"/>
 
+                <i className="fa fa-twitter" aria-hidden="true" style={{color: "#4AB3F4"}}/>
+            </div>
     )
 };

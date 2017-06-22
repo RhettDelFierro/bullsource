@@ -6,7 +6,7 @@ import {Tweets} from "../../sfc/tweets/tweets";
 class TweetsContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {hideTweets: true}
+        this.state = {showTweets: false}
     }
 
     toggle() {
@@ -15,14 +15,8 @@ class TweetsContainer extends Component {
 
     render() {
 
-        if (this.props.data.loading) {
-            return <div>Loading...</div>
-        }
-
         return (
-
-            <Tweets toggle={this.toggle.bind(this)} hideTweets={this.state.hideTweets} tweets={this.props.tweets}/>
-
+            <Tweets toggle={this.toggle.bind(this)} showTweets={this.state.hideTweets} tweets={this.props.tweets}/>
         )
 
     }
