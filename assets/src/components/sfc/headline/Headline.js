@@ -1,10 +1,10 @@
 import React from "react";
 import moment from "moment";
-import { Link } from 'react-router-dom';
+import {Link} from "react-router-dom";
 
 import styles from "./style.css";
 
-
+import TweetsContainer from "../../content/tweets_container/tweets_container";
 
 /**
  * Is an SFC - this will create each Headline and is a child component of Home and Category components.
@@ -57,18 +57,10 @@ export default ({newsTweet}) => {
             </div>
 
 
-            <TweetContainer tweets={tweets} />
+            <TweetsContainer tweets={tweets}/>
         </div>
     )
 }
 
-const TweetContainer = ({tweets}) => {
-    return (
-        <div>
-            {tweets.map(tweet => <li key={tweet.id_str}><b>{tweet.user.name}</b> {tweet.fullText}
-                <b>{tweet.retweetCount}</b> {`${tweet.retweeted}`}</li>)}
-        </div>
 
-    )
-};
 
