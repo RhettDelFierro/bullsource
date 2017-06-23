@@ -76,7 +76,7 @@ class UserPanel extends Component {
                         {this.state.showSignUp ? <SignUp /> : ''}
                       </div>
                 }
-                <div>BLAH!</div>
+                <div>UserInfo</div>
             </div>
         )
     }

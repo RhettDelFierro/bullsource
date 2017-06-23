@@ -1,7 +1,6 @@
 .header {
     grid-column-start: 1;
     grid-column-end: 4;
-    background-color: #FFFF51;
 }
 
 @media (min-width: 440px) {

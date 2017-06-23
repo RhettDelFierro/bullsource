@@ -51,9 +51,15 @@ export default ({newsTweet}) => {
                 <Link to={`/category/${network.category}/${title}`}>
                     {news.title}
                 </Link>
-                <p><b>Network</b>: <a href={network.url}>{network.name}</a></p>
+                <p><b>Network</b>: <a href={network.url} target="_blank">{network.name}</a></p>
                 <p>{time}</p>
-                <div>comment info</div>
+                <div>
+                    <p>
+                        <span style={{color: "#F15A24"}}>comments</span> {' '}
+                        <span style={{color: "rgb(119,253,119)"}}>Bullsourced</span>{' '}
+                        <span style={{color: "#977B52"}}>^%$^</span>
+                    </p>
+                </div>
             </div>
 
 

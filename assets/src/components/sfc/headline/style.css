@@ -5,6 +5,10 @@
     margin-bottom: 5px;
 }
 
+.headline p a {
+    color: #4A6FB1;
+}
+
 .image-holder{
     height: 100%;
     display: flex;
@@ -30,7 +34,7 @@
     .headline {
         display: grid;
         grid-template-columns: 110px 1fr;
-        border: 1px solid black;
+        border: 1px solid lightgray;
         max-height: 140px;
     }
 

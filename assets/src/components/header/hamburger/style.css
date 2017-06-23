@@ -43,18 +43,18 @@
     /*animation: animateBottom 1s forwards;*/
 /*}*/
 
-.hamburger-container:hover {
+.hamburger-container-clicked {
     animation: animateBlink 0.2s;
 }
 
-.hamburger-container:hover .hamburger::before {
+.hamburger-container-clicked .hamburger::before {
     animation: animateTop 0.5s 0.2s forwards;
 }
 
-.hamburger-container:hover .hamburger {
+.hamburger-container-clicked .hamburger {
     animation: animateMiddle 0.5s 0.2s forwards;
 }
-.hamburger-container:hover .hamburger::after {
+.hamburger-container-clicked .hamburger::after {
     animation: animateBottom 0.5s 0.2s forwards;
 }
 

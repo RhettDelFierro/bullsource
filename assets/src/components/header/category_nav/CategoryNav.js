@@ -2,12 +2,12 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import styles from "./style.css";
 import screenSize from "../../hoc/screenSize";
-import {Hamburger} from "../../sfc/hamburger/hamburger";
+import DropDown from "../dropdown/Dropdown";
 
 const CategoryNav = ({isMobile}) => {
     return (
         isMobile ?
-            <Hamburger />
+            <DropDown />
             :
             <div className={styles['category-nav']}>
                 <NavLink exact activeClassName={styles.active} to='/'>Home</NavLink>

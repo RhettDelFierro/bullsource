@@ -1,5 +1,11 @@
 .category-nav { /*making this a dropdown in mobile*/
-    width: 100%;
+    /*width: 100%;*/
+}
+
+.category-nav a {
+    /*color: #C9BCB3;*/
+    color: #977B52;
+    /*color: #FFFF51;*/
 }
 
 .active {
@@ -16,6 +22,7 @@
 @media (min-width: 440px) {
     .category-nav {
         display: grid;
+        width: 100%;
         grid-template-columns: repeat(9, 1fr);
         /*background-image: linear-gradient(135deg, #EECE13 0%, #B210FF 100%);*/
     }
@@ -29,8 +36,4 @@
         font-weight: bold;
     }
 
-
-    /*.category-nav li {*/
-        /*margin-right: 5px;*/
-    /*}*/
 }
