@@ -1,8 +1,13 @@
 .header {
-    grid-column-start: 1;
-    grid-column-end: 4;
+    display: grid;
+    grid-template-columns: auto 240px auto;
 }
 
 @media (min-width: 440px) {
+    .header {
+        grid-template-columns: repeat(auto-fill, 1fr);
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
 
 }

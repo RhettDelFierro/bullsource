@@ -2,10 +2,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 .root-container {
     display: grid;
+    /*grid-template-columns: 1000px;*/
     grid-template-rows: 150px auto;
     grid-template-areas:
       "header"
