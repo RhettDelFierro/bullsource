@@ -1,5 +1,4 @@
 .hamburger-container {
-    grid-area: hamburger;
     display: flex;
     justify-content: space-around;
     align-items: center;

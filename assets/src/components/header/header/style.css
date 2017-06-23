@@ -1,6 +1,7 @@
 .header {
+    grid-area: header;
     display: grid;
-    grid-template-columns: auto 240px auto;
+    grid-template-columns: 100px 1fr 20px;
 }
 
 @media (min-width: 440px) {
@@ -9,5 +10,4 @@
         grid-column-start: 1;
         grid-column-end: 4;
     }
-
 }
