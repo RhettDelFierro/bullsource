@@ -1,13 +1,19 @@
 .header {
     grid-area: header;
     display: grid;
-    grid-template-columns: 100px 1fr 20px;
+    grid-template-columns: 100px 1fr 30px;
+    grid-template-areas: "dropdown . hamburger";
+    /*justify-items: start;*/
 }
 
 @media (min-width: 440px) {
+    /*remember that the header info for the category should be accounted for*/
     .header {
-        grid-template-columns: repeat(auto-fill, 1fr);
-        grid-column-start: 1;
-        grid-column-end: 4;
+        grid-column: 1/4;
+        /*grid-template-rows: 30px;*/
+        /*grid-template-columns: repeat(9, 1fr);*/
+        grid-template-areas: "category-nav";
+        /*grid-column-start: 1;*/
+        /*grid-column-end: 4;*/
     }
 }

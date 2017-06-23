@@ -3,7 +3,7 @@ import {graphql} from "react-apollo";
 import { Link, withRouter } from "react-router-dom";
 import newsTweetFilterQuery from "../../../queries/fetchFilterNewsTweets";
 import Headline from "../../sfc/headline/Headline";
-import './style.css'
+import styles from './style.css'
 
 class Categories extends Component {
     renderNewsTweets() {
@@ -18,7 +18,7 @@ class Categories extends Component {
 
         return (
 
-            <div>
+            <div className={styles.content}>
                 <Link to="/">
                     <div height="500px" width="100%">
                         Home - This will eventually be the header
