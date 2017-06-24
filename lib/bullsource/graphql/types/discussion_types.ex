@@ -39,6 +39,9 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
 
 
 
+
+
+
   @desc "Proofs - belong to Posts and References. has_one Article and Comment."
   object :proof do
     field :id, :integer
