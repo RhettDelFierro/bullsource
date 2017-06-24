@@ -1,9 +1,9 @@
- defmodule Bullsource.GraphQL.Types.WorkTypes do
+ defmodule Bullsource.GraphQL.Types.CrossrefTypes do
    use Absinthe.Ecto, repo: Bullsource.Repo
    use Absinthe.Schema.Notation
 
- @desc "DOI"
-  object :crossref do
+ @desc "DOI -> Results from CrossRef"
+  object :work do
     field :DOI, :string
     field :indexed, :indexed
     field :"reference-count", :integer
@@ -12,21 +12,22 @@
     field :type, :string
     field :"is-referenced-by-count", :integer
     field :title, list_of(:string)
-    field :reference, list_of(:refernce)
+    field :author, list_of(:author)
+    field :reference, list_of(:reference)
     field :"container-title", list_of(:string)
     field :URL, :string
     field :ISSN, list_of(:string)
   end
 
   object :indexed do
-    field :"date-parts", list_of[:integer]
+    field :"date-parts", list_of(:integer)
     field :"date-time", :string
     field :timestamp, :integer
   end
 
   @desc "Funder"
   object :funder do
-    field :doi, :string
+    field :DOI, :string
     field :name, :string
     field :"doi-asserted-by", :string
     field :award, list_of(:string)

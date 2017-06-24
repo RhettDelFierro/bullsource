@@ -1,29 +1,21 @@
 defmodule Bullsource.ReferenceValidator.CrossRef do
-  @crossref_url "https://api.crossref.org/works?"
+  @crossref_url "https://api.crossref.org/works/"
 
-  alias Bullsource.ReferenceValidator.Result
+  alias Bullsource.ReferenceValidator.Result.Work
 
-  def start_link(query, query_ref, owner, limit) do
-    Task.start_link(__MODULE__, :get_info, [query, query_ref, owner, limit])
+  def start_link(doi, doi_ref, owner, limit) do
+    Task.start_link(__MODULE__, :get_info, [doi, doi_ref, owner, limit])
   end
 
-  def get_info(query, query_ref, owner, limit) do
-    query
+  def get_info(doi, doi_ref, owner, _limit) do
+    doi
     |> build_query
     |> make_request
     |> parse_json
-    |> send_results(query_ref, owner)
+    |> send_results(doi_ref, owner)
   end
 
-  defp build_query(query) do
-
-#    str = String.replace(match_text," ","+")
-    @crossref_url <> "query=#{URI.encode(query)}"
-  end
-
-  defp build_jwt_token do
-    Application.get_env(:bullsource, :jstor)[:jwt]
-  end
+  defp build_query(query), do: @crossref_url <> "#{URI.encode(query)}"
 
   defp make_request(query) do
     case HTTPoison.get(query) do
@@ -47,20 +39,20 @@ defmodule Bullsource.ReferenceValidator.CrossRef do
       {:ok, body} ->
 #        Poison.Parser.parse!(body, keys: :atoms!)
          body
-         |> Poison.decode!
-         |> Bullsource.Helpers.Converters.str_to_atom_keys
+         |> Poison.decode!(as: [%Work{}])
+
       _ -> nil
     end
   end
 
-  defp send_results(nil, query_ref, owner) do
-    send(owner, {:results, query_ref, []})
+  defp send_results(nil, doi_ref, owner) do
+    send(owner, {:results, doi_ref, []})
   end
 
 
   defp send_results(answer, query_ref, owner) do
     IO.inspect answer
-    results = [%Result{result: answer}] #I want Result.result to be a List.
+    results = answer
     send(owner, {:results, query_ref, results})
   end
 

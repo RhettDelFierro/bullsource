@@ -1,31 +1,42 @@
 defmodule Bullsource.ReferenceValidator do
   @backends [Bullsource.ReferenceValidator.CrossRef]
+
+  alias Bullsource.ReferenceValidator.Result.Work
   
-  defmodule Result do
-    defstruct url: nil, title: nil, valid: false, result: nil
-  end
+#  defmodule Result do
+#    defstruct doi: nil, title: nil, valid: false, result: nil
+#  end
 
-  def verify_reference(url, opts \\ []) do
-    limit = opts[:limit] || 1
-    news_api = opts[:news_api] || nil
+#  def verify_reference(url, opts \\ []) do
+#    limit = opts[:limit] || 1
+#    news_api = opts[:news_api] || nil
+#
+#
+#    @backends
+#    |> Enum.map(&spawn_query(&1, url, limit))
+#    |> await_results(opts)
+#  end
+  def verify_doi(doi, opts \\ []) do
+      limit = opts[:limit] || 1
+      news_api = opts[:news_api] || nil
 
 
-    @backends
-    |> Enum.map(&spawn_query(&1, url, limit))
-    |> await_results(opts)
-  end
+      @backends
+      |> Enum.map(&spawn_query(&1, doi, limit))
+      |> await_results(opts)
+    end
 
-  def start_link(backend, url, url_ref, owner, limit) do
-    backend.start_link(url, url_ref, owner, limit)
+  def start_link(backend, doi, doi_ref, owner, limit) do
+    backend.start_link(doi, doi_ref, owner, limit)
   end
 
   @doc false
-  defp spawn_query(backend, url, limit) do
-    url_ref = make_ref() #unique identifier (e.g #Reference<0.0.2390148>)
-    opts = [backend, url, url_ref, self(), limit] #self() will get the message to be sent into the verify_reference/2 pipeline. - this is called in Enum.map
+  defp spawn_query(backend, doi, limit) do
+    doi_ref = make_ref() #unique identifier (e.g #Reference<0.0.2390148>)
+    opts = [backend, doi, doi_ref, self(), limit] #self() will get the message to be sent into the verify_reference/2 pipeline. - this is called in Enum.map
     {:ok, pid} = Supervisor.start_child(Bullsource.ReferenceValidator.Supervisor, opts) #spawn a a child - context is this process we're in right now that the supervisor spawned.
     monitor_ref = Process.monitor(pid)
-    {pid,  monitor_ref, url_ref}
+    {pid,  monitor_ref, doi_ref}
   end
 
   defp await_results(children, opts) do

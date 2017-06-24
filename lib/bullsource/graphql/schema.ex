@@ -7,6 +7,7 @@ defmodule Bullsource.GraphQL.Schema do
   import_types Bullsource.GraphQL.Types.VoteTypes
   import_types Bullsource.GraphQL.Types.AccountTypes
   import_types Bullsource.GraphQL.Types.NewsTweetTypes
+  import_types Bullsource.GraphQL.Types.CrossrefTypes
 
   query do
 
@@ -36,7 +37,7 @@ defmodule Bullsource.GraphQL.Schema do
     end
 
     @desc "Check a DOI."
-    field :doi, list_of(:crossref) do
+    field :doi, list_of(:work) do
 
       @desc "DOI"
       arg :doi, non_null(:string)
@@ -165,7 +166,7 @@ defmodule Bullsource.GraphQL.Schema do
     end
 
     @desc "Edit a Reference"
-    field :edit_reference, :reference do
+    field :edit_reference, :reference_final do
       arg :post_id, non_null(:integer)
       arg :reference, non_null(:input_reference)
       middleware Bullsource.Web.Authentication
