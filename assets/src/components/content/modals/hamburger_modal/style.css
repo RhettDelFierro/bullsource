@@ -27,6 +27,7 @@
     background-color: rgb(255,255,255);
     color: rgb(119,253,119);
     animation: animate-content 0.2s forwards;
+    /*animation-delay: 0.2s;*/
 
 }
 .user-info > div{
