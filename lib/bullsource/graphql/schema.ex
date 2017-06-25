@@ -36,12 +36,12 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.NewsTweetsResolver.get_one_by_title/2
     end
 
-    @desc "Check a DOI."
+    @desc "Check a DOI and receive it's info'"
     field :doi, list_of(:work) do
 
       @desc "DOI"
       arg :doi, non_null(:string)
-      resolve &Bullsource.GraphQL.DOIResolver.check/2
+      resolve &Bullsource.GraphQL.DOIResolver.check_doi/2
     end
 
     @desc "Lists all the topics"

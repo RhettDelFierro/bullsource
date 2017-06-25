@@ -4,7 +4,7 @@
 
  @desc "DOI -> Results from CrossRef"
   object :work do
-    field :DOI, :string
+    field :doi, :string
     field :indexed, :indexed
     field :reference_count, :integer
     field :publisher, :string
