@@ -40,19 +40,8 @@ defmodule Bullsource.ReferenceValidator.CrossRef do
 #        Poison.Parser.parse!(body, keys: :atoms!)
          %{message: message} = body
          |> Poison.decode!
-         |> Bullsource.Helpers.Converters.str_to_atom_keys_map()
-
-#         authors = Map.put(message,:author, Enum.map(message.author,fn author ->
-#            IO.inspect author
-#            Bullsource.Helpers.Converters.str_to_atom_keys(author) |>
-#
-#            end))
-            IO.inspect message
-
-#         |> Map.put(:author,&(Enum.map(&1.author,fn author -> Bullsource.Helpers.Converters.str_to_atom_keys(author) end)))
-#         |> Map.put(:funder,&(Enum.map(&1.funder,fn funder -> Bullsource.Helpers.Converters.str_to_atom_keys(funder) end)))
-#         |> Map.put(:reference,&(Enum.map(&1.reference,fn reference -> Bullsource.Helpers.Converters.str_to_atom_keys(reference) end)))
-
+         |> Bullsource.Helpers.Converters.str_to_atom_keys()
+         IO.inspect message
          work = struct(%Work{},message)
 #         IO.inspect work
          work
