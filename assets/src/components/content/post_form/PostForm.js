@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {graphql} from "react-apollo";
 
 import headlineMutation from "../../../mutations/createHeadline";
+import fetchPostsQuery from "../../../queries/fetchPosts"
 
 class PostForm extends Component {
     constructor(props) {
@@ -17,7 +18,9 @@ class PostForm extends Component {
             post: {
                 intro: '',
                 proofs: []
-            }
+            },
+            doiCheck: false,
+            doi: ''
 
         }
     }
@@ -39,12 +42,13 @@ class PostForm extends Component {
         // }
     }
 
-    handlePostBodyChange(event) {
-        let post = {...this.state.post};
-        post.intro = event.target.value;
-        this.setState({post})
+    handleCreateProofForm() {
+
     }
 
+    handleDOICheck(){
+        this.setState({checkProof: true});
+    }
 
     onSubmit(event) {
         event.preventDefault();
@@ -61,7 +65,7 @@ class PostForm extends Component {
                 post: this.state.post,
 
             },
-            refetchQueries: [{query: newsTweetQuery}]
+            refetchQueries: [{query: fetchPostsQuery}]
         }).then((response) => {
             let token = response.data.registerUser.token;
             localStorage.setItem('token', token);
@@ -77,11 +81,7 @@ class PostForm extends Component {
             <div>
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <label>Post:</label>
-                    <input
-                        onChange={this.handlePostBodyChange.bind(this)}
-                        value={this.state.post.intro}
-                    />
-
+                    <input onChange={event => this.setState({post:{intro: event.target.value}})}/>
                 </form>
             </div>
         )

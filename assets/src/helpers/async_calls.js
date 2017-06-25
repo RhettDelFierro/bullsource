@@ -17,3 +17,20 @@ export async function signOutAPI(cb, resetFunc) {
     await cb({});
     localStorage.removeItem('token');
 }
+
+export async function createPost(cb, state) {
+    const {title, network, topicId, url,
+           description, publishedAt, post} = state;
+    const mutation = await cb({
+        variables: {
+            title,
+            network,
+            topicId,
+            url,
+            description,
+            publishedAt,
+            post
+        }
+    })
+    //then use the mutation object or just use reftech queries to get the posts from the db and re-render?
+}

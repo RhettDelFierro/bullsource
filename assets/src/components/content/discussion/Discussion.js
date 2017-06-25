@@ -1,22 +1,22 @@
 import React, {Component} from "react";
-import {graphql} from "react-apollo";
+import {graphql, compose} from "react-apollo";
 import {withRouter} from "react-router-dom";
 
 import HeadlineDetails from "../../sfc/headline_details/HeadlineDetails";
-import PostForm from "../post_form/PostForm"
+import PostForm from "../post_form/PostForm";
 
-import fetchThreadQuery from "../../../queries/fetchThread";
+import fetchFullDiscussion from "../../../queries/fetchFullDiscussion";
 
 class Discussion extends Component {
+
     //make will get props from the /category/:category/:headline_id # see the router.
     render() {
-
         if (this.props.data.loading) {
             return <div>Loading...</div>
         }
 
         // const isThread = this.props.data. ####check if this is a thread, then can pass prop to postform.
-        const logged_in = this.props.data.currentUser ? <PostForm newsTweet={this.props.data.newsTweet} /> : '';
+        const logged_in = this.props.data.currentUser ? <PostForm newsTweet={this.props.data.newsTweet}/> : '';
 
         return (
             <div>
@@ -24,16 +24,30 @@ class Discussion extends Component {
                 {logged_in}
             </div>
         )
-
     }
 }
 
-export default graphql(fetchThreadQuery, {
+export default graphql(fetchFullDiscussion, {
     options: (props) => {
+        const {headline_title, network} = props.match.params;
+        console.log(network);
+        const title = headline_title.split("_").join(' ');
 
-        const {headline_id} = props.match.params;
-        const title = headline_id.split("_").join(' ');
+        return {variables: {title, network}}
+    }})(withRouter(Discussion));
 
-        return {variables: {title: title}}
-    }
-})(withRouter(Discussion));
+// export default graphql(fetchPostsQuery, {
+//     options: (props) => {
+//         const {headline_title, network} = props.match.params;
+//         const title = headline_title.split("_").join(' ');
+//
+//         return {variables: {title, network}, name: 'thread'}
+//     }
+// })(graphql(fetchOneNewsTweetQuery, {
+//         options: (props) => {
+//             const {headline_title} = props.match.params;
+//             const title = headline_title.split("_").join(' ');
+//
+//             return {variables: {title}, name: 'newsTweet'}
+//         }
+//     }))(withRouter(Discussion));

@@ -41,6 +41,7 @@ defmodule Bullsource.ReferenceValidator.CrossRef do
            |> Poison.decode!
            |> Bullsource.Helpers.Converters.str_to_atom_keys()
            |> Bullsource.Helpers.Converters.change_map_keys("-","_")
+           |> Bullsource.Helpers.Converters.change_map_keys("reference","reference_cite")
            |> Bullsource.Helpers.Converters.map_keys_to_lowercase()
 
          message

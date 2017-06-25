@@ -48,7 +48,7 @@ export default ({newsTweet}) => {
                 <img className={styles["img-thumbnail"]} width="100" height="100" src={news.urlToImage}/>
             </div>
             <div className={styles.info}>
-                <Link to={`/category/${network.category}/${title}`}>
+                <Link to={`/category/${network.category}/${network.id}/${title}`}>
                     {news.title}
                 </Link>
                 <p><b>Network</b>: <a href={network.url} target="_blank">{network.name}</a></p>

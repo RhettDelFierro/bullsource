@@ -13,7 +13,7 @@
     field :is_referenced_by_count, :integer
     field :title, list_of(:string)
     field :author, list_of(:author)
-    field :reference, list_of(:reference)
+    field :reference, list_of(:reference_cite)
     field :container_title, list_of(:string)
     field :url, :string
     field :issn, list_of(:string)
@@ -48,7 +48,7 @@
   end
 
   @desc "References this DOI has"
-  object :reference do
+  object :reference_cite do
     field :issue, :string
     field :key, :string
     field :first_page, :string

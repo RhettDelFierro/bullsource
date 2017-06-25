@@ -13,9 +13,18 @@ defmodule Bullsource.Discussion do
     Repo.get(Topic,topic_id) |> Repo.preload([{:headliness, :user}])
   end
 
-  def list_posts_in_headline(headline_id) do
-    Repo.get(Headline,headline_id)
-    |> Repo.preload(posts: [:user, :proofs, proofs: :reference, proofs: :article, proofs: :comment])
+  def list_posts_in_headline(%{title: title, network: network}) do
+    headline = Repo.get_by(Headline,title: title, network: network)
+    case headline do
+
+      nil ->
+        []
+      headline ->
+        headline |> Repo.preload(posts:
+          [:user, :proofs, proofs: :reference, proofs: :article, proofs: :comment])
+
+    end
+
   end
 
   def get_post(post_id) do

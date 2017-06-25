@@ -16,6 +16,8 @@ defmodule Bullsource.GraphQL.Schema do
     field :current_user, :user,
       do: resolve &Bullsource.GraphQL.UserResolver.get_current_user/2
 
+
+
     @desc "Get the top news and tweets"
     field :news_tweets, list_of(:news_tweet),
       do: resolve &Bullsource.GraphQL.NewsTweetsResolver.list/2
@@ -36,6 +38,9 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.NewsTweetsResolver.get_one_by_title/2
     end
 
+
+
+
     @desc "Check a DOI and receive it's info'"
     field :doi, list_of(:work) do
 
@@ -43,6 +48,8 @@ defmodule Bullsource.GraphQL.Schema do
       arg :doi, non_null(:string)
       resolve &Bullsource.GraphQL.DOIResolver.check_doi/2
     end
+
+
 
     @desc "Lists all the topics"
     field :topic, list_of(:topic),
@@ -53,10 +60,15 @@ defmodule Bullsource.GraphQL.Schema do
       do: resolve &Bullsource.GraphQL.HeadlineResolver.list/2
 
     @desc "Lists all posts in headline"
-    field :post, list_of(:post) do
-      arg :id, non_null(:integer)
-      resolve &Bullsource.GraphQL.PostResolver.list/2
+    field :thread, list_of(:post) do
+
+      @desc "Need the headline_id"
+      arg :title, :string
+      arg :network, :string
+
+      resolve &Bullsource.GraphQL.PostResolver.list_thread/2
     end
+
 
 
     @desc "Lists all the proofs"
@@ -166,7 +178,7 @@ defmodule Bullsource.GraphQL.Schema do
     end
 
     @desc "Edit a Reference"
-    field :edit_reference, :reference_final do
+    field :edit_reference, :reference do
       arg :post_id, non_null(:integer)
       arg :reference, non_null(:input_reference)
       middleware Bullsource.Web.Authentication

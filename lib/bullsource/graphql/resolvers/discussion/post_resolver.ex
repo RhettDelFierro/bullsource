@@ -1,23 +1,19 @@
 defmodule Bullsource.GraphQL.PostResolver do
   import Ecto.Query
 
-  import Bullsource.Discussion, only: [create_post: 2, edit_post: 1]
+  import Bullsource.Discussion, only: [create_post: 2, edit_post: 1, list_posts_in_headline: 1]
   alias Bullsource.{Repo, Discussion.Post}
 
-
   def list(_args, _context), do: {:ok, Repo.all(Post)}
+  def list_thread(%{title: title, network: network} = args, _context),
+    do: {:ok, list_posts_in_headline(%{title: title, network: network})}
 
   def create(%{headline_id: headline_id, post: post}, %{context: %{current_user: current_user}}) do
      post_params = Map.put_new(post, :headline_id, headline_id)
-#     [p|ps] = post.proofs # also will have to loop through all the proofs in ReferenceValidator
-#     reference_post = Bullsource.ReferenceValidator.verify_reference(p.reference.link) #should maybe be in an if block to cancel the post if it's not verified.'
-#     IO.puts "++++++++++++++reference_post+++++++++++"
-#     IO.inspect reference_post
      case create_post(post_params, current_user) do
        {:ok, post} -> {:ok, post}
        {:error, errors} -> {:error, errors}
      end
-
   end
 
 

@@ -66,7 +66,7 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
   end
 
   @desc "References - has many proofs"
-  object :reference_final do
+  object :reference do
     field :id, :integer
     field :link, :string
     field :title, :string

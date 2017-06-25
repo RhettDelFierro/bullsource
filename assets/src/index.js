@@ -49,7 +49,7 @@ const Root = () => {
                         <Route path="/signup" component={SignUp}/>
                         <Route path="/signin" component={SignIn}/>
                         <Route exact path="/category/:category" component={Categories}/>
-                        <Route path="/category/:category/:headline_id" component={Discussion}/>
+                        <Route path="/category/:category/:network/:headline_title" component={Discussion}/>
                         <Route render={ () => <p>Not Found</p> }/>
                     </Switch>
                     <SidePanel />
