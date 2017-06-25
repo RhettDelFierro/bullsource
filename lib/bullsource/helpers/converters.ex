@@ -25,6 +25,43 @@ defmodule Bullsource.Helpers.Converters do
       end
     end
 
+    def str_to_atom_keys_map(map) do
+
+          for {key, val} <- map, into: %{} do
+            # refactor to be a separate function with a guard clause?
+            cond do
+              is_atom(key) -> #for keys that are already atoms
+
+                cond do
+                  is_map(val)  -> {key, str_to_atom_keys_map(val)} #recursion
+                  is_list(val) -> Enum.map(val,fn v ->
+                                                        if is_map(v) do
+                                                          str_to_atom_keys_map(v)
+                                                        else v
+                                                        end
+
+                                                      end)
+                  true -> {key, val}
+                end
+
+              true -> #for keys that are not atoms
+
+                cond do
+                  is_map(val) -> {String.to_atom(key), str_to_atom_keys_map(val)}
+                  is_list(val) ->{String.to_atom(key), Enum.map(val,fn v ->
+                      if is_map(v) do
+                        str_to_atom_keys_map(v)
+                      else v
+                      end
+
+                    end)}
+                  true -> {String.to_atom(key), val}
+                end
+
+            end
+          end
+        end
+
 #    def str_to_atom_keys(map) do
 #
 #      for %{key => val} <- map, into: %{} do

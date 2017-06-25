@@ -18,7 +18,7 @@ defmodule Bullsource.ReferenceValidator.CrossRef do
   defp build_query(query), do: @crossref_url <> "#{URI.encode(query)}"
 
   defp make_request(query) do
-    case HTTPoison.get(query) do
+    case HTTPoison.get(query, [], [ ssl: [{:versions, [:'tlsv1.2']}] ]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
          {:ok, body}
       {:ok, %HTTPoison.Response{status_code: 404}} ->
@@ -38,9 +38,24 @@ defmodule Bullsource.ReferenceValidator.CrossRef do
     case answer do
       {:ok, body} ->
 #        Poison.Parser.parse!(body, keys: :atoms!)
-         body
-         |> Poison.decode!(as: [%Work{}])
+         %{message: message} = body
+         |> Poison.decode!
+         |> Bullsource.Helpers.Converters.str_to_atom_keys_map()
 
+#         authors = Map.put(message,:author, Enum.map(message.author,fn author ->
+#            IO.inspect author
+#            Bullsource.Helpers.Converters.str_to_atom_keys(author) |>
+#
+#            end))
+            IO.inspect message
+
+#         |> Map.put(:author,&(Enum.map(&1.author,fn author -> Bullsource.Helpers.Converters.str_to_atom_keys(author) end)))
+#         |> Map.put(:funder,&(Enum.map(&1.funder,fn funder -> Bullsource.Helpers.Converters.str_to_atom_keys(funder) end)))
+#         |> Map.put(:reference,&(Enum.map(&1.reference,fn reference -> Bullsource.Helpers.Converters.str_to_atom_keys(reference) end)))
+
+         work = struct(%Work{},message)
+#         IO.inspect work
+         work
       _ -> nil
     end
   end
@@ -51,7 +66,6 @@ defmodule Bullsource.ReferenceValidator.CrossRef do
 
 
   defp send_results(answer, query_ref, owner) do
-    IO.inspect answer
     results = answer
     send(owner, {:results, query_ref, results})
   end
