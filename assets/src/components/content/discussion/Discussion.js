@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {graphql, compose} from "react-apollo";
+import {graphql} from "react-apollo";
 import {withRouter} from "react-router-dom";
 
 import HeadlineDetails from "../../sfc/headline_details/HeadlineDetails";
@@ -30,11 +30,11 @@ class Discussion extends Component {
 export default graphql(fetchFullDiscussion, {
     options: (props) => {
         const {headline_title, network} = props.match.params;
-        console.log(network);
         const title = headline_title.split("_").join(' ');
 
         return {variables: {title, network}}
-    }})(withRouter(Discussion));
+    }
+})(withRouter(Discussion));
 
 // export default graphql(fetchPostsQuery, {
 //     options: (props) => {

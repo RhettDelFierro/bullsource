@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/queries/checkDOI.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/queries/fetchFullDiscussion.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/queries/fetchPosts.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/src/mutations/proofMutation.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/src/queries/fetchThread.js" afterPath="$PROJECT_DIR$/assets/src/queries/fetchOneNewsTweet.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/discussion/Discussion.js" afterPath="$PROJECT_DIR$/assets/src/components/content/discussion/Discussion.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/post_form/PostForm.js" afterPath="$PROJECT_DIR$/assets/src/components/content/post_form/PostForm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/sfc/headline/Headline.js" afterPath="$PROJECT_DIR$/assets/src/components/sfc/headline/Headline.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/helpers/async_calls.js" afterPath="$PROJECT_DIR$/assets/src/helpers/async_calls.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/index.js" afterPath="$PROJECT_DIR$/assets/src/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/mutations/createPost.js" afterPath="$PROJECT_DIR$/assets/src/mutations/createPost.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex" afterPath="$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/resolvers/discussion/post_resolver.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/types/cross_types.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/types/cross_types.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/reference_validator/Result.ex" afterPath="$PROJECT_DIR$/lib/bullsource/reference_validator/Result.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex" afterPath="$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,9 +18,11 @@
       <file leaf-file-name="Discussion.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/src/components/content/discussion/Discussion.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="275">
+              <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -980,8 +965,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="800" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25178826" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25178826" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1432,9 +1418,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/content/discussion/Discussion.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="275">
+          <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
