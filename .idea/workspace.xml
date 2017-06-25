@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/graphql/types/cross_types.ex" afterPath="$PROJECT_DIR$/lib/bullsource/graphql/types/cross_types.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/helpers/converters.ex" afterPath="$PROJECT_DIR$/lib/bullsource/helpers/converters.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/reference_validator/Result.ex" afterPath="$PROJECT_DIR$/lib/bullsource/reference_validator/Result.ex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex" afterPath="$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/reference_validator/reference_validator.ex" afterPath="$PROJECT_DIR$/lib/bullsource/reference_validator/reference_validator.ex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cross_types.ex" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cross_types.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/cross_types.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="52" column="23" lean-forward="true" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
+            <state relative-caret-position="-277">
+              <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -60,8 +58,8 @@
       <file leaf-file-name="reference_validator.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/bullsource/reference_validator/reference_validator.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="59" column="10" lean-forward="false" selection-start-line="59" selection-start-column="10" selection-end-line="59" selection-end-column="10" />
+            <state relative-caret-position="261">
+              <caret line="52" column="14" lean-forward="true" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -100,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cross_ref.ex" pinned="false" current-in-tab="false">
+      <file leaf-file-name="cross_ref.ex" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state relative-caret-position="242">
+              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -219,11 +217,11 @@
         <option value="$PROJECT_DIR$/lib/bullsource/reference_validator/Results.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/discussion_types.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/graphql/schema.ex" />
-        <option value="$PROJECT_DIR$/lib/bullsource/reference_validator/reference_validator.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/reference_validator/Result.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/helpers/converters.ex" />
-        <option value="$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/graphql/types/cross_types.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/reference_validator/reference_validator.ex" />
+        <option value="$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex" />
       </list>
     </option>
   </component>
@@ -245,7 +243,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1440" />
+    <option name="width" value="1028" />
     <option name="height" value="800" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -795,10 +793,10 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="800" extended-state="0" />
+    <frame x="0" y="23" width="1028" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24821173" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35192698" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2036,30 +2034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/reference_validator/reference_validator.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="59" column="10" lean-forward="false" selection-start-line="59" selection-start-column="10" selection-end-line="59" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/helpers/converters.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/schema.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
@@ -2078,8 +2052,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/graphql/types/cross_types.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="52" column="23" lean-forward="true" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
+        <state relative-caret-position="-277">
+          <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/helpers/converters.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/reference_validator/reference_validator.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="52" column="14" lean-forward="true" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bullsource/reference_validator/cross_ref.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>

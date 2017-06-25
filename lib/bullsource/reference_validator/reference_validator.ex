@@ -52,6 +52,7 @@ defmodule Bullsource.ReferenceValidator do
 
     receive do
       {:results, ^query_ref, results} ->
+        IO.puts "WE ARE IN RECEIVE: #{inspect results}"
         Process.demonitor(monitor_ref, [:flush])
         await_result(tail, results ++ acc, timeout)
       {:DOWN, ^monitor_ref, :process, ^pid, _reason} ->
