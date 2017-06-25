@@ -18,18 +18,18 @@ defmodule Bullsource.ReferenceValidator.Result do
 
   defmodule Work do
     defstruct DOI: nil,
-    indexed: Indexed,
+    indexed: nil,
     "reference-count": nil,
     publisher: nil,
-    funder: [Funder],
+    funder: nil,
     type: nil,
     "is-referenced-by-count": nil,
-    title: [],
-    author: [Author],
-    reference: [Reference],
+    title: nil,
+    author: nil,
+    reference: nil,
     "container-title": nil,
     URL: nil,
-    ISSN: []
+    ISSN: nil
   end
 
 

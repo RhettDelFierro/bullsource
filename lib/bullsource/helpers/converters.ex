@@ -47,6 +47,21 @@ defmodule Bullsource.Helpers.Converters do
     end
   end
 
+  def map_keys_to_lowercase(map) do
+    for {key, val} <- map, into: %{} do
+      cond do
+        is_map(val) ->
+          {Atom.to_string(key) |> String.downcase |> String.to_atom(),
+            map_keys_to_lowercase(val)}
+        is_list(val) ->
+          {Atom.to_string(key) |> String.downcase |> String.to_atom(),
+            list_converter_lowercase(val)}
+        true ->
+          {Atom.to_string(key) |> String.downcase |> String.to_atom(), val}
+      end
+    end
+  end
+
   def atom_to_str_keys(map) do
 
     for {key, val} <- map, into: %{} do
@@ -91,5 +106,17 @@ defmodule Bullsource.Helpers.Converters do
     end)
 
   end
+
+  defp list_converter_lowercase(list) do
+    Enum.map(list, fn v ->
+      if is_map(v) do
+        map_keys_to_lowercase(v)
+      else
+        v
+      end
+    end)
+
+  end
+
 
 end

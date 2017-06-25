@@ -41,6 +41,9 @@ defmodule Bullsource.ReferenceValidator.CrossRef do
          %{message: message} = body
          |> Poison.decode!
          |> Bullsource.Helpers.Converters.str_to_atom_keys()
+         |> Bullsource.Helpers.Converters.change_map_keys("-","_")
+         |> Bullsource.Helpers.Converters.map_keys_to_lowercase()
+
          IO.inspect message
          work = struct(%Work{},message)
 #         IO.inspect work
