@@ -6,7 +6,7 @@ import styles from './style.css'
 import checkDoiQuery from '../../../queries/checkDOI';
 
 
-import updateDataOfBlock from '../../../helpers/forms';
+import {updateDataOfBlock} from '../../../helpers/forms';
 
 
 class DOIBlock extends React.Component {
@@ -27,7 +27,6 @@ class DOIBlock extends React.Component {
     }
 
     render() {
-        const {doi} = this.props.data;
         const data = this.props.block.getData();
         const verify = data.get('verify') === true;
         return (
@@ -39,4 +38,4 @@ class DOIBlock extends React.Component {
     }
 }
 
-export default graphql(checkDoiQuery)(DOIBlock);
+export default (DOIBlock);

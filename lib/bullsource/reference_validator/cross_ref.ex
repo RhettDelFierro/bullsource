@@ -49,14 +49,7 @@ defmodule Bullsource.ReferenceValidator.CrossRef do
     end
   end
 
-  defp send_results(nil, doi_ref, owner) do
-    send(owner, {:results, doi_ref, []})
-  end
-
-
-  defp send_results(answer, query_ref, owner) do
-    results = answer
-    send(owner, {:results, query_ref, [results]})
-  end
+  defp send_results(nil, doi_ref, owner), do: send(owner, {:results, doi_ref, []})
+  defp send_results(answer, query_ref, owner), do: send(owner, {:results, query_ref, [answer]})
 
 end

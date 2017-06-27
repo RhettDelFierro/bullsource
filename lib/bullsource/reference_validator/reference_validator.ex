@@ -2,24 +2,10 @@ defmodule Bullsource.ReferenceValidator do
   @backends [Bullsource.ReferenceValidator.CrossRef]
 
   alias Bullsource.ReferenceValidator.Result.Work
-  
-#  defmodule Result do
-#    defstruct doi: nil, title: nil, valid: false, result: nil
-#  end
 
-#  def verify_reference(url, opts \\ []) do
-#    limit = opts[:limit] || 1
-#    news_api = opts[:news_api] || nil
-#
-#
-#    @backends
-#    |> Enum.map(&spawn_query(&1, url, limit))
-#    |> await_results(opts)
-#  end
   def verify_doi(doi, opts \\ []) do
       limit = opts[:limit] || 1
       news_api = opts[:news_api] || nil
-
 
       @backends
       |> Enum.map(&spawn_query(&1, doi, limit))
@@ -47,6 +33,7 @@ defmodule Bullsource.ReferenceValidator do
     results
   end
 
+  defp await_result([], acc, _), do: acc
   defp await_result([head|tail], acc, timeout) do
     {pid, monitor_ref, query_ref} = head
 
@@ -63,10 +50,6 @@ defmodule Bullsource.ReferenceValidator do
         kill(pid, monitor_ref)
         await_result(tail, acc, 0)
     end
-  end
-
-  defp await_result([], acc, _) do
-    acc
   end
 
   defp cleanup(timer) do

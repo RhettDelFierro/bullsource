@@ -5,19 +5,22 @@ import DOIBlock from "../../sfc/doi_block/DOIBlock";
 import styles from "./style.css";
 import blockStyles from '../../sfc/doi_block/style.css'
 
-import {getBlockRendererFn} from '../../../helpers/forms'
+import {getBlockRendererFn, resetBlockType} from '../../../helpers/forms'
+
+const DOI_BLOCK = 'doi_block';
 
 class FormEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {editorState: EditorState.createEmpty()};
         this.onChange = (editorState) => this.setState({editorState});
+        this.handleBeforeInput = this.handleBeforeInput.bind(this);
         this.handleKeyCommand = this.handleKeyCommand.bind(this);
         this.focus = () => this.refs.editor.focus();
         this.getEditorState = () => this.state.editorState;
         this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange, DOIBlock);
         this.blockRenderMap = Map({
-            ['doi_block']: {
+            [DOI_BLOCK]: {
                 element: 'div',
             },
         }).merge(DefaultDraftBlockRenderMap);
@@ -57,6 +60,26 @@ class FormEditor extends Component {
         }
     }
 
+    handleBeforeInput(str) {
+        if (str !== ']') {
+            return false;
+        }
+        const { editorState } = this.state;
+        /* Get the selection */
+        const selection = editorState.getSelection();
+
+        /* Get the current block */
+        const currentBlock = editorState.getCurrentContent()
+            .getBlockForKey(selection.getStartKey());
+        const blockType = currentBlock.getType();
+        const blockLength = currentBlock.getLength();
+        if (blockLength === 1 && currentBlock.getText() === '[') {
+            this.onChange(resetBlockType(editorState, blockType !== DOI_BLOCK ? DOI_BLOCK : 'unstyled'));
+            return true;
+        }
+        return false;
+    }
+
 
     render() {
         return (
@@ -70,6 +93,9 @@ class FormEditor extends Component {
                             handleKeyCommand={this.handleKeyCommand}
                             ref="editor"
                             blockRendererFn={this.blockRendererFn}
+                            blockStyleFn={this.blockStyleFn}
+                            blockRenderMap={this.blockRenderMap}
+                            handleBeforeInput={this.handleBeforeInput}
                     />
                 </div>
             </div>
