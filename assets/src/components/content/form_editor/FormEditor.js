@@ -9,6 +9,9 @@ class FormEditor extends Component {
         this.onChange = (editorState) => this.setState({editorState});
         this.handleKeyCommand = this.handleKeyCommand.bind(this);
         this.focus = () => this.refs.editor.focus();
+        this.getEditorState = () => this.state.editorState;
+        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange);
+
     }
 
     handleKeyCommand(command) {
@@ -36,6 +39,8 @@ class FormEditor extends Component {
     }
 
 
+
+
     render() {
         return (
             <div className={styles['form-container']}>
@@ -47,6 +52,7 @@ class FormEditor extends Component {
                             onChange={this.onChange}
                             handleKeyCommand={this.handleKeyCommand}
                             ref="editor"
+                            blockRendererFn={this.blockRendererFn}
                     />
                 </div>
             </div>

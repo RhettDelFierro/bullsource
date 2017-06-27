@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const VENDOR_LIBS = ["axios", "apollo-client", "graphql", "react-apollo",
                      "react", "react-dom", "react-router-dom", "moment",
-                     'react-twitter-widgets', "draft-js"];
+                     'react-twitter-widgets', "draft-js", "immutable"];
 
 module.exports = {
     entry: {
