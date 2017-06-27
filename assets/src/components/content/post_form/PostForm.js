@@ -3,6 +3,7 @@ import {graphql} from "react-apollo";
 
 import headlineMutation from "../../../mutations/createHeadline";
 import fetchPostsQuery from "../../../queries/fetchPosts"
+import FormEditor from "../form_editor/FormEditor"
 
 class PostForm extends Component {
     constructor(props) {
@@ -79,10 +80,12 @@ class PostForm extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.onSubmit.bind(this)}>
-                    <label>Post:</label>
-                    <input onChange={event => this.setState({post:{intro: event.target.value}})}/>
-                </form>
+                <FormEditor onSubmit={this.onSubmit.bind(this)}/>
+                {/*<form onSubmit={this.onSubmit.bind(this)}>*/}
+                    {/*<label>Post:</label>*/}
+                    {/*<input onChange={event => this.setState({post:{intro: event.target.value}})}/>*/}
+                {/*</form>*/}
+
             </div>
         )
     }
