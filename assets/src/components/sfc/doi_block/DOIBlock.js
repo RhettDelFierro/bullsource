@@ -34,7 +34,6 @@ class DOIBlock extends React.Component {
         const data = this.props.block.getData();
         console.log('block data .getdata()', data);
         const verify = data.get('verify') === true;
-        console.log('doi', this.props.data);
         return (
             <div className={verify ? `${styles['block-doi-verified']}` : ''}>
                 <label>Enter the DOI here:</label>
@@ -47,10 +46,10 @@ class DOIBlock extends React.Component {
 }
 
 export default graphql(checkDoiQuery,{
-    // skip: (props) => {
-    //     const data = props.block.getData();
-    //     return data.get('doi') ? false : true
-    // },
+    skip: (props) => {
+        const data = props.block.getData();
+        return !data.get('doi')
+    },
 
     options: (props) => {
         const doi = props.block.getData().get('doi');
