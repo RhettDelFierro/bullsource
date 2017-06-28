@@ -59,9 +59,8 @@ export const updateDataOfBlock = (editorState, block, newData) => {
 *  Object
 * */
 export const getDefaultBlockData = (blockType, initialData = {}) => {
-    console.log('getDefaultBlockdata');
     switch (blockType) {
-        case DOI_BLOCK: return { verified: false };
+        case DOI_BLOCK: return { doi: '' };
         default: return initialData;
     }
 };

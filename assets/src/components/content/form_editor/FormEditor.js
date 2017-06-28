@@ -96,6 +96,7 @@ class FormEditor extends Component {
                             blockStyleFn={this.blockStyleFn}
                             blockRenderMap={this.blockRenderMap}
                             handleBeforeInput={this.handleBeforeInput}
+                            placeholder="insert DOI by typing []"
                     />
                 </div>
             </div>
