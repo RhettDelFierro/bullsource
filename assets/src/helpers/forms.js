@@ -39,7 +39,6 @@ export const getBlockRendererFn = (getEditorState, onChange, component) => (bloc
 *   EditorState    -/> new editor state for DOIBlock component which wil be set as the new currentContent.
 **/
 export const updateDataOfBlock = (editorState, block, newData) => {
-    console.log('updateDataofBlock');
     const contentState = editorState.getCurrentContent();
     const newBlock = block.merge({
         data: newData,

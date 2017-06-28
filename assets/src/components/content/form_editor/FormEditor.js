@@ -54,9 +54,9 @@ class FormEditor extends Component {
     blockStyleFn(block) {
         switch (block.getType()) {
             case DOI_BLOCK:
-                return `${blockStyles.block} ${blockStyles['block-doi']}`;
+                return `block block-doi`;
             default:
-                return `${blockStyles.block}`;
+                return `block`;
         }
     }
 
