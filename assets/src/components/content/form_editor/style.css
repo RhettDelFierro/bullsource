@@ -5,3 +5,12 @@
 .editor {
   border: 1px solid pink;
 }
+
+.doi-input{
+  margin-right: 10px;
+  padding: 3px;
+}
+
+.doi-input-container{
+  margin-bottom: 10px;
+}

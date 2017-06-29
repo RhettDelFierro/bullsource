@@ -11,6 +11,7 @@ import Discussion from "./components/content/discussion/Discussion";
 import Home from "./components/content/home/Home";
 import SignIn from "./components/side/signin/SignIn";
 import SignUp from "./components/side/signup/SignUp";
+import DraftJSTest from "./test"
 
 
 import styles from "./style.css";
@@ -50,6 +51,7 @@ const Root = () => {
                         <Route path="/signin" component={SignIn}/>
                         <Route exact path="/category/:category" component={Categories}/>
                         <Route path="/category/:category/:network/:headline_title" component={Discussion}/>
+                        <Route path="/test" component={DraftJSTest} />
                         <Route render={ () => <p>Not Found</p> }/>
                     </Switch>
                     <SidePanel />

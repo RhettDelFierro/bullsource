@@ -18,6 +18,7 @@ class Discussion extends Component {
         // const isThread = this.props.data. ####check if this is a thread, then can pass prop to postform.
         const logged_in = this.props.data.currentUser ? <PostForm newsTweet={this.props.data.newsTweet}/> : '';
 
+        //render the rest of the posts after {logged_in}
         return (
             <div>
                 <HeadlineDetails newsTweet={this.props.data.newsTweet}/>

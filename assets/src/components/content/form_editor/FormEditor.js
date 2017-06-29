@@ -1,30 +1,35 @@
 import React, {Component} from "react";
-import {DefaultDraftBlockRenderMap, Editor, EditorState, RichUtils} from "draft-js";
-import {Map} from "immutable";
-import DOIBlock from "../../sfc/doi_block/DOIBlock";
+import {Editor, EditorState, RichUtils, AtomicBlockUtils} from "draft-js";
+
+import DOIBlock from "../doi_block/DOIBlock";
 import styles from "./style.css";
-import blockStyles from '../../sfc/doi_block/style.css'
 
-import {getBlockRendererFn, resetBlockType} from '../../../helpers/forms'
+import {getBlockRendererFn, resetBlockType} from "../../../helpers/forms";
 
-const DOI_BLOCK = 'doi_block';
+// const DOI_BLOCK = 'doi_block';
 
 class FormEditor extends Component {
     constructor(props) {
         super(props);
-        this.state = {editorState: EditorState.createEmpty()};
+        this.state = {
+            editorState: EditorState.createEmpty(),
+            showDOIInput: false,
+            doiValue: '',
+            componentType: '',
+            proofs: [],
+            doiError: ''
+        };
         this.onChange = (editorState) => this.setState({editorState});
-        this.handleBeforeInput = this.handleBeforeInput.bind(this);
         this.handleKeyCommand = this.handleKeyCommand.bind(this);
         this.focus = () => this.refs.editor.focus();
         this.getEditorState = () => this.state.editorState;
-        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange, DOIBlock);
-        this.blockRenderMap = Map({
-            [DOI_BLOCK]: {
-                element: 'div',
-            },
-        }).merge(DefaultDraftBlockRenderMap);
-
+        this.onDOIChange = (e) => this.setState({doiValue: e.target.value});
+        this.onDOIError = (doiError) => this.setState({doiError});
+        this.setProof = (proof) => this.setState({proofs: [proof, ...this.state.proofs]});
+        this.confirmDOI = this.confirmDOI.bind(this);
+        this.onInsertProof = this.onInsertProof.bind(this);
+        this.proxyForBlock = this.proxyForBlock.bind(this);
+        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange, this.setProof, this.onDOIError, DOIBlock);
     }
 
     handleKeyCommand(command) {
@@ -51,53 +56,92 @@ class FormEditor extends Component {
         setTimeout(() => this.focus(), 0);
     }
 
-    blockStyleFn(block) {
-        switch (block.getType()) {
-            case DOI_BLOCK:
-                return `block block-doi`;
-            default:
-                return `block`;
+    confirmDOI(e) {
+        e.preventDefault();
+        const {editorState, doiValue, componentType} = this.state;
+        const contentState = editorState.getCurrentContent(); //get the current editor's content (all of it)
+        const contentStateWithEntity = contentState.createEntity( //inserting an entity for the proof code block.
+            componentType,
+            'IMMUTABLE',
+            {doiValue}
+        );
+        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+        const newEditorState = EditorState.set(
+            editorState,
+            {currentContent: contentStateWithEntity}
+        );
+        //we now have a new editorState with the entity we created:
+        this.setState({
+            editorState: AtomicBlockUtils.insertAtomicBlock(
+                newEditorState,
+                entityKey,
+                ' ' //means the whole work block will be represented by a space that you can delete by hitting delete/backspace key.
+            ),
+            showDOIInput: false, //reset the doi form with these two lines.
+            doiValue: '',
+        }, () => {
+            setTimeout(() => this.focus(), 0); //focus back on editor.
+        });
+    }
+
+    //if user presses enter during doi confirmation:
+    onDOIInputKeyDown(e){
+        if (e.which === 13) {
+            this.confirmDOI(e);
         }
     }
 
-    handleBeforeInput(str) {
-        if (str !== ']') {
-            return false;
-        }
-        const { editorState } = this.state;
-        /* Get the selection */
-        const selection = editorState.getSelection();
-
-        /* Get the current block */
-        const currentBlock = editorState.getCurrentContent()
-            .getBlockForKey(selection.getStartKey());
-        const blockType = currentBlock.getType();
-        const blockLength = currentBlock.getLength();
-        if (blockLength === 1 && currentBlock.getText() === '[') {
-            this.onChange(resetBlockType(editorState, blockType !== DOI_BLOCK ? DOI_BLOCK : 'unstyled'));
-            return true;
-        }
-        return false;
+    //Will show the doi input form and tell draft-js to render the work info component:
+    proxyForBlock(type) {
+        this.setState({
+            showDOIInput: true,
+            doiValue: '',
+            componentType: type
+        }, () => {
+            setTimeout(() => this.refs.doi.focus(), 0);
+        })
     }
 
+    onInsertProof(){
+        this.proxyForBlock('proof')
+    }
 
     render() {
+
+        let doiInput;
+        if (this.state.showDOIInput) {
+            //the doi "form" that gets toggled if this.state.showDOIInput is true:
+            doiInput =
+                <div className={styles['doi-input-container']}>
+                    <input
+                        onChange={this.onDOIChange}
+                        ref="doi"
+                        className={styles['doi-input']}
+                        type="text"
+                        value={this.state.doiValue}
+                        onKeyDown={this.onDOIInputKeyDown}
+                    />
+                    <button onClick={this.confirmDOI}>
+                        Confirm
+                    </button>
+                </div>;
+        }
         return (
             <div className={styles['form-container']}>
                 <button onClick={this.onBoldClick.bind(this)}>Bold</button>
                 <button onClick={this.onUnderlineClick.bind(this)}>Underline</button>
                 <button onClick={this.onItalicClick.bind(this)}>Italic</button>
+                <button onClick={this.onInsertProof}>Insert Proof</button>
+                {doiInput}
+                {!this.state.doiError ? '' : `${this.state.doiError}`}
                 <div className={styles.editor} onClick={this.focus}>
                     <Editor editorState={this.state.editorState}
                             onChange={this.onChange}
                             handleKeyCommand={this.handleKeyCommand}
                             ref="editor"
                             blockRendererFn={this.blockRendererFn}
-                            blockStyleFn={this.blockStyleFn}
-                            blockRenderMap={this.blockRenderMap}
-                            handleBeforeInput={this.handleBeforeInput}
-                            placeholder="insert DOI by typing []"
                     />
+                <button>Submit</button>
                 </div>
             </div>
 
