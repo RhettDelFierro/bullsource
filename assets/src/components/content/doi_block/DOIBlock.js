@@ -29,15 +29,14 @@ class DOIBlock extends React.Component {
         const {onDOIError} = blockProps;
         if (error) {
             let errorMessage = error.message.split(':')[2];
-            console.log(errorMessage);
-            onDOIError(errorMessage)
+            onDOIError(errorMessage);
         } else if (doi) {
             const {url, title, indexed, containerTitle, author} = doi[0];
             this.setState({
                 link: url,
                 title: title[0],
                 source: containerTitle[0],
-                date: `${indexed.dateParts[1]}/${indexed.dateParts[2]}/${indexed.dateParts[0]}`,
+                date: indexed.dateParts[0],
                 authors: author.map(name => `${name.given} ${name.family}`)
             })
         }
@@ -45,29 +44,31 @@ class DOIBlock extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const {blockProps} = this.props;
-        const {setProof} = blockProps;
+        //might have to set new content blocks here.
+
+        const {block, blockProps} = this.props;
+        // const data = block.getData();
+        // const {onChange, getEditorState,setProof} = blockProps;
         setProof(this.state);
         //should also tell the FormEditor component to re render the content block.
     }
 
     renderForm() {
-        return this.props.data.isLoading ? <div>Loading</div> :
-            <div className={styles['work-info']} onClick={this.focus} ref="proof">
-                <form>
-                    <textarea ref="text1" onClick={this.text1Focus} placeholder="Text from source goes here"
-                              onChange={(event) => this.setState({article: event.target.value})}>
-                    </textarea>
-                    <textarea ref="text2" onClick={this.text2Focus} placeholder="Your thoughts go here"
-                              onChange={(event) => this.setState({coments: event.target.value})}>
-                    </textarea>
-                    <a href={this.state.link}>{this.state.title}</a>
-                    <p>{this.state.source}</p>
-                    <p>{this.state.date}</p>
-                    <p>{this.state.authors.map(author => author + ', ')}</p>
-                    <button onClick={this.onSubmit.bind(this)}>Proof</button>
-                </form>
-            </div>
+        if(this.props.data.loading){
+            return <div>Checking for DOI</div>
+        }
+        else {
+            return this.props.data.error ? <div/> :
+               <div className={styles['work-info']} onClick={this.focus} ref="proof">
+                    <form>
+                        <a href={this.state.link}>{this.state.title}</a>
+                        <p>{this.state.source}</p>
+                        <p>{this.state.date}</p>
+                        <p>{this.state.authors.map(author => author + ', ')}</p>
+                        <button onClick={this.onSubmit.bind(this)}>Proof</button>
+                    </form>
+               </div>
+        }
 
     }
 

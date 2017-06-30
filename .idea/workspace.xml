@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/components/content/proof_info/ProofInfo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/components/content/proof_info/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/test.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/src/components/sfc/doi_block/DOIBlock.js" afterPath="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/src/components/sfc/doi_block/style.css" afterPath="$PROJECT_DIR$/assets/src/components/content/doi_block/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/discussion/Discussion.js" afterPath="$PROJECT_DIR$/assets/src/components/content/discussion/Discussion.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js" afterPath="$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/form_editor/style.css" afterPath="$PROJECT_DIR$/assets/src/components/content/form_editor/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/helpers/forms.js" afterPath="$PROJECT_DIR$/assets/src/helpers/forms.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/index.js" afterPath="$PROJECT_DIR$/assets/src/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/queries/checkDOI.js" afterPath="$PROJECT_DIR$/assets/src/queries/checkDOI.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" afterPath="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +20,8 @@
           <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/test.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="172">
-                  <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="22" />
+                <state relative-caret-position="393">
+                  <caret line="166" column="21" lean-forward="true" selection-start-line="166" selection-start-column="21" selection-end-line="166" selection-end-column="21" />
                   <folding>
                     <element signature="e#0#37#0" expanded="true" />
                   </folding>
@@ -42,8 +32,8 @@
           <file leaf-file-name="forms.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/assets/src/helpers/forms.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="288">
-                  <caret line="22" column="33" lean-forward="false" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+                <state relative-caret-position="373">
+                  <caret line="35" column="54" lean-forward="false" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
                   <folding />
                 </state>
               </provider>
@@ -52,22 +42,22 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="Discussion.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/components/content/discussion/Discussion.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-3">
-                  <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+                <state relative-caret-position="15">
+                  <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="FormEditor.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="FormEditor.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="217">
-                  <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+                <state relative-caret-position="2040">
+                  <caret line="136" column="24" lean-forward="true" selection-start-line="136" selection-start-column="24" selection-end-line="136" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#39#0" expanded="true" />
                     <marker date="1498779675000" expanded="true" signature="4705:5589" ph="..." />
@@ -78,13 +68,15 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="DOIBlock.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="DOIBlock.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="342">
-                  <caret line="58" column="46" lean-forward="false" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+                <state relative-caret-position="255">
+                  <caret line="55" column="18" lean-forward="false" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
+                    <marker date="1498791137000" expanded="true" signature="1925:2340" ph="..." />
+                    <marker date="1498791137000" expanded="true" signature="1952:2316" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -113,7 +105,7 @@
           <file leaf-file-name="SignUp.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/components/side/signup/SignUp.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-352">
+                <state relative-caret-position="360">
                   <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
                   <folding />
                 </state>
@@ -243,9 +235,9 @@
         <option value="$PROJECT_DIR$/assets/src/test.js" />
         <option value="$PROJECT_DIR$/assets/src/queries/checkDOI.js" />
         <option value="$PROJECT_DIR$/assets/src/components/content/doi_block/style.css" />
-        <option value="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" />
-        <option value="$PROJECT_DIR$/assets/src/helpers/forms.js" />
         <option value="$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js" />
+        <option value="$PROJECT_DIR$/assets/src/helpers/forms.js" />
+        <option value="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" />
       </list>
     </option>
   </component>
@@ -366,6 +358,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="deps" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -834,7 +840,7 @@
     <frame x="0" y="23" width="1440" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26895565" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2725322" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1138,7 +1144,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1290">
           <caret line="86" column="45" lean-forward="false" selection-start-line="86" selection-start-column="45" selection-end-line="86" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1146,7 +1151,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1155,7 +1159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="28" lean-forward="false" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1171,7 +1174,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
           <caret line="39" column="35" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1201,15 +1203,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/content/discussion/Discussion.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="15">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/side/signup/SignUp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-352">
+        <state relative-caret-position="360">
           <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
@@ -1223,43 +1225,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="58" column="46" lean-forward="false" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="22" />
+        <state relative-caret-position="393">
+          <caret line="166" column="21" lean-forward="true" selection-start-line="166" selection-start-column="21" selection-end-line="166" selection-end-column="21" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/helpers/forms.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="22" column="33" lean-forward="false" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+        <state relative-caret-position="2040">
+          <caret line="136" column="24" lean-forward="true" selection-start-line="136" selection-start-column="24" selection-end-line="136" selection-end-column="24" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <marker date="1498779675000" expanded="true" signature="4705:5589" ph="..." />
             <marker date="1498779675000" expanded="true" signature="5189:5570" ph="..." />
             <marker date="1498779675000" expanded="true" signature="5255:5507" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/helpers/forms.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="35" column="54" lean-forward="false" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="55" column="18" lean-forward="false" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <marker date="1498791137000" expanded="true" signature="1925:2340" ph="..." />
+            <marker date="1498791137000" expanded="true" signature="1952:2316" ph="..." />
           </folding>
         </state>
       </provider>
