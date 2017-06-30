@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {graphql} from "react-apollo";
 
 import headlineMutation from "../../../mutations/createHeadline";
-import fetchPostsQuery from "../../../queries/fetchPosts"
-import FormEditor from "../form_editor/FormEditor"
+import fetchFullDiscussion from "../../../queries/fetchFullDiscussion";
+import FormEditor from "../form_editor/FormEditor";
 
 class PostForm extends Component {
     constructor(props) {
@@ -16,13 +16,23 @@ class PostForm extends Component {
             url: '',
             description: '',
             publishedAt: '',
+            intro: '',
             post: {
                 intro: '',
                 proofs: []
-            },
-            doiCheck: false,
-            doi: ''
+            }
+        };
 
+        this.setProofs = (proof) => {
+            let post = this.state.post;
+            post['proofs'] = [proof, ...post.proofs];
+            this.setState({post})
+        };
+
+        this.setPostIntro = (body) => {
+            let post = this.state.post;
+            post['intro'] = body;
+            this.setState({post})
         }
     }
 
@@ -43,14 +53,6 @@ class PostForm extends Component {
         // }
     }
 
-    handleCreateProofForm() {
-
-    }
-
-    handleDOICheck(){
-        this.setState({checkProof: true});
-    }
-
     onSubmit(event) {
         event.preventDefault();
 
@@ -64,13 +66,10 @@ class PostForm extends Component {
                 description: this.state.description,
                 publishedAt: this.state.publishedAt,
                 post: this.state.post,
-
             },
-            refetchQueries: [{query: fetchPostsQuery}]
+            refetchQueries: [{query: fetchFullDiscussion}]
         }).then((response) => {
-            let token = response.data.registerUser.token;
-            localStorage.setItem('token', token);
-            this.props.history.push("/");
+            console.log(response);
         })
             .catch((e) => {
                 console.log('error', e);
@@ -80,12 +79,7 @@ class PostForm extends Component {
     render() {
         return (
             <div>
-                <FormEditor onSubmit={this.onSubmit.bind(this)}/>
-                {/*<form onSubmit={this.onSubmit.bind(this)}>*/}
-                    {/*<label>Post:</label>*/}
-                    {/*<input onChange={event => this.setState({post:{intro: event.target.value}})}/>*/}
-                {/*</form>*/}
-
+                <FormEditor setPostIntro={this.setPostIntro} setProofs={this.setProofs} onSubmit={this.onSubmit.bind(this)}/>
             </div>
         )
     }

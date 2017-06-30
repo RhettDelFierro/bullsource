@@ -76,7 +76,6 @@ export const getDefaultBlockData = (blockType, initialData = {}) => {
  *
  **/
 export const resetBlockType = (editorState, newType = 'unstyled') => {
-    console.log('resetBlockType');
     const contentState = editorState.getCurrentContent();
     const selectionState = editorState.getSelection();
     const key = selectionState.getStartKey();

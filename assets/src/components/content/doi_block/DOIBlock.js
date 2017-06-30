@@ -1,6 +1,7 @@
 import React from "react";
 import {graphql} from "react-apollo";
 import styles from "./style.css";
+import {EditorState,Modifier} from 'draft-js';
 
 import checkDoiQuery from "../../../queries/checkDOI";
 
@@ -30,13 +31,22 @@ class DOIBlock extends React.Component {
         if (error) {
             let errorMessage = error.message.split(':')[2];
             onDOIError(errorMessage);
+            const {block, blockProps} = this.props;
+            // const data = block.getData();
+            const {onChange, getEditorState} = blockProps;
+            let currentEditorState = getEditorState();
+            let currentContentState = currentEditorState.getCurrentContent();
+
+            let newContentState = Modifier.applyEntity(currentContentState, currentEditorState.getSelection(), null);
+            return onChange(EditorState.push(currentEditorState, newContentState, 'apply-entity'));
+
         } else if (doi) {
             const {url, title, indexed, containerTitle, author} = doi[0];
             this.setState({
                 link: url,
                 title: title[0],
                 source: containerTitle[0],
-                date: indexed.dateParts[0],
+                date: `${indexed.dateParts[0][1]}/${indexed.dateParts[0][2]}/${indexed.dateParts[0][0]}`,
                 authors: author.map(name => `${name.given} ${name.family}`)
             })
         }

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Editor, EditorState, RichUtils, AtomicBlockUtils} from "draft-js";
+import {Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw} from "draft-js";
 
 import DOIBlock from "../doi_block/DOIBlock";
 import styles from "./style.css";
@@ -16,7 +16,6 @@ class FormEditor extends Component {
             showDOIInput: false,
             doiValue: '',
             componentType: '',
-            proofs: [],
             doiError: ''
         };
         this.onChange = (editorState) => this.setState({editorState});
@@ -25,11 +24,10 @@ class FormEditor extends Component {
         this.getEditorState = () => this.state.editorState;
         this.onDOIChange = (e) => this.setState({doiValue: e.target.value});
         this.onDOIError = (doiError) => this.setState({doiError});
-        this.setProof = (proof) => this.setState({proofs: [proof, ...this.state.proofs]});
         this.confirmDOI = this.confirmDOI.bind(this);
         this.onInsertProof = this.onInsertProof.bind(this);
         this.proxyForBlock = this.proxyForBlock.bind(this);
-        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange, this.setProof, this.onDOIError, DOIBlock);
+        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange, this.props.setProofs, this.onDOIError, DOIBlock);
     }
 
     handleKeyCommand(command) {
@@ -106,6 +104,14 @@ class FormEditor extends Component {
         this.proxyForBlock('proof')
     }
 
+    onSubmit(e){
+        e.preventDefault();
+        let contentState = this.state.editorState.getCurrentContent();
+        let postIntro = convertToRaw(contentState);
+        console.log(postIntro);
+        this.props.setPostIntro(postIntro);
+    }
+
     render() {
 
         let doiInput;
@@ -141,7 +147,7 @@ class FormEditor extends Component {
                             ref="editor"
                             blockRendererFn={this.blockRendererFn}
                     />
-                <button>Submit</button>
+                <button onClick={this.onSubmit.bind(this)}>Submit</button>
                 </div>
             </div>
 
