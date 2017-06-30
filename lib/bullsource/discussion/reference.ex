@@ -5,7 +5,7 @@ defmodule Bullsource.Discussion.Reference do
   alias Bullsource.Votes.{ReferenceVoteUp, ReferenceVoteDown}
 
   schema "references" do
-    field :link, :string, unique: true
+    field :doi, :string, unique: true
     field :title, :string
 
     #has_many :proof, ProofReference

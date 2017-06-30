@@ -14,7 +14,7 @@ class FormEditor extends Component {
         this.state = {
             editorState: EditorState.createEmpty(),
             showDOIInput: false,
-            doiValue: '',
+            doi: '',
             componentType: '',
             doiError: ''
         };
@@ -22,7 +22,7 @@ class FormEditor extends Component {
         this.handleKeyCommand = this.handleKeyCommand.bind(this);
         this.focus = () => this.refs.editor.focus();
         this.getEditorState = () => this.state.editorState;
-        this.onDOIChange = (e) => this.setState({doiValue: e.target.value});
+        this.onDOIChange = (e) => this.setState({doi: e.target.value});
         this.onDOIError = (doiError) => this.setState({doiError});
         this.confirmDOI = this.confirmDOI.bind(this);
         this.onInsertProof = this.onInsertProof.bind(this);
@@ -56,12 +56,12 @@ class FormEditor extends Component {
 
     confirmDOI(e) {
         e.preventDefault();
-        const {editorState, doiValue, componentType} = this.state;
+        const {editorState, doi, componentType} = this.state;
         const contentState = editorState.getCurrentContent(); //get the current editor's content (all of it)
         const contentStateWithEntity = contentState.createEntity( //inserting an entity for the proof code block.
             componentType,
             'IMMUTABLE',
-            {doiValue}
+            {doi}
         );
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
         const newEditorState = EditorState.set(
@@ -76,7 +76,7 @@ class FormEditor extends Component {
                 ' ' //means the whole work block will be represented by a space that you can delete by hitting delete/backspace key.
             ),
             showDOIInput: false, //reset the doi form with these two lines.
-            doiValue: '',
+            doi: '',
         }, () => {
             setTimeout(() => this.focus(), 0); //focus back on editor.
         });
@@ -93,7 +93,7 @@ class FormEditor extends Component {
     proxyForBlock(type) {
         this.setState({
             showDOIInput: true,
-            doiValue: '',
+            doi: '',
             componentType: type
         }, () => {
             setTimeout(() => this.refs.doi.focus(), 0);
@@ -124,7 +124,7 @@ class FormEditor extends Component {
                         ref="doi"
                         className={styles['doi-input']}
                         type="text"
-                        value={this.state.doiValue}
+                        value={this.state.doi}
                         onKeyDown={this.onDOIInputKeyDown}
                     />
                     <button onClick={this.confirmDOI}>

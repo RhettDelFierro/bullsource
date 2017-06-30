@@ -94,7 +94,7 @@ export default graphql(checkDoiQuery, {
         const entity = props.contentState.getEntity(
             props.block.getEntityAt(0)
         );
-        const {doiValue} = entity.getData();
-        return {variables: {doi: doiValue}}
+        const {doi} = entity.getData();
+        return {variables: {doi}}
     }
 })(DOIBlock);
