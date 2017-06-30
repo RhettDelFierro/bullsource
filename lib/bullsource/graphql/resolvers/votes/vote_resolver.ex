@@ -4,15 +4,12 @@ defmodule Bullsource.GraphQL.VoteResolver do
 
   alias Bullsource.{Repo, Votes}
   alias Bullsource.Account.User
-  alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ProofVoteUp,
-                    ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
+  alias Bullsource.Votes.{PostVoteUp, PostVoteDown,ReferenceVoteUp, ReferenceVoteDown}
 
 
 
   @vote_type_list [up_vote_post: PostVoteUp,
                    down_vote_post: PostVoteDown,
-                   up_vote_proof: ProofVoteUp,
-                   down_vote_proof: ProofVoteDown,
                    up_vote_reference: ReferenceVoteUp,
                    down_vote_reference: ReferenceVoteDown]
 

@@ -69,11 +69,9 @@ defmodule Bullsource.GraphQL.Schema do
       resolve &Bullsource.GraphQL.PostResolver.list_thread/2
     end
 
-
-
-    @desc "Lists all the proofs"
-    field :proof, list_of(:proof),
-      do: resolve &Bullsource.GraphQL.ProofResolver.list/2
+    @desc "Lists all the references"
+    field :reference, list_of(:reference),
+      do: resolve &Bullsource.GraphQL.ReferenceResolver.list/2
 
   end
 
@@ -135,7 +133,7 @@ defmodule Bullsource.GraphQL.Schema do
 
 
 
-    @desc "Create a vote - posts, proofs and references"
+    @desc "Create a vote - posts and references"
     field :create_vote, :vote do
       arg :vote_type, non_null(:vote_type)
       arg :vote_type_id, non_null(:integer)
@@ -148,32 +146,13 @@ defmodule Bullsource.GraphQL.Schema do
 
 
 
-
-    @desc "Edit a post - the intro/conclusion (implemented later)"
+# going to have to add references.
+    @desc "Edit a post"
     field :edit_post, :post do
       arg :post_id, non_null(:integer)
-      arg :intro, :string
+      arg :body, :string
       middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.PostResolver.edit/2
-      middleware Bullsource.Web.HandleError
-    end
-
-    @desc "Edit an Article"
-    field :edit_article, :article do
-      arg :post_id, non_null(:integer)
-      arg :article_id, non_null(:integer)
-      arg :text, :string
-      middleware Bullsource.Web.Authentication
-      resolve &Bullsource.GraphQL.ArticleResolver.edit/2
-      middleware Bullsource.Web.HandleError
-    end
-    @desc "Edit a Comment"
-    field :edit_comment, :comment do
-      arg :post_id, non_null(:integer)
-      arg :comment_id, non_null(:integer)
-      arg :text, :string
-      middleware Bullsource.Web.Authentication
-      resolve &Bullsource.GraphQL.CommentResolver.edit/2
       middleware Bullsource.Web.HandleError
     end
 

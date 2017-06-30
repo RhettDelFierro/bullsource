@@ -31,29 +31,6 @@ defimpl DeleteVote, for: Bullsource.Votes.PostVoteDown do
   end
 end
 
-defimpl DeleteVote, for: Bullsource.Votes.ProofVoteUp do
-  import Ecto.Query, only: [from: 2]
-  def delete_vote(proof_vote_up,params) do
-        query = from p in Bullsource.Votes.ProofVoteUp,
-                where: p.proof_id == ^params.id and p.user_id == ^params.user_id
-        case Bullsource.Repo.one(query) do
-          nil   -> {:ok, nil}
-          proof -> Bullsource.Repo.delete(proof)
-        end
-  end
-end
-
-defimpl DeleteVote, for: Bullsource.Votes.ProofVoteDown do
-  import Ecto.Query, only: [from: 2]
-  def delete_vote(proof_vote_down,params) do
-        query = from p in Bullsource.Votes.ProofVoteDown,
-                where: p.proof_id == ^params.id and p.user_id == ^params.user_id
-        case Bullsource.Repo.one(query) do
-          nil   -> {:ok, nil}
-          proof -> Bullsource.Repo.delete(proof)
-        end
-  end
-end
 
 defimpl DeleteVote, for: Bullsource.Votes.ReferenceVoteUp do
   import Ecto.Query, only: [from: 2]

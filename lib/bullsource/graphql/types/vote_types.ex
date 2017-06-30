@@ -18,22 +18,6 @@ defmodule Bullsource.GraphQL.Types.VoteTypes do
 
 
 
-  @desc "ProofVoteUp"
-  object :proof_vote_up do
-    field :id, :integer
-    field :proof, :proof, resolve: assoc(:proof)
-    field :user, :user, resolve: assoc(:user)
-  end
-
-  @desc "ProofVoteDown"
-  object :proof_vote_down do
-    field :id, :integer
-    field :prook, :post, resolve: assoc(:proof)
-    field :user, :user, resolve: assoc(:user)
-  end
-
-
-
   @desc "ReferenceVoteUp"
   object :reference_vote_up do
     field :id, :integer
@@ -50,14 +34,10 @@ defmodule Bullsource.GraphQL.Types.VoteTypes do
 
 
 
-
-
   @desc "Vote type"
   enum :vote_type do
     value :up_vote_post
     value :down_vote_post
-    value :up_vote_proof
-    value :down_vote_proof
     value :up_vote_reference
     value :down_vote_reference
   end

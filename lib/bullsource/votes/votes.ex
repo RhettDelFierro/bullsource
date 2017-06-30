@@ -1,14 +1,12 @@
 defmodule Bullsource.Votes do
   import Ecto.{Changeset, Query}
-  alias Bullsource.Discussion.{Article, Comment, Post, Proof, Reference, Headline, Topic}
-  alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ProofVoteUp,
-                            ProofVoteDown, ReferenceVoteUp, ReferenceVoteDown}
+  alias Bullsource.Discussion.{Post, Reference, Headline, Topic}
+  alias Bullsource.Votes.{PostVoteUp, PostVoteDown, ReferenceVoteUp, ReferenceVoteDown}
   alias Bullsource.Repo
 
 
 
   @vote_type_opposites [up_vote_post: %PostVoteDown{},   down_vote_post: %PostVoteUp{},
-                        up_vote_proof: %ProofVoteDown{}, down_vote_proof: %ProofVoteUp{},
                         up_vote_reference:   %ReferenceVoteDown{}, down_vote_reference: %ReferenceVoteUp{}
                        ]
 
@@ -30,10 +28,6 @@ defmodule Bullsource.Votes do
     do: down_vote_post_changeset(%PostVoteDown{},%{post_id: params.id, user_id: params.user_id})
   def up_vote_post(params),
     do: up_vote_post_changeset(%PostVoteUp{},%{post_id: params.id, user_id: params.user_id})
-  def down_vote_proof(params),
-    do: down_vote_proof_changeset(%ProofVoteDown{},%{proof_id: params.id, user_id: params.user_id})
-  def up_vote_proof(params),
-    do: up_vote_proof_changeset(%ProofVoteUp{},%{proof_id: params.id, user_id: params.user_id})
   def down_vote_reference(params),
     do: down_vote_reference_changeset(%ReferenceVoteDown{},%{reference_id: params.id, user_id: params.user_id})
   def up_vote_reference(params),
@@ -59,24 +53,6 @@ defmodule Bullsource.Votes do
     |> unique_constraint(:post_id, name: :post_votes_up_index)
     |> assoc_constraint(:user)
     |> assoc_constraint(:post)
-  end
-
-  defp down_vote_proof_changeset(struct,params \\%{}) do
-    struct
-    |> cast(params, [:proof_id, :user_id])
-    |> validate_required([:proof_id, :user_id])
-    |> unique_constraint(:proof_id, name: :proof_votes_down_index)
-    |> assoc_constraint(:user)
-    |> assoc_constraint(:proof)
-  end
-
-  defp up_vote_proof_changeset(struct,params \\%{}) do
-    struct
-    |> cast(params, [:proof_id, :user_id])
-    |> validate_required([:proof_id, :user_id])
-    |> unique_constraint(:proof_id, name: :proof_votes_up_index)
-    |> assoc_constraint(:user)
-    |> assoc_constraint(:proof)
   end
 
   defp down_vote_reference_changeset(struct,params \\%{}) do
