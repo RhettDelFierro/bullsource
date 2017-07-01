@@ -9,6 +9,7 @@ defmodule Bullsource.GraphQL.PostResolver do
     do: {:ok, list_posts_in_headline(%{title: title, network: network})}
 
   def create(%{headline_id: headline_id, post: post}, %{context: %{current_user: current_user}}) do
+     IO.puts "create: #{post}"
      post_params = Map.put_new(post, :headline_id, headline_id)
      case create_post(post_params, current_user) do
        {:ok, post} -> {:ok, post}

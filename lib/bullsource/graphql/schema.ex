@@ -150,7 +150,7 @@ defmodule Bullsource.GraphQL.Schema do
     @desc "Edit a post"
     field :edit_post, :post do
       arg :post_id, non_null(:integer)
-      arg :body, :string
+      arg :body, :input_body
       middleware Bullsource.Web.Authentication
       resolve &Bullsource.GraphQL.PostResolver.edit/2
       middleware Bullsource.Web.HandleError

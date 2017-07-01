@@ -2,12 +2,11 @@ defmodule Bullsource.Discussion.Post do
   use Ecto.Schema
 
   alias Bullsource.Accounts.User
-  alias Bullsource.Discussion.Headline
-  alias Bullsource.Discussion.Reference
+  alias Bullsource.Discussion.{Body,Headline.Reference}
   alias Bullsource.Votes.{PostVoteUp, PostVoteDown}
 
   schema "posts" do
-    field :intro, :string
+    embeds_one :body, Body
 
     belongs_to :headline, Headline
     belongs_to :user, User

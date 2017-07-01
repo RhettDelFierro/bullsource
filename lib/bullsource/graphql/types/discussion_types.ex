@@ -26,7 +26,7 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
   @desc "Posts belong to Headliness and Users. Has many Proofs and References"
   object :post do
     field :id, :integer
-    field :body, :string
+    field :body, :input_body
     field :headline_id, :integer
     field :user_id, :integer
     field :referencess, list_of(:reference), resolve: assoc(:references)
@@ -49,13 +49,25 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
 
   @desc "An input object for :post"
   input_object :input_post do
-    field :body, :string
+    field :body, :input_body
     field :references, list_of(:input_reference)
+  end
+
+  @desc "An input object for a post's body"
+  input_object :input_body do
+    field :blocks
+    field :entity_map
   end
 
   @desc "An input object for :reference"
   input_object :input_reference do
     field :doi, non_null(:string)
+  end
+
+  def key (key_name) do
+    fn(thing,_,_) ->
+      {:ok, Map.get(thing, key_name)}
+    end
   end
 
 end
