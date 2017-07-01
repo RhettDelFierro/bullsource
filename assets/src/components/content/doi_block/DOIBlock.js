@@ -1,7 +1,6 @@
 import React from "react";
 import {graphql} from "react-apollo";
 import styles from "./style.css";
-import {EditorState,Modifier} from 'draft-js';
 
 import checkDoiQuery from "../../../queries/checkDOI";
 
@@ -19,27 +18,15 @@ class DOIBlock extends React.Component {
             date: '',
             authors: []
         };
-        this.text1Focus = () => this.refs.text1.focus();
-        this.text2Focus = () => this.refs.text2.focus();
         this.focus = () => this.refs.proof.focus();
     }
 
     componentWillReceiveProps(nextProps) {
         const {error,doi} = nextProps.data;
-        const {blockProps} = this.props;
-        const {onDOIError} = blockProps;
+        const {onCheckInvalidDOI} = this.props.editor.props;
         if (error) {
             let errorMessage = error.message.split(':')[2];
-            onDOIError(errorMessage);
-            const {block, blockProps} = this.props;
-            // const data = block.getData();
-            const {onChange, getEditorState} = blockProps;
-            let currentEditorState = getEditorState();
-            let currentContentState = currentEditorState.getCurrentContent();
-
-            let newContentState = Modifier.applyEntity(currentContentState, currentEditorState.getSelection(), null);
-            return onChange(EditorState.push(currentEditorState, newContentState, 'apply-entity'));
-
+            onCheckInvalidDOI(errorMessage);
         } else if (doi) {
             const {url, title, indexed, containerTitle, author} = doi[0];
             this.setState({
@@ -57,10 +44,7 @@ class DOIBlock extends React.Component {
         //might have to set new content blocks here.
 
         const {block, blockProps} = this.props;
-        // const data = block.getData();
-        // const {onChange, getEditorState,setProof} = blockProps;
         setProof(this.state);
-        //should also tell the FormEditor component to re render the content block.
     }
 
     renderForm() {
@@ -86,15 +70,11 @@ class DOIBlock extends React.Component {
         return this.renderForm()
     }
 
-
 }
 
 export default graphql(checkDoiQuery, {
     options: (props) => {
-        const entity = props.contentState.getEntity(
-            props.block.getEntityAt(0)
-        );
-        const {doi} = entity.getData();
+        const doi = props.editor.props.doi[0];
         return {variables: {doi}}
     }
 })(DOIBlock);

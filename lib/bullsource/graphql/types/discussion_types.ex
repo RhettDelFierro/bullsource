@@ -43,8 +43,6 @@ defmodule Bullsource.GraphQL.Types.DiscussionTypes do
 
 
 
-
-
 #######INPUT OBJECTS########
 
   @desc "An input object for :post"

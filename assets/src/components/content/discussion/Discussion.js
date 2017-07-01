@@ -36,19 +36,3 @@ export default graphql(fetchFullDiscussion, {
         return {variables: {title, network}}
     }
 })(withRouter(Discussion));
-
-// export default graphql(fetchPostsQuery, {
-//     options: (props) => {
-//         const {headline_title, network} = props.match.params;
-//         const title = headline_title.split("_").join(' ');
-//
-//         return {variables: {title, network}, name: 'thread'}
-//     }
-// })(graphql(fetchOneNewsTweetQuery, {
-//         options: (props) => {
-//             const {headline_title} = props.match.params;
-//             const title = headline_title.split("_").join(' ');
-//
-//             return {variables: {title}, name: 'newsTweet'}
-//         }
-//     }))(withRouter(Discussion));
