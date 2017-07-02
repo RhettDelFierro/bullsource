@@ -45,13 +45,8 @@ class FormEditor extends Component {
 
     confirmDOI(e){
         e.preventDefault();
-        // this.setState({
-        //     dois: [this.state.doi, ...this.state.dois],
-        //     doi: '',
-        //     showDOI: false
-        // });
 
-        const isCode = this.state.state.blocks.some(block => block.type == 'code');
+     //const isCode = this.state.state.blocks.some(block => block.type == 'code');
 
         let state = this.state.state
             .transform()
@@ -78,7 +73,6 @@ class FormEditor extends Component {
     onChange = (state) => this.setState({state});
 
     render = () => {
-        console.log(Raw.serialize(this.state.state));
         let doiInput;
         if (this.state.showDOI) {
             //the doi "form" that gets toggled if this.state.showDOIInput is true:
