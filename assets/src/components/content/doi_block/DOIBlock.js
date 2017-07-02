@@ -10,64 +10,68 @@ class DOIBlock extends React.Component {
         super(props);
 
         this.state = {
-            article: '',
-            comments: '',
-            link: '',
+            url: '',
             title: '',
             source: '',
             date: '',
             authors: []
         };
-        this.focus = () => this.refs.proof.focus();
     }
 
     componentWillReceiveProps(nextProps) {
-        const {error,doi} = nextProps.data;
+        // const {error, doi} = nextProps.data;
         const {onCheckInvalidDOI} = this.props.editor.props;
-        if (error) {
+        if (nextProps.data.error) {
+            const {error} = nextProps.data;
             let errorMessage = error.message.split(':')[2];
             onCheckInvalidDOI(errorMessage);
-        } else if (doi) {
+        } else if (nextProps.data.doi) {
+            const {doi} = nextProps.data;
             const {url, title, indexed, containerTitle, author} = doi[0];
-            this.setState({
-                link: url,
+            const authors = author.map(name => `${name.given} ${name.family}`);
+            const {node, editor} = this.props;
+            // console.log(editor);
+            const data = {
+                url,
                 title: title[0],
                 source: containerTitle[0],
                 date: `${indexed.dateParts[0][1]}/${indexed.dateParts[0][2]}/${indexed.dateParts[0][0]}`,
-                authors: author.map(name => `${name.given} ${name.family}`)
-            })
+                authors: authors
+            };
+
+            const properties = {data};
+            // editor.props.setProofs({data});
+
+            const next = editor
+                .getState()
+                .transform()
+                .setNodeByKey(node.key, properties)
+                .apply();
+
+            editor.onChange(next)
         }
     }
 
-    onSubmit(e) {
-        e.preventDefault();
-        //might have to set new content blocks here.
-
-        const {block, blockProps} = this.props;
-        setProof(this.state);
-    }
-
-    renderForm() {
-        if(this.props.data.loading){
-            return <div>Checking for DOI</div>
-        }
-        else {
-            return this.props.data.error ? <div/> :
-               <div className={styles['work-info']} onClick={this.focus} ref="proof">
-                    <form>
-                        <a href={this.state.link}>{this.state.title}</a>
-                        <p>{this.state.source}</p>
-                        <p>{this.state.date}</p>
-                        <p>{this.state.authors.map(author => author + ', ')}</p>
-                        <button onClick={this.onSubmit.bind(this)}>Proof</button>
-                    </form>
-               </div>
-        }
-
+    renderWork() {
+        const data = this.props.node.data;
+        const authors = this.props.data.error ? '' : data.get('authors').map(author => author + ', ');
+        return this.props.data.error ? <div/> :
+            <div className={styles['work-info']}>
+                <a href={data.get('url')}>{data.get('title')}</a>
+                <p>{data.get('source')}</p>
+                <p>{data.get('date')}</p>
+                <p>{authors}</p>
+            </div>
     }
 
     render() {
-        return this.renderForm()
+        return (
+            <div {...this.props.attributes}>
+                {this.props.data.loading ?
+                    <div>Checking for DOI</div>
+                    : this.renderWork()}
+            </div>
+        )
     }
 
 }

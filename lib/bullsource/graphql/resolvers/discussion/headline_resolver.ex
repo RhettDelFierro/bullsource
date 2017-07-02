@@ -6,6 +6,7 @@ defmodule Bullsource.GraphQL.HeadlineResolver do
 
 # should give the topic id (the category id) and get headlines associated with it.
   def list(_args, _context) do
+  IO.puts "we're starting'"
     {:ok, Repo.all(Headline)}
   end
 

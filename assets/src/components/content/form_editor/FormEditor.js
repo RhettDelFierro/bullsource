@@ -1,37 +1,39 @@
 import React, {Component} from "react";
-import {Editor, Mark} from "slate";
+import {Editor, Raw} from "slate";
+import {withApollo, graphql} from 'react-apollo'
 import keycode from "keycode";
-import injector from 'react-frame-aware-selection-plugin';
-
 import {initialState} from "../../../helpers/slate";
-
-
 import styles from "./style.css";
-
+import checkDoiQuery from "../../../queries/checkDOI";
 import DOIBlock from "../doi_block/DOIBlock";
+
+
+const DEFAULT_NODE = 'paragraph';
+
+const schema = {
+    nodes: {
+        doiBlock: DOIBlock
+    },
+    marks: {
+        bold: props => <strong>{props.children}</strong>,
+        code: props => <code>{props.children}</code>,
+        italic: props => <em>{props.children}</em>,
+        strikethrough: props => <del>{props.children}</del>,
+        underline: props => <u>{props.children}</u>,
+    }
+};
 
 class FormEditor extends Component {
     constructor(props){
         super(props);
         this.state = {
             state: initialState,
-            schema: {
-                nodes: {
-                    doiBlock: DOIBlock
-                },
-                marks: {
-                    bold: props => <strong>{props.children}</strong>,
-                    code: props => <code>{props.children}</code>,
-                    italic: props => <em>{props.children}</em>,
-                    strikethrough: props => <del>{props.children}</del>,
-                    underline: props => <u>{props.children}</u>,
-                }
-            },
             showDOI: false,
             doi: '',
             dois: [],
             doiErrorMessage: ''
         };
+        this.focus = () => this.refs.editor.focus();
 
     }
 
@@ -43,11 +45,11 @@ class FormEditor extends Component {
 
     confirmDOI(e){
         e.preventDefault();
-        this.setState({
-            dois: [this.state.doi, ...this.state.dois],
-            doi: '',
-            showDOI: false
-        });
+        // this.setState({
+        //     dois: [this.state.doi, ...this.state.dois],
+        //     doi: '',
+        //     showDOI: false
+        // });
 
         const isCode = this.state.state.blocks.some(block => block.type == 'code');
 
@@ -55,7 +57,13 @@ class FormEditor extends Component {
             .transform()
             .setBlock('doiBlock')
             .apply();
-        this.setState({state});
+
+        this.setState({
+            state,
+            dois: [this.state.doi, ...this.state.dois],
+            doi: '',
+            showDOI: false
+        });
     };
 
     onCheckInvalidDOI = (errorMessage) => {
@@ -70,6 +78,7 @@ class FormEditor extends Component {
     onChange = (state) => this.setState({state});
 
     render = () => {
+        console.log(Raw.serialize(this.state.state));
         let doiInput;
         if (this.state.showDOI) {
             //the doi "form" that gets toggled if this.state.showDOIInput is true:
@@ -93,7 +102,7 @@ class FormEditor extends Component {
                 <button onClick={this.onToggleDOI.bind(this)}>Show DOI</button>
                 <Editor
                     plugins={plugins}
-                    schema={this.state.schema}
+                    schema={schema}
                     state={this.state.state}
                     onChange={this.onChange}
                     doi={this.state.dois}

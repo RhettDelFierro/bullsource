@@ -1,4 +1,4 @@
-import {Raw} from 'slate';
+import {Raw} from "slate";
 export const initialState = Raw.deserialize({
     nodes: [
         {
@@ -12,4 +12,4 @@ export const initialState = Raw.deserialize({
             ]
         }
     ]
-}, { terse: true })
+}, {terse: true});
