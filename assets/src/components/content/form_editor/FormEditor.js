@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Map} from 'immutable';
 import {Editor,EditorState,DefaultDraftBlockRenderMap, RichUtils} from 'draft-js';
 import styles from "./style.css";
-import {DOI_TYPE, REFERENCE_TYPE, getBlockRendererFn, resetBlockType} from '../../../helpers/forms';
+import {DOI_TYPE, REFERENCE_TYPE, getBlockRendererFn, resetBlockType, getDefaultBlockData} from '../../../helpers/forms';
 import DOIBlock from "../doi_block/DOIBlock";
 
 class FormEditor extends Component {
@@ -44,18 +44,28 @@ class FormEditor extends Component {
         return false;
     }
 
+    blockStyleFn(block) {
+        switch (block.getType()) {
+            case DOI_TYPE:
+                return 'block block-todo';
+            default:
+                return 'block';
+        }
+    }
 
 
     render() {
         return (
             <div className={styles['form-container']}>
-                <Editor
-                    editorState={this.state.editorState}
+                <Editor editorState={this.state.editorState}
+                    ref="editor"
+                    placeholder="Write here. Type [ ] to add a todo ..."
                     onChange={this.onChange}
+                    blockStyleFn={this.blockStyleFn}
                     blockRenderMap={this.blockRenderMap}
                     blockRendererFn={this.blockRendererFn}
                     handleBeforeInput={this.handleBeforeInput}
-                />
+                    handleKeyCommand={this.handleKeyCommand} />
             </div>
         )
     }

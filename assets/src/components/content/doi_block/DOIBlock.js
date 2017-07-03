@@ -1,24 +1,21 @@
 import React from "react";
-import {graphql} from "react-apollo";
-import {EditorBlock, EditorState} from 'draft-js';
-import {updateDataOfBlock} from "../../../helpers/forms"
+import {Editor, EditorBlock} from "draft-js";
+import {Map} from 'immutable';
+import {updateDataOfBlock} from "../../../helpers/forms";
 import styles from "./style.css";
 
-import checkDoiQuery from "../../../queries/checkDOI";
-
 class DOIBlock extends React.Component {
-    constructor(props){
-      super(props);
-      this.onVerifyDOI = this.onVerifyDOI;
+    constructor(props) {
+        super(props);
+        this.onVerifyDOI = this.onVerifyDOI.bind(this);
     }
 
-    onVerifyDOI(){
-        e.preventDefault();
+    onVerifyDOI() {
 
-        const { block, blockProps } = this.props;
+        const {block, blockProps} = this.props;
 
         // This is the reason we needed a higher-order function for blockRendererFn
-        const { onChange, getEditorState } = blockProps;
+        const {onChange, getEditorState} = blockProps;
         const text = block.getText();
         const data = block.getData();
         const newData = data.set('doi', text);
@@ -40,21 +37,18 @@ class DOIBlock extends React.Component {
     }
 
     render() {
-        console.log(this.props);
+        console.log('DOI BLOCK', this.props);
+        //maybe const {blockRendererFn, ....rest} = this.props
+        //<EditorBlock {...rest} blockRendererFn={this.blockrendererFn}
         return (
-            <div>
-              <EditorBlock {...this.props} />
+            <div className={styles['work-info']}>
+                <div>BLAH!</div>
                 <button onClick={this.onVerifyDOI}>Verify DOI</button>
+                <EditorBlock {...this.props} />
             </div>
         )
     }
 
 }
 
-export default graphql(checkDoiQuery, {
-    options: (props) => {
-        const doi = props.data.doi;
-        return {variables: {doi}}
-    },
-    name: 'checkDOIQuery'
-})(DOIBlock);
+export default DOIBlock;

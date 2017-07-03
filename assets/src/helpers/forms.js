@@ -1,4 +1,5 @@
 import {EditorState} from "draft-js";
+import {Map} from 'immutable';
 export const DOI_TYPE = 'doi_block';
 export const REFERENCE_TYPE = 'reference_block';
 
@@ -12,18 +13,13 @@ export const REFERENCE_TYPE = 'reference_block';
  * Returns
  *   ContentBlock -> Object
  * */
-export const getBlockRendererFn =
-    (getEditorState, onChange, component) => (block) => {
+export const getBlockRendererFn = (getEditorState, onChange, component) => (block) => {
         const type = block.getType();
+        const props = { getEditorState, onChange };
+        const renderBlock = {component,props};
         switch (type) {
-            case [DOI_TYPE]:
-                return {
-                    component: component,
-                    props: {
-                        getEditorState,
-                        onChange
-                    }
-                };
+            case [DOI_TYPE]:       return renderBlock;
+            case [REFERENCE_TYPE]: return renderBlock;
             default:
                 return null;
         }
@@ -84,7 +80,7 @@ export const getDefaultBlockData = (blockType, initialData = {}) => {
  *
  *
  **/
-export const resetBlockType = (editorState, newType = 'unstyled') => {
+export const resetBlockType = (editorState, newType = Block.UNSTYLED) => {
     const contentState = editorState.getCurrentContent();
     const selectionState = editorState.getSelection();
     const key = selectionState.getStartKey();
