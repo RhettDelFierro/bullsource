@@ -1,58 +1,33 @@
 import React from "react";
 import {graphql} from "react-apollo";
+import {EditorBlock, EditorState} from 'draft-js';
+import {updateDataOfBlock} from "../../../helpers/forms"
 import styles from "./style.css";
 
 import checkDoiQuery from "../../../queries/checkDOI";
 
-
 class DOIBlock extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            url: '',
-            title: '',
-            source: '',
-            date: '',
-            authors: []
-        };
+    constructor(props){
+      super(props);
+      this.onVerifyDOI = this.onVerifyDOI;
     }
 
-    componentWillReceiveProps(nextProps) {
-        // const {error, doi} = nextProps.data;
-        const {onCheckInvalidDOI} = this.props.editor.props;
-        if (nextProps.data.error) {
-            const {error} = nextProps.data;
-            let errorMessage = error.message.split(':')[2];
-            onCheckInvalidDOI(errorMessage);
-        } else if (nextProps.data.doi) {
-            const {doi} = nextProps.data;
-            const {url, title, indexed, containerTitle, author} = doi[0];
-            const authors = author.map(name => `${name.given} ${name.family}`);
-            const {node, editor} = this.props;
-            // console.log(editor);
-            const data = {
-                url,
-                title: title[0],
-                source: containerTitle[0],
-                date: `${indexed.dateParts[0][1]}/${indexed.dateParts[0][2]}/${indexed.dateParts[0][0]}`,
-                authors: authors
-            };
+    onVerifyDOI(){
+        e.preventDefault();
 
-            const properties = {data};
-            // editor.props.setProofs({data});
+        const { block, blockProps } = this.props;
 
-            const next = editor
-                .getState()
-                .transform()
-                .setNodeByKey(node.key, properties)
-                .apply();
-
-            editor.onChange(next)
-        }
+        // This is the reason we needed a higher-order function for blockRendererFn
+        const { onChange, getEditorState } = blockProps;
+        const text = block.getText();
+        const data = block.getData();
+        const newData = data.set('doi', text);
+        onChange(updateDataOfBlock(getEditorState(), block, newData));
     }
+
 
     renderWork() {
+
         const data = this.props.node.data;
         const authors = this.props.data.error ? '' : data.get('authors').map(author => author + ', ');
         return this.props.data.error ? <div/> :
@@ -65,11 +40,11 @@ class DOIBlock extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         return (
-            <div {...this.props.attributes}>
-                {this.props.data.loading ?
-                    <div>Checking for DOI</div>
-                    : this.renderWork()}
+            <div>
+              <EditorBlock {...this.props} />
+                <button onClick={this.onVerifyDOI}>Verify DOI</button>
             </div>
         )
     }
@@ -78,7 +53,8 @@ class DOIBlock extends React.Component {
 
 export default graphql(checkDoiQuery, {
     options: (props) => {
-        const doi = props.editor.props.doi[0];
+        const doi = props.data.doi;
         return {variables: {doi}}
-    }
+    },
+    name: 'checkDOIQuery'
 })(DOIBlock);

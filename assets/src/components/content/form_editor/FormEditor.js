@@ -1,134 +1,63 @@
 import React, {Component} from "react";
-import {Editor, Raw} from "slate";
-import {withApollo, graphql} from 'react-apollo'
-import keycode from "keycode";
-import {initialState} from "../../../helpers/slate";
+import {Map} from 'immutable';
+import {Editor,EditorState,DefaultDraftBlockRenderMap, RichUtils} from 'draft-js';
 import styles from "./style.css";
-import checkDoiQuery from "../../../queries/checkDOI";
+import {DOI_TYPE, REFERENCE_TYPE, getBlockRendererFn, resetBlockType} from '../../../helpers/forms';
 import DOIBlock from "../doi_block/DOIBlock";
-
-
-const DEFAULT_NODE = 'paragraph';
-
-const schema = {
-    nodes: {
-        doiBlock: DOIBlock
-    },
-    marks: {
-        bold: props => <strong>{props.children}</strong>,
-        code: props => <code>{props.children}</code>,
-        italic: props => <em>{props.children}</em>,
-        strikethrough: props => <del>{props.children}</del>,
-        underline: props => <u>{props.children}</u>,
-    }
-};
 
 class FormEditor extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            state: initialState,
-            showDOI: false,
-            doi: '',
-            dois: [],
-            doiErrorMessage: ''
-        };
-        this.focus = () => this.refs.editor.focus();
+        this.state = {editorState: EditorState.createEmpty()};
+        this.onChange = (editorState) => this.setState({editorState});
+        this.getEditorState = () => this.state.editorState;
 
+        this.blockRenderMap = Map({
+            [DOI_TYPE]: {element: 'div'},
+            [REFERENCE_TYPE]: {element: 'div'}
+        }).merge(DefaultDraftBlockRenderMap);
+
+        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange, DOIBlock);
+        this.handleBeforeInput = this.handleBeforeInput.bind(this);
     }
 
-    onDOIChange = (e) => this.setState({doi: e.target.value});
-
-    onToggleDOI() {
-        this.setState({showDOI: true})
+    componentDidMount(){
+        this.refs.editor.focus();
     }
 
-    confirmDOI(e){
-        e.preventDefault();
-
-     //const isCode = this.state.state.blocks.some(block => block.type == 'code');
-
-        let state = this.state.state
-            .transform()
-            .setBlock('doiBlock')
-            .apply();
-
-        this.setState({
-            state,
-            dois: [this.state.doi, ...this.state.dois],
-            doi: '',
-            showDOI: false
-        });
-    };
-
-    onCheckInvalidDOI = (errorMessage) => {
-        let [_a, ...rest] = this.state.dois;
-
-        this.setState({
-            dois: rest,
-            doiErrorMessage: errorMessage
-        })
-    };
-
-    onChange = (state) => this.setState({state});
-
-    render = () => {
-        let doiInput;
-        if (this.state.showDOI) {
-            //the doi "form" that gets toggled if this.state.showDOIInput is true:
-            doiInput =
-                <div className={styles['doi-input-container']}>
-                    <input
-                        onChange={this.onDOIChange}
-                        ref="doi"
-                        className={styles['doi-input']}
-                        type="text"
-                        value={this.state.doi}
-                    />
-                    <button onClick={(event) => this.confirmDOI(event)}>
-                        Confirm
-                    </button>
-                </div>;
+    handleBeforeInput(str) {
+        if (str !== ']') {
+            return false;
         }
+        const { editorState } = this.state;
+        /* Get the selection */
+        const selection = editorState.getSelection();
+
+        /* Get the current block */
+        const currentBlock = editorState.getCurrentContent().getBlockForKey(selection.getStartKey());
+        const blockType = currentBlock.getType();
+        const blockLength = currentBlock.getLength();
+        if (blockLength === 1 && currentBlock.getText() === '[') {
+            this.onChange(resetBlockType(editorState, blockType !== DOI_TYPE ? DOI_TYPE : 'unstyled'));
+            return true;
+        }
+        return false;
+    }
+
+
+
+    render() {
         return (
             <div className={styles['form-container']}>
-                {doiInput}
-                <button onClick={this.onToggleDOI.bind(this)}>Show DOI</button>
                 <Editor
-                    plugins={plugins}
-                    schema={schema}
-                    state={this.state.state}
+                    editorState={this.state.editorState}
                     onChange={this.onChange}
-                    doi={this.state.dois}
-                    onCheckInvalidDOI={this.onCheckInvalidDOI}
+                    blockRenderMap={this.blockRenderMap}
+                    blockRendererFn={this.blockRendererFn}
+                    handleBeforeInput={this.handleBeforeInput}
                 />
             </div>
         )
-    }
-}
-
-// Create an array of plugins.
-const plugins = [
-    MarkHotkey({ key: 'b', type: 'bold' }),
-    MarkHotkey({ key: 'c', type: 'code', isAltKey: true }),
-    MarkHotkey({ key: 'i', type: 'italic' }),
-    MarkHotkey({ key: 'd', type: 'strikethrough' }),
-    MarkHotkey({ key: 'u', type: 'underline' })
-];
-
-function MarkHotkey(options) {
-    // Grab our options from the ones passed in.
-    const {type, key, isAltKey = false} = options;
-    return {
-        onKeyDown(event, data, state) {
-            // Change the comparison to use the key name.
-            if (!event.metaKey || keycode(event.which) != key || event.altKey != isAltKey) return;
-            event.preventDefault();
-            return state
-                .transform()
-                .toggleMark(type)
-                .apply()
-        }
     }
 }
 

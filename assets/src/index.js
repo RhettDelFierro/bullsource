@@ -13,8 +13,8 @@ import SignIn from "./components/side/signin/SignIn";
 import SignUp from "./components/side/signup/SignUp";
 import DraftJSTest from "./test"
 
-
 import styles from "./style.css";
+import 'draft-js/dist/Draft.css'
 
 //create new instance of ApolloClient for the ApolloProvider
 const networkInterface = createNetworkInterface({

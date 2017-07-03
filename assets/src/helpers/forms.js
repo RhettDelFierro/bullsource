@@ -1,5 +1,6 @@
 import {EditorState} from "draft-js";
-const DOI_BLOCK = 'doi_block';
+export const DOI_TYPE = 'doi_block';
+export const REFERENCE_TYPE = 'reference_block';
 
 
 /* The block renderer function applied to each block in draft-js editor component
@@ -12,17 +13,15 @@ const DOI_BLOCK = 'doi_block';
  *   ContentBlock -> Object
  * */
 export const getBlockRendererFn =
-    (getEditorState, onChange, setProof, onDOIError, component) => (block) => {
+    (getEditorState, onChange, component) => (block) => {
         const type = block.getType();
         switch (type) {
-            case 'atomic':
+            case [DOI_TYPE]:
                 return {
                     component: component,
                     props: {
                         getEditorState,
-                        onChange,
-                        setProof,
-                        onDOIError
+                        onChange
                     }
                 };
             default:
@@ -61,8 +60,18 @@ export const updateDataOfBlock = (editorState, block, newData) => {
  * */
 export const getDefaultBlockData = (blockType, initialData = {}) => {
     switch (blockType) {
-        case DOI_BLOCK:
-            return {doi: ''};
+        case DOI_TYPE:
+            return {
+                doi: '',
+            };
+        case REFERENCE_TYPE:
+            return {
+                url: '',
+                title: '',
+                source: '',
+                date: '',
+                authors: ''
+            };
         default:
             return initialData;
     }
