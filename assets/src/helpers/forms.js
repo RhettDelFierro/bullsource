@@ -1,3 +1,5 @@
+import DOIBlock from '../components/content/doi_block/DOIBlock'
+import ReferenceBlock from '../components/content/reference_block/ReferenceBlock'
 import {EditorState} from "draft-js";
 import {Map} from 'immutable';
 export const DOI_TYPE = 'doi_block';
@@ -13,19 +15,26 @@ export const REFERENCE_TYPE = 'reference_block';
  * Returns
  *   ContentBlock -> Object
  * */
-export const getBlockRendererFn = (getEditorState, onChange, component) => (block) => {
+export const getBlockRendererFn = (getEditorState, onChange) => (block) => {
         const type = block.getType();
         const props = { getEditorState, onChange };
-        const renderBlock = {component,props};
-
         switch (type) {
-            case DOI_TYPE:       return renderBlock;
-            case REFERENCE_TYPE: return renderBlock;
+            case DOI_TYPE:
+                return {
+                    component: DOIBlock,
+                    props
+                };
+            case REFERENCE_TYPE:
+                return {
+                    component: ReferenceBlock,
+                    props,
+                    editable: false
+                };
             default:
                 return null;
         }
     };
-/* Updates the current state of DOI content block when the user confirms the doi fetch from query.
+/* Updates the current state of DOI content.
  *
  * Parameters
  *   editorState    :: EditorState  -/>  snapshot of the state of the editor.
@@ -44,7 +53,20 @@ export const updateDataOfBlock = (editorState, block, newData) => {
         blockMap: contentState.getBlockMap().set(block.getKey(), newBlock),
     });
     return EditorState.push(editorState, newContentState, 'change-block-type');
-};
+}; //I want to push to the reference block, is there any way to do that?
+
+export const updateTypeOfBlock = (editorState, block, type, newData) => {
+    const contentState = editorState.getCurrentContent();
+    const newBlock = block.merge({
+        type,
+        data: newData
+    });
+    const newContentState = contentState.merge({
+        blockMap: contentState.getBlockMap().set(block.getKey(), newBlock),
+    });
+    return EditorState.push(editorState, newContentState, 'change-block-type');
+}; //I want to push to the reference block, is there any way to do that?
+
 
 /* Returns the metadata for a block type. Only have doi right now.
  *
@@ -63,6 +85,7 @@ export const getDefaultBlockData = (blockType, initialData = {}) => {
             };
         case REFERENCE_TYPE:
             return {
+                doi: '',
                 url: '',
                 title: '',
                 source: '',

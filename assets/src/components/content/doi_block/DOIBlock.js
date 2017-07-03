@@ -1,8 +1,8 @@
 import React from "react";
 import {Editor, EditorBlock} from "draft-js";
-import {withApollo} from 'react-apollo'
 import {Map} from 'immutable';
-import {updateDataOfBlock} from "../../../helpers/forms";
+import {REFERENCE_TYPE,updateTypeOfBlock,getBlockRendererFn} from "../../../helpers/forms";
+import ReferenceBlock from '../reference_block/ReferenceBlock';
 import styles from "./style.css";
 
 class DOIBlock extends React.Component {
@@ -12,17 +12,14 @@ class DOIBlock extends React.Component {
     }
 
     onVerifyDOI() {
-
         const {block, blockProps} = this.props;
-
         // This is the reason we needed a higher-order function for blockRendererFn
         const {onChange, getEditorState} = blockProps;
         const text = block.getText();
         const data = block.getData();
         const newData = data.set('doi', text);
-        onChange(updateDataOfBlock(getEditorState(), block, newData));
+        onChange(updateTypeOfBlock(getEditorState(), block, REFERENCE_TYPE, newData));
     }
-
 
     renderWork() {
         const data = this.props.node.data;
@@ -49,4 +46,4 @@ class DOIBlock extends React.Component {
 
 }
 
-export default withApollo(DOIBlock);
+export default DOIBlock;

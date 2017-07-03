@@ -17,7 +17,7 @@ class FormEditor extends Component {
             [REFERENCE_TYPE]: {element: 'div'}
         }).merge(DefaultDraftBlockRenderMap);
 
-        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange, DOIBlock);
+        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange);
         this.handleBeforeInput = this.handleBeforeInput.bind(this);
     }
 
@@ -55,7 +55,7 @@ class FormEditor extends Component {
             <div className={styles['form-container']}>
                 <Editor editorState={this.state.editorState}
                     ref="editor"
-                    placeholder="Write here. Type [ ] to add a todo ..."
+                    placeholder="Write here. Type [ ] to check for a doi..."
                     onChange={this.onChange}
                     blockStyleFn={this.blockStyleFn}
                     blockRenderMap={this.blockRenderMap}
