@@ -1,5 +1,6 @@
 import React from "react";
 import {Editor, EditorBlock} from "draft-js";
+import {withApollo} from 'react-apollo'
 import {Map} from 'immutable';
 import {updateDataOfBlock} from "../../../helpers/forms";
 import styles from "./style.css";
@@ -24,7 +25,6 @@ class DOIBlock extends React.Component {
 
 
     renderWork() {
-
         const data = this.props.node.data;
         const authors = this.props.data.error ? '' : data.get('authors').map(author => author + ', ');
         return this.props.data.error ? <div/> :
@@ -37,18 +37,16 @@ class DOIBlock extends React.Component {
     }
 
     render() {
-        console.log('DOI BLOCK', this.props);
         //maybe const {blockRendererFn, ....rest} = this.props
         //<EditorBlock {...rest} blockRendererFn={this.blockrendererFn}
         return (
             <div className={styles['work-info']}>
-                <div>BLAH!</div>
-                <button onClick={this.onVerifyDOI}>Verify DOI</button>
                 <EditorBlock {...this.props} />
+                <button onClick={this.onVerifyDOI}>Verify DOI</button>
             </div>
         )
     }
 
 }
 
-export default DOIBlock;
+export default withApollo(DOIBlock);

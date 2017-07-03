@@ -17,9 +17,10 @@ export const getBlockRendererFn = (getEditorState, onChange, component) => (bloc
         const type = block.getType();
         const props = { getEditorState, onChange };
         const renderBlock = {component,props};
+
         switch (type) {
-            case [DOI_TYPE]:       return renderBlock;
-            case [REFERENCE_TYPE]: return renderBlock;
+            case DOI_TYPE:       return renderBlock;
+            case REFERENCE_TYPE: return renderBlock;
             default:
                 return null;
         }

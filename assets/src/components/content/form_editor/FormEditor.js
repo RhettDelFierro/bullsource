@@ -21,10 +21,6 @@ class FormEditor extends Component {
         this.handleBeforeInput = this.handleBeforeInput.bind(this);
     }
 
-    componentDidMount(){
-        this.refs.editor.focus();
-    }
-
     handleBeforeInput(str) {
         if (str !== ']') {
             return false;
