@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Map} from 'immutable';
-import {Editor,EditorState,DefaultDraftBlockRenderMap, RichUtils} from 'draft-js';
+import {Editor,EditorState,DefaultDraftBlockRenderMap, RichUtils, convertToRaw} from 'draft-js';
 import styles from "./style.css";
 import {DOI_TYPE, REFERENCE_TYPE, getBlockRendererFn, resetBlockType, getDefaultBlockData} from '../../../helpers/forms';
 import DOIBlock from "../doi_block/DOIBlock";
@@ -19,6 +19,7 @@ class FormEditor extends Component {
 
         this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange);
         this.handleBeforeInput = this.handleBeforeInput.bind(this);
+        this.focus = () => this.refs.editor.focus();
     }
 
     handleBeforeInput(str) {
@@ -61,7 +62,9 @@ class FormEditor extends Component {
                     blockRenderMap={this.blockRenderMap}
                     blockRendererFn={this.blockRendererFn}
                     handleBeforeInput={this.handleBeforeInput}
-                    handleKeyCommand={this.handleKeyCommand} />
+                    handleKeyCommand={this.handleKeyCommand}
+                    onClick={this.focus}
+                />
             </div>
         )
     }

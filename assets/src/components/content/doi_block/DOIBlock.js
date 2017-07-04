@@ -10,7 +10,14 @@ class DOIBlock extends React.Component {
         super(props);
         this.state = {errorMessage: ''};
         this.onVerifyDOI = this.onVerifyDOI.bind(this);
-        this.onDOIError = (errorMessage) => this.setState({errorMessage})
+        this.onDOIError = (errorMessage) => this.setState({errorMessage});
+        this.keyBindingFn = (e) => this.keyBindingFn(e);
+    }
+
+    keyBindingFn(e){
+        if(e.key === 'Enter'){
+            return this.onVerifyDOI();
+        }
     }
 
     onVerifyDOI() {
@@ -19,7 +26,8 @@ class DOIBlock extends React.Component {
         const {onChange, getEditorState} = blockProps;
         const text = block.getText();
         const data = block.getData();
-        const newData = data.set('doi', text);
+        // const newData = data.set('doi', text);
+        const newData = Map({doi: text});
         onChange(updateTypeOfBlock(getEditorState(), block, REFERENCE_TYPE, newData));
     }
 
@@ -28,7 +36,7 @@ class DOIBlock extends React.Component {
         //<EditorBlock {...rest} blockRendererFn={this.blockrendererFn}
         return (
             <div className={styles['work-info']}>
-                <EditorBlock {...this.props} />
+                <EditorBlock {...this.props} keyBindingFn={this.keyBindingFn}/>
                 <button onClick={this.onVerifyDOI}>Verify DOI</button>
             </div>
         )

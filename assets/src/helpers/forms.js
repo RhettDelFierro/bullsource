@@ -1,6 +1,6 @@
 import DOIBlock from '../components/content/doi_block/DOIBlock'
 import ReferenceBlock from '../components/content/reference_block/ReferenceBlock'
-import {EditorState} from "draft-js";
+import {EditorState, Modifier} from "draft-js";
 import {Map} from 'immutable';
 export const DOI_TYPE = 'doi_block';
 export const REFERENCE_TYPE = 'reference_block';
@@ -57,14 +57,21 @@ export const updateDataOfBlock = (editorState, block, newData) => {
 
 export const updateTypeOfBlock = (editorState, block, type, newData) => {
     const contentState = editorState.getCurrentContent();
-    const newBlock = block.merge({
-        type,
-        data: newData
-    });
-    const newContentState = contentState.merge({
-        blockMap: contentState.getBlockMap().set(block.getKey(), newBlock),
-    });
-    return EditorState.push(editorState, newContentState, 'change-block-type');
+    // const newBlock = block.merge({
+    //     type,
+    //     data: newData
+    // });
+    const selectionState = editorState.getSelection();
+    const newContentState = Modifier.setBlockType(contentState, selectionState, type);
+    const newContentStateData = Modifier.setBlockData(
+        newContentState,
+        selectionState,
+        newData
+    );
+    // const newContentState = contentState.merge({
+    //     blockMap: contentState.getBlockMap().set(block.getKey(), newBlock),
+    // });
+    return EditorState.push(editorState, newContentStateData, 'change-block-type');
 }; //I want to push to the reference block, is there any way to do that?
 
 
@@ -90,7 +97,8 @@ export const getDefaultBlockData = (blockType, initialData = {}) => {
                 title: '',
                 source: '',
                 date: '',
-                authors: ''
+                authors: '',
+                fetched: false
             };
         default:
             return initialData;
@@ -104,7 +112,7 @@ export const getDefaultBlockData = (blockType, initialData = {}) => {
  *
  *
  **/
-export const resetBlockType = (editorState, newType = Block.UNSTYLED) => {
+export const resetBlockType = (editorState, newType = 'unstyled') => {
     const contentState = editorState.getCurrentContent();
     const selectionState = editorState.getSelection();
     const key = selectionState.getStartKey();

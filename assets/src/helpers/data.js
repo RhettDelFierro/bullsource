@@ -13,7 +13,8 @@ export const organizeReferenceData = (doi) => (block) => {
         title: title[0],
         source: containerTitle[0],
         date: `${indexed.dateParts[0][1]}/${indexed.dateParts[0][2]}/${indexed.dateParts[0][0]}`,
-        authors: authors
+        authors: authors,
+        fetched: true
     });
 
     const data = block.getData();

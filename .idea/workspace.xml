@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fbcbf16-02e6-40cb-b852-6c59aa848b46" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/components/content/reference_block/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/src/helpers/data.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" afterPath="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/doi_block/style.css" afterPath="$PROJECT_DIR$/assets/src/components/content/doi_block/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js" afterPath="$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/components/content/reference_block/ReferenceBlock.js" afterPath="$PROJECT_DIR$/assets/src/components/content/reference_block/ReferenceBlock.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/helpers/data.js" afterPath="$PROJECT_DIR$/assets/src/helpers/data.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/helpers/forms.js" afterPath="$PROJECT_DIR$/assets/src/helpers/forms.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/helpers/converters.ex" afterPath="$PROJECT_DIR$/lib/bullsource/helpers/converters.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" afterPath="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/src/test.js" afterPath="$PROJECT_DIR$/assets/src/test.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,6 +20,18 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="FormEditor.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="discussion.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/bullsource/discussion/discussion.ex">
           <provider selected="true" editor-type-id="text-editor">
@@ -35,28 +45,8 @@
       <file leaf-file-name="data.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/helpers/data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="82" lean-forward="true" selection-start-line="9" selection-start-column="82" selection-end-line="9" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignIn.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/side/signin/SignIn.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user_panel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/components/side/user_panel/user_panel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-807">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="270">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -65,10 +55,22 @@
       <file leaf-file-name="forms.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/helpers/forms.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="57" column="60" lean-forward="false" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
+            <state relative-caret-position="311">
+              <caret line="70" column="31" lean-forward="true" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/src/test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="62" column="23" lean-forward="false" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,8 +89,8 @@
       <file leaf-file-name="DOIBlock.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="22" column="76" lean-forward="false" selection-start-line="22" selection-start-column="76" selection-end-line="22" selection-end-column="76" />
+            <state relative-caret-position="203">
+              <caret line="27" column="37" lean-forward="true" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -116,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReferenceBlock.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReferenceBlock.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/src/components/content/reference_block/ReferenceBlock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+            <state relative-caret-position="234">
+              <caret line="27" column="44" lean-forward="false" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -132,9 +134,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ocus</find>
-      <find>style=</find>
-      <find>focus</find>
       <find>sonsubmit</find>
       <find>onsubmit</find>
       <find>doivalue</find>
@@ -162,6 +161,9 @@
       <find>doi</find>
       <find>parse_json_final</find>
       <find>length</find>
+      <find>console.log</find>
+      <find>toggle</find>
+      <find>push</find>
     </findStrings>
     <replaceStrings>
       <replace>k&gt;</replace>
@@ -196,7 +198,6 @@
         <option value="$PROJECT_DIR$/assets/src/components/content/work_info/WorkInfo.js" />
         <option value="$PROJECT_DIR$/assets/src/components/content/proof_info/ProofInfo.js" />
         <option value="$PROJECT_DIR$/assets/src/test.html" />
-        <option value="$PROJECT_DIR$/assets/src/test.js" />
         <option value="$PROJECT_DIR$/assets/src/queries/checkDOI.js" />
         <option value="$PROJECT_DIR$/assets/src/components/content/post_form/PostForm.js" />
         <option value="$PROJECT_DIR$/priv/repo/migrations/20170630044345_create_post_references_rename_fields.exs" />
@@ -224,15 +225,16 @@
         <option value="$PROJECT_DIR$/assets/src/index.html" />
         <option value="$PROJECT_DIR$/assets/src/components/content/form_editor/style.css" />
         <option value="$PROJECT_DIR$/assets/webpack.config.js" />
-        <option value="$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js" />
-        <option value="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" />
-        <option value="$PROJECT_DIR$/assets/src/helpers/forms.js" />
         <option value="$PROJECT_DIR$/lib/bullsource/helpers/converters.ex" />
         <option value="$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex" />
         <option value="$PROJECT_DIR$/assets/src/components/content/reference_block/style.css" />
         <option value="$PROJECT_DIR$/assets/src/components/content/doi_block/style.css" />
         <option value="$PROJECT_DIR$/assets/src/helpers/data.js" />
         <option value="$PROJECT_DIR$/assets/src/components/content/reference_block/ReferenceBlock.js" />
+        <option value="$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js" />
+        <option value="$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js" />
+        <option value="$PROJECT_DIR$/assets/src/helpers/forms.js" />
+        <option value="$PROJECT_DIR$/assets/src/test.js" />
       </list>
     </option>
   </component>
@@ -742,6 +744,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="form_editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bullsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="doi_block" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1131,24 +1163,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-145">
-          <caret line="121" column="42" lean-forward="false" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
-          <caret line="19" column="84" lean-forward="true" selection-start-line="19" selection-start-column="84" selection-end-line="19" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/header/dropdown/DropDown.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-282">
@@ -1209,16 +1223,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="22" column="76" lean-forward="false" selection-start-line="22" selection-start-column="76" selection-end-line="22" selection-end-column="76" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/bullsource/social_media/twitter/trending_tweets.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3330">
@@ -1251,14 +1255,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/content/reference_block/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="1" lean-forward="false" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/components/content/doi_block/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1267,30 +1263,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/content/reference_block/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="1" lean-forward="false" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/content/reference_block/ReferenceBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="27" column="44" lean-forward="false" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/content/form_editor/FormEditor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/helpers/data.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="82" lean-forward="true" selection-start-line="9" selection-start-column="82" selection-end-line="9" selection-end-column="82" />
+        <state relative-caret-position="270">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/components/content/doi_block/DOIBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="27" column="37" lean-forward="true" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/helpers/forms.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="57" column="60" lean-forward="false" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
+        <state relative-caret-position="311">
+          <caret line="70" column="31" lean-forward="true" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
           <folding>
             <element signature="e#0#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/components/content/reference_block/ReferenceBlock.js">
+    <entry file="file://$PROJECT_DIR$/assets/src/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+        <state relative-caret-position="174">
+          <caret line="62" column="23" lean-forward="false" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
