@@ -79,10 +79,10 @@ export const updateTypeOfBlock = (editorState, block, type, newData) => {
  * */
 export const getDefaultBlockData = (blockType, initialData = {}) => {
     switch (blockType) {
-        case DOI_TYPE:
-            return {
-                doi: '',
-            };
+        // case DOI_TYPE:
+        //     return {
+        //         doi: '',
+        //     };
         case REFERENCE_TYPE:
             return {
                 doi: '',

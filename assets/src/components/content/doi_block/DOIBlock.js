@@ -8,7 +8,9 @@ import styles from "./style.css";
 class DOIBlock extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {errorMessage: ''};
         this.onVerifyDOI = this.onVerifyDOI.bind(this);
+        this.onDOIError = (errorMessage) => this.setState({errorMessage})
     }
 
     onVerifyDOI() {
@@ -19,18 +21,6 @@ class DOIBlock extends React.Component {
         const data = block.getData();
         const newData = data.set('doi', text);
         onChange(updateTypeOfBlock(getEditorState(), block, REFERENCE_TYPE, newData));
-    }
-
-    renderWork() {
-        const data = this.props.node.data;
-        const authors = this.props.data.error ? '' : data.get('authors').map(author => author + ', ');
-        return this.props.data.error ? <div/> :
-            <div className={styles['work-info']}>
-                <a href={data.get('url')}>{data.get('title')}</a>
-                <p>{data.get('source')}</p>
-                <p>{data.get('date')}</p>
-                <p>{authors}</p>
-            </div>
     }
 
     render() {

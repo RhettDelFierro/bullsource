@@ -3,13 +3,10 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
   @oauth2_application_twitter_url "https://api.twitter.com/oauth2/token"
   @twitter_search_filter_url "https://api.twitter.com/1.1/search/tweets.json?q="
-  @twitter_trends_url "https://api.twitter.com/1.1/trends/place.json?id="
 
 
   defmodule Bearer, do: defstruct token_type: nil, access_token: nil
   defmodule TokenError, do: defstruct code: nil, label: nil, message: nil
-
-  defmodule TwitterTrend, do: defstruct name: nil, url: nil, promoted_content: nil, query: nil, tweet_wolume: nil
 
   defmodule Tweet do
     defstruct created_at: nil,
@@ -60,6 +57,7 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   ###
   # GenServer API
   ###
+
   def init(_state) do
 # global woeid = 1
 # united states = 23424977
@@ -70,14 +68,8 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
   def handle_call(:get_tweets, _from, state) do
-    #maybe extract this into another function that will call when it first fires up, that way it doesn't sort on every call.
-    ordered_stories_by_tweets = state.stories
-      |> Enum.map(fn(story) ->
-          ordered_tweets = Enum.sort(story.tweets,&(&1.retweet_count >= &2.retweet_count))
-          %{network: story.network, news: story.news, tweets: ordered_tweets}
-         end)
-
-    {:reply, ordered_stories_by_tweets, state}
+    IO.inspect state.stories
+    {:reply, state.stories, state}
   end
 
   def sort_tweets([]), do: []
@@ -87,7 +79,6 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   def handle_call(:get_only_tweets, _from, state) do
     {:reply, Enum.take(state.stories.tweets,2), state}
   end
-
 
   def handle_info(:fetch, state) do
     stories = update_tweets(state.token,23424977)
@@ -126,23 +117,19 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
 # keep in mind, when you have to update, you'll be querying for a new token, find some way to get the token from state?
   defp update_tweets(token, woe_id) do
-    news = Bullsource.News.GetNews.get_news([]) |> Enum.filter(&(&1.network.language == "en" && &1.network.country == "us"))
+    news = Bullsource.News.GetNews.get_news([])
+      |> Enum.filter(&(&1.network.language == "en" && &1.network.country == "us"))
+
     stories = news
       |> make_tweet_requests([], token)
       |> Enum.map(&format_list(&1, [])) # => [%{network, headline, tweets}]
       |> List.flatten
-      |> Enum.filter(&(length(&1.tweets) >= 1 )) #filter out stories with no tweets.
+      |> Enum.filter(&(&1.tweets !== nil))
 #      |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
     stories
   end
 
-  defp build_trend_url(woe_id) do
-    @twitter_trends_url <> "#{woe_id}"
-  end
-
-  defp make_tweet_requests([], acc, _token) do
-    acc
-  end
+  defp make_tweet_requests([], acc, _token), do: acc
 
   defp make_tweet_requests([n | ns], acc, token) do
     %{network: network, news: headlines} = n
@@ -168,70 +155,39 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
   end
 
 
+# check every 30 minutes (rate limit is 450 requests/15 minutes)
+  defp set_schedule(), do: Process.send_after(self(), :fetch, 1 * 60 * 35 * 1000)
 
-  defp set_schedule() do
-     Process.send_after(self(), :fetch, 1 * 60 * 35 * 1000) #check every 30 minutes (rate limit is 450 requests/15 minutes)
-  end
-
-  defp api_key do
-    Application.get_env(:bullsource, :twitter)[:consumer_api_key]
-  end
-
-  defp secret_api_key do
-    Application.get_env(:bullsource, :twitter)[:consumer_secret_api_key]
-  end
-
-  defp encode_secret do
-    Base.encode64("#{api_key()}:#{secret_api_key()}")
-  end
+  defp api_key, do: Application.get_env(:bullsource, :twitter)[:consumer_api_key]
+  defp secret_api_key, do: Application.get_env(:bullsource, :twitter)[:consumer_secret_api_key]
+  defp encode_secret, do: Base.encode64("#{api_key()}:#{secret_api_key()}")
 
 
   defp format_list({network, []}, acc), do: acc
 
   defp format_list({network, [t | ts] }, acc) do
-#     {headline, task} = t
-#     tweets = Task.await(task) |> parse_json_final()
-#     |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
-
-#     news = %{network: network, news: headline, tweets: tweets}
-#     format_list({network, ts}, [news | acc])
      {headline, task} = t
      tweets = Task.await(task) |> parse_json_final()
-#       |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
-#     IO.puts "+_+_+_+_+_+_+_+_+_+_+#{inspect tweets}"
+#     filtered_tweets = Enum.filter(tweets,&(&1 !== nil))
+
      news = %{network: network, news: headline, tweets: tweets}
      format_list({network, ts}, [news | acc])
-
   end
-
-#in the block above:
-#     {headline, task} = t
-#     res_task = Task.await(task)
-#     IO.puts "++++++#{inspect task}"
-#     tweets = parse_json_final(Task.await(task))
-#     tweets = Task.await(task)
-#     IO.inspect headline
-#     tweets = parse_json_final(tweets)
-#     |> Enum.sort(&(&1.retweet_count >= &2.retweet_count))
-#     IO.puts "+_+_+_+_+_+_+_+_+_+_+#{inspect tweets}"
-#     news = %{network: network, news: headline, tweets: tweets}
-#     format_list({network, ts}, [news | acc])
-
 
   defp get_bearer_token(secret) do
     headers = ["Authorization": "Basic #{secret}", "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8."]
     HTTPoison.post(@oauth2_application_twitter_url, "grant_type=client_credentials", headers)
   end
 
+
+
   defp parse_json_validate({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
 #    IO.puts "====================1 #{inspect body}"
     body |> Poison.decode!(as: %Bearer{})
-#    body |> Poison.decode!(as: %{sources: [%Network{}]})
   end
 
   defp parse_json_validate({:ok, %HTTPoison.Response{body: body, status_code: 401}}) do
 #    IO.puts "====================2 #{inspect body}"
-    errors = body |> Poison.decode!(as: %{"errors" => [%TokenError{}]})
     errors = body |> Poison.decode!(as: %{"errors" => [%TokenError{}]})
     Process.send(self(), {:error_json_validate, errors["errors"][0].message}, [])
   end
@@ -250,13 +206,24 @@ defmodule Bullsource.SocialMedia.Twitter.TrendingTweets do
 
 
   defp parse_json_final({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    %{"statuses" => tweets} = body |> Poison.decode!(as: %{"statuses" => [%Tweet{}]})
-
-    tweets = Enum.map(tweets,
-        &Map.put(&1,:retweeted_status, Bullsource.Helpers.Converters.str_to_atom_keys(&1.retweeted_status)))
-      |> Enum.map(&Map.put(&1,:user, Bullsource.Helpers.Converters.str_to_atom_keys(&1.user)))
-#      |> Enum.map(&Map.put(&1.retweeted_status,:, Bullsource.Helpers.Converters.str_to_atom_keys(&1.user)))
-
+    with {:ok, %{"statuses" => tweets}} <- body |> Poison.decode()
+    do
+      case tweets do
+        [] -> nil
+        nil -> nil
+        :ok -> nil
+        tweets when (length(tweets) >= 2) ->
+          Enum.map(tweets,fn tweet -> Bullsource.Helpers.Converters.str_to_atom_keys(tweet)end)
+        [tweet|[]] = tweets ->
+          [Bullsource.Helpers.Converters.str_to_atom_keys(tweet)]
+        tweets ->
+          [Bullsource.Helpers.Converters.str_to_atom_keys(tweets)]
+      end
+    else
+      {:error, error} ->
+        IO.puts "ERROR CAUGHT IN PARSE_JSON_FINAL #{inspect error}"
+        Process.send(self(),:error_json_final, [])
+    end
   end
 
   defp parse_json_final(error) do

@@ -63,7 +63,6 @@ defmodule Bullsource.Helpers.Converters do
   end
 
   def atom_to_str_keys(map) do
-
     for {key, val} <- map, into: %{} do
       cond do
         is_binary(key) -> #for keys that are already strings
