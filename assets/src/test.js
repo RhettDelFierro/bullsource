@@ -91,6 +91,7 @@ class MediaEditorExample extends React.Component {
         this._promptForMedia('video');
     }
     render() {
+        console.log(convertToRaw(this.state.editorState.getCurrentContent()));
         let urlInput;
         if (this.state.showURLInput) {
             urlInput =

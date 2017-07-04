@@ -25,11 +25,24 @@ class DOIBlock extends React.Component {
         // This is the reason we needed a higher-order function for blockRendererFn
         const {onChange, getEditorState} = blockProps;
         const text = block.getText();
-        const data = block.getData();
+        // const data = block.getData();
         // const newData = data.set('doi', text);
-        const newData = Map({doi: text});
-        onChange(updateTypeOfBlock(getEditorState(), block, REFERENCE_TYPE, newData));
+        // const newData = Map({doi: text});
+        onChange(updateTypeOfBlock(getEditorState(), block, REFERENCE_TYPE, text));
     }
+
+    // onVerifyDOI() {
+    //     const {block, blockProps} = this.props;
+    //     const {onChange, getEditorState} = blockProps;
+    //     const editorState = getEditorState();
+    //     const contentState = editorState.getCurrentContent();
+    //
+    //     const text = block.getText();
+    //     const data = block.getData();
+    //     // const newData = data.set('doi', text);
+    //     const newData = Map({doi: text});
+    //     onChange(updateTypeOfBlock(getEditorState(), block, REFERENCE_TYPE, newData));
+    // }
 
     render() {
         //maybe const {blockRendererFn, ....rest} = this.props

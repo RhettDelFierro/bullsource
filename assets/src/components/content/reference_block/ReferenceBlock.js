@@ -21,13 +21,13 @@ class ReferenceBlock extends Component {
             console.log('error', nextProps.data.error);
             //don't want to set data of an error. Maybe you just want to delete this block. Or go back to rendering the reference block but with an error message?
         }
-        if (fetched) {
-            const editorState = getEditorState();
-            const selection = editorState.getSelection();
-            const afterBlock = editorState.getCurrentContent().getBlockAfter(selection.getAnchorKey());
-            // console.log('block type:', currentBlock.getType());
-            onChange(resetBlockType(editorState, 'unstyled'))
-        }
+        // if (fetched) {
+        //     const editorState = getEditorState();
+        //     const selection = editorState.getSelection();
+        //     const afterBlock = editorState.getCurrentContent().getBlockAfter(selection.getAnchorKey());
+        //     // console.log('block type:', currentBlock.getType());
+        //     onChange(resetBlockType(editorState, 'unstyled'))
+        // }
     }
 
     renderWork() {
@@ -56,12 +56,23 @@ class ReferenceBlock extends Component {
 
 
 }
-
 export default graphql(checkDOIQuery, {
     options: (props) => {
-        const {block} = props;
-        const data = block.getData();
-        const doi = data.get('doi');
+        const entity = props.contentState.getEntity(
+            props.block.getEntityAt(0)
+        );
+        const {doi} = entity.getData();
+        // const {block} = props;
+        // const data = block.getData();
+        // const doi = data.get('doi');
         return {variables: {doi}}
     }
 })(ReferenceBlock);
+// export default graphql(checkDOIQuery, {
+//     options: (props) => {
+//         const {block} = props;
+//         const data = block.getData();
+//         const doi = data.get('doi');
+//         return {variables: {doi}}
+//     }
+// })(ReferenceBlock);

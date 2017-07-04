@@ -4,6 +4,10 @@
   border: 1px solid black;
 }
 
+.full-container {
+  border: 1px solid blue;
+}
+
 .editor {
   border: 1px solid pink;
 }
