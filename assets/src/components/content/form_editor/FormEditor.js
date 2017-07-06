@@ -27,7 +27,7 @@ class FormEditor extends Component {
         const contentStateWithEntity = contentState.createEntity(
             REFERENCE_TYPE,
             'IMMUTABLE',
-            {doi}
+            {doi, fetched: false}
         );
 
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
@@ -59,6 +59,7 @@ class FormEditor extends Component {
     }
 
     render() {
+        console.log(convertToRaw(this.state.editorState.getCurrentContent()));
         let doiInput;
         if (this.state.showDOI) {
             doiInput =

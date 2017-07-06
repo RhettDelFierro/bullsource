@@ -2,20 +2,27 @@ import React, {Component} from "react";
 import {EditorBlock} from 'draft-js';
 import {graphql} from "react-apollo";
 import checkDOIQuery from "../../../queries/checkDOI";
-import {resetBlockType, updateDataOfBlock} from "../../../helpers/forms";
-import {organizeReferenceData} from "../../../helpers/data";
+import {updateEntityOfBlock} from "../../../helpers/forms";
+import {organizeReferenceEntityData, compose, replaceEntityData} from "../../../helpers/data";
 import styles from "./style.css";
 
 class ReferenceBlock extends Component {
     componentWillUpdate(nextProps) {
-        const {block, blockProps} = this.props;
+        const {blockProps, contentState} = this.props;
         const {onChange, getEditorState} = blockProps;
-        const fetched = block.getData().get('fetched');
-
+        const entityKey = contentState.getLastCreatedEntityKey();
+        const entity = this.props.contentState.getEntity(
+            this.props.block.getEntityAt(0)
+        );
+        const {fetched} = entity.getData();
         if (!this.props.data.doi && nextProps.data.doi && !fetched) {
+            console.log('ceached if statement');
             const {doi} = nextProps.data;
-            let newData = organizeReferenceData(doi);
-            onChange(updateDataOfBlock(getEditorState(), block, newData(block)));
+            const editorState = getEditorState();
+            const contentStateWithNewEntity = updateEntityOfBlock(editorState)(entityKey);
+            let newContentState = compose(contentStateWithNewEntity,organizeReferenceEntityData);
+
+            onChange(newContentState(doi));
         }
         else if (!this.props.data.error && nextProps.data.error) {
             console.log('error', nextProps.data.error);
@@ -31,19 +38,25 @@ class ReferenceBlock extends Component {
     }
 
     renderWork() {
-        const {block} = this.props;
-        const data = block.getData();
-        const authors = this.props.data.error ? '' : data.get('authors');
+        const entity = this.props.contentState.getEntity(
+            this.props.block.getEntityAt(0)
+        );
+        const data = entity.getData();
         return this.props.data.error ? <div>Error</div> :
                 <div className={styles['work-info']}>
                     <a href={data.get('url')}>{data.get('title')}</a>
+                    <p>{data.get('doi')}</p>
                     <p>{data.get('source')}</p>
                     <p>{data.get('date')}</p>
-                    <p>{authors}</p>
+                    <p>{data.get('authors')}</p>
                 </div>
     }
 
     render() {
+        // const entity = this.props.contentState.getEntity(
+        //     this.props.block.getEntityAt(0)
+        // );
+        // const {fetched} = entity.getData();
         const {loading} = this.props.data;
         return (
             loading ?
@@ -57,11 +70,20 @@ class ReferenceBlock extends Component {
 
 }
 export default graphql(checkDOIQuery, {
+    skip: (props) => {
+        const entity = props.contentState.getEntity(
+            props.block.getEntityAt(0)
+        );
+        const {fetched} = entity.getData();
+
+        return fetched
+    },
     options: (props) => {
         const entity = props.contentState.getEntity(
             props.block.getEntityAt(0)
         );
-        const {doi} = entity.getData();
+        const {fetched,doi} = entity.getData();
+        // console.log('doi', doi, fetched);
         // const {block} = props;
         // const data = block.getData();
         // const doi = data.get('doi');

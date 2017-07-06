@@ -1,14 +1,27 @@
 import {Map} from 'immutable';
 
+export const compose = (...funcs) => x => {
+  return funcs.reduceRight((acc,next) => {
+      return next(acc);
+  },x)
+};
+
+export const pipe = (...funcs) => x => {
+  return funcs.reduce((acc,next) => {
+      return next(acc);
+  }, x)
+};
+
 /*Returns a function that waits for the content block
 *
 * Return:
 *  ContentBlock -> Map
 * */
-export const organizeReferenceData = (doi) => (block) => {
-    const {url, title, indexed, containerTitle, author} = doi[0];
+export const organizeReferenceEntityData = (doiInfo) => {
+    const {url, title, indexed, containerTitle, author, doi} = doiInfo[0];
     const authors = author.map(name => `${name.given} ${name.family}`).join(', ');
-    const doiInfo = Map({
+    return Map({
+        doi,
         url,
         title: title[0],
         source: containerTitle[0],
@@ -16,7 +29,12 @@ export const organizeReferenceData = (doi) => (block) => {
         authors: authors,
         fetched: true
     });
+};
 
-    const data = block.getData();
-    return data.merge(doiInfo);
+// replaceEntityData :: a -> b -> c -> b
+export const replaceEntityData = entity => entityKey => data => {
+    return entity.replaceData(
+        entityKey,
+        data
+    )
 };

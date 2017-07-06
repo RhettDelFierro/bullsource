@@ -16,7 +16,6 @@ export const REFERENCE_TYPE = 'reference_block';
  * */
 export const getBlockRendererFn = (getEditorState, onChange,focus) => (block) => {
     const type = block.getType();
-    console.log(type);
     switch (type) {
         case 'atomic':
             return {
@@ -42,14 +41,11 @@ export const getBlockRendererFn = (getEditorState, onChange,focus) => (block) =>
  * Returns
  *   EditorState    -/> new editor state for DOIBlock component which wil be set as the new currentContent.
  **/
-export const updateDataOfBlock = (editorState, block, newData) => {
+export const updateEntityOfBlock = editorState => entityKey => newData => {
     const contentState = editorState.getCurrentContent();
-    const newBlock = block.merge({
-        data: newData,
-    });
-    const newContentState = contentState.merge({
-        blockMap: contentState.getBlockMap().set(block.getKey(), newBlock),
-    });
+    const newContentState = contentState
+        .replaceEntityData(entityKey, newData);
+
     return EditorState.push(editorState, newContentState, 'change-block-type');
 }; //I want to push to the reference block, is there any way to do that?
 
