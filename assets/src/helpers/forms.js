@@ -1,7 +1,6 @@
-import DOIBlock from "../components/content/doi_block/DOIBlock";
-import ReferenceBlock from "../components/content/reference_block/ReferenceBlock";
+import {ReferenceBlock} from "../components/sfc/reference_block/ReferenceBlock";
 import {EditorState, AtomicBlockUtils} from "draft-js";
-export const DOI_TYPE = 'doi_block';
+
 export const REFERENCE_TYPE = 'reference_block';
 
 
@@ -14,16 +13,12 @@ export const REFERENCE_TYPE = 'reference_block';
  * Returns
  *   ContentBlock -> Object
  * */
-export const getBlockRendererFn = (getEditorState, onChange) => (block) => {
+export const getBlockRendererFn = (block) => {
     const type = block.getType();
     switch (type) {
         case 'atomic':
             return {
                 component: ReferenceBlock,
-                props: {
-                    getEditorState,
-                    onChange
-                },
                 editable: false
             };
         default:

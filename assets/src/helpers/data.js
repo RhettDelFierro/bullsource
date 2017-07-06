@@ -17,19 +17,17 @@ export const pipe = (...funcs) => x => {
 * Return:
 *  ContentBlock -> Map
 * */
-export const organizeReferenceEntityData = (doiInfo) => {
+export const organizeReferenceData = (doiInfo) => {
     const {url, title, indexed, containerTitle, author, doi} = doiInfo[0];
     const authors = author.map(name => `${name.given} ${name.family}`).join(', ');
-    return Map({
+    return {
         doi,
         url,
         title: title[0],
         source: containerTitle[0],
         date: `${indexed.dateParts[0][1]}/${indexed.dateParts[0][2]}/${indexed.dateParts[0][0]}`,
-        authors: authors,
-        fetched: true,
-        initialFetch: false
-    });
+        authors
+    };
 };
 
 // replaceEntityData :: a -> b -> c -> b

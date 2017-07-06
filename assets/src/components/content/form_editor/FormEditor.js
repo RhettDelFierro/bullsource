@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import {convertToRaw, Editor, EditorState, AtomicBlockUtils} from "draft-js";
+import {AtomicBlockUtils, convertToRaw, Editor, EditorState} from "draft-js";
 import styles from "./style.css";
-import {REFERENCE_TYPE,getBlockRendererFn} from "../../../helpers/forms";
-import {Map} from 'immutable'
+import {getBlockRendererFn, REFERENCE_TYPE} from "../../../helpers/forms";
+import ReferenceModal from '../reference_modal/ReferenceModal';
 
 class FormEditor extends Component {
     constructor(props) {
@@ -10,27 +10,33 @@ class FormEditor extends Component {
         this.state = {
             editorState: EditorState.createEmpty(),
             showDOI: false,
-            doi: ''
+            showModal: false,
+            doi: '',
         };
+
         this.getEditorState = () => this.state.editorState;
-        this.onChange = (editorState) => this.setState({editorState},() => {
+        this.onChange = (editorState) => this.setState({editorState}, () => {
             setTimeout(() => this.focus(), 0);
         });
-        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange);
         this.addDOI = this.addDOI.bind(this);
         this.confirmDOI = this.confirmDOI.bind(this);
         this.focus = () => this.refs.editor.focus();
+        this.onLoadEntity = this.onLoadEntity.bind(this);
     }
 
-    confirmDOI(e){
+    confirmDOI(e) {
         e.preventDefault();
+        this.setState({showModal: true})
+    }
 
-        const {editorState, doi} = this.state;
+    onLoadEntity(reference) {
+        const { doi,url,title,source,date,authors } = reference;
+        const {editorState} = this.state;
         const contentState = editorState.getCurrentContent();
         const contentStateWithEntity = contentState.createEntity(
             REFERENCE_TYPE,
             'IMMUTABLE',
-            Map({doi, fetched: false, initialFetch: true})
+            {doi,url,title,source,date,authors}
         );
 
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
@@ -48,23 +54,24 @@ class FormEditor extends Component {
             ),
             showDOI: false,
             doi: '',
+            showModal: false
         }, () => {
             setTimeout(() => this.focus(), 0);
         });
-
     }
 
-    addDOI(){
+
+    addDOI() {
         this.setState({
             showDOI: true,
             doi: ''
-        },() => {
+        }, () => {
             setTimeout(() => this.refs.doi.focus(), 0);
         });
     }
 
     render() {
-        // console.log(convertToRaw(this.state.editorState.getCurrentContent()));
+        console.log(convertToRaw(this.state.editorState.getCurrentContent()));
         let doiInput;
         if (this.state.showDOI) {
             doiInput =
@@ -89,9 +96,13 @@ class FormEditor extends Component {
                             ref="editor"
                             placeholder="Write here..."
                             onChange={this.onChange}
-                            blockRendererFn={this.blockRendererFn}
+                            blockRendererFn={getBlockRendererFn}
                     />
                 </div>
+                {this.state.showModal ?
+                    <ReferenceModal doi={this.state.doi} onLoadEntity={this.onLoadEntity}/>
+                    : <div/>
+                }
             </div>
         )
     }
