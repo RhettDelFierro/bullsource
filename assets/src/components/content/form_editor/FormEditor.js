@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {convertToRaw, Editor, EditorState, AtomicBlockUtils} from "draft-js";
 import styles from "./style.css";
 import {REFERENCE_TYPE,getBlockRendererFn} from "../../../helpers/forms";
+import {Map} from 'immutable'
 
 class FormEditor extends Component {
     constructor(props) {
@@ -12,8 +13,10 @@ class FormEditor extends Component {
             doi: ''
         };
         this.getEditorState = () => this.state.editorState;
-        this.onChange = (editorState) => this.setState({editorState});
-        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange, this.focus)
+        this.onChange = (editorState) => this.setState({editorState},() => {
+            setTimeout(() => this.focus(), 0);
+        });
+        this.blockRendererFn = getBlockRendererFn(this.getEditorState, this.onChange);
         this.addDOI = this.addDOI.bind(this);
         this.confirmDOI = this.confirmDOI.bind(this);
         this.focus = () => this.refs.editor.focus();
@@ -27,7 +30,7 @@ class FormEditor extends Component {
         const contentStateWithEntity = contentState.createEntity(
             REFERENCE_TYPE,
             'IMMUTABLE',
-            {doi, fetched: false}
+            Map({doi, fetched: false, initialFetch: true})
         );
 
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
@@ -35,6 +38,8 @@ class FormEditor extends Component {
             editorState,
             {currentContent: contentStateWithEntity}
         );
+
+        //sets entity before response from query:
         this.setState({
             editorState: AtomicBlockUtils.insertAtomicBlock(
                 newEditorState,
@@ -59,7 +64,7 @@ class FormEditor extends Component {
     }
 
     render() {
-        console.log(convertToRaw(this.state.editorState.getCurrentContent()));
+        // console.log(convertToRaw(this.state.editorState.getCurrentContent()));
         let doiInput;
         if (this.state.showDOI) {
             doiInput =

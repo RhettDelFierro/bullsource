@@ -14,7 +14,7 @@ export const REFERENCE_TYPE = 'reference_block';
  * Returns
  *   ContentBlock -> Object
  * */
-export const getBlockRendererFn = (getEditorState, onChange,focus) => (block) => {
+export const getBlockRendererFn = (getEditorState, onChange) => (block) => {
     const type = block.getType();
     switch (type) {
         case 'atomic':
@@ -22,8 +22,7 @@ export const getBlockRendererFn = (getEditorState, onChange,focus) => (block) =>
                 component: ReferenceBlock,
                 props: {
                     getEditorState,
-                    onChange,
-                    focus
+                    onChange
                 },
                 editable: false
             };
@@ -45,9 +44,18 @@ export const updateEntityOfBlock = editorState => entityKey => newData => {
     const contentState = editorState.getCurrentContent();
     const newContentState = contentState
         .replaceEntityData(entityKey, newData);
-
-    return EditorState.push(editorState, newContentState, 'change-block-type');
+    // const newEditorState = EditorState.set(editorState, {currentContent: newContentState});
+    return EditorState.push(editorState, newContentState, 'apply-entity');
+    // const selection = newEditorState.getSelection();
+    //
+    // return EditorState.forceSelection(newEditorState,selection)
+    // return AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ');
 }; //I want to push to the reference block, is there any way to do that?
+
+
+
+
+
 
 export const updateTypeOfBlock = (editorState, block, type, doi) => {
     const contentState = editorState.getCurrentContent();

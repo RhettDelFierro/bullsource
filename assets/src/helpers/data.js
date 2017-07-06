@@ -27,7 +27,8 @@ export const organizeReferenceEntityData = (doiInfo) => {
         source: containerTitle[0],
         date: `${indexed.dateParts[0][1]}/${indexed.dateParts[0][2]}/${indexed.dateParts[0][0]}`,
         authors: authors,
-        fetched: true
+        fetched: true,
+        initialFetch: false
     });
 };
 
